@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <%= render partial: 'shared/head' %>
+  </head>
+  <body>
+    <header>
+      <%= render partial: 'shared/header' %>
+    </header>
+
+    <main role="main" class="container">
+      <% if notice %>
+      <div class="alert alert-warning" role="alert">
+        <%= notice %>
+      </div>
+      <% end %>
+
+      <% if alert %>
+      <div class="alert alert-danger" role="alert">
+        <%= alert %>
+      </div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      <%= render partial: 'shared/footer' %>
+    </footer>
+  </body>
+</html>

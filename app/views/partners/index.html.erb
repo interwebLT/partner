@@ -1,0 +1,26 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'gears lg' %>&nbsp;Partners <span><%= @partners.count %></span>
+<% end %>
+
+
+<div id="table">
+  <table id="partners">
+    <thead>
+      <tr>
+        <th>Partner</th>
+        <th>Company Name</th>
+        <th>Current Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @partners.each do |partner| %>
+      <tr>
+        <td><%= link_to partner.name, partner_path(partner) %></td>
+        <td><%= partner.organization %></td>
+        <td><%= number_to_currency partner.credits %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

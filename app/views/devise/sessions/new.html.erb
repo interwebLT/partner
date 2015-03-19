@@ -1,0 +1,34 @@
+<%= content_for :banner_title do %>
+  <%= fa_icon 'gears lg' %>&nbsp;Login
+<% end %>
+
+<div id="login">
+  <div>
+    <h3>Welcome to dotPH Partner Console.</h3>
+    <p>Please log in using your partner ID and assigned password to manage your .ph domain names.</p>
+    <ul>
+      <li>Forgot your password? Please contact <a href="https://www.dot.ph/corporate/contactus" target="_blank">dotPH Helpdesk</a>.</li>
+      <li>Don't have an account? contact us <a href="mailto:helpdesk@dot.ph?subject=Partner Application">here</a>.</li>
+    </ul>
+  </div>
+
+  <div id="login-form">
+    <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
+      <div id="username-field">
+        <%= f.text_field :username, autofocus: true, placeholder: 'Partner ID' %>
+      </div>
+      <div id="password-field">
+        <%= f.password_field :password, autocomplete: 'off', placeholder: 'Password'  %>
+      </div>
+      <div id="login-submit">
+        <%= f.submit 'Login' %>
+      </div>
+      <% if devise_mapping.rememberable? -%>
+        <div>
+          <%= f.check_box :remember_me %>
+          <span>Keep me logged in for two weeks unless I log out.</span>
+        </div>
+      <% end -%>
+    <% end %>
+  </div>
+</div>

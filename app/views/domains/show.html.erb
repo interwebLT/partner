@@ -1,0 +1,133 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'gears lg' %>&nbsp;Domains
+<% end %>
+
+<section>
+  <div id="MyDomains">
+    <div class="pull-right">
+      <span class="text-danger"></span>
+    </div>
+    <h3><strong><%= @domain.name %></strong></h3>
+    <div class=" "></div>
+    <span class="sr-only"><strong>Domain Status:</strong> Active</span>
+    <div id="dom-reg-date">Registered Date: <%= formatted_date @domain.registered_at %></div>
+    <div id="dom-exp-date">Expiry Date: <%= formatted_date @domain.expires_at %></div>
+    <div><br></div>
+
+    <ul id="tab-list" class="dm" role="tablist">
+      <li class="active"><a href="#info" role="tab" data-toggle="tab">Domain Info</a></li>
+      <li><a href="#nameservers" role="tab" data-toggle="tab">Nameservers</a></li>
+      <li><a href="#domain_activity" role="tab" data-toggle="tab">Domain Activity</a></li>
+    </ul>
+    <div class="tab-content">
+      <!--domain info-->
+      <div class="active" id="info"><!-- tab-pane -->
+        <h5>Registrant Contact</h5>
+        <hr>
+        <div id="defaultInfo">
+          <div><!-- form-group -->
+            <label for="inputEmail3"><%= fa_icon 'user' %> Name</label>
+            <div class="inputfield"><%= @domain.registrant.name %></div>
+            <div ></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><%= fa_icon 'users' %> Organization </label>
+            <div class="inputfield"><%= @domain.registrant.organization %><span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span> </div>
+            <div></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><%= fa_icon 'home' %> Street </label>
+            <div class="inputfield"><%= @domain.registrant.street %></div>
+            <div></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><span>City</span></label>
+            <div class="inputfield"><%= @domain.registrant.city %></div>
+            <div></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><span>State/Province</span></label>
+            <div class="inputfield"><%= @domain.registrant.state %></div>
+            <div></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><span>Postal Code</span></label>
+            <div class="inputfield"><%= @domain.registrant.postal_code %></div>
+            <div></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><span>Country</span></label>
+            <div class="inputfield"><%= @domain.registrant.country_code %></div>
+            <div></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><%= fa_icon 'phone-square' %> Telephone </label>
+            <div class="inputfield"><%= @domain.registrant.phone %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span> </div>
+            <div></div>
+          </div>
+          <div><!-- form-group -->
+            <label for="inputEmail3"><%= fa_icon 'fax' %> Fax </label>
+            <div class="inputfield"><%= @domain.registrant.fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span> </div>
+            <div></div>
+          </div>
+          <div>
+            <label for="inputEmail3"><%= fa_icon 'envelope' %> Email </label>
+            <div class="inputfield"><%= @domain.registrant.email %></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <!--domain info-->
+      <!--nameservers-->
+      <div id="nameservers"><!-- tab-pane -->
+        <h5>Nameservers</h5>
+        <hr>
+        <div id="table">
+          <table id="domain_hosts">
+            <thead>
+              <tr>
+                <th>Nameserver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @domain.hosts.each do |host| %>
+              <tr>
+                <td><%= host.name %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <br>
+        </div>
+      </div>
+      <!--name servers-->
+      <!--domain activity-->
+      <div id="domain_activity"><!-- tab-pane -->
+        <h5>Domain Activity</h5>
+        <hr>
+        <div>
+          <div>
+            <table id="domain_activities">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @domain.activities.each do |activity| %>
+                <tr>
+                  <td><%= formatted_timestamp activity.activity_at %></td>
+                  <td><%= activity_description(activity).html_safe %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+      <!--domain activity-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'user lg' %>&nbsp; Create Partner
+<% end %>
+<%= simple_form_for @partner,  url: preview_partners_path, method: :post do |f| %>
+<div>
+  <div>Profile Info</div>
+  <div>
+    <div>
+      <%= f.input :type, label: 'Partner Type', as: :select, collection: ['epp','registrar_console'], :include_blank => 'Select Type' %>
+      <%= f.input :name, label: 'Username' %>
+      <%= f.input :pwd, label: 'Password', input_html: { value: @pwd } %>
+      <%= f.input :organization, label: 'Company Name' %>
+      <%= f.input :url, label: 'Website' %>
+      <%= f.input :nature, label: 'Nature of Business' %>
+      <%= f.input :representative %>
+      <%= f.input :position %>
+      <%= f.input :street %>
+      <%= f.input :city %>
+      <%= f.input :state, label: 'State/Province' %>
+      <%= f.input :postal_code, label: 'Postal Code', required: false %>
+      <%= f.input :country_code %>
+      <%= f.input :phone %>
+      <%= f.input :fax, required: false %>
+      <%= f.input :email %>
+      <%= f.input :local, as: :boolean , checked_value: 'yes', unchecked_value: 'no'%>
+      <%= f.input :admin, as: :boolean , checked_value: 'yes', unchecked_value: 'no' %>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-default pull-left btn-lg">Cancel</button>
+    <%= f.submit 'Submit', role: 'button', class: 'btn btn-warning pull-right  btn-lg' %>
+  </div>
+</div>
+<% end %>

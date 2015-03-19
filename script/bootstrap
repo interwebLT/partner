@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+echo ""
+echo "  Partner Console"
+echo ""
+
+# Check if Bundler is present
+if test ! $(which bundler); then
+  echo "  x You need to install Bundler:"
+  echo "    gem install bundler"
+  exit
+else
+  echo "  + Bundler found."
+fi
+
+echo "  + Installing dependencies..."
+bundle install --quiet
+
+echo ""
+echo "  We're ready to rock!"

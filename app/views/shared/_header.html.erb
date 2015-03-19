@@ -1,0 +1,83 @@
+<div role="navigation" id="navbar">
+  <div>
+    <div>
+        <button data-target=".navbar-collapse" data-toggle="collapse"  type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <%= link_to root_path do %>
+        <%= image_tag 'pc-logo.png', width: 55 %>
+        <% end %>
+    </div>
+    <nav>
+      <h2 class="sr-only">Navigation</h2>
+      <div class="navbar-collapse collapse" data-no-turbolink>
+        <ul>
+          <% if user_signed_in? and current_user.admin %>
+            <li class="<%= 'active' if params[:controller] == 'domains' %>"><%= link_to 'Domains', domains_path %></li>
+            <li class="<%= 'active' if params[:controller] == 'partners' %>"><%= link_to 'Partners', partners_path %></li>
+            <li class="<%= 'active' if params[:controller] == 'orders' %>"><%= link_to 'Orders', orders_path, id: :menu_orders %></li>
+            <li class="<%= 'active' if params[:controller] == 'activities' %>"><%= link_to 'Activities', activities_path, id: :menu_activities  %></li>
+          <% elsif user_signed_in? %>
+            <li class="<%= 'active' if params[:controller] == 'domains' %>"><%= link_to 'Domains', domains_path %></li>
+            <li class="<%= 'active' if params[:controller] == 'reports' %>"><%= link_to 'Reports', reports_path, id: 'orders' %></li>
+          <% else %>
+            <li><%= link_to 'Code of Conduct', coc_about_index_path %></li>
+            <li><%= link_to 'Service Agreement', sa_about_index_path %></li>
+          <% end %>
+        </ul>
+        <ul class="navbar-right">
+          <% if user_signed_in? %>
+            <li class="dropdown">
+              <a data-toggle="dropdown" href="#">
+                 <strong><%= current_user.partner_name.downcase %></strong>
+                 <span></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <% unless current_user.admin %>
+                  <li><%= link_to 'Partner Info', profile_index_path, id: :menu_partner_info %></li>
+                  <li><%= link_to 'Code of Conduct', coc_about_index_path %></li>
+                  <li><%= link_to 'Service Agreement', sa_about_index_path %></li>
+                <% end %>
+                <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+            <% unless current_user.admin %>
+              <li>
+                <%= link_to '#', id: :current_balance do %>
+                  <%= number_to_currency current_user.credits %>
+                <% end %>
+              </li>
+            <% end %>
+          <% else %>
+            <li><%= link_to "Log In", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+<% unless @welcome_page %>
+<div role="banner" id="banner-title">
+  <div>
+    <div>
+      <h2><%= yield :banner_title %></h2>
+    </div>
+  </div>
+</div>
+<% else %>
+<div id="banner-container">
+  <div>
+    <h1>Become a Partner</h1>
+    <p>Get <strong>big discounts</strong> on your PH domain purchases and <strong>earn maximum profits</strong>.</p>
+    <ul>
+      <li><%= fa_icon 'check-circle' %> No startup fees.</li>
+      <li><%= fa_icon 'check-circle' %> No annual fees.</li>
+      <li><%= fa_icon 'check-circle' %> No minimum monthly purchases.</li>
+    </ul>
+    <br>
+    <a role="button" href="mailto:helpdesk@dot.ph?subject=Partner Application">Contact Us</a>
+  </div>
+</div>
+<% end %>

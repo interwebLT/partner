@@ -1,0 +1,20 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 110px;
+}
+
+.footer {
+  background-color: #414141;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0;
+  background-image: url(/assets/grain.png);
+}

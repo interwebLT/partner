@@ -1,0 +1,36 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      html: '<span class="text-red">*</span></label>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      defaults:
+        name: <i class="fa fa-user"></i> Name
+        organization: <i class="fa fa-briefcase"></i> Organization
+        street: <i class="fa fa-home"></i> Street
+        city: <span class="text-indent"></span> City
+        state: <span class="text-indent"></span> State/Province
+        postal_code: <span class="text-indent"></span> Postal Code
+        country_code: <span class="text-indent"></span> Country
+        phone: <i class="fa fa-phone"></i> Telephone
+        fax: <i class="fa fa-fax"></i> Fax
+        email: <i class="fa fa-envelope"></i> Email
+    hints:
+      defaults:
+        organization: Enter your name if you are not registering the domain on behalf of an organization
+        phone: 'e.g. +12.34567890'
+        fax: 'e.g. +12.34567890'
+    placeholders:
+      defaults:
+        name: Enter Name
+        organization: Enter Organization
+        street: Enter Street
+        city: Enter City
+        state: Enter State/Province
+        postal_code: Enter Postal Code
+        phone: Enter Telephone
+        fax: Enter Fax
+        email: Enter Email

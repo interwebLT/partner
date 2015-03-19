@@ -1,0 +1,42 @@
+#partner_info {
+  @extend .container;
+
+  h3 {
+    @extend .text-primary;
+
+    font-weight: bold;
+  }
+}
+
+#pinfo > div {
+  @extend .form-group;
+
+  label {
+    @extend .control-label;
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    @extend .col-md-5;
+
+    padding-top: 0;
+
+    span {
+      padding-left: 15px;
+    }
+  }
+
+  div.inputfield {
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    @extend .col-md-7;
+    @extend .inputfield;
+  }
+
+  div:last-child{
+    @extend .clearfix;
+  }
+}
+
+#pinfo h5 {
+  color: rgb(139, 139, 139);
+  font-size: 12px;
+}

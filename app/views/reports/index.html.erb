@@ -1,0 +1,89 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'file-text lg' %>&nbsp;Reports
+<% end %>
+
+<div id="table">
+  <% total_credits = 0 %>
+  <% total_orders = 0 %>
+
+  <h3>Credit History</h3>
+
+  <table id="credits">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Order No.</th>
+        <th>Type</th>
+        <th>Amount ($)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @credits.each do |credit| %>
+      <tr>
+        <td><%= formatted_timestamp credit.credited_at %></td>
+        <td><%= credit.order_number %></td>
+        <td>Replenish Credits</td>
+        <td><%= number_to_currency(credit.credits.to_f, unit: '') %></td>
+      </tr>
+      <% total_credits = total_credits + credit.credits.to_f %>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>TOTAL</td>
+        <td></td>
+        <td></td>
+        <td><%= number_to_currency total_credits %></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <h3>Transactions</h3>
+
+  <table id="orders">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Order No.</th>
+        <th>Type</th>
+        <th>Term</th>
+        <th>Domain</th>
+        <th>Amount ($)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+      <% order.order_details.each do |order_detail| %>
+      <tr>
+        <td><%= formatted_timestamp order.ordered_at %></td>
+        <td><%= order.order_number %></td>
+        <td><%= order_detail_type order_detail.type %></td>
+        <td><%= order_detail.period %></td>
+        <td><%= order_detail.domain %></td>
+        <td><%= number_to_currency(order_detail.price) %></td>
+      </tr>
+      <% end %>
+      <% total_orders = total_orders + order.total_price %>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>TOTAL</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= number_to_currency total_orders %></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <table id="remaining_balance">
+    <tbody>
+      <tr>
+        <th>Remaining Balance</th>
+        <th><%= number_to_currency(total_credits - total_orders) %></th>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,173 @@
+<% content_for :banner_title do %>
+  <%= fa_icon 'user lg' %>&nbsp; Create Partner
+<% end %>
+<%= simple_form_for @partner,  url: partners_path, method: :post do |f| %>
+  <div class="panel panel-default panel-bg">
+    <div class="panel-body">
+     <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Partner Type
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.type %>
+          <%= f.hidden_field :type, value: @partner.type %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Name
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.name %>
+          <%= f.hidden_field :name, value: @partner.name %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Password
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.pwd %>
+          <%= f.hidden_field :pwd, value: @partner.pwd %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Company Name
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.organization %>
+          <%= f.hidden_field :organization, value: @partner.organization %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Website
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.url %>
+          <%= f.hidden_field :url, value: @partner.url %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Nature of Business
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.nature %>
+          <%= f.hidden_field :nature, value: @partner.nature %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Representative
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.representative %>
+          <%= f.hidden_field :representative, value: @partner.representative %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Position
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.position %>
+          <%= f.hidden_field :position, value: @partner.position %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Street
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.street %>
+          <%= f.hidden_field :street, value: @partner.street %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        City
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.city %>
+          <%= f.hidden_field :city, value: @partner.city %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        State/Province
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.state %>
+          <%= f.hidden_field :state, value: @partner.state %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Postal Code
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.postal_code %>
+          <%= f.hidden_field :postal_code, value: @partner.postal_code %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Country
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.country_code %>
+          <%= f.hidden_field :country_code, value: @partner.country_code %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Telephone
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.phone %>
+          <%= f.hidden_field :phone, value: @partner.phone %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Fax
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.fax %>
+          <%= f.hidden_field :fax, value: @partner.fax %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Email
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.email %>
+          <%= f.hidden_field :email, value: @partner.email %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Local
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.local %>
+          <%= f.hidden_field :local, value: @partner.local %>
+        </div>
+      </div>
+      <div class="form-group string required disabled registrant_partner">
+        <label class="string required control-label col-xs-12 col-sm-6 col-md-4 control-label" for="registrant_partner">
+        Admin
+        </label>
+        <div class="col-sm-4 text-info" data-original-title="" title="">
+          <%= @partner.admin %>
+          <%= f.hidden_field :admin, value: @partner.admin %>
+        </div>
+      </div>
+      <p class="col-md-offset-3">
+        <%= f.submit 'Create Partner', role: 'button', class: 'btn btn-primary btn-lg' %>
+      </p>
+  </div>
+<% end %>

@@ -1,0 +1,213 @@
+.page-header {
+  padding-bottom: 9px;
+  margin: 0;
+  border-bottom: none;
+}
+
+main > div{
+  @extend .container;
+}
+
+main > div.alert {
+  margin-left: 15px;
+}
+
+#domain_list_search {
+  @extend .form-inline;
+  @extend .col-sm-12;
+  @extend .pull-right;
+  @extend .text-right;
+}
+
+#domain_list_search > div {
+  @extend .input-group;
+}
+
+#domain_list_search > div > div {
+  @extend .input-group-btn;
+}
+
+#find-domain {
+  @extend .input-group;
+
+  border: 1px solid #CACACA;
+  border-radius: 4px;
+
+  input {
+    @extend .form-control;
+
+    border: none !important;
+  }
+
+  span {
+    @extend .input-group-btn;
+
+    button {
+      @extend .btn;
+      @extend .btn-link;
+    }
+  }
+}
+
+
+/* Domain Info Tab
+------------------*/
+#MyDomains {
+  @extend .container;
+
+  h3 {
+    @extend .text-primary;
+
+    strong {
+      /*border-right: 2px solid #337ab7;*/
+      padding-right: 10px;
+    }
+
+    a {
+      @extend .btn;
+      @extend .btn-link;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  #MyDomains {
+    h3 {
+      text-align: center;
+
+      strong {
+        border-right: none !important;
+        text-align: center;
+      }
+    }
+  }
+
+  #dom-reg-date, #dom-exp-date {
+    text-align: center;
+  }
+}
+
+#tab-list {
+  @extend .nav, .nav-tabs;
+}
+
+.tab-content {
+  @extend .panel, .panel-body;
+  background-color: #FFF !important;
+  border-color: #CCC;
+  border-width: 1px;
+  margin-top: -15px;
+
+  div {
+    @extend .tab-pane;
+
+    section a {
+      @extend .btn, .btn-default;
+    }
+  }
+}
+
+#defaultInfo > div {
+  @extend .form-group;
+
+  label {
+    @extend .control-label;
+    @extend .col-xs-12;
+    @extend .col-sm-4;
+    @extend .col-md-3;
+
+    padding-top: 0;
+
+    span{
+      padding-left: 15px;
+    }
+  }
+
+  div.inputfield {
+    @extend .col-xs-12;
+    @extend .col-sm-8;
+    @extend .col-md-9;
+    @extend .inputfield;
+    color: #47A2D6;
+  }
+
+  div:last-child {
+    @extend .clearfix;
+  }
+}
+
+#nameservers, #info, #domain_activity  {
+  h5 {
+    @extend .text-primary;
+  }
+}
+
+#domain_activity {
+  div {
+    @extend .table-responsive;
+  }
+}
+
+.dm.nav-tabs {
+  border-bottom: 1px solid #CCC;
+}
+
+.dm.nav-tabs > li.active > a, .dm.nav-tabs > li.active > a:hover, .dm.nav-tabs > li.active > a:focus {
+  background: none repeat scroll 0px 0px #EB9000;
+  color: #fff;
+  border: 0px none;
+}
+
+.dm.nav > li, .dm.nav-tabs > li {
+  float: none;
+  display: inline-block;
+}
+
+.dm.nav li a {
+  border-radius: none;
+  height: 40px;
+  line-height: 20px !important;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.dm.nav-tabs {
+  border-bottom: 0;
+  text-align: center;
+}
+
+.dm.nav-tabs > li > a {
+  background-color: #ccc;
+  color: #555;
+  border-top: 0;
+  border-left: 0!important;
+  margin: 0;
+  border-radius: 0;
+}
+
+.dm.nav > li > a:hover, .dm.nav-tabs > li > a:hover {
+  background-color: #EB9000;
+  color: #fff !important;
+  border-top: none;
+}
+
+.dm.nav li {
+  cursor: pointer;
+  margin-right: -5px;
+}
+
+.dm.nav-tabs > li:first-child > a {
+  border-radius: 4px 0  0 4px;
+}
+
+.dm.nav-tabs > li:last-child > a {
+  border-radius: 0 4px 4px 0;
+}
+
+.dm.nav li:last-child {
+  border-right: 0;
+}
+
+.dm.nav li:first-child {
+  border-left: 0;
+}

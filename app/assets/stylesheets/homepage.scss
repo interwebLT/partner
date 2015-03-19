@@ -1,0 +1,71 @@
+#banner-container {
+  margin-top: 60px;
+  background-color: #47A2D6;
+  background-image: image-url("grain.png");
+  margin-bottom: 60px;
+
+  div {
+    @extend .text-center;
+
+    padding-top: 60px;
+    padding-bottom: 60px;
+    color: #fff;
+
+    h1 {
+      @extend .text-center;
+
+      font-family: 'Muli';
+      font-size: 50px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #3D3D3D;
+      letter-spacing: -2px;
+    }
+
+    p {
+      @extend .text-center;
+
+      font-family: 'Muli';
+      font-size: 22px;
+      font-weight: 300;
+      text-shadow: 1px 1px 2px #3D3D3D;
+    }
+
+    ul {
+      @extend .list-unstyled;
+      @extend .text-left;
+
+      margin: 0 auto;
+      width: 345px;
+      font-size: 20px;
+      text-shadow: 1px 1px 2px #3D3D3D;
+    }
+
+    i {
+      @extend .orange;
+    }
+  }
+
+  a {
+    @extend .btn;
+    @extend .btn-warning;
+    @extend .btn-lg;
+  }
+}
+
+#homepage {
+  @extend .row;
+
+  div {
+    @extend .col-md-4;
+    @extend .text-center;
+  }
+
+  p {
+    @extend .text-left;
+  }
+
+  h2 {
+    font-family: 'Open Sans Condensed';
+    font-weight: 600;
+  }
+}

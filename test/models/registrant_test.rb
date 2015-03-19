@@ -1,0 +1,246 @@
+require 'test_helper'
+
+describe Registrant do
+  describe :valid? do
+    subject {
+      Registrant.new  name: 'Test Registrant',
+                      organization: 'Test Organization',
+                      street: '#123 Test Street',
+                      city: 'Test City',
+                      state: 'Test State',
+                      postal_code: '1240',
+                      country_code: 'PH',
+                      phone: '+63.123456789',
+                      fax: '+63.123456789',
+                      email: 'sample@dot.ph'
+    }
+
+    context :when_valid do
+      specify { subject.valid?.must_equal true }
+    end
+
+    context :when_name_missing do
+      before do
+        subject.name = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_organization_missing do
+      before do
+        subject.organization = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_street_missing do
+      before do
+        subject.street = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_city_missing do
+      before do
+        subject.city = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_state_missing do
+      before do
+        subject.state = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_country_code_missing do
+      before do
+        subject.country_code = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_phone_missing do
+      before do
+        subject.phone = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_email_missing do
+      before do
+        subject.email = nil
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_postal_code_contains_special_chars do
+      before do
+        subject.postal_code = '12)(b@!#$'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_phone_not_a_number do
+      before do
+        subject.phone = 'asdasd'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_fax_not_a_number do
+      before do
+        subject.fax = 'asdasd'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_email_invalid do
+      before do
+        subject.email = 'sampledot.ph'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_name_blank do
+      before do
+        subject.name = ''
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_organization_blank do
+      before do
+        subject.organization = ''
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_street_blank do
+      before do
+        subject.street = ''
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_city_blank do
+      before do
+        subject.city = ''
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_state_blank do
+      before do
+        subject.state = ''
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_postal_code_less_than_3_chars do
+      before do
+        subject.postal_code = '12'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_phone_less_than_10_chars do
+      before do
+        subject.phone = '123456789'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_fax_less_than_10_chars do
+      before do
+        subject.fax = '123456789'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_name_more_than_100_chars do
+      before do
+        subject.name = '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_organization_more_than_100_chars do
+      before do
+        subject.name = '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_street_more_than_50_chars do
+      before do
+        subject.street = '123456789 123456789 123456789 123456789 123456789 X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_city_more_than_50_chars do
+      before do
+        subject.city = '123456789 123456789 123456789 123456789 123456789 X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_state_more_than_50_chars do
+      before do
+        subject.state = '123456789 123456789 123456789 123456789 123456789 X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_postal_code_more_than_10_chars do
+      before do
+        subject.postal_code = '123456789 X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_phone_more_than_32_chars do
+      before do
+        subject.fax = '123456789 123456789 123456789 12X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+
+    context :when_fax_more_than_32_chars do
+      before do
+        subject.fax = '123456789 123456789 123456789 12X'
+      end
+
+      specify { subject.valid?.must_equal false }
+    end
+  end
+end
