@@ -4,14 +4,6 @@
   border-bottom: none;
 }
 
-main > div{
-  @extend .container;
-}
-
-main > div.alert {
-  margin-left: 15px;
-}
-
 #domain_list_search {
   @extend .form-inline;
   @extend .col-sm-12;
