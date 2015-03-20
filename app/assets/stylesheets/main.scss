@@ -124,26 +124,25 @@ html, body {
     }
 }
 
-#svcAgreement > div:first-child {
+#sa > div:first-child {
   @extend .col-sm-9;
 }
 
-#svcAgreement > div:nth-child(2) {
+#sa > div:nth-child(2) {
   @extend .col-sm-3;
   @extend .hidden-xs;
 }
 
-#svcAgreement > div:first-child > div {
+#sa > div:first-child div {
   @extend .visible-xs;
+}
 
-  div {
+#sa-dropdown-menu {
     @extend .btn-group;
 
     button {
       @extend .btn;
       @extend .btn-default;
-      @extend .dropdown-toggle;
-
       border-radius: 4px !important;
 
       span {
@@ -151,6 +150,5 @@ html, body {
       }
     }
   }
-}
 
 .text-indent{padding-left: 15px;}
