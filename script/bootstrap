@@ -16,7 +16,7 @@ else
 fi
 
 echo "  + Installing dependencies..."
-bundle install --quiet
+NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install --quiet
 
 echo ""
 echo "  We're ready to rock!"
