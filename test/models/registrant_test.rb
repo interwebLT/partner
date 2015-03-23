@@ -1,6 +1,30 @@
 require 'test_helper'
 
 describe Registrant do
+  describe :new do
+    subject { Registrant.new params }
+
+    let(:params) {
+      {
+        name: 'Test Registrant',
+        organization: 'Test Organization',
+        street: '#123 Test Street',
+        street2: 'Street 2',
+        street3: 'Street 3',
+        city: 'Test City',
+        state: 'Test State',
+        postal_code: '1240',
+        country_code: 'PH',
+        phone: '+63.123456789',
+        fax: '+63.123456789',
+        email: 'sample@dot.ph'
+      }
+    }
+
+    specify { subject.street2.must_equal 'Street 2' }
+    specify { subject.street3.must_equal 'Street 3' }
+  end
+
   describe :valid? do
     subject {
       Registrant.new  name: 'Test Registrant',

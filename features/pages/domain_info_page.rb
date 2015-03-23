@@ -32,6 +32,8 @@ def domain_info_response
       name: 'Registrant',
       organization: 'Organization',
       street: 'Street',
+      street2: nil,
+      street3: nil,
       city: 'City',
       state: 'State',
       postal_code: 1234,
