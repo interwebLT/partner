@@ -39,7 +39,7 @@ def domain_info_response
       postal_code: 1234,
       country_code: 'PH',
       email: 'contact@domain.ph',
-      phone: '+63.2134567',
+      voice: '+63.2134567',
       fax: nil
     },
     registrant_handle: 'contact',

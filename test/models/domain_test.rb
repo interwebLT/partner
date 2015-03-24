@@ -21,7 +21,7 @@ describe Domain do
           postal_code: 'Postal Code',
           country_code: 'Country Code',
           email: 'hello@domain.ph',
-          phone: '+63.21234567',
+          voice: '+63.21234567',
           fax: nil
         },
         registrant_handle: 'contact',
