@@ -29,6 +29,7 @@ def domain_info_response
     registered_at: '2014-01-01T00:00:00Z',
     expires_at: '2015-01-01T00:00:00Z',
     registrant: {
+      handle: 'handle',
       name: 'Registrant',
       organization: 'Organization',
       street: 'Street',
@@ -40,7 +41,9 @@ def domain_info_response
       country_code: 'PH',
       email: 'contact@domain.ph',
       voice: '+63.2134567',
-      fax: nil
+      voice_ext: '+63.2134567',
+      fax: nil,
+      fax_ext: nil
     },
     registrant_handle: 'contact',
     admin_handle: nil,
