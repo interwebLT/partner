@@ -300,6 +300,14 @@ table th[class*="col-"] {
     margin-bottom: 0;
   }
 
+  #table {
+    padding:0;
+  }
+
+  #pinfo > div label span, #defaultInfo > div label span {
+    padding-left: 0;
+  }
+
   .table-responsive > .table > thead > tr > th,
   .table-responsive > .table > tbody > tr > th,
   .table-responsive > .table > tfoot > tr > th,
@@ -383,6 +391,8 @@ table#remaining_balance{
 }
 #table{
   @extend .table-responsive;
+  @extend .container;
   border: 0;
 }
+
 
