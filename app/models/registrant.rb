@@ -1,7 +1,9 @@
 class Registrant
   include ActiveModel::Model
 
-  attr_accessor :name, :organization, :street, :street2, :street3, :city, :state, :postal_code, :country_code, :voice, :fax, :email
+  attr_accessor :name, :organization,
+                :street, :street2, :street3, :city, :state, :postal_code, :country_code,
+                :voice, :voice_ext, :fax, :fax_ext, :email
 
   validates_presence_of :name, :organization, :street, :city, :state, :country_code, :voice, :email
 

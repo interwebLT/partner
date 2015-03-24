@@ -40,7 +40,9 @@ def domain_info_response
       country_code: 'PH',
       email: 'contact@domain.ph',
       voice: '+63.2134567',
-      fax: nil
+      voice_ext: '+63.2134567',
+      fax: nil,
+      fax_ext: nil
     },
     registrant_handle: 'contact',
     admin_handle: nil,

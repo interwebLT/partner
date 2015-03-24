@@ -22,7 +22,9 @@ describe Domain do
           country_code: 'Country Code',
           email: 'hello@domain.ph',
           voice: '+63.21234567',
-          fax: nil
+          voice_ext: nil,
+          fax: nil,
+          fax_ext: nil
         },
         registrant_handle: 'contact',
         admin_handle: 'contact',
