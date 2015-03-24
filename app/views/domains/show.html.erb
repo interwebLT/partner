@@ -79,7 +79,7 @@
             <div class="inputfield">
               <%= @domain.registrant.voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
               <% if @domain.registrant.voice_ext %>
-              <span class="text-muted">Extension</span> <%=@domain.registrant.voice_ext %>
+              <span class="text-muted">ext.</span> <%=@domain.registrant.voice_ext %>
               <% end %>
             </div>
             <div></div>
@@ -89,7 +89,7 @@
             <div class="inputfield">
               <%= @domain.registrant.fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
               <% if @domain.registrant.fax_ext %>
-              <span class="text-muted">Extension</span> <%=@domain.registrant.fax_ext %>
+              <span class="text-muted">ext.</span> <%=@domain.registrant.fax_ext %>
               <% end %>
             </div>
             <div></div>
