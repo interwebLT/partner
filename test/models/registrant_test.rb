@@ -15,7 +15,7 @@ describe Registrant do
         state: 'Test State',
         postal_code: '1240',
         country_code: 'PH',
-        phone: '+63.123456789',
+        voice: '+63.123456789',
         fax: '+63.123456789',
         email: 'sample@dot.ph'
       }
@@ -34,7 +34,7 @@ describe Registrant do
                       state: 'Test State',
                       postal_code: '1240',
                       country_code: 'PH',
-                      phone: '+63.123456789',
+                      voice: '+63.123456789',
                       fax: '+63.123456789',
                       email: 'sample@dot.ph'
     }
@@ -91,9 +91,9 @@ describe Registrant do
       specify { subject.valid?.must_equal false }
     end
 
-    context :when_phone_missing do
+    context :when_voice_missing do
       before do
-        subject.phone = nil
+        subject.voice = nil
       end
 
       specify { subject.valid?.must_equal false }
@@ -115,9 +115,9 @@ describe Registrant do
       specify { subject.valid?.must_equal false }
     end
 
-    context :when_phone_not_a_number do
+    context :when_voice_not_a_number do
       before do
-        subject.phone = 'asdasd'
+        subject.voice = 'asdasd'
       end
 
       specify { subject.valid?.must_equal false }
@@ -187,9 +187,9 @@ describe Registrant do
       specify { subject.valid?.must_equal false }
     end
 
-    context :when_phone_less_than_10_chars do
+    context :when_voice_less_than_10_chars do
       before do
-        subject.phone = '123456789'
+        subject.voice = '123456789'
       end
 
       specify { subject.valid?.must_equal false }
@@ -251,9 +251,9 @@ describe Registrant do
       specify { subject.valid?.must_equal false }
     end
 
-    context :when_phone_more_than_32_chars do
+    context :when_voice_more_than_32_chars do
       before do
-        subject.fax = '123456789 123456789 123456789 12X'
+        subject.voice = '123456789 123456789 123456789 12X'
       end
 
       specify { subject.valid?.must_equal false }
