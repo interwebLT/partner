@@ -6,6 +6,7 @@ describe Registrant do
 
     let(:params) {
       {
+        handle: 'handle',
         name: 'Test Registrant',
         organization: 'Test Organization',
         street: '#123 Test Street',

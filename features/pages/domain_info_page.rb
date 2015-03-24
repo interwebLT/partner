@@ -29,6 +29,7 @@ def domain_info_response
     registered_at: '2014-01-01T00:00:00Z',
     expires_at: '2015-01-01T00:00:00Z',
     registrant: {
+      handle: 'handle',
       name: 'Registrant',
       organization: 'Organization',
       street: 'Street',
