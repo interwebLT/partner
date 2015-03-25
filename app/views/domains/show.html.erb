@@ -106,23 +106,20 @@
       <div id="nameservers"><!-- tab-pane -->
         <h5>Nameservers</h5>
         <hr>
-        <div id="table">
-          <table id="domain_hosts">
-            <thead>
-              <tr>
-                <th>Nameserver</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @domain.hosts.each do |host| %>
-              <tr>
-                <td><%= host.name %></td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <br>
-        </div>
+        <table id="domain_hosts">
+          <thead>
+            <tr>
+              <th>Nameserver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @domain.hosts.each do |host| %>
+            <tr>
+              <td><%= host.name %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
       <!--name servers-->
       <!--domain activity-->
