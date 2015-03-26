@@ -24,7 +24,7 @@ class Domain
   end
 
   def registrant= registrant
-    @registrant = Registrant.new registrant
+    @registrant = Contact.new registrant
   end
 
   def activities= activities
