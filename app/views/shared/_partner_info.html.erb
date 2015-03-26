@@ -88,46 +88,42 @@
     <div id="pns">
       <h5 class="text-primary">Nameservers</h5>
       <hr class="border-gray">
-      <div id="table">
-        <table id="default_nameservers">
-          <thead>
-            <tr>
-              <th>Nameserver</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @partner.default_nameservers.each do |default_nameserver| %>
-            <tr>
-              <td><%= default_nameserver.name %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+      <table id="default_nameservers">
+        <thead>
+          <tr>
+            <th>Nameserver</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @partner.default_nameservers.each do |default_nameserver| %>
+          <tr>
+            <td><%= default_nameserver.name %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
     <div id="pricing_tab">
       <h5 class="text-primary">Pricing</h5>
       <hr class="border-gray">
-      <div id="table">
-        <table id="pricing">
-          <thead>
-            <tr>
-              <th>Action</th>
-              <th>Period</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @partner.pricing.each do |partner_price| %>
-            <tr>
-              <td><%= order_detail_type partner_price.action %></td>
-              <td><%= partner_price.period %></td>
-              <td><%= number_to_currency partner_price.price %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+      <table id="pricing">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Period</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @partner.pricing.each do |partner_price| %>
+          <tr>
+            <td><%= order_detail_type partner_price.action %></td>
+            <td><%= partner_price.period %></td>
+            <td><%= number_to_currency partner_price.price %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

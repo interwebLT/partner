@@ -153,4 +153,5 @@ html, body {
 
 .text-indent{padding-left: 15px;}
 
-#coc {@extend .container;}
+#coc, #alert {@extend .container;}
+

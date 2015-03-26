@@ -9,18 +9,19 @@
     </header>
 
     <main role="main" class="container">
-      <% if notice %>
-      <div class="alert alert-warning" role="alert">
-        <%= notice %>
-      </div>
-      <% end %>
+      <div id="alert">
+        <% if notice %>
+        <div class="alert alert-warning" role="alert">
+          <%= notice %>
+        </div>
+        <% end %>
 
-      <% if alert %>
-      <div class="alert alert-danger" role="alert">
-        <%= alert %>
+        <% if alert %>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-
       <%= yield %>
     </main>
 
