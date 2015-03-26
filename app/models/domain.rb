@@ -5,7 +5,6 @@ class Domain
   RESTRICTED_EXTENSIONS = ['mil.ph', 'ngo.ph', 'edu.ph', 'gov.ph']
 
   attr_accessor :id, :zone, :name, :partner, :registered_at, :expires_at,
-                :registrant_handle, :admin_handle, :billing_handle, :tech_handle,
                 :registrant, :admin_contact, :billing_contact, :tech_contact,
                 :client_hold, :client_delete_prohibited, :client_renew_prohibited,
                 :client_transfer_prohibited, :client_update_prohibited,

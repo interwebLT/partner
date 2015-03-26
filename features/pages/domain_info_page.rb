@@ -28,7 +28,6 @@ def domain_info_response
     partner: 'alpha',
     registered_at: '2014-01-01T00:00:00Z',
     expires_at: '2015-01-01T00:00:00Z',
-    registrant_handle: 'registrant',
     registrant: {
       handle: 'registrant',
       name: 'Registrant',
@@ -55,7 +54,6 @@ def domain_info_response
       fax_ext: nil,
       email: 'registrant@domain.ph'
     },
-    admin_handle: 'admin',
     admin_contact: {
       handle: 'admin',
       name: 'Admin',
@@ -82,7 +80,6 @@ def domain_info_response
       fax_ext: nil,
       email: 'admin@domain.ph'
     },
-    billing_handle: 'billing',
     billing_contact: {
       handle: 'billing',
       name: 'Billing',
@@ -109,7 +106,6 @@ def domain_info_response
       fax_ext: nil,
       email: 'billing@domain.ph'
     },
-    tech_handle: 'tech',
     tech_contact: {
       handle: 'tech',
       name: 'Tech',

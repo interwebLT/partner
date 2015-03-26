@@ -13,11 +13,6 @@ describe Domain do
     specify { subject.expiring.must_equal false }
     specify { subject.expired.must_equal true }
 
-    specify { subject.registrant_handle.must_equal 'registrant' }
-    specify { subject.admin_handle.must_equal 'admin' }
-    specify { subject.billing_handle.must_equal 'billing' }
-    specify { subject.tech_handle.must_equal 'tech' }
-
     specify { subject.registrant.wont_be_nil }
     specify { subject.admin_contact.wont_be_nil }
     specify { subject.billing_contact.wont_be_nil }
@@ -128,7 +123,6 @@ describe Domain do
       partner: 'alpha',
       registered_at: '2015-02-27T20:30:00Z',
       expires_at: '2017-02-27T20:30:00Z',
-      registrant_handle: 'registrant',
       registrant: {
         handle: 'registrant',
         name: 'Registrant',
@@ -155,7 +149,6 @@ describe Domain do
         fax_ext: nil,
         email: 'registrant@domain.ph'
       },
-      admin_handle: 'admin',
       admin_contact: {
         handle: 'admin',
         name: 'Admin',
@@ -182,7 +175,6 @@ describe Domain do
         fax_ext: nil,
         email: 'admin@domain.ph'
       },
-      billing_handle: 'billing',
       billing_contact: {
         handle: 'billing',
         name: 'Billing',
@@ -209,7 +201,6 @@ describe Domain do
         fax_ext: nil,
         email: 'billing@domain.ph'
       },
-      tech_handle: 'tech',
       tech_contact: {
         handle: 'tech',
         name: 'Tech',
