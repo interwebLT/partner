@@ -23,6 +23,11 @@ describe Domain do
     specify { subject.billing_contact.wont_be_nil }
     specify { subject.tech_contact.wont_be_nil }
 
+    specify { subject.registrant.must_be_kind_of Contact }
+    specify { subject.admin_contact.must_be_kind_of Contact }
+    specify { subject.billing_contact.must_be_kind_of Contact }
+    specify { subject.tech_contact.must_be_kind_of Contact }
+
     specify { subject.client_hold.must_equal false }
     specify { subject.client_delete_prohibited.must_equal false }
     specify { subject.client_renew_prohibited.must_equal false }
