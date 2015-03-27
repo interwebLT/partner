@@ -99,7 +99,7 @@
   }
 }
 
-#domain-info > div {
+#domain-info > div, #admin-info > div, #tech-info > div, #billing-info > div {
   @extend .form-group;
   @extend .clearfix;
   @extend .row;
@@ -124,18 +124,32 @@
     color: #47A2D6;
 
     div:first-child, div:nth-child(3) {
-        @extend .text-muted;
-        @extend .small;
-        @extend .col-xs-12;
-        @extend .col-lg-3;
-    @extend .row;
-      }
+      @extend .text-muted;
+      @extend .small;
+      @extend .col-xs-12;
+      @extend .row;
+      @extend .visible-xs;
+
+    }
 
       div:nth-child(2), div:last-child {
         @extend .col-xs-12;
-        @extend .col-lg-10;
-    @extend .row;
-      }
+        @extend .col-lg-6;
+        @extend .row;
+    }
+  }
+}
+
+.info-l10n {
+  @extend .hidden-xs;
+  label {
+    @extend .col-lg-3;
+  }
+  div{
+    @extend .col-lg-4;
+  }
+  div:last-child{
+    margin-left: -5px;
   }
 }
 
