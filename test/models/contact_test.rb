@@ -1,8 +1,8 @@
 require 'test_helper'
 
-describe Registrant do
+describe Contact do
   describe :new do
-    subject { Registrant.new params }
+    subject { Contact.new params }
 
     let(:params) {
       {
@@ -48,16 +48,16 @@ describe Registrant do
 
   describe :valid? do
     subject {
-      Registrant.new  name: 'Test Registrant',
-                      organization: 'Test Organization',
-                      street: '#123 Test Street',
-                      city: 'Test City',
-                      state: 'Test State',
-                      postal_code: '1240',
-                      country_code: 'PH',
-                      voice: '+63.123456789',
-                      fax: '+63.123456789',
-                      email: 'sample@dot.ph'
+      Contact.new name: 'Test Registrant',
+                  organization: 'Test Organization',
+                  street: '#123 Test Street',
+                  city: 'Test City',
+                  state: 'Test State',
+                  postal_code: '1240',
+                  country_code: 'PH',
+                  voice: '+63.123456789',
+                  fax: '+63.123456789',
+                  email: 'sample@dot.ph'
     }
 
     context :when_valid do

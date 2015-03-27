@@ -2,94 +2,7 @@ require 'test_helper'
 
 describe Domain do
   describe :new do
-    subject { Domain.new params }
-
-    let(:params) {
-      {
-        id: 1,
-        zone: 'ph',
-        name: 'domain.ph',
-        partner: 'alpha',
-        registered_at: '2015-02-27T20:30:00Z',
-        expires_at: '2017-02-27T20:30:00Z',
-        registrant: {
-          handle: 'handle',
-          name: 'Registrant',
-          organization: 'Organization',
-          street: 'Street',
-          street2: nil,
-          street3: nil,
-          city: 'City',
-          state: 'State',
-          postal_code: 1234,
-          country_code: 'PH',
-          local_name: 'Registrant',
-          local_organization: 'Organization',
-          local_street: 'Street',
-          local_street2: nil,
-          local_street3: nil,
-          local_city: 'City',
-          local_state: 'State',
-          local_postal_code: 1234,
-          local_country_code: 'PH',
-          voice: '+63.2134567',
-          voice_ext: nil,
-          fax: '+63.2134567',
-          fax_ext: nil,
-          email: 'contact@domain.ph'
-        },
-        registrant_handle: 'contact',
-        admin_handle: 'contact',
-        billing_handle: 'contact',
-        tech_handle: 'contact',
-        client_hold: false,
-        client_delete_prohibited: false,
-        client_renew_prohibited: false,
-        client_transfer_prohibited: false,
-        client_update_prohibited: false,
-        expiring: false,
-        expired: true,
-        activities: [
-          {
-            id: 1,
-            type: 'create',
-            activity_at: '2015-03-03T15:00:00Z',
-            object: {
-              id: 1,
-              type: 'domain',
-              name: 'domain.ph'
-            }
-          },
-          {
-            id: 2,
-            type: 'update',
-            activity_at: '2015-03-03T15:00:00Z',
-            object: {
-              id: 1,
-              type: 'domain',
-              name: 'domain.ph'
-            },
-            property_changed: 'name',
-            old_value: 'old_name',
-            new_value: 'new_name'
-          }
-        ],
-        hosts: [
-          {
-            id: 1,
-            name: 'ns3.domains.ph',
-            created_at: '2015-03-04T18:00:00Z',
-            updated_at: '2015-03-04T18:00:00Z'
-          },
-          {
-            id: 2,
-            name: 'ns4.domains.ph',
-            created_at: '2015-03-04T18:00:00Z',
-            updated_at: '2015-03-04T18:00:00Z'
-          }
-        ]
-      }
-    }
+    subject { Domain.new get_response }
 
     specify { subject.id.must_equal 1 }
     specify { subject.zone.must_equal 'ph' }
@@ -97,18 +10,25 @@ describe Domain do
     specify { subject.partner.must_equal 'alpha' }
     specify { subject.registered_at.must_equal '2015-02-27 20:30'.in_time_zone }
     specify { subject.expires_at.must_equal '2017-02-27 20:30'.in_time_zone }
+    specify { subject.expiring.must_equal false }
+    specify { subject.expired.must_equal true }
+
+    specify { subject.registrant_handle.must_equal 'registrant' }
+    specify { subject.admin_handle.must_equal 'admin' }
+    specify { subject.billing_handle.must_equal 'billing' }
+    specify { subject.tech_handle.must_equal 'tech' }
+
     specify { subject.registrant.wont_be_nil }
-    specify { subject.registrant_handle.must_equal 'contact' }
-    specify { subject.admin_handle.must_equal 'contact' }
-    specify { subject.billing_handle.must_equal 'contact' }
-    specify { subject.tech_handle.must_equal 'contact' }
+    specify { subject.admin_contact.wont_be_nil }
+    specify { subject.billing_contact.wont_be_nil }
+    specify { subject.tech_contact.wont_be_nil }
+
     specify { subject.client_hold.must_equal false }
     specify { subject.client_delete_prohibited.must_equal false }
     specify { subject.client_renew_prohibited.must_equal false }
     specify { subject.client_transfer_prohibited.must_equal false }
     specify { subject.client_update_prohibited.must_equal false }
-    specify { subject.expiring.must_equal false }
-    specify { subject.expired.must_equal true }
+
     specify { subject.activities.wont_be_empty }
     specify { subject.hosts.wont_be_empty }
   end
@@ -196,5 +116,172 @@ describe Domain do
     specify { Domain.valid?('domain--123.ph').must_equal false }
     specify { Domain.valid?(nil).must_equal false }
     specify { Domain.valid?('domain123').must_equal false }
+  end
+
+  private
+
+  def get_response
+    {
+      id: 1,
+      zone: 'ph',
+      name: 'domain.ph',
+      partner: 'alpha',
+      registered_at: '2015-02-27T20:30:00Z',
+      expires_at: '2017-02-27T20:30:00Z',
+      registrant_handle: 'registrant',
+      registrant: {
+        handle: 'registrant',
+        name: 'Registrant',
+        organization: 'Organization',
+        street: 'Street',
+        street2: nil,
+        street3: nil,
+        city: 'City',
+        state: 'State',
+        postal_code: '1234',
+        country_code: 'PH',
+        local_name: 'Registrant',
+        local_organization: 'Organization',
+        local_street: 'Street',
+        local_street2: nil,
+        local_street3: nil,
+        local_city: 'City',
+        local_state: 'State',
+        local_postal_code: '1234',
+        local_country_code: 'PH',
+        voice: '+63.2134567',
+        voice_ext: nil,
+        fax: '+63.2134567',
+        fax_ext: nil,
+        email: 'registrant@domain.ph'
+      },
+      admin_handle: 'admin',
+      admin_contact: {
+        handle: 'admin',
+        name: 'Admin',
+        organization: 'Organization',
+        street: 'Street',
+        street2: nil,
+        street3: nil,
+        city: 'City',
+        state: 'State',
+        postal_code: '1234',
+        country_code: 'PH',
+        local_name: 'Admin',
+        local_organization: 'Organization',
+        local_street: 'Street',
+        local_street2: nil,
+        local_street3: nil,
+        local_city: 'City',
+        local_state: 'State',
+        local_postal_code: '1234',
+        local_country_code: 'PH',
+        voice: '+63.2134567',
+        voice_ext: nil,
+        fax: '+63.2134567',
+        fax_ext: nil,
+        email: 'admin@domain.ph'
+      },
+      billing_handle: 'billing',
+      billing_contact: {
+        handle: 'billing',
+        name: 'Billing',
+        organization: 'Organization',
+        street: 'Street',
+        street2: nil,
+        street3: nil,
+        city: 'City',
+        state: 'State',
+        postal_code: '1234',
+        country_code: 'PH',
+        local_name: 'Billing',
+        local_organization: 'Organization',
+        local_street: 'Street',
+        local_street2: nil,
+        local_street3: nil,
+        local_city: 'City',
+        local_state: 'State',
+        local_postal_code: '1234',
+        local_country_code: 'PH',
+        voice: '+63.2134567',
+        voice_ext: nil,
+        fax: '+63.2134567',
+        fax_ext: nil,
+        email: 'billing@domain.ph'
+      },
+      tech_handle: 'tech',
+      tech_contact: {
+        handle: 'tech',
+        name: 'Tech',
+        organization: 'Organization',
+        street: 'Street',
+        street2: nil,
+        street3: nil,
+        city: 'City',
+        state: 'State',
+        postal_code: '1234',
+        country_code: 'PH',
+        local_name: 'Tech',
+        local_organization: 'Organization',
+        local_street: 'Street',
+        local_street2: nil,
+        local_street3: nil,
+        local_city: 'City',
+        local_state: 'State',
+        local_postal_code: '1234',
+        local_country_code: 'PH',
+        voice: '+63.2134567',
+        voice_ext: nil,
+        fax: '+63.2134567',
+        fax_ext: nil,
+        email: 'tech@domain.ph'
+      },
+      client_hold: false,
+      client_delete_prohibited: false,
+      client_renew_prohibited: false,
+      client_transfer_prohibited: false,
+      client_update_prohibited: false,
+      expiring: false,
+      expired: true,
+      activities: [
+        {
+          id: 1,
+          type: 'create',
+          activity_at: '2015-03-03T15:00:00Z',
+          object: {
+            id: 1,
+            type: 'domain',
+            name: 'domain.ph'
+          }
+        },
+        {
+          id: 2,
+          type: 'update',
+          activity_at: '2015-03-03T15:00:00Z',
+          object: {
+            id: 1,
+            type: 'domain',
+            name: 'domain.ph'
+          },
+          property_changed: 'name',
+          old_value: 'old_name',
+          new_value: 'new_name'
+        }
+      ],
+      hosts: [
+        {
+          id: 1,
+          name: 'ns3.domains.ph',
+          created_at: '2015-03-04T18:00:00Z',
+          updated_at: '2015-03-04T18:00:00Z'
+        },
+        {
+          id: 2,
+          name: 'ns4.domains.ph',
+          created_at: '2015-03-04T18:00:00Z',
+          updated_at: '2015-03-04T18:00:00Z'
+        }
+      ]
+    }
   end
 end
