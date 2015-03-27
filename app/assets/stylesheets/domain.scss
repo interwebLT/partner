@@ -139,6 +139,43 @@
   }
 }
 
+.nav#domain-info-tab {
+margin-top: 20px;
+}
+
+.nav-tabs#domain-info-tab li {
+border-right: none !important;
+border-left: none !important;
+margin: 0 15px;
+border-bottom: 3px solid transparent;
+}
+
+.nav-tabs#domain-info-tab li.active a {
+color: #47a2d6;
+}
+
+.nav-tabs#domain-info-tab li.active {
+border-bottom: 3px solid #47a2d6;
+}
+
+.nav-tabs#domain-info-tab li a {
+margin: 10px 0px 5px;
+border: none !important;
+padding: 0;
+height: 25px;
+color: #666;
+}
+.nav-tabs#domain-info-tab li a:hover {
+background-color: transparent;
+color: #47a2d6;
+}
+
+#domain-info-tab-content {
+border: none;
+
+}
+
+
 #nameservers, #info, #domain_activity  {
   h5 {
     @extend .text-primary;
