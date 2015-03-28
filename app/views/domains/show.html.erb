@@ -26,8 +26,8 @@
         <ul class="nav nav-tabs" id="domain-info-tab" role="tablist">
           <li role="presentation" class="active"><a href="#registrant-contact" aria-controls="registrant-contact" role="tab" data-toggle="tab">Registrant Contact</a></li>
           <li role="presentation"><a href="#admin-contact" aria-controls="admin-contact" role="tab" data-toggle="tab">Admin Contact</a></li>
-          <li role="presentation"><a href="#technical-contact" aria-controls="technical-contact" role="tab" data-toggle="tab">Technical Contact</a></li>
           <li role="presentation"><a href="#billing-contact" aria-controls="billing-contact" role="tab" data-toggle="tab">Billing Contact</a></li>
+          <li role="presentation"><a href="#technical-contact" aria-controls="technical-contact" role="tab" data-toggle="tab">Technical Contact</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" id="domain-info-tab-content">
@@ -285,132 +285,6 @@
               </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="technical-contact">
-            <hr>
-            <div id="tech-info">
-              <div class="info-l10n">
-                <label class=""></label>
-                <div class=""><strong>International</strong></div>
-                <div class=""><strong>Local</strong></div>
-              </div>
-              <div><!-- form-group -->
-                <label><%= fa_icon 'user' %> Name</label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.name %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_name %></div>
-                </div>
-              </div>
-              <div><!-- form-group -->
-                <label><%= fa_icon 'users' %> Organization </label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.organization %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_organization %></div>
-                  <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
-                </div>
-              </div>
-              <div><!-- form-group -->
-                <label><%= fa_icon 'home' %> Street </label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.street %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_street %></div>
-                </div>
-              </div>
-              <% if @domain.tech_contact.street2 %>
-              <div><!-- form-group -->
-                <label class="hidden-xs">&nbsp;</label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.street2 %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_street2 %></div>
-                </div>
-              </div>
-              <% end %>
-              <% if @domain.tech_contact.street3 %>
-              <div><!-- form-group -->
-                <label class="hidden-xs">&nbsp;</label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.street3 %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_street3 %></div>
-                </div>
-              </div>
-              <% end %>
-              <div><!-- form-group -->
-                <label><span>City</span></label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.city %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_city %></div>
-                </div>
-              </div>
-              <div><!-- form-group -->
-                <label><span>State/Province</span></label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.state %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_state %></div>
-                </div>
-              </div>
-              <div><!-- form-group -->
-                <label><span>Postal Code</span></label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.postal_code %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_postal_code %></div>
-                </div>
-              </div>
-              <div><!-- form-group -->
-                <label><span>Country</span></label>
-                <div class="inputfield">
-                  <div>Int'l</div>
-                  <div><%= @domain.tech_contact.country_code %></div>
-                  <div>Local</div>
-                  <div><%= @domain.tech_contact.local_country_code %></div>
-                </div>
-              </div>
-              <div><!-- form-group -->
-                <label><%= fa_icon 'phone-square' %> Telephone </label>
-                <div class="inputfield">
-                  <%= @domain.tech_contact.voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-                  <% if @domain.tech_contact.voice_ext %>
-                  <span class="text-muted">ext.</span> <%=@domain.tech_contact.voice_ext %>
-                  <% end %>
-                </div>
-                <div></div>
-              </div>
-              <div><!-- form-group -->
-                <label><%= fa_icon 'fax' %> Fax </label>
-                <div class="inputfield">
-                  <%= @domain.tech_contact.fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-                  <% if @domain.tech_contact.fax_ext %>
-                  <span class="text-muted">ext.</span> <%=@domain.tech_contact.fax_ext %>
-                  <% end %>
-                </div>
-                <div></div>
-              </div>
-              <div>
-                <label><%= fa_icon 'envelope' %> Email </label>
-                <div class="inputfield"><%= @domain.tech_contact.email %></div>
-                <div></div>
-              </div>
-              <div><!-- form-group -->
-                <label><%= fa_icon 'user-secret' %> Handle </label>
-                <div class="inputfield"><%= @domain.tech_contact.handle %></div>
-                <div></div>
-              </div>
-            </div>
-          </div>
           <!-- Billing Contact -->
           <div role="tabpanel" class="tab-pane" id="billing-contact">
             <hr>
@@ -534,6 +408,133 @@
               <div><!-- form-group -->
                 <label><%= fa_icon 'user-secret' %> Handle </label>
                 <div class="inputfield"><%= @domain.billing_contact.handle %></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Tech Contact -->
+          <div role="tabpanel" class="tab-pane" id="technical-contact">
+            <hr>
+            <div id="tech-info">
+              <div class="info-l10n">
+                <label class=""></label>
+                <div class=""><strong>International</strong></div>
+                <div class=""><strong>Local</strong></div>
+              </div>
+              <div><!-- form-group -->
+                <label><%= fa_icon 'user' %> Name</label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.name %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_name %></div>
+                </div>
+              </div>
+              <div><!-- form-group -->
+                <label><%= fa_icon 'users' %> Organization </label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.organization %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_organization %></div>
+                  <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
+                </div>
+              </div>
+              <div><!-- form-group -->
+                <label><%= fa_icon 'home' %> Street </label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.street %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_street %></div>
+                </div>
+              </div>
+              <% if @domain.tech_contact.street2 %>
+              <div><!-- form-group -->
+                <label class="hidden-xs">&nbsp;</label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.street2 %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_street2 %></div>
+                </div>
+              </div>
+              <% end %>
+              <% if @domain.tech_contact.street3 %>
+              <div><!-- form-group -->
+                <label class="hidden-xs">&nbsp;</label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.street3 %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_street3 %></div>
+                </div>
+              </div>
+              <% end %>
+              <div><!-- form-group -->
+                <label><span>City</span></label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.city %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_city %></div>
+                </div>
+              </div>
+              <div><!-- form-group -->
+                <label><span>State/Province</span></label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.state %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_state %></div>
+                </div>
+              </div>
+              <div><!-- form-group -->
+                <label><span>Postal Code</span></label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.postal_code %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_postal_code %></div>
+                </div>
+              </div>
+              <div><!-- form-group -->
+                <label><span>Country</span></label>
+                <div class="inputfield">
+                  <div>Int'l</div>
+                  <div><%= @domain.tech_contact.country_code %></div>
+                  <div>Local</div>
+                  <div><%= @domain.tech_contact.local_country_code %></div>
+                </div>
+              </div>
+              <div><!-- form-group -->
+                <label><%= fa_icon 'phone-square' %> Telephone </label>
+                <div class="inputfield">
+                  <%= @domain.tech_contact.voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+                  <% if @domain.tech_contact.voice_ext %>
+                  <span class="text-muted">ext.</span> <%=@domain.tech_contact.voice_ext %>
+                  <% end %>
+                </div>
+                <div></div>
+              </div>
+              <div><!-- form-group -->
+                <label><%= fa_icon 'fax' %> Fax </label>
+                <div class="inputfield">
+                  <%= @domain.tech_contact.fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+                  <% if @domain.tech_contact.fax_ext %>
+                  <span class="text-muted">ext.</span> <%=@domain.tech_contact.fax_ext %>
+                  <% end %>
+                </div>
+                <div></div>
+              </div>
+              <div>
+                <label><%= fa_icon 'envelope' %> Email </label>
+                <div class="inputfield"><%= @domain.tech_contact.email %></div>
+                <div></div>
+              </div>
+              <div><!-- form-group -->
+                <label><%= fa_icon 'user-secret' %> Handle </label>
+                <div class="inputfield"><%= @domain.tech_contact.handle %></div>
                 <div></div>
               </div>
             </div>
