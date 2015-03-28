@@ -46,7 +46,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.name %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.name %></div>
+                  <div><%= @domain.registrant.local_name %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -55,7 +55,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.organization %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.organization %></div>
+                  <div><%= @domain.registrant.local_organization %></div>
                   <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.street %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.street %></div>
+                  <div><%= @domain.registrant.local_street %></div>
                 </div>
               </div>
               <% if @domain.registrant.street2 %>
@@ -75,7 +75,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.street2 %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.street2 %></div>
+                  <div><%= @domain.registrant.local_street2 %></div>
                 </div>
               </div>
               <% end %>
@@ -86,7 +86,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.street3 %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.street3 %></div>
+                  <div><%= @domain.registrant.local_street3 %></div>
                 </div>
               </div>
               <% end %>
@@ -96,7 +96,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.city %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.city %></div>
+                  <div><%= @domain.registrant.local_city %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -105,7 +105,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.state %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.state %></div>
+                  <div><%= @domain.registrant.local_state %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -114,7 +114,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.postal_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.postal_code %></div>
+                  <div><%= @domain.registrant.local_postal_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -123,7 +123,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.registrant.country_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.registrant.country_code %></div>
+                  <div><%= @domain.registrant.local_country_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -173,7 +173,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.name %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.name %></div>
+                  <div><%= @domain.admin_contact.local_name %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -182,7 +182,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.organization %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.organization %></div>
+                  <div><%= @domain.admin_contact.local_organization %></div>
                   <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
                 </div>
               </div>
@@ -192,7 +192,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.street %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.street %></div>
+                  <div><%= @domain.admin_contact.local_street %></div>
                 </div>
               </div>
               <% if @domain.admin_contact.street2 %>
@@ -202,7 +202,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.street2 %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.street2 %></div>
+                  <div><%= @domain.admin_contact.local_street2 %></div>
                 </div>
               </div>
               <% end %>
@@ -213,7 +213,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.street3 %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.street3 %></div>
+                  <div><%= @domain.admin_contact.local_street3 %></div>
                 </div>
               </div>
               <% end %>
@@ -223,7 +223,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.city %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.city %></div>
+                  <div><%= @domain.admin_contact.local_city %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -232,7 +232,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.state %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.state %></div>
+                  <div><%= @domain.admin_contact.local_state %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -241,7 +241,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.postal_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.postal_code %></div>
+                  <div><%= @domain.admin_contact.local_postal_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -250,7 +250,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.admin_contact.country_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.admin_contact.country_code %></div>
+                  <div><%= @domain.admin_contact.local_country_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -299,7 +299,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.name %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.name %></div>
+                  <div><%= @domain.tech_contact.local_name %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -308,7 +308,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.organization %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.organization %></div>
+                  <div><%= @domain.tech_contact.local_organization %></div>
                   <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
                 </div>
               </div>
@@ -318,7 +318,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.street %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.street %></div>
+                  <div><%= @domain.tech_contact.local_street %></div>
                 </div>
               </div>
               <% if @domain.tech_contact.street2 %>
@@ -328,7 +328,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.street2 %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.street2 %></div>
+                  <div><%= @domain.tech_contact.local_street2 %></div>
                 </div>
               </div>
               <% end %>
@@ -339,7 +339,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.street3 %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.street3 %></div>
+                  <div><%= @domain.tech_contact.local_street3 %></div>
                 </div>
               </div>
               <% end %>
@@ -349,7 +349,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.city %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.city %></div>
+                  <div><%= @domain.tech_contact.local_city %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -358,7 +358,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.state %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.state %></div>
+                  <div><%= @domain.tech_contact.local_state %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -367,7 +367,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.postal_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.postal_code %></div>
+                  <div><%= @domain.tech_contact.local_postal_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -376,7 +376,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.tech_contact.country_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.tech_contact.country_code %></div>
+                  <div><%= @domain.tech_contact.local_country_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -411,6 +411,7 @@
               </div>
             </div>
           </div>
+          <!-- Billing Contact -->
           <div role="tabpanel" class="tab-pane" id="billing-contact">
             <hr>
             <div id="billing-info">
@@ -425,7 +426,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.name %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.name %></div>
+                  <div><%= @domain.billing_contact.local_name %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -434,7 +435,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.organization %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.organization %></div>
+                  <div><%= @domain.billing_contact.local_organization %></div>
                   <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
                 </div>
               </div>
@@ -444,7 +445,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.street %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.street %></div>
+                  <div><%= @domain.billing_contact.local_street %></div>
                 </div>
               </div>
               <% if @domain.billing_contact.street2 %>
@@ -454,7 +455,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.street2 %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.street2 %></div>
+                  <div><%= @domain.billing_contact.local_street2 %></div>
                 </div>
               </div>
               <% end %>
@@ -465,7 +466,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.street3 %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.street3 %></div>
+                  <div><%= @domain.billing_contact.local_street3 %></div>
                 </div>
               </div>
               <% end %>
@@ -475,7 +476,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.city %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.city %></div>
+                  <div><%= @domain.billing_contact.local_city %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -484,7 +485,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.state %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.state %></div>
+                  <div><%= @domain.billing_contact.local_state %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -493,7 +494,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.postal_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.postal_code %></div>
+                  <div><%= @domain.billing_contact.local_postal_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
@@ -502,7 +503,7 @@
                   <div>Int'l</div>
                   <div><%= @domain.billing_contact.country_code %></div>
                   <div>Local</div>
-                  <div><%= @domain.billing_contact.country_code %></div>
+                  <div><%= @domain.billing_contact.local_country_code %></div>
                 </div>
               </div>
               <div><!-- form-group -->
