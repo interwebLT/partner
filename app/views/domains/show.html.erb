@@ -68,7 +68,7 @@
                   <div><%= @domain.registrant.local_street %></div>
                 </div>
               </div>
-              <% if @domain.registrant.street2 %>
+              <% if @domain.registrant.street2 or @domain.registrant.local_street2 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
@@ -79,7 +79,7 @@
                 </div>
               </div>
               <% end %>
-              <% if @domain.registrant.street3 %>
+              <% if @domain.registrant.street3 or @domain.registrant.local_street3 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
@@ -195,7 +195,7 @@
                   <div><%= @domain.admin_contact.local_street %></div>
                 </div>
               </div>
-              <% if @domain.admin_contact.street2 %>
+              <% if @domain.admin_contact.street2 or @domain.admin_contact.local_street2 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
@@ -206,7 +206,7 @@
                 </div>
               </div>
               <% end %>
-              <% if @domain.admin_contact.street3 %>
+              <% if @domain.admin_contact.street3 or @domain.admin_contact.local_street3 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
@@ -322,7 +322,7 @@
                   <div><%= @domain.billing_contact.local_street %></div>
                 </div>
               </div>
-              <% if @domain.billing_contact.street2 %>
+              <% if @domain.billing_contact.street2 or @domain.billing_contact.local_street2 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
@@ -333,7 +333,7 @@
                 </div>
               </div>
               <% end %>
-              <% if @domain.billing_contact.street3 %>
+              <% if @domain.billing_contact.street3 or @domain.billing_contact.local_street3 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
@@ -449,7 +449,7 @@
                   <div><%= @domain.tech_contact.local_street %></div>
                 </div>
               </div>
-              <% if @domain.tech_contact.street2 %>
+              <% if @domain.tech_contact.street2 or @domain.tech_contact.local_street2 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
@@ -460,7 +460,7 @@
                 </div>
               </div>
               <% end %>
-              <% if @domain.tech_contact.street3 %>
+              <% if @domain.tech_contact.street3 or @domain.tech_contact.local_street3 %>
               <div><!-- form-group -->
                 <label class="hidden-xs">&nbsp;</label>
                 <div class="inputfield">
