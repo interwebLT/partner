@@ -109,6 +109,7 @@
     @extend .col-xs-12;
     @extend .col-sm-4;
     @extend .col-md-3;
+    @extend .clearfix;
 
     padding-top: 0;
 
@@ -120,7 +121,7 @@
   div.inputfield {
     @extend .col-xs-12;
     @extend .col-sm-8;
-    @extend .col-md-9;
+    @extend .col-md-8;
     color: #47A2D6;
 
     div:first-child, div:nth-child(3) {
@@ -132,11 +133,20 @@
 
     }
 
-      div:nth-child(2), div:last-child {
-        @extend .col-xs-12;
-        @extend .col-lg-6;
-        @extend .row;
+    div:nth-child(2), div:last-child {
+      @extend .col-xs-12;
+      @extend .col-lg-6;
+      @extend .row;
     }
+
+    div:nth-child(2){
+      @extend .col-md-7;
+    }
+
+   div:last-child {
+      @extend .col-md-5;
+    }
+
   }
 }
 
@@ -144,12 +154,15 @@
   @extend .hidden-xs;
   label {
     @extend .col-lg-3;
+    @extend .col-md-3;
+    @extend .clearfix;
   }
   div{
     @extend .col-lg-4;
+    @extend .col-md-4;
   }
   div:last-child{
-    margin-left: -5px;
+    margin-left:0;
   }
 }
 
