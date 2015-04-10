@@ -41,5 +41,24 @@ describe OrderDetail do
       specify { subject.period.must_equal 2 }
       specify { subject.renewed_at.must_equal '2015-02-27 14:00'.in_time_zone }
     end
+
+    context :when_migrate_domain do
+      let(:params) {
+        {
+          type:               'migrate_domain',
+          price:              0.00,
+          domain:             'migrated.ph',
+          registrant_handle:  'migrated_r',
+          registered_at:      '2015-04-10T15:00:00Z',
+          expires_at:         '2017-04-10T15:00:00Z'
+        }
+      }
+
+      specify { subject.type.must_equal 'migrate_domain' }
+      specify { subject.price.must_equal 0.00 }
+      specify { subject.domain.must_equal 'migrated.ph' }
+      specify { subject.registered_at.must_equal '2015-04-10 15:00'.in_time_zone }
+      specify { subject.expires_at.must_equal '2017-04-10 15:00'.in_time_zone }
+    end
   end
 end

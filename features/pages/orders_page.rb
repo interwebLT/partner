@@ -96,6 +96,26 @@ def orders_response
           price: 15.00
         }
       ]
+    },
+    {
+      id: 5,
+      partner: 'alpha',
+      order_number: 'ABCD127',
+      total_price: 0.00,
+      fee: 0.00,
+      ordered_at: '2015-04-10T15:00:00Z',
+      status: 'complete',
+      currency_code: 'USD',
+      order_details: [
+        {
+          type: 'migrate_domain',
+          price: 0.00,
+          domain: 'migrated.ph',
+          registrant_handle: 'migrated_registrant',
+          registered_at: '2015-01-01T00:00:00Z',
+          expires_at: '2015-01-01T00:00:00Z'
+        }
+      ]
     }
   ]
 end
