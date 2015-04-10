@@ -3,7 +3,8 @@ module OrderDetailHelper
     domain_create: 'Domain Registration',
     domain_renew: 'Domain Renewal',
     domain_transfer: 'Domain Transfer',
-    credits: 'Replenish Credits'
+    credits: 'Replenish Credits',
+    migrate_domain: 'Domain Migrated'
   }
 
   def order_detail_type order_detail_type
