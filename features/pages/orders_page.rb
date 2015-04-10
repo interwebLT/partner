@@ -8,7 +8,7 @@ class OrdersPage < SitePrism::Page
 end
 
 def view_latest_orders
-  stub_get to: Order.url, returns: orders_response
+  stub_get to: Order.url, returns: latest_orders_response
 
   site.orders.load
 end
@@ -19,12 +19,12 @@ def assert_latest_orders_displayed
   site.orders.header.menu_orders.present?.must_equal true
   site.orders.header.banner_title.text.must_equal 'Orders'
 
-  site.orders.orders.count.must_equal 4
+  site.orders.orders.count.must_equal 5
 end
 
 private
 
-def orders_response
+def latest_orders_response
   [
     {
       id: 1,
