@@ -28,6 +28,18 @@ class Domain
     @registrant = Contact.new registrant
   end
 
+  def admin_contact= admin_contact
+    @admin_contact = Contact.new admin_contact
+  end
+
+  def billing_contact= admin_contact
+    @billing_contact = Contact.new admin_contact
+  end
+
+  def tech_contact= admin_contact
+    @tech_contact = Contact.new admin_contact
+  end
+
   def activities= activities
     @activities = activities.collect { |activity| ObjectActivity.new activity }
   end

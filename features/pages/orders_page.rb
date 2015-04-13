@@ -8,7 +8,7 @@ class OrdersPage < SitePrism::Page
 end
 
 def view_latest_orders
-  stub_get to: Order.url, returns: orders_response
+  stub_get to: Order.url, returns: latest_orders_response
 
   site.orders.load
 end
@@ -19,12 +19,12 @@ def assert_latest_orders_displayed
   site.orders.header.menu_orders.present?.must_equal true
   site.orders.header.banner_title.text.must_equal 'Orders'
 
-  site.orders.orders.count.must_equal 4
+  site.orders.orders.count.must_equal 5
 end
 
 private
 
-def orders_response
+def latest_orders_response
   [
     {
       id: 1,
@@ -40,6 +40,7 @@ def orders_response
           type:   'domain_create',
           price:  70.00,
           domain: 'test.ph',
+          authcode: 'ABC123',
           period: 2,
           registrant_handle: 'domains_registrant',
           registered_at: '2015-02-04T00:00:00Z'
@@ -94,6 +95,26 @@ def orders_response
         {
           type: 'domain_transfer',
           price: 15.00
+        }
+      ]
+    },
+    {
+      id: 5,
+      partner: 'alpha',
+      order_number: 'ABCD127',
+      total_price: 0.00,
+      fee: 0.00,
+      ordered_at: '2015-04-10T15:00:00Z',
+      status: 'complete',
+      currency_code: 'USD',
+      order_details: [
+        {
+          type: 'migrate_domain',
+          price: 0.00,
+          domain: 'migrated.ph',
+          registrant_handle: 'migrated_registrant',
+          registered_at: '2015-01-01T00:00:00Z',
+          expires_at: '2015-01-01T00:00:00Z'
         }
       ]
     }

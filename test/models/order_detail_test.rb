@@ -10,6 +10,7 @@ describe OrderDetail do
           type: 'domain_create',
           price: 70.00,
           domain: 'test.ph',
+          authcode: 'ABC123',
           period: 2,
           registrant_handle: 'domain_registrant',
           registered_at: '2015-02-27T14:00:00Z'
@@ -19,6 +20,7 @@ describe OrderDetail do
       specify { subject.type.must_equal 'domain_create' }
       specify { subject.price.must_equal 70.00 }
       specify { subject.domain.must_equal 'test.ph' }
+      specify { subject.authcode.must_equal 'ABC123' }
       specify { subject.period.must_equal 2 }
       specify { subject.registrant_handle.must_equal 'domain_registrant' }
       specify { subject.registered_at.must_equal '2015-02-27 14:00'.in_time_zone }
@@ -40,6 +42,25 @@ describe OrderDetail do
       specify { subject.domain.must_equal 'test.ph' }
       specify { subject.period.must_equal 2 }
       specify { subject.renewed_at.must_equal '2015-02-27 14:00'.in_time_zone }
+    end
+
+    context :when_migrate_domain do
+      let(:params) {
+        {
+          type:               'migrate_domain',
+          price:              0.00,
+          domain:             'migrated.ph',
+          registrant_handle:  'migrated_r',
+          registered_at:      '2015-04-10T15:00:00Z',
+          expires_at:         '2017-04-10T15:00:00Z'
+        }
+      }
+
+      specify { subject.type.must_equal 'migrate_domain' }
+      specify { subject.price.must_equal 0.00 }
+      specify { subject.domain.must_equal 'migrated.ph' }
+      specify { subject.registered_at.must_equal '2015-04-10 15:00'.in_time_zone }
+      specify { subject.expires_at.must_equal '2017-04-10 15:00'.in_time_zone }
     end
   end
 end

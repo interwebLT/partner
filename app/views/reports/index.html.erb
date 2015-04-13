@@ -6,6 +6,7 @@
   <% total_credits = 0 %>
   <% total_orders = 0 %>
 
+  <% unless @credits.empty? %>
   <h3>Credit History</h3>
 
   <table id="credits">
@@ -37,7 +38,9 @@
       </tr>
     </tfoot>
   </table>
+  <% end %>
 
+  <% unless @orders.empty? %>
   <h3>Transactions</h3>
 
   <table id="orders">
@@ -77,6 +80,7 @@
       </tr>
     </tfoot>
   </table>
+  <% end %>
 
   <table id="remaining_balance">
     <tbody>

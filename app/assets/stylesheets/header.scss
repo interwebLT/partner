@@ -210,6 +210,7 @@ button.add-credits {
       div:nth-child(2) {
         text-align: center;
       }
+      h2 {text-align: center; font-size: 25px;}
     }
   }
 
@@ -217,5 +218,30 @@ button.add-credits {
     background-color: #47A2D6 !important;
     color: #fff !important;
     border-top: none !important;
+  }
+
+  #login > div:first-child h3 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  #partner_info {
+    h3 {text-align: center;}
+    p {text-align: center;}
+  }
+
+  #banner-container div ul {
+  width: auto!important;
+  text-align: center;
+  }
+
+  #alert {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .nav-tabs#domain-info-tab li{
+    width: 80%;
+    text-align: center;
   }
 }
