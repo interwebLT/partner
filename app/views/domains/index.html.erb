@@ -19,7 +19,7 @@
       <tr class="expire">
         <td><%= fa_icon 'flag', class: 'red', data: { placement: :left, toggle: :tooltip, original_title: 'Expired Domain' } %></td>
         <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain has expired. You should renew it now.' } %></td>
-        <td><%= domain.registrant.name %></td>
+        <td><%= domain.registrant.name ? domain.registrant.name : domain.registrant.local_name %></td>
         <td><%= formatted_date domain.registered_at %></td>
         <td><%= formatted_date domain.expires_at %></td>
       </tr>
@@ -27,7 +27,7 @@
       <tr class="expire">
         <td><%= fa_icon 'flag', class: 'yellow', data: { placement: :left, toggle: :tooltip, original_title: 'Expiring Domain' } %></td>
         <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain is about to expire. You should renew it now.' } %></td>
-        <td><%= domain.registrant.name %></td>
+        <td><%= domain.registrant.name ? domain.registrant.name : domain.registrant.local_name %></td>
         <td><%= formatted_date domain.registered_at %></td>
         <td><%= formatted_date domain.expires_at %></td>
       </tr>
@@ -35,7 +35,7 @@
       <tr>
         <td></td>
         <td><%= link_to domain.name, domain_path(domain) %></td>
-        <td><%= domain.registrant.name %></td>
+        <td><%= domain.registrant.name ? domain.registrant.name : domain.registrant.local_name %></td>
         <td><%= formatted_date domain.registered_at %></td>
         <td><%= formatted_date domain.expires_at %></td>
       </tr>
