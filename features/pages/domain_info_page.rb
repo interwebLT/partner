@@ -14,7 +14,7 @@ end
 
 def assert_domain_info_displayed
   site.domain_info.displayed?.must_equal true
-  site.domain_info.domain_activities.count.must_equal 2
+  site.domain_info.domain_activities.count.must_equal 3
   site.domain_info.domain_hosts.count.must_equal 2
 end
 
@@ -166,6 +166,17 @@ def domain_info_response
         property_changed: 'name',
         old_value: 'old_name',
         new_value: 'new_name'
+      },
+      {
+        id: 3,
+        type: 'transfer',
+        activity_at: '2015-04-16T19:30:00Z',
+        object: {
+          id: 1,
+          type: 'domain',
+          name: 'domain.ph'
+        },
+        losing_partner: 'beta'
       }
     ],
     hosts: [
