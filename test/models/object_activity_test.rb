@@ -49,7 +49,30 @@ describe ObjectActivity do
       specify { subject.old_value.must_equal 'old_name' }
       specify { subject.new_value.must_equal 'new_name' }
     end
+
+    context :when_transfer do
+      let(:params) {
+        {
+          id: 1,
+          type: 'update',
+          activity_at: '2015-04-16T19:30:00Z',
+          object: {
+            id: 1,
+            type: 'domain',
+            name: 'domain.ph'
+          },
+          losing_partner: 'other_partner'
+        }
+      }
+
+      specify { subject.id.must_equal 1 }
+      specify { subject.type.must_equal 'update' }
+      specify { subject.activity_at.must_equal '2015-04-16 19:30:00'.in_time_zone }
+      specify { subject.object.wont_be_nil }
+      specify { subject.losing_partner.must_equal 'other_partner' }
+    end
   end
+
 
   describe :all do
     subject { ObjectActivity.all(token: default_token) }
@@ -59,7 +82,7 @@ describe ObjectActivity do
         .to_return(status: 200, body: activities_response.to_json)
     end
 
-    specify { subject.count.must_equal 2 }
+    specify { subject.count.must_equal 3 }
   end
 
   private
@@ -88,6 +111,17 @@ describe ObjectActivity do
         property_changed: 'name',
         old_value: 'old_name',
         new_value: 'new_name'
+      },
+      {
+        id: 3,
+        type: 'update',
+        activity_at: '2015-04-16T19:30:00Z',
+        object: {
+          id: 1,
+          type: 'domain',
+          name: 'domain.ph'
+        },
+        losing_partner: 'other_partner'
       }
     ]
   end

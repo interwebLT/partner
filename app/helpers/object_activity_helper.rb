@@ -1,7 +1,15 @@
 module ObjectActivityHelper
   def activity_description activity
-    return 'created' if activity.type == 'create'
+    case activity.type
+    when 'create'   then 'created'
+    when 'update'   then render_update activity
+    when 'transfer' then render_transfer activity
+    end
+  end
 
+  private
+
+  def render_update activity
     property = activity.property_changed
     property = 'nameserver'   if property == 'domain_host'
     property = 'registrant'   if property == 'registrant_handle'
@@ -51,13 +59,15 @@ module ObjectActivityHelper
     end
   end
 
-  private
-
   def status_enabled activity
     activity.old_value == 'false' and activity.new_value == 'true'
   end
 
   def status_disabled activity
     activity.old_value == 'true' and activity.new_value == 'false'
+  end
+
+  def render_transfer activity
+    "transferred from #{activity.losing_partner}"
   end
 end
