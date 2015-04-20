@@ -54,6 +54,8 @@ module ObjectActivityHelper
       'status: is now <strong>client update prohibited</strong>'
     elsif property == 'client_update_prohibited' and status_disabled(activity)
       'status: is no longer <strong>client update prohibited</strong>'
+    elsif property == 'authcode'
+      'authcode: updated value'
     else
       "#{property}: updated value from <strong>#{activity.old_value}</strong> to <strong>#{activity.new_value}</strong>"
     end

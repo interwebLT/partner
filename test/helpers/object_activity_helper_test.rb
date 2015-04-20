@@ -213,6 +213,14 @@ describe ObjectActivityHelper do
 
         specify { subject.must_equal 'expiry date: updated value from <strong>old value</strong> to <strong>new value</strong>' }
       end
+
+      context :when_property_changed_authcode do
+        let(:property_changed) { 'authcode' }
+        let(:old_value) { 'old_authcode' }
+        let(:new_value) { 'new_authcode' }
+
+        specify { subject.must_equal 'authcode: updated value' }
+      end
     end
   end
 end
