@@ -19,7 +19,7 @@ def assert_latest_orders_displayed
   site.orders.header.menu_orders.present?.must_equal true
   site.orders.header.banner_title.text.must_equal 'Orders'
 
-  site.orders.orders.count.must_equal 5
+  site.orders.orders.count.must_equal 6
 end
 
 private
@@ -115,6 +115,29 @@ def latest_orders_response
           registrant_handle: 'migrated_registrant',
           registered_at: '2015-01-01T00:00:00Z',
           expires_at: '2015-01-01T00:00:00Z'
+        }
+      ]
+    },
+    {
+      id: 6,
+      partner: 'alpha',
+      order_number: 'ABCD128',
+      total_price: -35.00,
+      fee: 0.00,
+      ordered_at: '2015-04-24T16:00:00Z',
+      status: 'complete',
+      currency_code: 'USD',
+      order_details: [
+        {
+          type: 'refund',
+          price:  -35.00,
+          refunded_order_detail: {
+            type: 'domain_renew',
+            price: 35.00,
+            domain: 'test.ph',
+            period: 1,
+            renewed_at: '2015-02-04T00:00:00Z'
+          }
         }
       ]
     }

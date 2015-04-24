@@ -7,6 +7,7 @@ describe OrderDetailHelper do
     specify { order_detail_type('transfer_domain').must_equal 'Domain Transfer' }
     specify { order_detail_type('credits').must_equal 'Replenish Credits' }
     specify { order_detail_type('migrate_domain').must_equal 'Domain Migrated' }
+    specify { order_detail_type('refund').must_equal 'Refund' }
 
     specify { order_detail_type(nil).must_equal '' }
     specify { order_detail_type('something').must_equal '' }
