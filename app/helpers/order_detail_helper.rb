@@ -4,7 +4,8 @@ module OrderDetailHelper
     domain_renew: 'Domain Renewal',
     transfer_domain:  'Domain Transfer',
     credits:  'Replenish Credits',
-    migrate_domain: 'Domain Migrated'
+    migrate_domain: 'Domain Migrated',
+    refund: 'Refund'
   }
 
   def order_detail_type order_detail_type
