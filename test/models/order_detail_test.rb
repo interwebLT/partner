@@ -62,5 +62,26 @@ describe OrderDetail do
       specify { subject.registered_at.must_equal '2015-04-10 15:00'.in_time_zone }
       specify { subject.expires_at.must_equal '2017-04-10 15:00'.in_time_zone }
     end
+
+    context :when_refund do
+      let(:params) {
+        {
+          type: 'refund',
+          price:  -35.00,
+          refunded_order_detail: {
+            type: 'domain_renew',
+            price: 35.00,
+            domain: 'test.ph',
+            period: 1,
+            renewed_at: '2015-02-04T00:00:00Z'
+          }
+        }
+      }
+
+      specify { subject.type.must_equal 'refund' }
+      specify { subject.price.must_equal -35.00 }
+      specify { subject.domain.must_equal 'test.ph' }
+      specify { subject.period.must_equal 1 }
+    end
   end
 end
