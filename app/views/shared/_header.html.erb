@@ -29,6 +29,15 @@
         </ul>
         <ul class="navbar-right">
           <% if user_signed_in? %>
+            <li><a>
+              <form class="search-form">
+                <div class="form-group has-feedback">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+              </form></a>
+            </li>
             <li class="dropdown">
               <a data-toggle="dropdown" href="#">
                  <strong><%= current_user.partner_name.downcase %></strong>
