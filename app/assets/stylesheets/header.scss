@@ -300,3 +300,18 @@ button.add-credits {
   left: initial;
   font-size: 14px;
 }
+
+.search-form > div.form-group > input.form-control {
+  padding: 10px 26px 10px 10px !important;
+  height: 30px;
+}
+
+ul.navbar-right li.search-btn {
+  border-left: none;
+  border-bottom: none;
+}
+
+ul.navbar-right li.search-btn > div {
+  padding: 14px 15px;
+  background-color: rgba(67, 153, 202, 0);
+}
