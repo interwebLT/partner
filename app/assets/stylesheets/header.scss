@@ -250,35 +250,36 @@ button.add-credits {
 .animate {
     transition: all 0.3s ease-in-out 0s;
 }
+
 .search-box {
-    background-color: #EBEBEB;
+    background-color: transparent;
+    border-top: 1px solid #DFDFDF;
     display: block;
     position: absolute;
     top: 100%;
-    width: 985px;
+    left: 0px;
+    width: 100%;
     transform: rotateX(-90deg);
     transform-origin: 0px 0px 0px;
     visibility: hidden;
 }
+
 .search-box > .container {
     padding: 0px;
 }
+
 .input-group {
     position: relative;
     display: table;
     border-collapse: separate;
 }
-.search-box .form-control {
-    border-radius: 0px;
-    border-width: 0px;
-    font-size: 18px;
-    padding: 25px 0px;
-}
+
 .input-group-btn {
     position: relative;
     font-size: 0px;
     white-space: nowrap;
 }
+
 .search-box .input-group-btn > .btn {
     padding: 14px 16px;
     border-radius: 0px;
@@ -292,8 +293,13 @@ button.add-credits {
 .search-box .form-control {
   border-radius: 0px;
   border-width: 0px;
-  font-size: 24px;
-  padding: 7px 10px;
+  font-size: 18px;
+  padding: 12px 10px;
   color: #000;
   height: auto;
+}
+
+.search-box .input-group .form-control {
+  float: right;
+  width: 97%;
 }
