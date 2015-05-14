@@ -281,8 +281,13 @@ button.add-credits {
 }
 
 .search-box .input-group-btn > .btn {
-    padding: 14px 16px;
+    padding: 13.5px 16px;
     border-radius: 0px;
+    background-color: #fff !important;
+}
+
+.search-box .input-group-btn > .btn > span {
+  color: rgb(199, 199, 199);
 }
 
 .search-box.open {
