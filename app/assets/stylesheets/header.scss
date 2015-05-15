@@ -302,6 +302,7 @@ form.search-bar input.form-control {
   @extend .transition;
   border: 1px solid rgb(224, 224, 224);
   box-shadow: none;
+  padding-right: 27px;
 }
 
 form.search-bar input.form-control:focus {
@@ -309,7 +310,7 @@ form.search-bar input.form-control:focus {
 }
 
 form.search-bar > .btn {
-  background-color: #FFF;
+  background-color: transparent;
   border: none;
   position: absolute;
   right: 0;
@@ -320,6 +321,12 @@ form.search-bar > .btn {
 
 form.search-bar > .btn:hover {
     color: orange;
+}
+
+@media (max-width: 990px) {
+  form.search-bar input.form-control {
+    width: 130px;
+  }
 }
 
 @media (max-width: 768px) {
