@@ -325,11 +325,15 @@ form.search-bar > .btn:hover {
 
 @media (max-width: 990px) {
   form.search-bar input.form-control {
-    width: 130px;
+    width: 130px !important;
   }
 }
 
 @media (max-width: 768px) {
+  form.search-bar input.form-control {
+    width: 100% !important;
+  }
+
   form.search-bar {
     padding: 0;
   }
