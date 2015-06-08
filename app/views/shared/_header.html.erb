@@ -30,12 +30,14 @@
 
         <ul class="navbar-right">
           <% if user_signed_in? %>
+            <% if current_user.staff %>
             <form class="search-bar navbar-form navbar-left" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
               </div>
               <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
             </form>
+            <% end %>
             <li class="dropdown">
               <a data-toggle="dropdown" href="#">
                  <strong><%= current_user.partner_name.downcase %></strong>
