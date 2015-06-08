@@ -23,5 +23,17 @@ $(document).ready(function() {
   $('i').tooltip();
 });
 
+(jQuery, window, document), $(function() {
+  $('a[href="#toggle-search"], .search-box .input-group-btn > .btn[type="reset"]').on("click",
+    function(e) {
+      e.preventDefault(), $(".search-box .input-group > input").val(""),
+      $(".search-box").toggleClass("open"),
+      $('a[href="#toggle-search"]').closest("li").toggleClass("active"),
+      $(".search-box").hasClass("open") && setTimeout(function() {
+        $(".search-box .form-control").focus()
+      }, 100)
+    })
+});
+
 
 
