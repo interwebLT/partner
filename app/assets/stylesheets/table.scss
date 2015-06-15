@@ -379,9 +379,13 @@ table#orders td:nth-child(4), table#orders td:nth-child(4), table#orders td:nth-
   white-space: normal!important;
 }
 
-table#activities td:nth-child(4),table#activities td:nth-child(3){
+table#activities td:nth-child(4) {
   word-break: break-word!important;
   white-space: normal!important;
+}
+
+table#activities td:nth-child(3) {
+  white-space: nowrap!important;
 }
 
 table#remaining_balance{
