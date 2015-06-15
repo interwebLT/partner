@@ -29,6 +29,26 @@ def activities_response
     {
       id: 1,
       type: 'create',
+      partner:     {
+        id: 1,
+        name: 'alpha',
+        organization: 'Company',
+        credits: 0.00,
+        site: 'http://alpha.ph',
+        nature: 'Alpha Business',
+        representative: 'Alpha Guy',
+        position: 'Position',
+        street: 'Alpha Street',
+        city: 'Alpha City',
+        state: 'Alpha State',
+        postal_code: '1234',
+        country_code: 'PH',
+        phone: '+63.1234567',
+        fax: '+63.1234567',
+        email: 'alpha@alpha.ph',
+        local: true,
+        admin: false
+      },
       activity_at: '2015-03-03T15:00:00Z',
       object: {
         id: 1,
@@ -39,6 +59,26 @@ def activities_response
     {
       id: 2,
       type: 'update',
+      partner:     {
+        id: 1,
+        name: 'alpha',
+        organization: 'Company',
+        credits: 0.00,
+        site: 'http://alpha.ph',
+        nature: 'Alpha Business',
+        representative: 'Alpha Guy',
+        position: 'Position',
+        street: 'Alpha Street',
+        city: 'Alpha City',
+        state: 'Alpha State',
+        postal_code: '1234',
+        country_code: 'PH',
+        phone: '+63.1234567',
+        fax: '+63.1234567',
+        email: 'alpha@alpha.ph',
+        local: true,
+        admin: false
+      },
       activity_at: '2015-03-03T15:00:00Z',
       object: {
         id: 1,
