@@ -15,6 +15,7 @@
       <% @activities.each do |activity| %>
       <tr>
         <td><%= formatted_timestamp activity.activity_at %></td>
+        <td><%= link_to activity.partner.name, partner_path(activity.partner.id) %></td>
         <td><%= link_to activity.object.name, domain_path(activity.object.id) %></td>
         <td><%= activity_description(activity).html_safe %>
       </tr>
