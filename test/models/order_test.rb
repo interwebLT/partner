@@ -7,7 +7,7 @@ describe Order do
     let(:params) {
       {
         id: 1,
-        partner: 'alpha',
+        partner: alpha_partner,
         order_number: 'ABCD123',
         total_price:  70.00,
         fee: 0.00,
@@ -27,7 +27,7 @@ describe Order do
     }
 
     specify { subject.id.must_equal 1 }
-    specify { subject.partner.must_equal 'alpha' }
+    specify { subject.partner.as_json.symbolize_keys.must_equal alpha_partner }
     specify { subject.order_number.must_equal 'ABCD123' }
     specify { subject.total_price.must_equal 70.00 }
     specify { subject.fee.must_equal 0.00 }
@@ -36,4 +36,27 @@ describe Order do
     specify { subject.currency_code.must_equal 'USD' }
     specify { subject.order_details.wont_be_empty }
   end
+end
+
+def alpha_partner
+  {
+    id: 1,
+    name: 'alpha',
+    organization: 'Company',
+    credits: 0.00,
+    site: 'http://alpha.org',
+    nature: 'Nature',
+    representative: 'Representative',
+    position: 'Position',
+    street: 'Street',
+    city: 'City',
+    state: 'State',
+    postal_code: '1234',
+    country_code: 'PH',
+    phone: '+63.21234567',
+    fax: '+63.21234567',
+    email: 'alpha@alpha.org',
+    local: true,
+    admin: false
+  }
 end
