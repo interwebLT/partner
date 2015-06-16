@@ -20,4 +20,12 @@ module OrderDetailHelper
       ""
     end
   end
+
+  def domain_for detail
+    if detail.object.nil? || detail.object.id.nil?
+      return detail.domain
+    end
+
+    return link_to detail.domain, domain_path(detail.object.id)
+  end
 end

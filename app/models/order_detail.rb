@@ -3,6 +3,7 @@ class OrderDetail
 
   attr_accessor :type, :price,
                 :domain, :authcode, :period, :registrant_handle, :registered_at,
+                :object,
                 :renewed_at,
                 :expires_at,
                 :refunded_order_detail
@@ -12,5 +13,9 @@ class OrderDetail
 
     self.domain = @refunded_order_detail.domain
     self.period = @refunded_order_detail.period
+  end
+
+  def object= object
+    @object = AppObject.new object
   end
 end
