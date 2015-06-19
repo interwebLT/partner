@@ -341,6 +341,22 @@ form.search-bar > .btn:hover {
   form.search-bar > .btn {
   margin: 3px;
   }
+  /* fix ipadmini nav bug */
+  nav ul li {
+    border-left:  1px solid #DFDFDF;;
+  }
+  nav ul li a {
+  height: 60px;
+  line-height: 28px;
+  padding-left: 20px;
+  padding-right: 20px;
+  }
+  nav ul li.active a {
+  border-top: 5px solid #47A2D6!important;
+  color: #47A2D6 !important;
+  font-weight: 400;
+  background-color: #fff !important;
+  }
 }
 
 
