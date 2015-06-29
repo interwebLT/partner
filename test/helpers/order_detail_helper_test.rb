@@ -2,11 +2,11 @@ require 'test_helper'
 
 describe OrderDetailHelper do
   describe :order_detail_type do
-    specify { order_detail_type('domain_create').must_equal 'Domain Registration' }
-    specify { order_detail_type('domain_renew').must_equal 'Domain Renewal' }
-    specify { order_detail_type('transfer_domain').must_equal 'Domain Transfer' }
+    specify { order_detail_type('domain_create').must_equal 'Registration' }
+    specify { order_detail_type('domain_renew').must_equal 'Renewal' }
+    specify { order_detail_type('transfer_domain').must_equal 'Transfer' }
     specify { order_detail_type('credits').must_equal 'Replenish Credits' }
-    specify { order_detail_type('migrate_domain').must_equal 'Domain Migrated' }
+    specify { order_detail_type('migrate_domain').must_equal 'Migrated' }
     specify { order_detail_type('refund').must_equal 'Refund' }
 
     specify { order_detail_type(nil).must_equal '' }
