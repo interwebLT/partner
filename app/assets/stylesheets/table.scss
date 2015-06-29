@@ -365,11 +365,6 @@ table#orders tr th:last-child, table#orders tr td:last-child, table#partners tr 
   white-space: nowrap;
 }
 
-table#orders tr th:first-child, table#activities tr th:first-child{
-  width: 200px!important;
-  white-space: nowrap!important;
-}
-
 table#orders td, table#activities td, table th, table#domains td:nth-child(2), table#domains td:nth-child(4){
   white-space: nowrap!important;
 }
