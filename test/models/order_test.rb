@@ -36,6 +36,22 @@ describe Order do
     specify { subject.currency_code.must_equal 'USD' }
     specify { subject.order_details.wont_be_empty }
   end
+
+  describe :complete? do
+    subject { Order.new }
+
+    context :when_status_complete do
+      before do
+        subject.status = Order::COMPLETE
+      end
+
+      specify { subject.complete?.must_equal true }
+    end
+
+    context :when_status_not_complete do
+      specify { subject.complete?.must_equal false }
+    end
+  end
 end
 
 def alpha_partner
