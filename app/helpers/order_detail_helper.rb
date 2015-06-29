@@ -1,8 +1,8 @@
 module OrderDetailHelper
   TYPE_DESCRIPTIONS = {
-    domain_create:  'Registration',
-    domain_renew: 'Renewal',
-    transfer_domain:  'Transfer',
+    domain_create:  'Domain Registration',
+    domain_renew: 'Domain Renewal',
+    transfer_domain:  'Domain Transfer',
     credits:  'Replenish Credits',
     migrate_domain: 'Domain Migrated',
     refund: 'Refund'

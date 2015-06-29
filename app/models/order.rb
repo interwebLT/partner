@@ -10,10 +10,4 @@ class Order
   def partner= partner
     @partner = Partner.new partner
   end
-
-  def status= status
-  	if status == 'complete'
-  		@status = '<span class="glyphicon glyphicon-ok-circle text-success" data-toggle="tooltip" data-placement="top" title="Complete"></span>'.html_safe
-  	end
-  end
 end
