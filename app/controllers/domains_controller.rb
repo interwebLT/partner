@@ -7,6 +7,9 @@ class DomainsController < SecureController
     @domain = Domain.find params[:id], token: current_user.token
   end
 
+  def update
+  end
+
   def renew
     @domain = Domain.find params[:domain_id], token: current_user.token
 

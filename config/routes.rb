@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'site/sha', to: 'site#sha'
+  patch '/contacts/handle' => 'domains#update'
 
   root 'welcome#index'
 
