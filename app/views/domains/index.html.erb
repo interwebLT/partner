@@ -11,6 +11,9 @@
         <th>Domain Owner</th>
         <th>Registered Date</th>
         <th>Expiry Date</th>
+        <% if current_user.staff %>
+          <th>Renew</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +25,11 @@
         <td><%= domain.registrant.name ? domain.registrant.name : domain.registrant.local_name %></td>
         <td><%= formatted_date domain.registered_at %></td>
         <td><%= formatted_date domain.expires_at %></td>
+        <% if current_user.staff %>
+          <td>
+            <%= link_to "Renew", "/" %>
+          </td>
+        <% end %>
       </tr>
       <% elsif domain.expiring? %>
       <tr class="expire">
@@ -30,6 +38,11 @@
         <td><%= domain.registrant.name ? domain.registrant.name : domain.registrant.local_name %></td>
         <td><%= formatted_date domain.registered_at %></td>
         <td><%= formatted_date domain.expires_at %></td>
+        <% if current_user.staff %>
+          <td>
+            <%= link_to "Renew", "/" %>
+          </td>
+        <% end %>
       </tr>
       <% else %>
       <tr>
@@ -38,6 +51,11 @@
         <td><%= domain.registrant.name ? domain.registrant.name : domain.registrant.local_name %></td>
         <td><%= formatted_date domain.registered_at %></td>
         <td><%= formatted_date domain.expires_at %></td>
+        <% if current_user.staff %>
+          <td>
+            <%= link_to "Renew", "/" %>
+          </td>
+        <% end %>
       </tr>
       <% end %>
       <% end %>
