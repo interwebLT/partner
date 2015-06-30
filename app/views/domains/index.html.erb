@@ -1,3 +1,6 @@
+<!-- ############################################## -->
+<%= javascript_include_tag :domains %>
+<!-- ================================= -->
 <% content_for :banner_title do %>
 <%= fa_icon 'gears lg' %>&nbsp;Domains <% unless current_user.admin %><span><%= @domains.count %></span><% end %>
 <% end %>
@@ -53,7 +56,7 @@
         <td><%= formatted_date domain.expires_at %></td>
         <% if current_user.staff %>
           <td>
-            <%= link_to "Renew", domain_renew_path(domain.id) %>
+            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?" %>
           </td>
         <% end %>
       </tr>
