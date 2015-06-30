@@ -30,7 +30,11 @@
         <% else %>
           <td><%= order_detail.object.name %></td>
         <% end %>
-        <td><%= order.status %></td>
+        <% if order.complete? == true %>
+        <td class="order-status"><i class="fa fa-circle green" data-toggle="tooltip" data-placement="top" title="Complete"></i></td>
+        <% else %>
+        <td class="order-status"><i class="fa fa-circle red" data-toggle="tooltip" data-placement="top" title="Pending"></i></td>
+        <% end %>
         <td><%= number_to_currency(order_detail.price) %></td>
       </tr>
       <% end %>
