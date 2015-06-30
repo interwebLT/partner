@@ -18,4 +18,16 @@ class OrderDetail
   def object= object
     @object = AppObject.new object
   end
+
+  def as_json
+    {
+      type: type,
+      domain: domain,
+      authcode: authcode,
+      period: period,
+      registrant_handle: registrant_handle,
+      registered_at: registered_at,
+      renewed_at: renewed_at
+    }
+  end
 end

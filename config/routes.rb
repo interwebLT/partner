@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :domains, only: [:index, :show]
+  resources :domains, only: [:index, :show] do
+    get :renew
+  end
 
   resources :profile, only: :index
 

@@ -26,4 +26,15 @@ class Order
   def error?
     status == ERROR
   end
+
+  def save token
+    Order.post Order.url(id: id), to_json, token: token
+  end
+
+  def to_json
+    {
+      currency_code: currency_code,
+      order_details: @order_details.collect { |det| det.as_json }
+    }
+  end
 end

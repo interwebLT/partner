@@ -75,4 +75,25 @@ class Domain
     not (too_short or too_long or special_chars or invalid_extension \
       or numbers_only or starts_with_dash or double_dash)
   end
+
+  def renew token
+    order = Order.new( {
+      partner: nil,
+      currency_code: 'USD'
+    } )
+    order.partner.name = partner
+
+    detail = {
+      type: 'domain_renew',
+      domain: name,
+      authcode: nil,
+      period: 1,
+      registrant_handle: registrant_handle,
+      registered_at: registered_at,
+      renewed_at: Time.now 
+      }
+    order.order_details = [detail]
+
+    return order.save token
+  end
 end

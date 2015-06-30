@@ -14,6 +14,10 @@ class LoginPage < SitePrism::Page
   end
 end
 
+def staff_authenticated
+  authenticate_user staff: true
+end
+
 def partner_authenticated
   authenticate_user
 end

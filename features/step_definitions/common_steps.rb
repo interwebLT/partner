@@ -1,3 +1,7 @@
+Given(/^I am authenticated as staff$/) do
+  staff_authenticated
+end
+
 Given /^I am authenticated as partner$/ do
   partner_authenticated
 end

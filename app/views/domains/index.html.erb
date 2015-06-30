@@ -27,7 +27,7 @@
         <td><%= formatted_date domain.expires_at %></td>
         <% if current_user.staff %>
           <td>
-            <%= link_to "Renew", "/" %>
+            <%= link_to "Renew", renew_path(domain.name) %>
           </td>
         <% end %>
       </tr>
@@ -40,7 +40,7 @@
         <td><%= formatted_date domain.expires_at %></td>
         <% if current_user.staff %>
           <td>
-            <%= link_to "Renew", "/" %>
+            <%= link_to "Renew", renew_path(domain.name) %>
           </td>
         <% end %>
       </tr>
@@ -53,7 +53,7 @@
         <td><%= formatted_date domain.expires_at %></td>
         <% if current_user.staff %>
           <td>
-            <%= link_to "Renew", "/" %>
+            <%= link_to "Renew", domain_renew_path(domain.id) %>
           </td>
         <% end %>
       </tr>
