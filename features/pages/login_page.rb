@@ -47,9 +47,9 @@ end
 
 private
 
-def authenticate_user admin: false
+def authenticate_user admin: false, staff: true
   stub_post to: Authorization.url, returns: token_response
-  stub_get  to: User.url,   returns: user_response(admin: admin)
+  stub_get  to: User.url,   returns: user_response(admin: admin, staff: staff)
   stub_get  to: Domain.url, returns: []
 
   site.login.load
@@ -62,7 +62,7 @@ def token_response
   }
 end
 
-def user_response admin: false
+def user_response admin: false, staff: true
   {
     id: 1,
     username: 'alpha',
@@ -71,6 +71,6 @@ def user_response admin: false
     partner_name: 'alpha',
     credits: 1000.00,
     admin: admin,
-    staff: true
+    staff: staff
   }
 end

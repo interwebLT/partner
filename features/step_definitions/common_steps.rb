@@ -1,4 +1,4 @@
-Given(/^I am authenticated as staff$/) do
+Given /^I am authenticated as staff$/ do
   staff_authenticated
 end
 
