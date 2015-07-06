@@ -68,6 +68,22 @@ describe Order do
       specify { subject.pending?.must_equal false }
     end
   end
+
+  describe :error? do
+    subject { Order.new }
+
+    context :when_status_error do
+      before do
+        subject.status = Order::ERROR
+      end
+
+      specify { subject.error?.must_equal true }
+    end
+
+    context :when_status_not_error do
+      specify { subject.error?.must_equal false }
+    end
+  end
 end
 
 def alpha_partner

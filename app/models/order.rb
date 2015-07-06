@@ -5,6 +5,7 @@ class Order
 
   COMPLETE  = 'complete'
   PENDING   = 'pending'
+  ERROR     = 'error'
 
   def order_details= order_details
     @order_details = order_details.collect { |order_detail| OrderDetail.new order_detail }
@@ -20,5 +21,9 @@ class Order
 
   def pending?
     status == PENDING
+  end
+
+  def error?
+    status == ERROR
   end
 end
