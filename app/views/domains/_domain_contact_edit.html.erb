@@ -1,5 +1,5 @@
 <hr>
-<%= form_for contact, url: contact_path(contact.handle), html: {method: 'patch'} do |f| %>
+<%= simple_form_for contact, url: contact_path(contact.handle), html: {method: 'patch'} do |f| %>
   <% if contact.errors.any? %>
   <ul>
     <% contact.errors.full_messages.each do |msg| %>
