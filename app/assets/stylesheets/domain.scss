@@ -118,22 +118,21 @@
     }
   }
 
-  div.inputfield {
+  > div.inputfield {
     @extend .col-xs-12;
     @extend .col-sm-8;
     @extend .col-md-8;
     color: #47A2D6;
 
-    div:first-child, div:nth-child(3) {
+    > div.contact-cat, >div:nth-child(3) {
       @extend .text-muted;
       @extend .small;
-      @extend .col-xs-12;
       @extend .row;
       @extend .visible-xs;
 
     }
 
-    div:nth-child(2){ /*international*/
+    >div:nth-child(2){ /*international*/
       @extend .col-lg-7;
       @extend .col-xs-12;
       @extend .col-md-7;
@@ -148,6 +147,10 @@
     }
 
   }
+}
+
+.inputfield > div.field_with_errors {
+  display: inline-block;
 }
 
 .info-l10n {
