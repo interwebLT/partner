@@ -86,9 +86,9 @@
     <label><span>Country</span></label>
     <div class="inputfield">
       <div>Int'l</div>
-      <div><%= contact.country_code %></div>
+      <div><%= Country[contact.country_code].try(:name) %></div>
       <div>Local</div>
-      <div><%= contact.local_country_code %></div>
+      <div><%= Country[contact.local_country_code].try(:name) %></div>
     </div>
   </div>
   <div><!-- form-group -->

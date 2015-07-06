@@ -255,6 +255,7 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano3-unicorn
   coffee-rails (~> 4.1.0)
+  countries
   country_select
   cucumber-rails
   devise
