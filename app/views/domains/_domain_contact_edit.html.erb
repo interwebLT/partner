@@ -116,6 +116,7 @@
     </div>
     <div><!-- form-group -->
       <label><%= fa_icon 'user-secret' %> Handle </label>
+      <%= f.hidden_field :handle, value: contact.handle %>
       <div class="inputfield"><%= contact.handle %></div>
       <div></div>
     </div>

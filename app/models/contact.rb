@@ -1,4 +1,5 @@
 class Contact
+  include Api::Model
   include ActiveModel::Model
 
   attr_accessor :handle,
@@ -20,4 +21,14 @@ class Contact
   validates_length_of :postal_code, minimum: 3, maximum: 10, allow_blank: true
   validates_length_of :voice, minimum: 10, maximum: 32
   validates_length_of :fax, minimum: 10, maximum: 32, allow_blank: true
+
+  def update token
+    Contact.patch Contact.url(id: self.handle), params, token: token
+  end
+
+  def params
+    json = self.as_json 
+    json.delete "handle"
+    return json
+  end
 end
