@@ -1,6 +1,9 @@
 <% content_for :banner_title do %>
 <%= fa_icon 'gears lg' %>&nbsp;Domains
 <% end %>
+<% if @show_edit %>
+  <span id="showEdit" />
+<% end %>
 
 <section>
   <div id="MyDomains">

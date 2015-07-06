@@ -10,6 +10,8 @@ class ContactsController < ApplicationController
       @domain = Domain.find return_to, token: current_user.token
       @domain.set_registrant contact
 
+      @show_edit = true
+
       render template: "domains/show" 
       # redirect_to "#{domain_url(return_to)}#edit", alert: 'Invalid information entered', invalid_contact: contact
     end
