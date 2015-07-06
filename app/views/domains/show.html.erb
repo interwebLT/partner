@@ -32,23 +32,29 @@
         <!-- Tab panes -->
         <div class="tab-content" id="domain-info-tab-content">
           <div role="tabpanel" class="tab-pane active" id="registrant-contact">
-            <a onclick="showEditContact()">Edit Contact Details</a>
-            <%= render partial: 'domain_contact', locals: { contact: @domain.registrant } %>
-            <a onclick="showEditContact()">Edit Contact Details</a>
+            <% if current_user.staff %>
+              <a onclick="showEditContact()">Edit Contact Details</a>
+            <% end %>
+            <%= render partial: 'domains/domain_contact', locals: { contact: @domain.registrant } %>
+            <% if current_user.staff %>
+              <a onclick="showEditContact()">Edit Contact Details</a>
+            <% end %>
           </div>
-          <div role="tabpanel" class="tab-pane" id="registrant-contact-edit">
-            <a onclick="hideEditContact()">Cancel</a>
-            <%= render partial: 'domain_contact_edit', locals: { contact: @domain.registrant } %>
-            <a onclick="hideEditContact()">Cancel</a>
-          </div>
+          <% if current_user.staff %>
+            <div role="tabpanel" class="tab-pane" id="registrant-contact-edit">
+              <a onclick="hideEditContact()">Cancel</a>
+              <%= render partial: 'domains/domain_contact_edit', locals: { contact: @domain.registrant } %>
+              <a onclick="hideEditContact()">Cancel</a>
+            </div>
+          <% end %>
           <div role="tabpanel" class="tab-pane" id="admin-contact">
-            <%= render partial: 'domain_contact', locals: { contact: @domain.admin_contact } %>
+            <%= render partial: 'domains/domain_contact', locals: { contact: @domain.admin_contact } %>
           </div>
           <div role="tabpanel" class="tab-pane" id="billing-contact">
-            <%= render partial: 'domain_contact', locals: { contact: @domain.billing_contact } %>
+            <%= render partial: 'domains/domain_contact', locals: { contact: @domain.billing_contact } %>
           </div>
           <div role="tabpanel" class="tab-pane" id="tech-contact">
-            <%= render partial: 'domain_contact', locals: { contact: @domain.tech_contact } %>
+            <%= render partial: 'domains/domain_contact', locals: { contact: @domain.tech_contact } %>
           </div>
         </div>
       </div>
