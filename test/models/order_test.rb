@@ -52,6 +52,22 @@ describe Order do
       specify { subject.complete?.must_equal false }
     end
   end
+
+  describe :pending? do
+    subject { Order.new }
+
+    context :when_status_pending do
+      before do
+        subject.status = Order::PENDING
+      end
+
+      specify { subject.pending?.must_equal true }
+    end
+
+    context :when_status_not_pending do
+      specify { subject.pending?.must_equal false }
+    end
+  end
 end
 
 def alpha_partner

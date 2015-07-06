@@ -3,7 +3,8 @@ class Order
 
   attr_accessor :id, :partner, :order_number, :total_price, :fee, :ordered_at, :status, :currency_code, :order_details
 
-  COMPLETE = 'complete'
+  COMPLETE  = 'complete'
+  PENDING   = 'pending'
 
   def order_details= order_details
     @order_details = order_details.collect { |order_detail| OrderDetail.new order_detail }
@@ -15,5 +16,9 @@ class Order
 
   def complete?
     status == COMPLETE
+  end
+
+  def pending?
+    status == PENDING
   end
 end
