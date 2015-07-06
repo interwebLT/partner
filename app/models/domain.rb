@@ -24,6 +24,11 @@ class Domain
     id.present?
   end
 
+  # This is for use when we're showing a form with errors
+  def set_registrant registrant
+    @registrant = registrant
+  end
+
   def registrant= registrant
     @registrant = Contact.new registrant
   end

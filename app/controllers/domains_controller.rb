@@ -5,7 +5,6 @@ class DomainsController < SecureController
 
   def show
     @domain = Domain.find params[:id], token: current_user.token
-    # @domain.registrant.valid?
   end
 
   def update

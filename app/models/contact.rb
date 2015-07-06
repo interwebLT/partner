@@ -23,11 +23,11 @@ class Contact
   validates_length_of :fax, minimum: 10, maximum: 32, allow_blank: true
 
   def update token
-    #if valid?
+    if valid?
       Contact.patch Contact.url(id: self.handle), params, token: token
       return true
-    #end
-    #return false
+    end
+    return false
   end
 
   def params

@@ -9,3 +9,7 @@
 @hideEditContact = () ->
   $('#registrant-contact').addClass('active')
   $('#registrant-contact-edit').removeClass('active')
+
+$ ->
+  if window.location.hash == "#edit" 
+    showEditContact()
