@@ -101,7 +101,7 @@ describe Contact do
         subject.state = nil
       end
 
-      specify { subject.valid?.must_equal false }
+      specify { subject.valid?.must_equal true }
     end
 
     context :when_country_code_missing do
@@ -197,7 +197,7 @@ describe Contact do
         subject.state = ''
       end
 
-      specify { subject.valid?.must_equal false }
+      specify { subject.valid?.must_equal true }
     end
 
     context :when_postal_code_less_than_3_chars do
@@ -261,7 +261,7 @@ describe Contact do
         subject.state = '123456789 123456789 123456789 123456789 123456789 X'
       end
 
-      specify { subject.valid?.must_equal false }
+      specify { subject.valid?.must_equal true }
     end
 
     context :when_postal_code_more_than_10_chars do
