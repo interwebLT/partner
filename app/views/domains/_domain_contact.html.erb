@@ -95,7 +95,7 @@
     <label><%= fa_icon 'phone-square' %> Telephone </label>
     <div class="inputfield">
       <%= contact.voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-      <% if contact.voice_ext %>
+      <% unless contact.voice_ext.blank? %>
       <span class="text-muted">ext.</span> <%=contact.voice_ext %>
       <% end %>
     </div>
@@ -105,7 +105,7 @@
     <label><%= fa_icon 'fax' %> Fax </label>
     <div class="inputfield">
       <%= contact.fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-      <% if contact.fax_ext %>
+      <% unless contact.fax_ext.blank? %>
       <span class="text-muted">ext.</span> <%=contact.fax_ext %>
       <% end %>
     </div>

@@ -3,8 +3,10 @@ class ContactsController < ApplicationController
     return_to = params[:contact].delete :domain
 
     contact = Contact.new params[:contact]
-    contact.update current_user.token
-
-    redirect_to domain_url(return_to)
+    if contact.update current_user.token
+      redirect_to domain_url(return_to)
+    else
+      redirect_to domain_url(return_to), alert: 'Invalid information entered'
+    end
   end
 end
