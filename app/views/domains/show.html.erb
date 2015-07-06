@@ -25,14 +25,21 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="domain-info-tab" role="tablist">
           <li role="presentation" class="active"><a href="#registrant-contact" aria-controls="registrant-contact" role="tab" data-toggle="tab">Registrant Contact</a></li>
-          <li role="presentation"><a href="#admin-contact" aria-controls="admin-contact" role="tab" data-toggle="tab">Admin Contact</a></li>
+           <li role="presentation"><a href="#admin-contact" aria-controls="admin-contact" role="tab" data-toggle="tab">Admin Contact</a></li>
           <li role="presentation"><a href="#billing-contact" aria-controls="billing-contact" role="tab" data-toggle="tab">Billing Contact</a></li>
           <li role="presentation"><a href="#technical-contact" aria-controls="technical-contact" role="tab" data-toggle="tab">Technical Contact</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" id="domain-info-tab-content">
           <div role="tabpanel" class="tab-pane active" id="registrant-contact">
+            <a onclick="showEditContact()">Edit Contact Details</a>
+            <%= render partial: 'domain_contact', locals: { contact: @domain.registrant } %>
+            <a onclick="showEditContact()">Edit Contact Details</a>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="registrant-contact-edit">
+            <a onclick="hideEditContact()">Cancel</a>
             <%= render partial: 'domain_contact_edit', locals: { contact: @domain.registrant } %>
+            <a onclick="hideEditContact()">Cancel</a>
           </div>
           <div role="tabpanel" class="tab-pane" id="admin-contact">
             <%= render partial: 'domain_contact', locals: { contact: @domain.admin_contact } %>
