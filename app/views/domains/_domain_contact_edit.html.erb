@@ -42,7 +42,6 @@
         <div><%= f.text_field :local_street %></div>
       </div>
     </div>
-    <% if contact.street2 or @domain.registrant.local_street2 %>
     <div><!-- form-group -->
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
@@ -52,8 +51,6 @@
         <div><%= f.text_field :local_street2 %></div>
       </div>
     </div>
-    <% end %>
-    <% if contact.street3 or @domain.registrant.local_street3 %>
     <div><!-- form-group -->
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
@@ -63,7 +60,6 @@
         <div><%= f.text_field :local_street3 %></div>
       </div>
     </div>
-    <% end %>
     <div><!-- form-group -->
       <label><span>City</span></label>
       <div class="inputfield">
