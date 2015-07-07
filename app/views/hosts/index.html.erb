@@ -1,0 +1,22 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'gears lg' %>&nbsp;Domains <% unless current_user.admin %><span><%= @domains.count %></span><% end %>
+<% end %>
+
+<div id="table">
+  <table id="domains">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Host</th>
+        <th>Partner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

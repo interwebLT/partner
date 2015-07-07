@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get :renew
   end
 
+  resources :hosts, only: [:index]
+
   resources :contacts, only: [:update]
 
   resources :profile, only: :index
