@@ -22,6 +22,10 @@ class Contact
   validates_length_of :voice, minimum: 10, maximum: 32
   validates_length_of :fax, minimum: 10, maximum: 32, allow_blank: true
 
+  def all token
+    Contact.get Contact.url
+  end
+
   def update token
     if valid?
       Contact.patch Contact.url(id: self.handle), params, token: token

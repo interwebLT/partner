@@ -17,6 +17,7 @@
           <% if user_signed_in? and current_user.admin %>
             <li class="<%= 'active' if params[:controller] == 'domains' %>"><%= link_to 'Domains', domains_path %></li>
             <li class="<%= 'active' if params[:controller] == 'hosts' %>"><%= link_to 'Hosts', hosts_path %></li>
+            <li class="<%= 'active' if params[:controller] == 'contacts' %>"><%= link_to 'Contacts', contacts_path %></li>
             <li class="<%= 'active' if params[:controller] == 'partners' %>"><%= link_to 'Partners', partners_path %></li>
             <li class="<%= 'active' if params[:controller] == 'orders' %>"><%= link_to 'Orders', orders_path, id: :menu_orders %></li>
             <li class="<%= 'active' if params[:controller] == 'activities' %>"><%= link_to 'Activities', activities_path, id: :menu_activities  %></li>
