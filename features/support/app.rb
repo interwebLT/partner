@@ -3,6 +3,14 @@ class App
     @login ||= LoginPage.new
   end
 
+  def contacts
+    @contacts ||= ContactsPage.new
+  end
+
+  def hosts
+    @hosts ||= HostsPage.new
+  end
+
   def domains
     @domains ||= DomainsPage.new
   end
