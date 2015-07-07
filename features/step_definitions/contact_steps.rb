@@ -1,8 +1,8 @@
 When /^I try to view contacts$/ do
-  view_domains
+  view_contacts
 end
 
 Then /^I must see all contacts$/ do
-  assert_domains_displayed
+  assert_contacts_displayed
 end
 
