@@ -16,4 +16,8 @@ class ContactsController < ApplicationController
       # redirect_to "#{domain_url(return_to)}#edit", alert: 'Invalid information entered', invalid_contact: contact
     end
   end
+
+  def index
+    @contacts = Contact.all token: current_user.token
+  end
 end

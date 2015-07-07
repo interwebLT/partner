@@ -13,12 +13,14 @@
       </tr>
     </thead>
     <tbody>
+      <% @contacts.each do |contact| %>
       <tr>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= contact.handle %></td>
+        <td><%= contact.name %></td>
+        <td><%= contact.organization %></td>
       </tr>
+      <% end %>
     </tbody>
   </table>
 </div>
