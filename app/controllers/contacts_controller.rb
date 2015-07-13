@@ -1,4 +1,4 @@
-class ContactsController < ApplicationController
+class ContactsController < SecureController
   def update
     return_to = params[:contact].delete :domain
 
