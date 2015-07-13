@@ -1,0 +1,9 @@
+<br/>
+Name: <%= @host.name %><br/>
+Partner: <%= @host.partner %><br/>
+Nameservers:
+<ul id="addresses">
+<% @host.host_addresses.each do |address| %>
+  <li><%= address.address %> (<%= address.type %>)</li>
+<% end %>
+</ul>

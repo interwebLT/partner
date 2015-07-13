@@ -16,7 +16,7 @@
       <% @hosts.each do |host| %>
       <tr>
         <td></td>
-        <td><%= host.name %></td>
+        <td><%= link_to host.name, host_url(host.id) %></td>
         <td><%= host.partner %></td>
         <td>
           <ul>

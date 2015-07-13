@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get :renew
   end
 
-  resources :hosts, only: [:index]
+  resources :hosts, only: [:index, :show]
 
   resources :contacts, only: [:index, :update]
 

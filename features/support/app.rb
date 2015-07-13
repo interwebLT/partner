@@ -11,6 +11,10 @@ class App
     @hosts ||= HostsPage.new
   end
 
+  def host_info
+    @host_info ||= HostInfoPage.new
+  end
+
   def domains
     @domains ||= DomainsPage.new
   end
