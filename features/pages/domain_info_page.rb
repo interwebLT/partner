@@ -18,6 +18,27 @@ def assert_domain_info_displayed
   site.domain_info.domain_hosts.count.must_equal 2
 end
 
+def add_host
+  stub_add_host
+
+  within first('#new_domain_host') do
+    fill_in 'domain_host_name', with: 'ns5.domains.ph'
+    click_on 'Create Domain host'
+  end
+end
+
+def stub_add_host
+ stub_request(:post, "http://test.host/domains/domain.ph/hosts").
+        to_return(:status => 200, :body =>       
+        {
+          id: 67,
+          name: "ns5.domains.ph",
+          created_at: "2015-07-14T08:17:23.967Z",
+          updated_at: "2015-07-14T08:17:23.967Z"
+        }.to_json, 
+        :headers => {})
+end
+
 private
 
 def domain_info_response
