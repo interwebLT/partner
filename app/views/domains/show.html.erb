@@ -70,12 +70,14 @@
           <thead>
             <tr>
               <th>Nameserver</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             <% @domain.hosts.each do |host| %>
             <tr>
               <td><%= host.name %></td>
+              <td><%= button_to 'Delete', domain_host_path(@domain.id, host.name), method: :delete %></td>
             </tr>
             <% end %>
           </tbody>

@@ -58,6 +58,10 @@ module Api
         process_response HTTParty.patch url, body: params.to_json, headers: default_headers(token: token)
       end
 
+      def delete(url, params, token:)
+        process_response HTTParty.delete url, body: params.to_json, headers: default_headers(token: token)
+      end
+
       def find(id, token:)
         response = get url(id: id), token: token
 

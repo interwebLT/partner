@@ -4,7 +4,6 @@ class DomainHost
   attr_accessor :id, :domain, :name, :created_at, :updated_at
 
   def save token
-    p token
     DomainHost.post DomainHost.url(domain.name), to_json, token: token
   end
 
@@ -14,7 +13,13 @@ class DomainHost
     }
   end
 
-  def self.url domain_id
-    super resource: "domains/#{domain_id}/hosts"
+  def self.url domain_id, id: nil
+    super resource: "domains/#{domain_id}/hosts", id: id
+  end
+
+  def self.destroy domain_id, id, token: token
+    response = delete url(domain_id, id: id), {}, token: token
+
+    new response
   end
 end

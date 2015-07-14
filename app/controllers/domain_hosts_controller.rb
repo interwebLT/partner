@@ -8,4 +8,11 @@ class DomainHostsController < SecureController
 
     redirect_to domain_url(domain.id)
   end
+
+  def destroy
+    domain = Domain.find params[:domain_id], token: current_user.token
+    host = DomainHost.destroy domain.name, params[:id], token: current_user.token
+
+    redirect_to domain_url(domain.id)
+  end
 end
