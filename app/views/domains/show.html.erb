@@ -80,6 +80,10 @@
             <% end %>
           </tbody>
         </table>
+        <%= simple_form_for @nameserver, url: domain_hosts_path(@domain.id) do |f| %>
+          <%= f.text_field :name %>
+          <%= f.submit %>
+        <% end %>
       </div>
       <!--name servers-->
       <!--domain activity-->

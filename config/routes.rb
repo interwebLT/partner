@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :domains, only: [:index, :show] do
     get :renew
+    resources :hosts, controller: :domain_hosts, only: [:create]
   end
 
   resources :hosts, only: [:index, :show]

@@ -5,6 +5,8 @@ class DomainsController < SecureController
 
   def show
     @domain = Domain.find params[:id], token: current_user.token
+    @nameserver = DomainHost.new
+    @nameserver.domain = @domain
   end
 
   def update

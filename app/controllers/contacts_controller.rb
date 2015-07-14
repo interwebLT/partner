@@ -23,6 +23,5 @@ class ContactsController < SecureController
 
   def show 
     @contact = Contact.find params[:id], token: current_user.token
-    p @contact
   end
 end
