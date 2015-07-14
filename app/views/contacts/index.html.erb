@@ -16,7 +16,7 @@
       <% @contacts.each do |contact| %>
       <tr>
         <td></td>
-        <td><%= contact.handle %></td>
+        <td><%= link_to contact.handle, contact_url(contact.handle) %></td>
         <td><%= contact.name %></td>
         <td><%= contact.organization %></td>
       </tr>

@@ -11,7 +11,7 @@
       <div class="contact-cat">Int'l</div>
       <div><%= contact.name %></div>
       <div class="contact-cat">Local</div>
-      <div><%= contact.local_name %></div>
+      <div id="contact_local_name"><%= contact.local_name %></div>
     </div>
   </div>
   <div><!-- form-group -->
@@ -33,7 +33,7 @@
       <div><%= contact.local_street %></div>
     </div>
   </div>
-  <% if contact.street2 or @domain.registrant.local_street2 %>
+  <% if contact.street2 || @domain.try(:registrant).try(:local_street2) %>
   <div><!-- form-group -->
     <label class="hidden-xs">&nbsp;</label>
     <div class="inputfield">
@@ -44,7 +44,7 @@
     </div>
   </div>
   <% end %>
-  <% if contact.street3 or @domain.registrant.local_street3 %>
+  <% if contact.street3 ||  @domain.try(:registrant).try(:local_street3) %>
   <div><!-- form-group -->
     <label class="hidden-xs">&nbsp;</label>
     <div class="inputfield">

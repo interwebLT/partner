@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :hosts, only: [:index, :show]
 
-  resources :contacts, only: [:index, :update]
+  resources :contacts, only: [:index, :update, :show]
 
   resources :profile, only: :index
 
