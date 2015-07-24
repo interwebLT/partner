@@ -1,18 +1,35 @@
-@import url(https://fonts.googleapis.com/css?family=Muli:300,400|Open+Sans+Condensed:300,700);
-
+@import url(https://fonts.googleapis.com/css?family=Muli:300,400|Open+Sans+Condensed:300,700|Poppins:300,400,500,600,700);
 
 html, body {
-  font-family: 'Muli', Helvetica, Arial, sans-serif;
-  font-weight: normal;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif;
+  font-weight: 300 !important;
   color: #636363 !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+strong {
+  font-weight: 600 !important;
+}
+
+label {
+  font-weight: 500 !important;
+}
+
+.alert {
+  padding: 10px 15px !important;
 }
 
 .btn {
   border: 1px solid transparent;
+  font-weight: 500 !important;
   transition: 0.05s;
   -moz-transition: 0.05s;
   -webkit-transition: 0.05s;
   -o-transition: 0.05;
+}
+
+.btn-link {
+  font-weight: 500 !important;
 }
 
 .btn-primary {
@@ -58,9 +75,9 @@ html, body {
 }
 
 .btn-default{
-  color: #555 !important;
-  background-color: #ccc !important;
-  border-color: #ccc !important;
+  color: #828282 !important;
+  background-color: #E8E8E8 !important;
+  border-color: #DCDCDC !important;
 }
 
 .btn-default:hover{
@@ -93,6 +110,24 @@ html, body {
   font-size: 14px;
 }
 
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    outline: 0;
+}
+
+.modal-header {
+    padding: 15px;
+    min-height: 16.42857143px;
+    background-color: #47A2D6;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 1000px;
@@ -105,13 +140,23 @@ html, body {
 
 #login-form {
   @extend .col-sm-5;
-  @extend .well;
+  min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #E3EBEF;
+    border-radius: 4px;
 
     #username-field, #password-field {
       @extend .form-group;
 
       input {
         @extend .form-control;
+        border-color: transparent !important;
+        box-shadow: none !important;
+      }
+
+      input:focus {
+        border-color: rgba(255, 165, 0, 0.37) !important;
       }
     }
     #login-submit {

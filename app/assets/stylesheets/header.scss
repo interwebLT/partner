@@ -10,7 +10,7 @@
 }
 
 .navbar-default {
-  background-color: #f3f3f3;
+  background-color: #fff;
 }
 
 .navbar-brand {
@@ -28,8 +28,10 @@
 
 #navbar {
   @extend .navbar;
-  @extend .navbar-fixed-top;
   @extend .navbar-default;
+  margin-bottom: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 #navbar > div {
@@ -61,6 +63,7 @@ nav {
   .dropdown {
     a {
       @extend .dropdown-toggle;
+      font-weight: 300 !important;
 
       span {
         @extend .caret;
@@ -102,7 +105,7 @@ nav ul.nav li a:hover,nav ul.nav li a.active,nav ul.nav li.active a {
   @extend .transition;
   border-top: 5px solid #47A2D6;
   color: #47A2D6 !important;
-  font-weight: 400;
+  font-weight: 300;
   background-color: #fff !important;
 }
 
@@ -169,13 +172,13 @@ button.add-credits {
   ul.nav li a:hover, ul.nav li a.active {
     border-top: none;
     color: #47A2D6 !important;
-    font-weight: 400;
+    font-weight: 500;
   }
 }
 
 #banner-title {
   @extend .row;
-  margin-top: 60px;
+  *margin-top: 60px;
   margin-bottom: 30px;
   background-color: #47A2D6;
   padding-top: 25px;
@@ -199,13 +202,14 @@ button.add-credits {
       a {
         @extend .btn;
         @extend .btn-secondary;
+        margin-top: 16px;
       }
     }
   }
 
   span {
     @extend .badge;
-
+    font-weight: 500 !important;
     font-size: 17px;
     vertical-align: middle;
     background-color: #277AA9;
@@ -227,6 +231,7 @@ button.add-credits {
     background-color: #47A2D6 !important;
     color: #fff !important;
     border-top: none !important;
+    font-weight: 500 !important;
   }
 
   #login > div:first-child h3 {
@@ -300,13 +305,14 @@ form.search-bar {
 
 form.search-bar input.form-control {
   @extend .transition;
-  border: 1px solid rgb(224, 224, 224);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: none;
   padding-right: 27px;
+  line-height: 1.7;
 }
 
 form.search-bar input.form-control:focus {
-  border-color: orange;
+  border-color: rgba(255, 165, 0, 0.37);
 }
 
 form.search-bar > .btn {
@@ -342,20 +348,23 @@ form.search-bar > .btn:hover {
   margin: 3px;
   }
   /* fix ipadmini nav bug */
-  nav ul li {
-    border-left:  1px solid #DFDFDF;;
-  }
+
   nav ul li a {
-  height: 60px;
-  line-height: 28px;
-  padding-left: 20px;
-  padding-right: 20px;
+  line-height: normal;
+  padding-left: 10px;
+  padding-right: 10px;
   }
-  nav ul li.active a {
-  border-top: 5px solid #47A2D6!important;
-  color: #47A2D6 !important;
-  font-weight: 400;
-  background-color: #fff !important;
+
+  nav ul li.active a ,  nav ul li.active{
+  border-top: none !important;
+  color: #FFF !important;
+  font-weight: 300;
+  background-color: #47A2D6 !important;
+  }
+
+  #navbar nav ul > li > a:hover {
+    color: white !important;
+    font-weight: 500;
   }
 }
 

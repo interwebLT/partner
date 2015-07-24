@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   resources :activities, only: [:index]
 
   resources :orders, only: [:index]
+
+  resources :register, only: [:index]
 end

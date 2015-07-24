@@ -1,0 +1,124 @@
+#register-checkout.modal .modal-footer {
+	text-align: center !important;
+}
+
+#register-checkout.modal table tr td:last-child {
+	text-align: right;
+}
+
+#register-checkout.modal table tr.total-amount td {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.register-page {
+width: 70%;
+margin: 0 auto;	
+}
+
+.register-page > form .form-group{
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.register-page > form.register-form-search .form-group	> input {
+	border: 1px solid rgba(0,0,0,0.2);
+}
+
+.register-page > form .form-group	> input, .register-page > form .form-group	> select{
+	width: 100%;
+	border: 1px solid transparent;
+	box-shadow: none !important;
+	line-height:1.7;
+}
+
+.register-page > form .form-group	> input:focus, .register-page > form .form-group	> select:focus {
+	border-color: rgba(255, 165, 0, 0.37);
+}
+
+form.register-form-search.navbar-form {
+	position: relative;
+	padding-left: 0;
+    padding-right: 0;
+}
+
+form.register-form.navbar-form {
+    position: relative;
+    background-color: #E6F3F9;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+form.register-form.navbar-form h4 {
+	margin-bottom: 10px;
+}
+
+#register-checkout .btn h6 {
+    margin: 0 !important;
+}
+
+form.register-form-search .btn {
+    position: absolute;
+    right: 1px;
+    top: 3px;
+    padding: 7px 15px;
+    background-color: #fff;
+}
+
+.has-feedback label ~ .form-control-feedback {
+    top: 25px !important;
+}
+
+@media (max-width: 768px){
+	.register-page {
+	width: 90%;
+	}
+
+	.register-page > form .col-sm-6	{
+		margin-bottom: 15px;
+	}
+
+	.navbar-form .has-feedback .form-control-feedback {
+    top: 0 !important;
+  }
+
+	form.register-form-search .btn {
+  	top: 13px !important;
+  	right: 1px;
+  }
+
+}
+
+.fa.form-control-feedback {
+    line-height: 34px; /* @input-height-base; */
+}
+.input-sm ~ .fa.form-control-feedback {
+    line-height: 30px; /* @input-height-base; */
+}
+.input-lg ~ .fa.form-control-feedback {
+    line-height: 46px; /* @input-height-base; */
+}
+
+
+.has-feedback-left input.form-control {
+    padding-left: 34px; /* @input-height-base; */
+    padding-right: 12px; /* @padding-base-horizontal */
+}
+
+.has-feedback-left .form-control-feedback {
+    left: 0; 
+}
+.form-horizontal .has-feedback-left .form-control-feedback {
+    left: 12px; /* @grid-gutter-width / 2 */
+}
+
+.has-feedback-left input.input-sm {
+  padding-left: 30px;  @input-height-small;
+}
+.has-feedback-left input.input-lg {
+  padding-left: 46px;  @input-height-large;
+}
+
+tr.total-amount > td {
+    font-size: 20px !important;
+}

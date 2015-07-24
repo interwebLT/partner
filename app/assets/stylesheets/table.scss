@@ -1,5 +1,6 @@
 table {
   background-color: transparent;
+  font-family: "Muli", Arial, sans-serif !important;
   border: none !important;
   @extend .table;
   @extend .table-striped;
@@ -40,7 +41,7 @@ th div {
 }
 
 tbody a {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .tablesorter-bootstrap .tablesorter-header, .tablesorter-bootstrap tfoot th, .tablesorter-bootstrap tfoot td {
@@ -65,7 +66,7 @@ tbody a {
 table thead {
   background-color: #FBB03B !important;
   color: #fff;
-  font-weight: lighter;
+  font-weight: 400;
 }
 
 .tablesorter-bootstrap .tablesorter-header, .tablesorter-bootstrap tfoot th, .tablesorter-bootstrap tfoot td {
@@ -148,7 +149,7 @@ table thead {
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #EDE6DC !important;
+  background-color: #FDF7EE !important;
 }
 
 .table-hover > tbody > tr:hover {
@@ -351,7 +352,7 @@ table th[class*="col-"] {
 table tfoot {
   background-color: #EB9000 !important;
   color: #fff;
-  font-weight: lighter;
+  font-weight: 400;
   font-size: 15px;
 }
 
@@ -384,7 +385,7 @@ table#activities td:nth-child(3) {
 }
 
 table#remaining_balance{
-  font-weight: bold;
+  font-weight: 600;
   font-size: 22px;
   @extend .text-primary;
 }

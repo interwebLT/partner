@@ -1,0 +1,494 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
+<% end %>
+
+<script type="text/javascript">
+function verifyAgreement() {
+  if(!( $("#toacheckbox1").is(':checked'))) {
+    alert("You must acknowledge the Terms of Agreement before checking out.");
+    return false;
+  }
+  return true;
+}
+</script>
+
+<div id="register-checkout" class="modal fade">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title">Cart</h3>
+			</div>
+			<div class="modal-body">
+				<p>You can review and edit your purchases here before checking out. Click on Secure Checkout button to proceed with your purchase.</p>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th width="40%">Item</th>
+							<th width="20%">Cost</th>
+							<th width="20%">Term</th>
+							<th width="20%">Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>qwerty.ph</td>
+							<td>$ 35/year</td>
+							<td>
+								<select class="form-control input-sm">
+									<option>2</option>
+									<option>5</option>
+									<option>10</option>
+								</select>
+							</td>
+							<td>$ 70.00</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr class="total-amount">
+							<td colspan="3" class="text-right">Total Amount Due</td>
+							<td>$ 70.00</td>
+						</tr>
+					</tfoot>
+				</table>
+
+			</div>
+			<div class="modal-footer">
+				<div class="checkbox">
+					<label>
+						<input class="" name="toa" type="checkbox" id="toacheckbox1"> I agree to the <a type="button" class="btn-link" data-toggle="modal" data-target="#toaModal">Terms of Agreement</a>
+					</label>
+				</div>
+				<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+				<button onclick="return verifyAgreement();" type="submit" class="btn btn-lg btn-primary"><i class="pull-left fa fa-money fa-2x"></i>Complete Purchase
+					<h6>Pay-as-you-go credits</h6>
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="register-page">
+	<form class="register-form-search navbar-form" role="search">
+		<div class="form-group">
+			<input type="text" class="form-control input-lg" placeholder="Enter the domain you want to register...">
+		</div>
+		<button type="button" class="btn btn-lg" onclick="showRegistrantForm();">
+			<span class="glyphicon glyphicon-search"></span>
+		</button>
+	</form>
+	<!--p class="alert alert-danger">
+		Sorry, the domain name you entered is not available or is already taken. Please search again.
+	</p-->
+
+	<form id ="register-form" class="register-form navbar-form hidden" role="search">
+		<h4>Registrant Contact</h4>
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="email" class="form-control" placeholder="Email"/>
+			<i class="fa fa-envelope form-control-feedback"></i>
+		</div>
+
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="text" class="form-control" placeholder="Name"/>
+			<i class="fa fa-user form-control-feedback"></i>
+		</div>
+
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="text" class="form-control" placeholder="Organization"/>
+			<i class="fa fa-briefcase form-control-feedback"></i>
+		</div>
+
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="text" class="form-control" placeholder="Street Address"/>
+			<i class="fa fa-home form-control-feedback"></i>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group has-feedback has-feedback-left">
+					<input type="text" class="form-control" placeholder="City"/>
+					<i class="fa fa-home form-control-feedback"></i>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="State/Province"/>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group has-feedback has-feedback-left">
+					<label class="control-label sr-only">Country</label>
+					<select class="form-control" selected="selected" name="registrant[country]" id="registrant_country"><option value="PH">Philippines</option>
+						<option disabled="disabled" value="---------------">---------------</option>
+						<option value="AF">Afghanistan</option>
+						<option value="AL">Albania</option>
+						<option value="DZ">Algeria</option>
+						<option value="AS">American Samoa</option>
+						<option value="AD">Andorra</option>
+						<option value="AO">Angola</option>
+						<option value="AI">Anguilla</option>
+						<option value="AQ">Antarctica</option>
+						<option value="AG">Antigua and Barbuda</option>
+						<option value="AR">Argentina</option>
+						<option value="AM">Armenia</option>
+						<option value="AW">Aruba</option>
+						<option value="AU">Australia</option>
+						<option value="AT">Austria</option>
+						<option value="AZ">Azerbaijan</option>
+						<option value="BS">Bahamas</option>
+						<option value="BH">Bahrain</option>
+						<option value="BD">Bangladesh</option>
+						<option value="BB">Barbados</option>
+						<option value="BY">Belarus</option>
+						<option value="BE">Belgium</option>
+						<option value="BZ">Belize</option>
+						<option value="BJ">Benin</option>
+						<option value="BM">Bermuda</option>
+						<option value="BT">Bhutan</option>
+						<option value="BO">Bolivia, Plurinational State of</option>
+						<option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+						<option value="BA">Bosnia and Herzegovina</option>
+						<option value="BW">Botswana</option>
+						<option value="BV">Bouvet Island</option>
+						<option value="BR">Brazil</option>
+						<option value="IO">British Indian Ocean Territory</option>
+						<option value="BN">Brunei Darussalam</option>
+						<option value="BG">Bulgaria</option>
+						<option value="BF">Burkina Faso</option>
+						<option value="BI">Burundi</option>
+						<option value="KH">Cambodia</option>
+						<option value="CM">Cameroon</option>
+						<option value="CA">Canada</option>
+						<option value="CV">Cape Verde</option>
+						<option value="KY">Cayman Islands</option>
+						<option value="CF">Central African Republic</option>
+						<option value="TD">Chad</option>
+						<option value="CL">Chile</option>
+						<option value="CN">China</option>
+						<option value="CX">Christmas Island</option>
+						<option value="CC">Cocos (Keeling) Islands</option>
+						<option value="CO">Colombia</option>
+						<option value="KM">Comoros</option>
+						<option value="CG">Congo</option>
+						<option value="CD">Congo, The Democratic Republic of the</option>
+						<option value="CK">Cook Islands</option>
+						<option value="CR">Costa Rica</option>
+						<option value="HR">Croatia</option>
+						<option value="CU">Cuba</option>
+						<option value="CW">Curaçao</option>
+						<option value="CY">Cyprus</option>
+						<option value="CZ">Czech Republic</option>
+						<option value="CI">Côte dIvoireIvoire</option>
+						<option value="DK">Denmark</option>
+						<option value="DJ">Djibouti</option>
+						<option value="DM">Dominica</option>
+						<option value="DO">Dominican Republic</option>
+						<option value="EC">Ecuador</option>
+						<option value="EG">Egypt</option>
+						<option value="SV">El Salvador</option>
+						<option value="GQ">Equatorial Guinea</option>
+						<option value="ER">Eritrea</option>
+						<option value="EE">Estonia</option>
+						<option value="ET">Ethiopia</option>
+						<option value="FK">Falkland Islands (Malvinas)</option>
+						<option value="FO">Faroe Islands</option>
+						<option value="FJ">Fiji</option>
+						<option value="FI">Finland</option>
+						<option value="FR">France</option>
+						<option value="GF">French Guiana</option>
+						<option value="PF">French Polynesia</option>
+						<option value="TF">French Southern Territories</option>
+						<option value="GA">Gabon</option>
+						<option value="GM">Gambia</option>
+						<option value="GE">Georgia</option>
+						<option value="DE">Germany</option>
+						<option value="GH">Ghana</option>
+						<option value="GI">Gibraltar</option>
+						<option value="GR">Greece</option>
+						<option value="GL">Greenland</option>
+						<option value="GD">Grenada</option>
+						<option value="GP">Guadeloupe</option>
+						<option value="GU">Guam</option>
+						<option value="GT">Guatemala</option>
+						<option value="GG">Guernsey</option>
+						<option value="GN">Guinea</option>
+						<option value="GW">Guinea-Bissau</option>
+						<option value="GY">Guyana</option>
+						<option value="HT">Haiti</option>
+						<option value="HM">Heard Island and McDonald Islands</option>
+						<option value="VA">Holy See (Vatican City State)</option>
+						<option value="HN">Honduras</option>
+						<option value="HK">Hong Kong</option>
+						<option value="HU">Hungary</option>
+						<option value="IS">Iceland</option>
+						<option value="IN">India</option>
+						<option value="ID">Indonesia</option>
+						<option value="IR">Iran, Islamic Republic of</option>
+						<option value="IQ">Iraq</option>
+						<option value="IE">Ireland</option>
+						<option value="IM">Isle of Man</option>
+						<option value="IL">Israel</option>
+						<option value="IT">Italy</option>
+						<option value="JM">Jamaica</option>
+						<option value="JP">Japan</option>
+						<option value="JE">Jersey</option>
+						<option value="JO">Jordan</option>
+						<option value="KZ">Kazakhstan</option>
+						<option value="KE">Kenya</option>
+						<option value="KI">Kiribati</option>
+						<option value="KP">Korea, Democratic Peoples Republic ofs Republic of</option>
+						<option value="KR">Korea, Republic of</option>
+						<option value="KW">Kuwait</option>
+						<option value="KG">Kyrgyzstan</option>
+						<option value="LA">Lao Peoples Democratic Republics Democratic Republic</option>
+						<option value="LV">Latvia</option>
+						<option value="LB">Lebanon</option>
+						<option value="LS">Lesotho</option>
+						<option value="LR">Liberia</option>
+						<option value="LY">Libya</option>
+						<option value="LI">Liechtenstein</option>
+						<option value="LT">Lithuania</option>
+						<option value="LU">Luxembourg</option>
+						<option value="MO">Macao</option>
+						<option value="MK">Macedonia, Republic of</option>
+						<option value="MG">Madagascar</option>
+						<option value="MW">Malawi</option>
+						<option value="MY">Malaysia</option>
+						<option value="MV">Maldives</option>
+						<option value="ML">Mali</option>
+						<option value="MT">Malta</option>
+						<option value="MH">Marshall Islands</option>
+						<option value="MQ">Martinique</option>
+						<option value="MR">Mauritania</option>
+						<option value="MU">Mauritius</option>
+						<option value="YT">Mayotte</option>
+						<option value="MX">Mexico</option>
+						<option value="FM">Micronesia, Federated States of</option>
+						<option value="MD">Moldova, Republic of</option>
+						<option value="MC">Monaco</option>
+						<option value="MN">Mongolia</option>
+						<option value="ME">Montenegro</option>
+						<option value="MS">Montserrat</option>
+						<option value="MA">Morocco</option>
+						<option value="MZ">Mozambique</option>
+						<option value="MM">Myanmar</option>
+						<option value="NA">Namibia</option>
+						<option value="NR">Nauru</option>
+						<option value="NP">Nepal</option>
+						<option value="NL">Netherlands</option>
+						<option value="AN">Netherlands Antilles</option>
+						<option value="NC">New Caledonia</option>
+						<option value="NZ">New Zealand</option>
+						<option value="NI">Nicaragua</option>
+						<option value="NE">Niger</option>
+						<option value="NG">Nigeria</option>
+						<option value="NU">Niue</option>
+						<option value="NF">Norfolk Island</option>
+						<option value="MP">Northern Mariana Islands</option>
+						<option value="NO">Norway</option>
+						<option value="OM">Oman</option>
+						<option value="PK">Pakistan</option>
+						<option value="PW">Palau</option>
+						<option value="PS">Palestine, State of</option>
+						<option value="PA">Panama</option>
+						<option value="PG">Papua New Guinea</option>
+						<option value="PY">Paraguay</option>
+						<option value="PE">Peru</option>
+						<option value="PH">Philippines</option>
+						<option value="PN">Pitcairn</option>
+						<option value="PL">Poland</option>
+						<option value="PT">Portugal</option>
+						<option value="PR">Puerto Rico</option>
+						<option value="QA">Qatar</option>
+						<option value="RO">Romania</option>
+						<option value="RU">Russian Federation</option>
+						<option value="RW">Rwanda</option>
+						<option value="RE">Réunion</option>
+						<option value="BL">Saint Barthélemy</option>
+						<option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+						<option value="KN">Saint Kitts and Nevis</option>
+						<option value="LC">Saint Lucia</option>
+						<option value="MF">Saint Martin (French part)</option>
+						<option value="PM">Saint Pierre and Miquelon</option>
+						<option value="VC">Saint Vincent and the Grenadines</option>
+						<option value="WS">Samoa</option>
+						<option value="SM">San Marino</option>
+						<option value="ST">Sao Tome and Principe</option>
+						<option value="SA">Saudi Arabia</option>
+						<option value="SN">Senegal</option>
+						<option value="RS">Serbia</option>
+						<option value="SC">Seychelles</option>
+						<option value="SL">Sierra Leone</option>
+						<option value="SG">Singapore</option>
+						<option value="SX">Sint Maarten (Dutch part)</option>
+						<option value="SK">Slovakia</option>
+						<option value="SI">Slovenia</option>
+						<option value="SB">Solomon Islands</option>
+						<option value="SO">Somalia</option>
+						<option value="ZA">South Africa</option>
+						<option value="GS">South Georgia and the South Sandwich Islands</option>
+						<option value="SS">South Sudan</option>
+						<option value="ES">Spain</option>
+						<option value="LK">Sri Lanka</option>
+						<option value="SD">Sudan</option>
+						<option value="SR">Suriname</option>
+						<option value="SJ">Svalbard and Jan Mayen</option>
+						<option value="SZ">Swaziland</option>
+						<option value="SE">Sweden</option>
+						<option value="CH">Switzerland</option>
+						<option value="SY">Syrian Arab Republic</option>
+						<option value="TW">Taiwan</option>
+						<option value="TJ">Tajikistan</option>
+						<option value="TZ">Tanzania, United Republic of</option>
+						<option value="TH">Thailand</option>
+						<option value="TL">Timor-Leste</option>
+						<option value="TG">Togo</option>
+						<option value="TK">Tokelau</option>
+						<option value="TO">Tonga</option>
+						<option value="TT">Trinidad and Tobago</option>
+						<option value="TN">Tunisia</option>
+						<option value="TR">Turkey</option>
+						<option value="TM">Turkmenistan</option>
+						<option value="TC">Turks and Caicos Islands</option>
+						<option value="TV">Tuvalu</option>
+						<option value="UG">Uganda</option>
+						<option value="UA">Ukraine</option>
+						<option value="AE">United Arab Emirates</option>
+						<option value="GB">United Kingdom</option>
+						<option value="US">United States</option>
+						<option value="UM">United States Minor Outlying Islands</option>
+						<option value="UY">Uruguay</option>
+						<option value="UZ">Uzbekistan</option>
+						<option value="VU">Vanuatu</option>
+						<option value="VE">Venezuela, Bolivarian Republic of</option>
+						<option value="VN">Viet Nam</option>
+						<option value="VG">Virgin Islands, British</option>
+						<option value="VI">Virgin Islands, U.S.</option>
+						<option value="WF">Wallis and Futuna</option>
+						<option value="EH">Western Sahara</option>
+						<option value="YE">Yemen</option>
+						<option value="ZM">Zambia</option>
+						<option value="ZW">Zimbabwe</option>
+						<option value="AX">Åland Islands</option></select>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Zip Code"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group has-feedback has-feedback-left">
+				<input type="text" class="form-control" placeholder="Contact Number"/>
+				<i class="fa fa-phone form-control-feedback"></i>
+			</div>
+
+			<div class="text-center">
+				<button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#register-checkout">Checkout></button>
+			</div>
+
+		</form>
+
+	</div>
+
+
+	<!--Terms and Agreements-->
+	<div class="modal fade" id="toaModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Terms of Agreement</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-body">
+						<h5><strong>DOMAIN NAME SERVICES AGREEMENT</strong></h5>
+						<div class="panel-body toaBox" data-original-title="" title="">
+							<p class="title">A. Introduction and dotPH Policies.</p>
+							<p>This domain service agreement ("ServiceAgreement" or "Agreement") is submitted to dotPH, INC. ("dotPH") for the purpose of applying for and registering a sub-domain of the PH country-code top level domain ("Domain") on the Internet. If this ServiceAgreement is accepted by dotPH, the Service Fee is paid to dotPH, its re-seller or other authorized party, and a Domain is registered in dotPH's domain name database and assigned to the Nameholder, Nameholder ("Nameholder") agrees to be bound by the terms of this ServiceAgreement and the terms of dotPH's Policies ("dotPH Policies") which exist now or in the future may be published by dotPH at dotPH's web site at http://www.domains.ph ("dotPH's Site"). dotPH may modify this Agreement and dotPH Policies from time to time, and will post at the top of the particular document the last date upon which it was modified and the date of effectivity. dotPH is responsible for publishing dotPH Policies applicable to its Nameholders on dotPH's Site. Nameholder is solely responsible for reviewing the dotPH Policies on a regular basis, as the updated dotPH Policies are effective thirty (30) calendar days after the initial date of posting of such revisions or modification on dotPH's Site. dotPH Policies, which Nameholder acknowledges and understands may be changed or modified by dotPH from time to time, are incorporated into this Agreement by this reference. By Nameholder's use of its Domain following the effective date of any revision of dotPH Policies, Nameholder agrees to be bound by such revisions to dotPH Policies. In the event Nameholder does not wish to be bound by the updated dotPH Policies, Nameholder's sole remedy is to cancel its registration to the Domain by following the appropriate dotPH Policies regarding such cancellation.</p>
+							<p class="title">B. Term, Fees and Payments.</p>
+							<p>This Service Agreement shall continue for a term specified by Nameholder pursuant to the current dotPH Policies. Nameholder will have the right to renew this Agreement in accordance with the dotPH Policies in effect at the end of this Agreement's then current term. Nameholder's payment of the Service Fee for the renewal term shall constitute Nameholder's acceptance of this Agreement and the dotPH Policies existing at the time of the payment including amendments thereto introduced thereafter.</p>
+							<p>Nameholder shall pay to dotPH the appropriate Service Fee applicable at the time the Nameholder submits its Registration Application. Payment of Service Fees should be made in accordance with the dotPH Policies effective at the time the Nameholder submits such payment. All fees paid pursuant to this Agreement are non-refundable except as provided for herein.</p>
+							<p class="title">C. Registration Information</p>
+							<p>Nameholder shall ensure that: (i) the information submitted by Nameholder to dotPH ("Nameholder Information") is true, current, complete, accurate, and reliable; and (ii) Nameholder shall maintain, update, and keep Nameholder Information true, current, complete, accurate, and reliable by notifying dotPH immediately of a change to any such information in accordance with the appropriate dotPH Policy relating to Nameholder Information modifications. dotPH reserves and may exercise the right to terminate Nameholder's Domain registration if (i) information provided by Nameholder to dotPH is false, inaccurate, incomplete, unreliable, misleading or otherwise secretive; or (ii) Nameholder fails, in a timely manner, to maintain, update, and keep Nameholder Information true, current, complete, accurate, and reliable. Nameholder acknowledges that a breach of this Section will constitute a material breach of this Agreement which will entitle dotPH to terminate this Agreement immediately upon such breach without any refund of the Service Fee and without notice to Nameholder.</p>
+							<p class="title">D. Disputes.</p>
+							<p>Nameholder agrees that, if the registration of its Domain is challenged by any third party, the Nameholder will be subject to the provisions specified in the dotPH Policies.</p>
+							<p class="title">E. Agents.</p>
+							<p>Nameholder agrees that if this ServiceAgreement is completed by an agent for the Nameholder, such as an ISP or dotPH's Reseller, the Nameholder is nonetheless bound as a principal by all terms and conditions herein, including the dotPH Policies. Further, Nameholder is responsible for all information submitted by its agent. dotPH will not cancel this Agreement, or refund any fees paid to it, because of errors or omissions of the agent in the registration process (e.g., if such agent provides incorrect information) or because of errors or omissions in changes to Nameholder's Domain registration, without Nameholder's actual consent, as such apparent authority will suffice to bind Nameholder. By acting on Nameholder's behalf, such agent represents and warrants to Nameholder and dotPH that the agent is authorized to bind Nameholder hereto and that it has fully and thoroughly advised Nameholder of the terms and conditions of this Agreement.</p>
+							<p class="title">F. Limitation of Liability.</p>
+							<p>dotPH SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF PROFITS, RELATING TO THE USE, OR THE INABILITY TO USE, THE DOMAIN, OR IN ANY OTHER WAY RELATED TO THE DOMAIN, REGARDLESS OF THE FORM OF ACTION, WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE. ADDITIONALLY, dotPH AND dotPH RELATED PARTIES SHALL NOT BE LIABLE WHATSOEVER FOR ANY LOSSES OR DAMAGES THAT NAMEHOLDER MAY INCUR AS A RESULT OF UNAUTHORIZED USE OF THE DOMAIN ARISING FROM "HACKING" OR OTHERWISE, OR FOR LACK OF FITNESS FOR A PARTICULAR PURPOSE OF THE DOMAIN. FINALLY, dotPH IS NOT LIABLE WHATSOEVER FOR ANY DAMAGES THAT NAMEHOLDER MAY SUFFER BECAUSE OF THE RE-DELEGATION OF THE PH COUNTRY CODE TOP LEVEL DOMAIN, SERVICE OR SYSTEM FAILURE, INCLUDING DOMAIN NAME SYSTEM FAILURE, ROOT SERVER FAILURE, INTERNET PROTOCOL ADDRESS FAILURE, ACCESS DELAYS OR INTERRUPTIONS, DATA NON-DELIVERY OR MIS-DELIVERY, ACTS OF GOD, UNAUTHORIZED USE OF PASSWORDS, ERRORS, OMISSIONS OR MIS-STATEMENTS IN ANY INFORMATION OR OTHER SERVICES PROVIDED UNDER THIS AGREEMENT, DELAYS OR INTERRUPTIONS IN DEVELOPMENT OF WEB SITES, OR BREACH OF SECURITY, EVEN IF dotPH HAS BEEN ADVISED OF THE POTENTIAL FOR SUCH DAMAGES, AND EVEN IF dotPH MAY FORESEE SUCH POSSIBLE DAMAGES. NAMEHOLDER'S SOLE REMEDY FOR dotPH'S BREACH OF THIS AGREEMENT SHALL BE A REFUND OF THE SERVICE FEE OR RENEWAL FEE (IF THE BREACH OCCURS DURING A RENEWAL TERM), WHICH REMEDY NAMEHOLDER ACKNOWLEDGES CONSTITUTES THE ONLY POSSIBLE DIRECT DAMAGES FLOWING FROM THIS AGREEMENT. NAMEHOLDER'S SOLE REMEDY FOR AN ACTION NOT FLOWING FROM THIS AGREEMENT (IN TORT OR OTHERWISE) SHALL BE LIMITED TO THE AMOUNT OF MONEY PAID TO dotPH BY THE NAMEHOLDER BUT IN NO CASE SHALL EXCEED ONE HUNDRED U.S. DOLLARS (US$100).</p>
+							<p class="title">G. Indemnity.</p>
+							<p>Nameholder shall defend, indemnify, and hold harmless dotPH and its officers, directors, shareholders, owners, managers, employees, agents, contractors, affiliates and attorneys ("dotPH Related Parties") from and against any and all claims of third parties, including, but not limited to all loss, liability, claims, demands, damages, cost or expense, causes of action, suits, proceedings, judgments, awards, executions and liens, including reasonable attorneys' fees (which attorneys shall be hired at the sole discretion of dotPH) and costs (including claims without legal merit or brought in bad faith), relating to or arising under this Agreement, use of dotPH's Domain registration or other services, or to the Domain itself, including Nameholder's use, display, exploitation, or registration of the Domain, as well as for infringing or otherwise damaging content displayed or otherwise made available via the Domain. If dotPH is threatened by claims or suit of a third party, dotPH may seek written assurances from the Nameholder concerning the Nameholder's obligation to indemnify dotPH. Failure to provide such written assurances is a material breach of this Agreement. Failure of Nameholder to fully indemnify dotPH in a timely manner will result in termination of Nameholder's registration to the Domain; such termination of the Domain shall in no way prejudice dotPH's right to seek the indemnity by way of litigation or otherwise.</p>
+							<p class="title">H. Breach. </p>
+							<p>Nameholder agrees that failure to abide by any provision of this ServiceAgreement or the dotPH Policies may be considered by dotPH to be a material breach and that dotPH may provide a written notice, describing the breach, to the Nameholder. If, within thirty (30) days of the date of mailing such notice, the Nameholder fails to provide evidence, which is reasonably satisfactory to dotPH, that it has not breached its obligations, then dotPH may delete Nameholder's registration of the Domain. Any such breach by a Nameholder shall not be deemed to be excused simply because dotPH did not act earlier in response to that, or any other, breach by the Nameholder. </p>
+							<p class="title">I. No Guaranty.</p>
+							<p>Nameholder agrees that, by registration of a Domain, such registration does not confer immunity from objection to either the registration or use of the Domain.</p>
+							<p class="title">J. Nameholder Warranties.</p>
+							<p>Nameholder represents, warrants, and guarantees that (i) Nameholder understands that use of the Domain may be subject to applicable laws, including those concerning trademarks and other types of intellectual property; (ii) to the best of the Nameholder's knowledge and belief, neither the registration of the Domain nor the manner in which it is to be directly or indirectly used infringes the intellectual property rights of another party in accordance with the law effective in the jurisdiction/s where the Nameholder resides or conducts business; (iii) Nameholder understands that use of the Domain is subject to all terms and conditions of this Agreement, dotPH Policies, and any other pertinent rule or policies now existing or which dotPH may publish from time to time; (iv) Nameholder does register and will use, display, or exploit the Domain in good faith, in accordance with all laws and regulations effective in the jurisdiction/s where the Nameholder resides or conducts business, and will not use the Domain in any way which may violate a subsisting right of any party; and (v) the information provided by the Domain applicant is true and accurate.</p>
+							<p class="title">K. Revocation.</p>
+							<p>Nameholder agrees that dotPH may delete a Nameholder's Domain if this ServiceAgreement, or subsequent modification(s) thereto, contains false or misleading information, or conceals or omits any information dotPH would likely consider material to its decision to approve this ServiceAgreement.</p>
+							<p class="title">L. Right of Refusal.</p>
+							<p>dotPH, in its sole discretion, reserves the right to refuse to approve the ServiceAgreement for any Nameholder. Nameholder agrees that the submission of this ServiceAgreement does not obligate dotPH to accept this ServiceAgreement. Nameholder agrees that dotPH shall not be liable for loss or damages that may result from dotPH's refusal to accept this ServiceAgreement.</p>
+							<p class="title">M. Severability.</p>
+							<p>Nameholder agrees that the terms of this ServiceAgreement are severable. If any term or provision is declared invalid, it shall not affect the remaining terms or provisions which shall continue to be binding.</p>
+							<p class="title">N. Entirety.</p>
+							<p>Nameholder agrees that this ServiceAgreement and the dotPH Policies is the complete and exclusive agreement between Nameholder and dotPH regarding the registration of Nameholder's Domain. This ServiceAgreement and the dotPH Policies supersede all prior agreements and understandings, whether established by custom, practice, policy, or precedent.</p>
+							<p class="title">O. Coverage.</p>
+							<p>This ServiceAgreement is only for registrations of domains of the PH country code top-level domains, namely: .PH, .COM.PH, .NET.PH, .ORG.PH, .MIL.PH and .NGO.PH. By completing and submitting this ServiceAgreement for consideration and acceptance by dotPH, the Nameholder agrees that he/she has read and agrees to be bound by the above.</p>
+						</div>
+						<br>
+						<h5><strong>WEB HOSTING SERVICES AGREEMENT</strong></h5>
+						<div class="panel-body toaBox" data-original-title="" title="">
+							<div class="toa" data-original-title="" title="">
+								<a name="1" data-original-title="" title=""></a>
+								<h5>A. SUBSCRIPTION</h5>
+
+								<p>dotPH and its applicable affiliates and distributors ("dotPH") hereby   agrees to provide, and you ("End User") hereby agree to subscribe,   during the term of this Agreement, for Web hosting and   telecommunications services to maintain the availability of your Web   site via the Internet ("Hosting Services").  Hosting Services shall be   provided by dotPH to End User in consideration for the payment of   applicable fees and in accordance with terms and conditions set forth in   this Agreement.  End User understands that dotPH is providing Hosting   Services to End User and other customers, and such services are   non-exclusive, non-transferable, and only for personal and lawful use   during the term of this Agreement.  In the event that the End User is a   corporation or other entity, then personal use shall mean an individual   use by the corporation or other entity subscribing to Hosting Services   under this Agreement.</p>
+
+
+								<a name="2" data-original-title="" title=""></a>
+								<h5>B. FEES </h5>
+								<p> End User shall pay dotPH for Hosting Services by credit card, direct   debit or other such method as the parties may agree, and End User   authorizes dotPH to automatically charge End User by such method on an   on-going basis during the term of this Agreement.  End User shall be   charged in advance for Hosting Services and billing cycles shall begin   on the day dotPH receives payment for the hosting plan applied for.    Fees for Hosting Services shall be charged according to   dotPH'then-current prices for such services which may be changed upon   thirty (30) days written notice to End User.</p>
+
+								<a name="3" data-original-title="" title=""></a>
+								<h5>C. dotPH POLICIES</h5>
+
+								<p>End User agrees to be bound by the terms of this Agreement and the   terms of dotPH's Policies ("dotPH Policies") which exist now or in the   future may be published by dotPH at dotPHsole discretion, to:  (i)   advise the End User how to achieve substantially the same functionality   with the Hosting Services using a procedure different from that   described in the Documentation, (ii) correct the Hosting Services or   Documentation, (iii) replace the Hosting Services, or (iv) if these   remedies are impractical, terminate this Agreement and refund the unused   fees paid by End User for such services.  dotPH shall use reasonable   commercial efforts to carry out all of its responsibilities under this   warranty within thirty (30) days of being notified by you of a potential   defect.</p>
+
+
+								<p>THIS IS A LIMITED WARRANTY AND IS THE ONLY WARRANTY MADE BY   dotPH.  EXCEPT AS EXPRESSLY PROVIDED IN THIS AGREEMENT, dotPH AND ITS   SUPPLIERS MAKE NO EXPRESS OR IMPLIED WARRANTIES OR CONDITIONS, INCLUDING   WITHOUT LIMITATION, WARRANTIES OR CONDITIONS OF MERCHANTABILITY OR   FITNESS FOR A PARTICULAR PURPOSE AND dotPH AND ITS SUPPLIERS MAKE NO   WARRANTY OF NONINFRINGEMENT OF THIRD PARTIES' RIGHTS WITH RESPECT TO THE   HOSTING SERVICES.    NO dotPH EMPLOYEE, AFFILIATE OR BUSINESS PARTNER   IS AUTHORIZED TO MAKE CHANGES OF ANY KIND TO THIS WARRANTY.</p>
+								<a name="4" data-original-title="" title=""></a>
+								<h5>D.  <strong>LIMITATION OF LIABILITY</strong></h5>
+
+								<p>NOTWITHSTANDING ANY PROVISION HEREOF TO THE CONTRARY, IN NO EVENT WILL   dotPH, ITS AFFILIATES, BUSINESS PARTNERS OR SUPPLIERS BE LIABLE TO YOU   FOR (1) GENERAL, INDIRECT, INCIDENTAL, EXEMPLARY OR CONSEQUENTIAL   DAMAGES, OR (2) ANY DAMAGES RESULTING FROM LOSS OF USE, DATA, PROFITS,   GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL   OTHER COMMERCIAL DAMAGES OR LOSSES ARISING OUT OF OR IN CONNECTION WITH   THIS AGREEMENT OR THE USE OR PERFORMANCE OF THE HOSTING SERVICES,   WHETHER IN AN ACTION BASED ON ANY LEGAL THEORY, CONTRACT, TORT OR   OTHERWISE, EVEN IF dotPH HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH   DAMAGES.  IN NO EVENT WILL dotPH'S OR ITS SUPPLIER'S TOTAL LIABILITY FOR   ANY DAMAGES IN ANY ACTION HOWEVER BASED ARISING OUT OF OR IN CONNECTION   WITH THIS AGREEMENT OR THE HOSTING SERVICES EXCEED THE FEE PAID TO   dotPH BY END USER IN THE PRECEDING TWELVE (12) MONTHS UNDER THIS   AGREEMENT.  SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF   INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THIS LIMITATION AND EXCLUSION   MAY NOT APPLY TO YOU.</p>
+
+								<a name="5" data-original-title="" title=""></a>
+								<h5>E. <strong>TERM</strong> </h5>
+
+								<p>This Agreement shall have an initial term of one (1) year and shall   renew automatically thereafter on a month-to-month basis until   terminated upon thirty (30) days written notice by either party.  The   Agreement shall terminate at any time upon notice from dotPH if End User   fails to comply with the terms and conditions herein.  End User   acknowledges and agrees that termination of this Agreement for any   reason during the initial term can, at dotPH's option, result in pro rata charges according to the number of months remaining in the initial   term.  Termination for any reason does not alleviate End User from its   obligation to pay dotPH all sums owed through the effective date of   termination.</p>
+
+								<a name="6" data-original-title="" title=""></a>
+								<h5>F. MISCELLANEOUS </h5>
+
+								<p>This Agreement constitutes the entire agreement between the parties   with respect to the subject matter hereof and supersedes all such prior   agreements and representations between them.  No modification, addition   or waiver of the terms and conditions of this Agreement shall be   effective unless in writing and signed by an authorized representative   of both parties.  The terms and conditions of any purchase order or   other ordering document issued by End User and accepted by dotPH in   connection with this Agreement, which are in addition to or inconsistent   with the terms and conditions of this Agreement are made expressly   conditional on End User�s assent to the terms and conditions set forth   in this Agreement.</p>
+
+								<p>Neither party shall be liable for any failure or delay in   performance due to any cause beyond its reasonable control, including,   but not limited to, acts of God, or strikes.</p>
+								<p>The waiver by either party of any of the rights, obligations,   limitations, terms and conditions of this Agreement shall not constitute   a waiver of any past, current or future obligation to comply with such   provisions and no waiver shall be effective unless made in writing and   approved by an authorized representative of both parties.  In the event   any provision of this Agreement shall be illegal or otherwise   unenforceable, such provision shall be reformed to the extent necessary   to make it enforceable, or severed, and in either event the entire   Agreement shall not fail on account thereof and the balance of the   Agreement shall continue in full force and effect.  This Agreement shall   be governed by the substantive, but not conflict, laws of the   Philippines.  End User irrevocably submits to the exclusive jurisdiction   and venue of the courts located in Pasig City, Philippines.  The   application of the United Nations Convention of Contracts for the   International Sale of Goods is expressly excluded.</p>
+
+								<p>IN WITNESS WHEREOF, you have caused this Agreement to be executed   by completing the electronic acceptance below and agree to the terms and   conditions stated above.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

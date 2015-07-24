@@ -1,5 +1,5 @@
 #banner-container {
-  margin-top: 60px;
+  *margin-top: 60px;
   background-color: #47A2D6;
   background-image: image-url("grain.png");
   margin-bottom: 60px;
@@ -14,20 +14,18 @@
     h1 {
       @extend .text-center;
 
-      font-family: 'Muli';
+      font-family: 'Poppins';
       font-size: 50px;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px #3D3D3D;
+      font-weight: 600;
       letter-spacing: -2px;
     }
 
     p {
       @extend .text-center;
 
-      font-family: 'Muli';
+      font-family: 'Poppins';
       font-size: 22px;
       font-weight: 300;
-      text-shadow: 1px 1px 2px #3D3D3D;
     }
 
     ul {
@@ -37,7 +35,6 @@
       margin: 0 auto;
       width: 345px;
       font-size: 20px;
-      text-shadow: 1px 1px 2px #3D3D3D;
     }
 
     i {
@@ -49,6 +46,7 @@
     @extend .btn;
     @extend .btn-warning;
     @extend .btn-lg;
+    font-weight: 500 !important;
   }
 }
 
@@ -65,7 +63,7 @@
   }
 
   h2 {
-    font-family: 'Open Sans Condensed';
+    font-family: 'Poppins';
     font-weight: 600;
   }
 }
