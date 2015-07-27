@@ -65,6 +65,36 @@ form.register-form-search .btn {
     background-color: #fff;
 }
 
+.register-available {
+	background-color: rgb(206, 236, 206) !important;
+	transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+
+
+.register-available-input {
+	background-color: rgb(206, 236, 206) !important;
+	color: green !important;
+	border-color: green !important;
+	transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+
+.register-cancel-input {
+	background-color: pink !important;
+	color: red !important;
+	border-color: red !important;
+}
+
+form.register-form-search .btn:active, form.register-form-search .btn:focus {
+	box-shadow: none !important;
+	border-color: transparent !important;
+}
+
 .has-feedback label ~ .form-control-feedback {
     top: 25px !important;
 }

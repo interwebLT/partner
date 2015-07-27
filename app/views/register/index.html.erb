@@ -2,26 +2,18 @@
 <%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
 <% end %>
 
-<script type="text/javascript">
-function verifyAgreement() {
-  if(!( $("#toacheckbox1").is(':checked'))) {
-    alert("You must acknowledge the Terms of Agreement before checking out.");
-    return false;
-  }
-  return true;
-}
-</script>
-
-<div id="register-checkout" class="modal fade">
+<!--div id="register-checkout" class="modal fade">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h3 class="modal-title">Cart</h3>
 			</div>
 			<div class="modal-body">
 				<p>You can review and edit your purchases here before checking out. Click on Secure Checkout button to proceed with your purchase.</p>
 
+				<h3>qwerty.ph</h3>
+				<h4>Cost : $35.00 per year</h4>
+				<h4>Term : <select><option>2</option></select></h4>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -57,7 +49,7 @@ function verifyAgreement() {
 			<div class="modal-footer">
 				<div class="checkbox">
 					<label>
-						<input class="" name="toa" type="checkbox" id="toacheckbox1"> I agree to the <a type="button" class="btn-link" data-toggle="modal" data-target="#toaModal">Terms of Agreement</a>
+						<input class="" name="toa" type="checkbox" id="toacheckbox"> I agree to the <a type="button" class="btn-link" data-toggle="modal" data-target="#toaModal">Terms of Agreement</a>
 					</label>
 				</div>
 				<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
@@ -65,9 +57,10 @@ function verifyAgreement() {
 					<h6>Pay-as-you-go credits</h6>
 				</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+		</div>
+	</div>
+</div>< /.modal -->
+
 
 
 <div class="register-page">
@@ -75,15 +68,15 @@ function verifyAgreement() {
 		<div class="form-group">
 			<input type="text" class="form-control input-lg" placeholder="Enter the domain you want to register...">
 		</div>
-		<button type="button" class="btn btn-lg" onclick="showRegistrantForm();">
-			<span class="glyphicon glyphicon-search"></span>
+		<button type="button" class="btn btn-lg" id="register-search-btn">
+			<i class="fa fa-search"></i>
 		</button>
 	</form>
 	<!--p class="alert alert-danger">
 		Sorry, the domain name you entered is not available or is already taken. Please search again.
 	</p-->
 
-	<form id ="register-form" class="register-form navbar-form hidden" role="search">
+	<form id ="register-form" class="register-form navbar-form" style="display:none;" role="search">
 		<h4>Registrant Contact</h4>
 		<div class="form-group has-feedback has-feedback-left">
 			<input type="email" class="form-control" placeholder="Email"/>
@@ -389,8 +382,14 @@ function verifyAgreement() {
 				<i class="fa fa-phone form-control-feedback"></i>
 			</div>
 
+			<div class="checkbox">
+				<label>
+					<input class="" name="toa" type="checkbox" id="toacheckbox1"> I agree to the <a type="button" class="btn-link" data-toggle="modal" data-target="#toaModal">Terms of Agreement</a>
+				</label>
+			</div>
+			<br><br>
 			<div class="text-center">
-				<button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#register-checkout">Checkout></button>
+				<button type="submit" class="btn btn-lg btn-primary" onclick="return verifyAgreement();">Checkout ></button>
 			</div>
 
 		</form>
@@ -491,4 +490,41 @@ function verifyAgreement() {
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+	</div><!-- /.modal -->
+
+
+	<script type="text/javascript">
+	$("#register-search-btn").on('click', showRegistrantForm)
+
+	function showRegistrantForm() {
+		$('#register-form').fadeIn("fast");
+		$('.register-form-search > .btn').html('<i class="fa fa-check green"></i>')
+		$('.register-form-search > .btn').addClass('register-available');
+		$('.register-form-search input').addClass('register-available-input');
+		$('.register-available').mouseenter(function(){
+			$('.register-available').html('<i class="fa fa-close"></i>');
+		}).mouseleave( function(){
+			$('.register-available').html('<i class="fa fa-check green"></i>');
+		}); 
+		$("#register-search-btn").off('click').on('click', hideRegistrantForm);
+	}
+
+	function hideRegistrantForm() {
+		$('#register-form').fadeOut("fast");
+		$('.register-form-search > .btn').html('<i class="fa fa-search"></i>');   
+		$('.register-form-search > .btn').removeClass('register-available');
+		$('.register-form-search > .btn').removeClass('register-cancel');
+		$('.register-form-search input').removeClass('register-available-input');
+		$('.register-form-search input').removeClass('register-cancel-input');
+		$("#register-search-btn").off('click').on('click', showRegistrantForm);
+	}
+
+	function verifyAgreement() {
+		if(!( $("#toacheckbox1").is(':checked'))) {
+			alert("You must acknowledge the Terms of Agreement before checking out.");
+			return false;
+		}
+		return true;
+	}
+
+	</script>
