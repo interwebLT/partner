@@ -70,6 +70,6 @@ module ObjectActivityHelper
   end
 
   def render_transfer activity
-    "transferred from #{activity.losing_partner}"
+    "transferred to #{activity.partner.name}"
   end
 end
