@@ -167,6 +167,7 @@ def domain_info_response
     activities: [
       {
         id: 1,
+        partner: partner,
         type: 'create',
         activity_at: '2015-03-03T15:00:00Z',
         object: {
@@ -177,6 +178,7 @@ def domain_info_response
       },
       {
         id: 2,
+        partner: partner,
         type: 'update',
         activity_at: '2015-03-03T15:00:00Z',
         object: {
@@ -190,6 +192,7 @@ def domain_info_response
       },
       {
         id: 3,
+        partner: partner,
         type: 'transfer',
         activity_at: '2015-04-16T19:30:00Z',
         object: {
@@ -214,5 +217,16 @@ def domain_info_response
         updated_at: '2015-03-04T18:00:00Z'
       }
     ]
+  }
+end
+
+def partner
+  {
+    id: 1,
+    name: 'alpha',
+    organization: 'Alpha Partner',
+    credits: 1000.00,
+    local: true,
+    admin: false
   }
 end

@@ -15,10 +15,11 @@ describe ObjectActivityHelper do
     context :when_type_transfer do
       let(:activity) {
         ObjectActivity.new  type: 'transfer',
+                            partner: { name: 'partner' },
                             losing_partner: 'other_partner'
       }
 
-      specify { subject.must_equal 'transferred from other_partner' }
+      specify { subject.must_equal 'transferred to partner' }
     end
 
     context :when_update do
