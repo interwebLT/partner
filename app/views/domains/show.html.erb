@@ -70,22 +70,24 @@
           <thead>
             <tr>
               <th>Nameserver</th>
-              <th>Delete</th>
+              <th class="text-right">Delete</th>
             </tr>
           </thead>
           <tbody>
             <% @domain.hosts.each do |host| %>
             <tr>
               <td><%= host.name %></td>
-              <td><%= button_to 'Delete', domain_host_path(@domain.id, host.name), method: :delete %></td>
+              <td class="text-right"><%= button_to 'delete', domain_host_path(@domain.id, host.name), method: :delete, :class => 'btn btn-xs btn-danger' %></td>
             </tr>
             <% end %>
           </tbody>
         </table>
-        <%= simple_form_for @nameserver, url: domain_hosts_path(@domain.id) do |f| %>
+        <div id="create-dom-host">
+          <%= simple_form_for @nameserver, url: domain_hosts_path(@domain.id) do |f| %>
           <%= f.text_field :name %>
           <%= f.submit %>
         <% end %>
+        </div>
       </div>
       <!--name servers-->
       <!--domain activity-->

@@ -281,3 +281,63 @@ border: none;
 .dm.nav li:first-child {
   border-left: 0;
 }
+
+
+
+
+#create-dom-host {
+    background-color: #EAEAEA;
+    padding: 10px;
+    display: inline-block;
+    width: 50%;
+
+    input[type="text"] {
+      @extend .form-control;
+      @extend .transition;
+      width: 60%;
+      display: inline;
+      box-shadow: none !important;
+    }
+
+    input[type="text"]:focus {
+      @extend .transition;
+      border-color: orange;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      @extend .btn;
+      @extend .btn-secondary;
+      @extend .transition;
+      width: 38%;
+      display: inline;
+    }
+
+    form {
+      @extend .form-group;
+      margin-bottom: 0 !important;
+    }
+}
+
+@media (max-width: 990px) {
+  #create-dom-host {
+    width: 100%;
+  }
+}
+
+@media (max-width: 530px) {
+  #create-dom-host {
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+      display:block;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      display: block;
+    }
+
+  }
+}
+
