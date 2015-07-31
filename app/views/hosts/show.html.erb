@@ -1,9 +1,25 @@
-<br/>
-Name: <%= @host.name %><br/>
-Partner: <%= @host.partner %><br/>
-Nameservers:
-<ul id="addresses">
-<% @host.host_addresses.each do |address| %>
-  <li><%= address.address %> (<%= address.type %>)</li>
+<% content_for :banner_title do %>
+<%= fa_icon 'server lg' %>&nbsp;Hosts <% unless current_user.admin %><span><%= @hosts.count %></span><% end %>
 <% end %>
-</ul>
+
+<div id="host-info">
+	<div class="info-header">
+		<h3>
+			<%= link_to hosts_path, :class => 'btn btn-default btn-xs back-btn' do %>
+			<i class="fa fa-chevron-left"></i>
+			<% end %> <%= @host.name %>
+		</h3>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<p>Partner: <%= @host.partner %></p>
+			Nameservers:
+			<ul id="addresses">
+				<% @host.host_addresses.each do |address| %>
+				<li><%= address.address %> (<%= address.type %>)</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

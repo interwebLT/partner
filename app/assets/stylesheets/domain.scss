@@ -48,35 +48,17 @@
   @extend .container;
 
   h3 {
-    @extend .text-primary;
+    color: #47A2D6;
+    margin-bottom: 5px;
 
     strong {
       /*border-right: 2px solid #337ab7;*/
       padding-right: 10px;
     }
-
-    a {
-      @extend .btn;
-      @extend .btn-link;
-    }
   }
 }
 
 @media (max-width: 500px) {
-  #MyDomains {
-    h3 {
-      text-align: center;
-
-      strong {
-        border-right: none !important;
-        text-align: center;
-      }
-    }
-  }
-
-  #dom-reg-date, #dom-exp-date {
-    text-align: center;
-  }
 }
 
 #tab-list {
@@ -171,6 +153,8 @@
 
 .nav#domain-info-tab {
 margin-top: 20px;
+margin-bottom: 20px;
+border-bottom: none;
 }
 
 .nav-tabs#domain-info-tab li {
@@ -231,6 +215,7 @@ border: none;
 .dm.nav > li, .dm.nav-tabs > li {
   float: none;
   display: inline-block;
+  border-color: #fff;
 }
 
 .dm.nav li a {
@@ -247,7 +232,7 @@ border: none;
 }
 
 .dm.nav-tabs > li > a {
-  background-color: #ccc;
+  background-color: #eaeaea;
   color: #555;
   border-top: 0;
   border-left: 0!important;
@@ -283,6 +268,16 @@ border: none;
 }
 
 
+#domain-info {
+    background-color: rgba(71, 162, 214, 0.13);
+    padding: 20px;
+}
+
+.edit-update input[type="submit"] {
+  @extend .btn;
+  @extend .btn-sm;
+  @extend .btn-success;
+}
 
 
 #create-dom-host {

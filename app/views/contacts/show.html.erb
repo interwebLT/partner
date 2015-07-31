@@ -1,1 +1,18 @@
-<%= render partial: 'domains/domain_contact', locals: { contact: @contact } %>
+<% content_for :banner_title do %>
+<%= fa_icon 'phone lg' %>&nbsp;Contacts <% unless current_user.admin %><span><%= @contacts.count %></span><% end %>
+<% end %>
+
+<div id="contacts-info">
+	<div class="contact-header info-header">
+		<h3>
+			<%= link_to contacts_path, :class => 'btn btn-default btn-xs back-btn' do %>
+				<i class="fa fa-chevron-left"></i> 
+			<% end %> <%= @contact.handle %>
+		</h3>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= render partial: 'domains/domain_contact', locals: { contact: @contact } %>
+		</div>
+	</div>
+</div>

@@ -2,13 +2,17 @@
   @extend .container;
 
   h3 {
-    @extend .text-primary;
-
-    font-weight: bold;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #4399CA;
   }
 }
 
-#pinfo > div {
+.pinfo-form-group {
+  padding: 0 20px;
+}
+
+#pinfo .pinfo-form-group > div {
   @extend .form-group;
   @extend .clearfix;
   @extend .row;
@@ -34,7 +38,7 @@
   }
 }
 
-#pinfo h5 {
+p.pinfo-note {
   color: rgb(139, 139, 139);
   font-size: 12px;
 }

@@ -10,7 +10,13 @@
     <div class="pull-right">
       <span class="text-danger"></span>
     </div>
-    <h3><strong><%= @domain.name %></strong></h3>
+    <div class="info-header">
+      <h3>
+        <%= link_to domains_path, :class => 'btn btn-default btn-xs back-btn' do %>
+          <i class="fa fa-chevron-left"></i> 
+        <% end %> <%= @domain.name %>
+      </h3>
+    </div>
     <div class=" "></div>
     <span class="sr-only"><strong>Domain Status:</strong> Active</span>
     <div id="dom-reg-date">Registered Date: <%= formatted_date @domain.registered_at %></div>
@@ -36,18 +42,22 @@
         <div class="tab-content" id="domain-info-tab-content">
           <div role="tabpanel" class="tab-pane active" id="registrant-contact">
             <% if current_user.staff %>
-              <a onclick="showEditContact()">Edit Contact Details</a>
+              <a onclick="showEditContact()" class="btn btn-sm btn-secondary"><%= fa_icon 'pencil' %> &nbsp;Edit Contact Details</a>
+              <br><br>
             <% end %>
             <%= render partial: 'domains/domain_contact', locals: { contact: @domain.registrant } %>
             <% if current_user.staff %>
-              <a onclick="showEditContact()">Edit Contact Details</a>
+            <br>
+              <a onclick="showEditContact()" class="btn btn-sm btn-secondary"><%= fa_icon 'pencil' %> &nbsp;Edit Contact Details</a>
             <% end %>
           </div>
           <% if current_user.staff %>
             <div role="tabpanel" class="tab-pane" id="registrant-contact-edit">
-              <a onclick="hideEditContact()">Cancel</a>
+              <br>
+              <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
               <%= render partial: 'domains/domain_contact_edit', locals: { contact: @domain.registrant } %>
-              <a onclick="hideEditContact()">Cancel</a>
+              <br>
+              <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
             </div>
           <% end %>
           <div role="tabpanel" class="tab-pane" id="admin-contact">
@@ -77,7 +87,11 @@
             <% @domain.hosts.each do |host| %>
             <tr>
               <td><%= host.name %></td>
-              <td class="text-right"><%= button_to 'delete', domain_host_path(@domain.id, host.name), method: :delete, :class => 'btn btn-xs btn-danger' %></td>
+              <td class="text-right">
+                <%= link_to domain_host_path(@domain.id, host.name), method: :delete, :class => 'btn btn-xs btn-danger' do %>
+                <%= fa_icon 'trash' %>
+                <%end%>
+              </td>
             </tr>
             <% end %>
           </tbody>

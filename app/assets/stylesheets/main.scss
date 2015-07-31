@@ -86,6 +86,10 @@ label {
   border-color: #E6E6E6 !important;
 }
 
+.btn-xs, .btn-sm {
+  font-weight: 300 !important;
+}
+
 .green {
   color: rgb(74, 163, 37);
 }
@@ -133,6 +137,19 @@ label {
     width: 1000px;
   }
 }
+
+
+.back-btn {
+  padding: 2px 5px 0px;
+}
+
+.info-header h3 {
+    color: #4195C6;
+    text-transform: lowercase;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 
 #login > div:first-child {
   @extend .col-sm-7;
