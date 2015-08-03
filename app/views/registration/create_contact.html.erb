@@ -1,3 +1,4 @@
+Creating contact for order for <b><%= session[:domain_to_register] %></b>
 <%= simple_form_for @contact, url: '/registration/confirm' do |f| %>
   <% if @contact.errors.any? %>
   <ul>
@@ -7,6 +8,10 @@
   </ul>
   <% end %>
   <div id="domain-info">
+    <div class="info-l10n">
+      <label><%= fa_icon 'user' %> Handle</label>
+      <div><%= f.text_field :handle %></div>
+    </div>
     <div class="info-l10n">
       <label class=""></label>
       <div class=""><strong>International</strong></div>
@@ -113,12 +118,6 @@
     <div>
       <label><%= fa_icon 'envelope' %> Email </label>
       <div class="inputfield"><%= f.text_field :email %></div>
-      <div></div>
-    </div>
-    <div><!-- form-group -->
-      <label><%= fa_icon 'user-secret' %> Handle </label>
-      <%= f.hidden_field :handle, value: @contact.handle %>
-      <div class="inputfield"><%= @contact.handle %></div>
       <div></div>
     </div>
   </div>

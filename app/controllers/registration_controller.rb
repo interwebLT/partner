@@ -26,10 +26,11 @@ class RegistrationController < SecureController
 
     reg = Registration.new domain
     unless reg.valid?
-      redirect_to '/'
-      return
+      #redirect_to '/'
+      #return
     end
 
+    @contact.save current_user.token
     reg.complete @contact
   end
 end

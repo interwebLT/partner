@@ -28,7 +28,10 @@ class Contact
 
   def update token
     if valid?
-      Contact.patch Contact.url(id: self.handle), params, token: token
+      update_params = params
+      update_params.delete "handle"
+
+      Contact.patch Contact.url(id: self.handle), update_params, token: token
       return true
     end
     return false
@@ -36,7 +39,7 @@ class Contact
 
   def save token
     if valid?
-      Contact.post Contact.url(id: self.handle), params, token: token
+      Contact.post Contact.url, params, token: token
       return true
     end
     return false
@@ -44,7 +47,6 @@ class Contact
 
   def params
     json = self.as_json 
-    json.delete "handle"
     return json
   end
 end
