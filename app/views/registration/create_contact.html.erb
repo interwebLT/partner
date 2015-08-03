@@ -1,4 +1,4 @@
-<%= simple_form_for @contact, url: '/domains/confirm_registration' do |f| %>
+<%= simple_form_for @contact, url: '/registration/confirm' do |f| %>
   <% if @contact.errors.any? %>
   <ul>
     <% @contact.errors.full_messages.each do |msg| %>

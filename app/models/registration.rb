@@ -17,14 +17,9 @@ class Registration
   end
 
   def domain_exists
-    
   end
 
-  def contact_valid?
-  end
-
-  def register_domain
-
+  def complete contact
   end
 
   private
