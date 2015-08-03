@@ -1,13 +1,14 @@
 class Registration
   include ActiveModel::Validations
 
-  attr_accessor :domain
+  attr_accessor :domain, :partner
 
   validate :validate_domain
   validate :domain_exists
 
-  def initialize(domain)
+  def initialize(partner, domain)
     self.domain = domain
+    self.partner = partner
   end
 
   def validate_domain
@@ -24,10 +25,32 @@ class Registration
     end
   end
 
-  def complete contact
+  def complete token, handle
+    create_order token, handle
   end
 
   private
+    def create_order token, handle
+      order = Order.new( {
+        partner: nil,
+        currency_code: 'USD'
+      } )
+      order.partner.name = partner
+
+      detail = {
+        type: 'domain_create',
+        price: 70.00,
+        domain: domain,
+        authcode: 'dummy-code',
+        period: 1,
+        registrant_handle: handle,
+        registered_at: Time.now
+        }
+      order.order_details = [detail]
+
+      return order.save token
+    end
+
     def valid_domain? (domain)
       # 3-63 characters, alphanumeric with optional dashes,
       valid_domain = /^[A-Za-z0-9][A-Za-z0-9\-]{2,62}(\.com|\.net|\.org)?\.ph$/

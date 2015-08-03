@@ -1,6 +1,6 @@
 class RegistrationController < SecureController
   def search
-    reg = Registration.new params[:name]
+    reg = Registration.new current_user.partner, params[:name]
 
     unless reg.valid?
       redirect_to '/'
@@ -24,13 +24,15 @@ class RegistrationController < SecureController
       return
     end
 
-    reg = Registration.new domain
+    reg = Registration.new current_user.partner, domain
     unless reg.valid?
       redirect_to '/'
       return
     end
 
     @contact.save current_user.token
-    reg.complete @contact
+    reg.complete current_user.token, @contact.handle
+
+    redirect_to '/'
   end
 end
