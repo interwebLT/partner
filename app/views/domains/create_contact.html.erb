@@ -1,0 +1,128 @@
+<%= simple_form_for @contact, url: '/domains/confirm_registration' do |f| %>
+  <% if @contact.errors.any? %>
+  <ul>
+    <% @contact.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  <div id="domain-info">
+    <div class="info-l10n">
+      <label class=""></label>
+      <div class=""><strong>International</strong></div>
+      <div class=""><strong>Local</strong></div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'user' %> Name</label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :name %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_name %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'users' %> Organization </label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :organization %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_organization %></div>
+        <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'home' %> Street </label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :street %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_street %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label class="hidden-xs">&nbsp;</label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :street2 %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_street2 %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label class="hidden-xs">&nbsp;</label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :street3 %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_street3 %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>City</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :city %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_city %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>State/Province</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :state %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_state %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>Postal Code</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.text_field :postal_code %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.text_field :local_postal_code %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>Country</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Int'l</div>
+        <div><%= f.country_select :country_code, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
+        <div class="contact-cat">Local</div>
+        <div><%= f.country_select :local_country_code, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'phone-square' %> Telephone </label>
+      <div class="inputfield">
+        <%= f.text_field :voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+        <span class="text-muted">ext.</span> <%= f.text_field :voice_ext %>
+      </div>
+      <div></div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'fax' %> Fax </label>
+      <div class="inputfield">
+        <%= f.text_field :fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+        <span class="text-muted">ext.</span> <%=f.text_field :fax_ext %>
+      </div>
+      <div></div>
+    </div>
+    <div>
+      <label><%= fa_icon 'envelope' %> Email </label>
+      <div class="inputfield"><%= f.text_field :email %></div>
+      <div></div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'user-secret' %> Handle </label>
+      <%= f.hidden_field :handle, value: @contact.handle %>
+      <div class="inputfield"><%= @contact.handle %></div>
+      <div></div>
+    </div>
+  </div>
+  <div class="edit-update">
+    <%= f.submit 'Update' %>
+  </div>
+<% end %>

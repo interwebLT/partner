@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  get 'domains/register/:name', to: 'domains#register', name: /.*/
+  get 'domains/create_contact', to: 'domains#create_contact'
+  post 'domains/confirm_registration', to: 'domains#confirm_registration'
+
   resources :domains, only: [:index, :show] do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:create, :destroy], id: /.*/
