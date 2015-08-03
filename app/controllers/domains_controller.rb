@@ -1,6 +1,10 @@
 class DomainsController < SecureController
   def index
-    @domains = Domain.all token: current_user.token
+    if params[:search]
+      @domains = Domain.search term: params[:search], token: current_user.token
+    else
+      @domains = Domain.all token: current_user.token
+    end
   end
 
   def show

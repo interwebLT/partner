@@ -77,6 +77,12 @@ module Api
 
         response.map { |entry| new entry }
       end
+
+      def search(term:,token:)
+        response = get url, {search: term}, token: token
+
+        response.map { |entry| new entry }
+      end
     end
   end
 end
