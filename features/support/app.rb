@@ -6,6 +6,10 @@ class App
   def contacts
     @contacts ||= ContactsPage.new
   end
+
+  def registration
+    @registration ||= RegistrationPage.new
+  end
   
   def contact_info
     @contact_info ||= ContactInfoPage.new

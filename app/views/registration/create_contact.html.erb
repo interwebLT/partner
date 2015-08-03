@@ -1,4 +1,4 @@
-Creating contact for order for <b><%= session[:domain_to_register] %></b>
+<span id="head">Creating contact for order for <b><%= session[:domain_to_register] %></b></span>
 <%= simple_form_for @contact, url: '/registration/confirm' do |f| %>
   <% if @contact.errors.any? %>
   <ul>

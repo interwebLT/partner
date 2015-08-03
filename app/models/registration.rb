@@ -1,12 +1,13 @@
 class Registration
   include ActiveModel::Validations
 
-  attr_accessor :domain, :partner
+  attr_accessor :domain, :partner, :token
 
   validate :validate_domain
   validate :domain_exists
 
-  def initialize(partner, domain)
+  def initialize(token, partner, domain)
+    self.token = token
     self.domain = domain
     self.partner = partner
   end
@@ -18,19 +19,18 @@ class Registration
   end
 
   def domain_exists
-    begin
-      dom = Domain.find domain
+    dom = Domain.search term: domain, token: token
+    unless dom.nil? || dom.length == 0
       errors.add :name, "already exists"
-    rescue => ex
     end
   end
 
-  def complete token, handle
-    create_order token, handle
+  def complete handle
+    create_order handle
   end
 
   private
-    def create_order token, handle
+    def create_order handle
       order = Order.new( {
         partner: nil,
         currency_code: 'USD'

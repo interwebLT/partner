@@ -41,6 +41,7 @@ group :test do
   gem 'site_prism'
   gem 'minitest-spec-rails'
   gem 'webmock'
+  gem 'timecop'
 end
 
 group :development do

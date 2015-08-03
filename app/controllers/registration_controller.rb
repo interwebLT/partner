@@ -1,9 +1,10 @@
 class RegistrationController < SecureController
   def search
-    reg = Registration.new current_user.partner, params[:name]
+    reg = Registration.new current_user.token, current_user.partner, params[:name]
 
     unless reg.valid?
       redirect_to '/'
+      flash[:message] = reg.errors.messages[:name][0]
       return
     end
     session[:domain_to_register] = params[:name]
@@ -24,15 +25,16 @@ class RegistrationController < SecureController
       return
     end
 
-    reg = Registration.new current_user.partner, domain
+    reg = Registration.new current_user.token, current_user.partner, domain
     unless reg.valid?
       redirect_to '/'
       return
     end
 
     @contact.save current_user.token
-    reg.complete current_user.token, @contact.handle
+    reg.complete @contact.handle
 
+    flash[:message] = 'Order placed'
     redirect_to '/'
   end
 end
