@@ -34,6 +34,14 @@ class Contact
     return false
   end
 
+  def save token
+    if valid?
+      Contact.post Contact.url(id: self.handle), params, token: token
+      return true
+    end
+    return false
+  end
+
   def params
     json = self.as_json 
     json.delete "handle"
