@@ -16,7 +16,7 @@ class RegistrationController < SecureController
   end
 
   def confirm
-    domain = params[:domain_to_register]
+    domain = session[:domain_to_register]
 
     @contact = Contact.new params[:contact]
     unless @contact.valid?
@@ -26,8 +26,8 @@ class RegistrationController < SecureController
 
     reg = Registration.new domain
     unless reg.valid?
-      #redirect_to '/'
-      #return
+      redirect_to '/'
+      return
     end
 
     @contact.save current_user.token
