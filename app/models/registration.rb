@@ -17,6 +17,11 @@ class Registration
   end
 
   def domain_exists
+    begin
+      dom = Domain.find domain
+      errors.add :name, "already exists"
+    rescue => ex
+    end
   end
 
   def complete contact
