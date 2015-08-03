@@ -2,6 +2,11 @@
 <%= fa_icon 'gears lg' %>&nbsp;Domains <% unless current_user.admin %><span><%= @domains.count %></span><% end %>
 <% end %>
 
+<%= form_tag '/registration/search', method: 'get' do %>
+  <%= text_field_tag :name %>
+  <%= submit_tag "Register new domain" %>
+<% end %>
+
 <div id="table">
   <table id="domains">
     <thead>

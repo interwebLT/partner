@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  get 'registration/search/:name', to: 'registration#search', name: /.*/
+  get 'registration/search', to: 'registration#search'
   get 'registration/create_contact', to: 'registration#create_contact'
   post 'registration/confirm', to: 'registration#confirm'
 
