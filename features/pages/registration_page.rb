@@ -56,6 +56,15 @@ def stub_create_contact
         with(:body => "{\"errors\":{},\"handle\":\"contact\",\"name\":\"Contact Contactson\",\"local_name\":\"\",\"organization\":\"Contacts R Us\",\"local_organization\":\"\",\"street\":\"123 Contact St.\",\"local_street\":\"\",\"street2\":\"\",\"local_street2\":\"\",\"street3\":\"\",\"local_street3\":\"\",\"city\":\"Contactville\",\"local_city\":\"\",\"state\":\"\",\"local_state\":\"\",\"postal_code\":\"\",\"local_postal_code\":\"\",\"country_code\":\"PH\",\"local_country_code\":\"\",\"voice\":\"+63.2000000\",\"voice_ext\":\"\",\"fax\":\"\",\"fax_ext\":\"\",\"email\":\"contact@test.fake\",\"validation_context\":null}",
              :headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
         to_return(:status => 200, :body => contact.to_json, :headers => {})
+
+  # This is identical to the above, except with a different order in the JSON
+  # Not sure why, but when all the tests are run at once, this acceptance test 
+  # breaks unless the below stub is included.
+  stub_request(:post, "http://test.host/contacts").
+        with(:body => "{\"handle\":\"contact\",\"name\":\"Contact Contactson\",\"organization\":\"Contacts R Us\",\"street\":\"123 Contact St.\",\"street2\":\"\",\"street3\":\"\",\"city\":\"Contactville\",\"state\":\"\",\"postal_code\":\"\",\"country_code\":\"PH\",\"local_name\":\"\",\"local_organization\":\"\",\"local_street\":\"\",\"local_street2\":\"\",\"local_street3\":\"\",\"local_city\":\"\",\"local_state\":\"\",\"local_postal_code\":\"\",\"local_country_code\":\"\",\"voice\":\"+63.2000000\",\"voice_ext\":\"\",\"fax\":\"\",\"fax_ext\":\"\",\"email\":\"contact@test.fake\",\"errors\":{},\"validation_context\":null}",
+             :headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
+        to_return(:status => 200, :body => contact.to_json, :headers => {})
+
 end
 
 def stub_registration
