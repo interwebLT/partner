@@ -19,7 +19,7 @@ end
 def domain_exists
   stub_request(:get, "http://test.host/domains?search=domain.ph").
     with(:headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
-    to_return(:status => 200, :body => show_domain_response.to_json, :headers => {})
+    to_return(:status => 200, :body => search_domain_response.to_json, :headers => {})
 end
 
 def domain_does_not_exist
@@ -74,7 +74,7 @@ def stub_registration
         :headers => {})
 end
 
-def show_domain_response
+def search_domain_response
   [{
     id: 1,
     name: 'domain.ph',
