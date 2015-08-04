@@ -61,20 +61,29 @@
 	</div>
 </div>< /.modal -->
 
-
-
 <div class="register-page">
-	<form class="register-form-search navbar-form" role="search">
+	<%= form_tag '/registration/search', method: 'get', class: 'form-control input-lg' do %>
+	  <%= text_field_tag :name, nil, class: 'form-control input-lg', placeholder: "Enter the domain you want to register..." %>
+	  <%= submit_tag "Search", class: 'btn btn-lg' %>
+	<% end %>
+
+	<!-- form class="register-form-search navbar-form" role="search">
 		<div class="form-group">
 			<input type="text" class="form-control input-lg" placeholder="Enter the domain you want to register...">
 		</div>
 		<button type="button" class="btn btn-lg" id="register-search-btn">
 			<i class="fa fa-search"></i>
 		</button>
-	</form>
-	<!--p class="alert alert-danger">
-		Sorry, the domain name you entered is not available or is already taken. Please search again.
-	</p-->
+	</form -->
+	<% if flash[:message] && flash[:message] == 'already exists' %>
+		<p class="alert alert-danger">
+			Sorry, the domain name you entered is not available or is already taken. Please search again.
+		</p>
+	<% elsif flash[:message] %>
+		<p class="alert alert-danger">
+			Sorry, something went wrong. The error we received was: <%= flash[:message] %>
+		</p>
+	<% end %>
 
 	<form id ="register-form" class="register-form navbar-form" style="display:none;" role="search">
 		<h4>Registrant Contact</h4>

@@ -3,7 +3,7 @@ class RegistrationController < SecureController
     reg = Registration.new current_user.token, current_user.partner, params[:name]
 
     unless reg.valid?
-      redirect_to '/'
+      redirect_to '/register'
       flash[:message] = reg.errors.messages[:name][0]
       return
     end
@@ -27,7 +27,7 @@ class RegistrationController < SecureController
 
     reg = Registration.new current_user.token, current_user.partner, domain
     unless reg.valid?
-      redirect_to '/'
+      redirect_to '/register'
       return
     end
 

@@ -24,7 +24,7 @@ Then(/^the order should not be created$/) do
 end
 
 Then(/^I should get a message saying "(.*?)"$/) do |message|
-  assert page.has_content? 'already exists'
+  assert page.has_content? 'Sorry, the domain name you entered is not available or is already taken. Please search again.'
 end
 
 Then(/^it should create a new order$/) do

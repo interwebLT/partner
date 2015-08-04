@@ -1,11 +1,13 @@
 class RegistrationPage < SitePrism::Page
-  set_url '/registration/search'
+  set_url '/register'
   set_url_matcher /\/domains$/
 
   element :head, '#head'
 end
 
 def search_domain
+  site.registration.load
+
   Timecop.freeze Time.local(2015)
 
   stub_partner
@@ -13,7 +15,7 @@ def search_domain
   stub_registration
 
   fill_in 'name', with: 'domain.ph'
-  click_on 'Register new domain'
+  click_on 'Search'
 end
 
 def domain_exists
