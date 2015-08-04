@@ -3,6 +3,7 @@ class RegistrationPage < SitePrism::Page
   set_url_matcher /\/domains$/
 
   element :head, '#head'
+  element :search, '#register-search-btn'
 end
 
 def search_domain
@@ -15,18 +16,18 @@ def search_domain
   stub_registration
 
   fill_in 'name', with: 'domain.ph'
-  click_on 'Search'
+  site.registration.search.click
 end
 
 def domain_exists
-  stub_request(:get, "http://test.host/domains?search=domain.ph").
-    with(:headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
+    stub_request(:get, "http://test.host/domains?name=domain.ph").
+      with(:headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
     to_return(:status => 200, :body => search_domain_response.to_json, :headers => {})
 end
 
 def domain_does_not_exist
-  stub_request(:get, "http://test.host/domains?search=domain.ph").
-    with(:headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
+    stub_request(:get, "http://test.host/domains?name=domain.ph").
+      with(:headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
     to_return(:status => 200, :body => not_found_response.to_json, :headers => {})
 end
 
