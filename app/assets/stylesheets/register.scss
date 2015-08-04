@@ -16,23 +16,25 @@ width: 70%;
 margin: 0 auto;	
 }
 
-.register-page > form .form-group{
+.register-page > form.register-form-search{
 	width: 100%;
 	margin-bottom: 15px;
 }
 
-.register-page > form.register-form-search .form-group	> input {
+.register-page > form.register-form-search 	> input[type="text"] {
+	
+	width: 100%;
+	line-height: 31px;
+}
+
+.register-page > form.register-form-search > input[type="text"], .register-page > form.register-form-search	> select{
+	width: 100%;
+	box-shadow: none !important;
+	line-height:1.7;
 	border: 1px solid rgba(0,0,0,0.2);
 }
 
-.register-page > form .form-group	> input, .register-page > form .form-group	> select{
-	width: 100%;
-	border: 1px solid transparent;
-	box-shadow: none !important;
-	line-height:1.7;
-}
-
-.register-page > form .form-group	> input:focus, .register-page > form .form-group	> select:focus {
+.register-page > form.register-form-search	> input:focus, .register-page > form.register-form-search	> select:focus {
 	border-color: rgba(255, 165, 0, 0.37);
 }
 
@@ -90,7 +92,7 @@ form.register-form-search .btn {
 	border-color: red !important;
 }
 
-form.register-form-search .btn:active, form.register-form-search .btn:focus {
+form.register-form-search input.btn:active, form.register-form-search .btn:focus {
 	box-shadow: none !important;
 	border-color: transparent !important;
 }

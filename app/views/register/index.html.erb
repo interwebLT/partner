@@ -62,9 +62,11 @@
 </div>< /.modal -->
 
 <div class="register-page">
-	<%= form_tag '/registration/search', method: 'get', class: 'form-control input-lg' do %>
+	<%= form_tag '/registration/search', method: 'get', class: 'register-form-search navbar-form' do %>
 	  <%= text_field_tag :name, nil, class: 'form-control input-lg', placeholder: "Enter the domain you want to register..." %>
-	  <%= submit_tag "Search", class: 'btn btn-lg' %>
+	  <%= button_tag(type: "submit", class: "btn btn-lg", id: "register-search-btn") do %>
+			<i class="fa fa-search"></i>
+		<% end %>
 	<% end %>
 
 	<!-- form class="register-form-search navbar-form" role="search">
@@ -502,7 +504,7 @@
 	</div><!-- /.modal -->
 
 
-	<script type="text/javascript">
+	<!--script type="text/javascript">
 	$("#register-search-btn").on('click', showRegistrantForm)
 
 	function showRegistrantForm() {
@@ -536,4 +538,4 @@
 		return true;
 	}
 
-	</script>
+	</script-->
