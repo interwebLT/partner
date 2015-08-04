@@ -19,8 +19,7 @@ class Registration
   end
 
   def domain_exists
-    dom = Domain.search term: domain, token: token
-    unless dom.nil? || dom.length == 0
+    if Domain.exists? domain, token: token
       errors.add :name, "already exists"
     end
   end
