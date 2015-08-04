@@ -19,8 +19,11 @@ class DomainsController < SecureController
   def renew
     @domain = Domain.find params[:domain_id], token: current_user.token
 
-    @domain.renew(current_user.token)
-    
+    begin
+      @domain.renew(current_user.token)
+    rescue Exception => ex 
+      flash[:alert] = ex
+    end 
     redirect_to domains_url
   end
 end
