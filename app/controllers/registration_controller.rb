@@ -34,7 +34,7 @@ class RegistrationController < SecureController
     @contact.save current_user.token
     reg.complete @contact.handle
 
-    flash[:message] = 'Order placed'
-    redirect_to '/'
+    flash[:notice] = 'Order placed'
+    redirect_to domains_path
   end
 end
