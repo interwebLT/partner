@@ -99,8 +99,7 @@ def latest_orders_response
           type: 'domain_renew',
           price: 35.00,
           domain: 'test.ph',
-          period: 1,
-          renewed_at: '2015-02-04T00:00:00Z'
+          period: 1
         }
       ]
     },
@@ -249,8 +248,7 @@ def latest_orders_response
             type: 'domain_renew',
             price: 35.00,
             domain: 'test.ph',
-            period: 1,
-            renewed_at: '2015-02-04T00:00:00Z'
+            period: 1
           }
         }
       ]

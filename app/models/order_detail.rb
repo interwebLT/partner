@@ -4,7 +4,6 @@ class OrderDetail
   attr_accessor :type, :price,
                 :domain, :authcode, :period, :registrant_handle, :registered_at,
                 :object,
-                :renewed_at,
                 :expires_at,
                 :refunded_order_detail
 
@@ -26,8 +25,7 @@ class OrderDetail
       authcode: authcode,
       period: period,
       registrant_handle: registrant_handle,
-      registered_at: registered_at,
-      renewed_at: renewed_at
+      registered_at: registered_at
     }
   end
 end

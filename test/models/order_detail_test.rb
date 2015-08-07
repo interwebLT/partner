@@ -32,8 +32,7 @@ describe OrderDetail do
           type: 'domain_renew',
           price: 70.00,
           domain: 'test.ph',
-          period: 2,
-          renewed_at: '2015-02-27T14:00:00Z'
+          period: 2
         }
       }
 
@@ -41,7 +40,6 @@ describe OrderDetail do
       specify { subject.price.must_equal 70.00 }
       specify { subject.domain.must_equal 'test.ph' }
       specify { subject.period.must_equal 2 }
-      specify { subject.renewed_at.must_equal '2015-02-27 14:00'.in_time_zone }
     end
 
     context :when_migrate_domain do
@@ -72,8 +70,7 @@ describe OrderDetail do
             type: 'domain_renew',
             price: 35.00,
             domain: 'test.ph',
-            period: 1,
-            renewed_at: '2015-02-04T00:00:00Z'
+            period: 1
           }
         }
       }

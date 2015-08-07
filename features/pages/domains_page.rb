@@ -37,15 +37,14 @@ def stub_renewal
  stub_request(:post, "http://test.host/orders").
  #       with(:body => "{\"currency_code\":\"USD\",\"order_details\":[{\"type\":\"domain_renew\",\"domain\":\"domain.ph\",\"authcode\":null,\"period\":1,\"registrant_handle\":null,\"registered_at\":null,\"renewed_at\":\"2015-06-30T18:07:30.004+08:00\"}]}",
  #            :headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
-        to_return(:status => 200, :body =>       
+        to_return(:status => 200, :body =>
         {
           type: 'domain_renew',
           price:  35.00,
           domain: 'domain.ph',
           object: nil,
-          period: 1,
-          renewed_at: '2015-02-14T01:01:00Z'
-        }.to_json, 
+          period: 1
+        }.to_json,
         :headers => {})
 end
 

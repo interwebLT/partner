@@ -61,7 +61,7 @@ def stub_create_contact
         to_return(:status => 200, :body => contact.to_json, :headers => {})
 
   # This is identical to the above, except with a different order in the JSON
-  # Not sure why, but when all the tests are run at once, this acceptance test 
+  # Not sure why, but when all the tests are run at once, this acceptance test
   # breaks unless the below stub is included.
   stub_request(:post, "http://test.host/contacts").
         with(:body => "{\"handle\":\"contact\",\"name\":\"Contact Contactson\",\"organization\":\"Contacts R Us\",\"street\":\"123 Contact St.\",\"street2\":\"\",\"street3\":\"\",\"city\":\"Contactville\",\"state\":\"\",\"postal_code\":\"\",\"country_code\":\"PH\",\"local_name\":\"\",\"local_organization\":\"\",\"local_street\":\"\",\"local_street2\":\"\",\"local_street3\":\"\",\"local_city\":\"\",\"local_state\":\"\",\"local_postal_code\":\"\",\"local_country_code\":\"\",\"voice\":\"+63.2000000\",\"voice_ext\":\"\",\"fax\":\"\",\"fax_ext\":\"\",\"email\":\"contact@test.fake\",\"errors\":{},\"validation_context\":null}",
@@ -72,9 +72,9 @@ end
 
 def stub_registration
   stub_request(:post, "http://test.host/orders").
-        with(:body => "{\"currency_code\":\"USD\",\"order_details\":[{\"type\":\"domain_create\",\"domain\":\"domain.ph\",\"authcode\":\"dummy-code\",\"period\":1,\"registrant_handle\":\"contact\",\"registered_at\":\"2015-01-01T00:00:00.000+08:00\",\"renewed_at\":null}]}",
+        with(:body => "{\"currency_code\":\"USD\",\"order_details\":[{\"type\":\"domain_create\",\"domain\":\"domain.ph\",\"authcode\":\"dummy-code\",\"period\":1,\"registrant_handle\":\"contact\",\"registered_at\":\"2015-01-01T00:00:00.000+08:00\"}]}",
              :headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
-        to_return(:status => 200, :body => 
+        to_return(:status => 200, :body =>
         {
           type: 'domain_create',
           price:  35.00,
@@ -82,7 +82,7 @@ def stub_registration
           object: nil,
           period: 1,
           registered_at: '2015-02-14T01:01:00Z'
-        }.to_json, 
+        }.to_json,
         :headers => {})
 end
 

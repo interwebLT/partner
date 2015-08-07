@@ -94,8 +94,7 @@ class Domain
       authcode: nil,
       period: 1,
       registrant_handle: registrant_handle,
-      registered_at: registered_at,
-      renewed_at: Time.now 
+      registered_at: registered_at
       }
     order.order_details = [detail]
 
