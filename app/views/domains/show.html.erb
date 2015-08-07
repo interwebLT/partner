@@ -13,7 +13,7 @@
     <div class="info-header">
       <h3>
         <%= link_to domains_path, :class => 'btn btn-default btn-xs back-btn' do %>
-          <i class="fa fa-chevron-left"></i> 
+          <i class="fa fa-chevron-left"></i>
         <% end %> <%= @domain.name %>
       </h3>
     </div>
@@ -53,11 +53,11 @@
           </div>
           <% if current_user.staff %>
             <div role="tabpanel" class="tab-pane" id="registrant-contact-edit">
-              <br>
+
               <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
+              <br> <br>
               <%= render partial: 'domains/domain_contact_edit', locals: { contact: @domain.registrant } %>
-              <br>
-              <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
+
             </div>
           <% end %>
           <div role="tabpanel" class="tab-pane" id="admin-contact">

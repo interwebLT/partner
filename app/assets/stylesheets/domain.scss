@@ -122,6 +122,8 @@
       select {
         @extend .col-lg-7;
         @extend .col-md-7;
+        border-radius: 1px;
+        border: 1px solid #ccc;
       }
     }
 
@@ -133,6 +135,8 @@
       select {
         @extend .col-lg-10;
         @extend .col-md-10;
+        border-radius: 1px;
+        border: 1px solid #ccc;
       }
     }
 
