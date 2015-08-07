@@ -12,8 +12,7 @@ describe OrderDetail do
           domain: 'test.ph',
           authcode: 'ABC123',
           period: 2,
-          registrant_handle: 'domain_registrant',
-          registered_at: '2015-02-27T14:00:00Z'
+          registrant_handle: 'domain_registrant'
         }
       }
 
@@ -23,7 +22,6 @@ describe OrderDetail do
       specify { subject.authcode.must_equal 'ABC123' }
       specify { subject.period.must_equal 2 }
       specify { subject.registrant_handle.must_equal 'domain_registrant' }
-      specify { subject.registered_at.must_equal '2015-02-27 14:00'.in_time_zone }
     end
 
     context :when_renew_domain do

@@ -2,9 +2,9 @@ class OrderDetail
   include Api::Model
 
   attr_accessor :type, :price,
-                :domain, :authcode, :period, :registrant_handle, :registered_at,
+                :domain, :authcode, :period, :registrant_handle,
                 :object,
-                :expires_at,
+                :registered_at, :expires_at,
                 :refunded_order_detail
 
   def refunded_order_detail= order_detail
@@ -24,8 +24,7 @@ class OrderDetail
       domain: domain,
       authcode: authcode,
       period: period,
-      registrant_handle: registrant_handle,
-      registered_at: registered_at
+      registrant_handle: registrant_handle
     }
   end
 end

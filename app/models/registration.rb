@@ -42,8 +42,7 @@ class Registration
         domain: domain,
         authcode: 'dummy-code',
         period: 1,
-        registrant_handle: handle,
-        registered_at: Time.now
+        registrant_handle: handle
         }
       order.order_details = [detail]
 

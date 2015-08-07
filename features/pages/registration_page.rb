@@ -72,7 +72,7 @@ end
 
 def stub_registration
   stub_request(:post, "http://test.host/orders").
-        with(:body => "{\"currency_code\":\"USD\",\"order_details\":[{\"type\":\"domain_create\",\"domain\":\"domain.ph\",\"authcode\":\"dummy-code\",\"period\":1,\"registrant_handle\":\"contact\",\"registered_at\":\"2015-01-01T00:00:00.000+08:00\"}]}",
+        with(:body => "{\"currency_code\":\"USD\",\"order_details\":[{\"type\":\"domain_create\",\"domain\":\"domain.ph\",\"authcode\":\"dummy-code\",\"period\":1,\"registrant_handle\":\"contact\"}]}",
              :headers => {'Accept'=>'application/json', 'Authorization'=>'Token token=abcd123456', 'Content-Type'=>'application/json'}).
         to_return(:status => 200, :body =>
         {
@@ -80,8 +80,7 @@ def stub_registration
           price:  35.00,
           domain: 'domain.ph',
           object: nil,
-          period: 1,
-          registered_at: '2015-02-14T01:01:00Z'
+          period: 1
         }.to_json,
         :headers => {})
 end

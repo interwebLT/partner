@@ -59,8 +59,7 @@ def orders_response
           domain: 'test.ph',
           authcode: 'ABC123',
           period: 2,
-          registrant_handle: 'domains_registrant',
-          registered_at: '2015-02-04T00:00:00Z'
+          registrant_handle: 'domains_registrant'
         }
       ]
     },
