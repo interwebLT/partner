@@ -202,7 +202,7 @@ border: none;
 }
 
 
-#nameservers, #info, #domain_activity  {
+#nameservers, #info, #domain_activity {
   h5 {
     @extend .text-primary;
   }
@@ -353,3 +353,5 @@ border: none;
   }
 }
 
+ul.alert li { margin-left: 15px;}
+input#contact_handle {@extend .text-primary;}
