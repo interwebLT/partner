@@ -1,4 +1,6 @@
 class RegistrationController < SecureController
+  before_filter :staff_only
+
   def search
     reg = Registration.new current_user.token, current_user.partner, params[:name]
 

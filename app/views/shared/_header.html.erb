@@ -106,10 +106,12 @@
       <h2><%= yield :banner_title %></h2>
     </div>
     <% if user_signed_in? %>
-    <div class="col-sm-7 <%= 'hidden' if params[:controller] == 'register' %>">
-      <%= link_to 'Register Domain +', register_index_path %>
-    </div>
-    <%end%>
+      <% if current_user.staff %>
+        <div class="col-sm-7 <%= 'hidden' if params[:controller] == 'register' %>">
+          <%= link_to 'Register Domain +', register_index_path %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
 <% else %>
