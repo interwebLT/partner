@@ -80,7 +80,11 @@
           <thead>
             <tr>
               <th>Nameserver</th>
-              <th class="text-right">Delete</th>
+              <th class="text-right">
+                <% if current_user.staff %>
+                  Delete
+                <% end %>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -88,20 +92,24 @@
             <tr>
               <td><%= host.name %></td>
               <td class="text-right">
-                <%= link_to domain_host_path(@domain.id, host.name), method: :delete, :class => 'btn btn-xs btn-danger' do %>
-                <%= fa_icon 'trash' %>
+                <% if current_user.staff %>
+                  <%= link_to domain_host_path(@domain.id, host.name), method: :delete, :class => 'btn btn-xs btn-danger' do %>
+                  <%= fa_icon 'trash' %>
+                <% end %>
                 <%end%>
               </td>
             </tr>
             <% end %>
           </tbody>
         </table>
+        <% if current_user.staff %>
         <div id="create-dom-host">
           <%= simple_form_for @nameserver, url: domain_hosts_path(@domain.id) do |f| %>
-          <%= f.text_field :name %>
-          <%= f.submit %>
-        <% end %>
+            <%= f.text_field :name %>
+            <%= f.submit %>
+          <% end %>
         </div>
+        <% end %>
       </div>
       <!--name servers-->
       <!--domain activity-->
