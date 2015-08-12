@@ -333,6 +333,9 @@ border: none;
 }
 
 @media (max-width: 530px) {
+  .pinfo-form-group > div label span {
+    padding-left: 0px;
+}
   #domain-info > div > div.inputfield > div.contact-cat{
     margin-left: 0px;
     margin-left: 0px;
