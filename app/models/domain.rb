@@ -100,4 +100,8 @@ class Domain
 
     return order.save token
   end
+
+  def domain_owner
+    registrant.name.present? ? registrant.name : registrant.local_name
+  end
 end

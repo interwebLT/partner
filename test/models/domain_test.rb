@@ -289,4 +289,47 @@ describe Domain do
       ]
     }
   end
+
+  describe :domain_owner do
+    subject { Domain.new params }
+
+    context :when_international_address do
+      let(:params) {
+        {
+          registrant: {
+            name: 'International',
+            local_name: 'Local'
+          }
+        }
+      }
+
+      specify { subject.domain_owner.must_equal 'International' }
+    end
+
+    context :when_international_address_nil do
+      let(:params) {
+        {
+          registrant: {
+            name: nil,
+            local_name: 'Local'
+          }
+        }
+      }
+
+      specify { subject.domain_owner.must_equal 'Local' }
+    end
+
+    context :when_international_address_blank do
+      let(:params) {
+        {
+          registrant: {
+            name: '',
+            local_name: 'Local'
+          }
+        }
+      }
+
+      specify { subject.domain_owner.must_equal 'Local' }
+    end
+  end
 end
