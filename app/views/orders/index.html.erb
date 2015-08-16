@@ -22,7 +22,7 @@
       <tr>
         <td><%= formatted_timestamp order.ordered_at %></td>
         <td><%= order.order_number %></td>
-        <td><%= link_to order.partner.name, partner_url(order.partner.id) %></td>
+        <td><%= link_to order.partner, partner_url(order.partner) %></td>
         <td><%= order_detail_type order_detail.type %></td>
         <td><%= order_detail.period %></td>
         <% if order.status == 'complete' %>

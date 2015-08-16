@@ -3,6 +3,7 @@ Feature: Register a domain
   As a partner
   I must be able to place an order for a domain
 
+  @wip
   Scenario: Register Domain Completion
     Given I am authenticated as partner
     And the domain "domain.ph" does not exist

@@ -11,10 +11,6 @@ class Order
     @order_details = order_details.collect { |order_detail| OrderDetail.new order_detail }
   end
 
-  def partner= partner
-    @partner = Partner.new partner
-  end
-
   def complete?
     status == COMPLETE
   end
