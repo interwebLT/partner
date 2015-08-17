@@ -22,6 +22,20 @@ class Contact
   validates_length_of :voice, minimum: 10, maximum: 32
   validates_length_of :fax, minimum: 10, maximum: 32, allow_blank: true
 
+  def initialize(params=nil)
+    super(params)
+    unless params
+      return
+    end
+
+    timestamp = '%10.6f' % Time.now.to_f
+    timestamp.sub('.', '')
+
+    unless params[:handle] 
+      self.handle = "PH#{timestamp}"
+    end
+  end
+
   def all token
     Contact.get Contact.url
   end
