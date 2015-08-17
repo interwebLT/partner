@@ -66,19 +66,13 @@ def domains_response
       id: 1,
       name: 'domain.ph',
       expires_at: DateTime.now,
-      expired: false,
-      registrant: {
-        name: 'Registrant'
-      }
+      expired: false
     },
     {
       id: 2,
       name: 'domain.com.ph',
       expires_at: DateTime.now,
-      expired: false,
-      registrant: {
-        name: 'Registrant'
-      }
+      expired: false
     }
   ]
 end
