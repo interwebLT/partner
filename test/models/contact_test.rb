@@ -85,7 +85,7 @@ describe Contact do
                     fax: '+63.123456789',
                     email: 'sample@dot.ph'
       }
-      specify { subject.handle.must_equal 'PH1420041600.000000' }
+      specify { subject.handle.must_equal 'PH1420041600.000' }
     end
   end
 

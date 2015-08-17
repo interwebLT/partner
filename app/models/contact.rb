@@ -32,7 +32,7 @@ class Contact
     timestamp.sub('.', '')
 
     unless params[:handle] 
-      self.handle = "PH#{timestamp}"
+      self.handle = "PH#{timestamp}"[0...16]
     end
   end
 
