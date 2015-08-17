@@ -12,7 +12,7 @@ class Contact
   validates_presence_of :name, :organization, :street, :city, :country_code, :voice, :email
 
   validates_format_of :postal_code, with: /^[a-zA-Z0-9-]*$/, multiline: true, allow_blank: true
-  validates_format_of :voice, with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true
+  validates_format_of :voice, with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, message: 'Format is +cc.xxxxxxxxxx'
   validates_format_of :fax, with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, allow_blank: true
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 

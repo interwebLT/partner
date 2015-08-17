@@ -2,9 +2,7 @@
 <%= simple_form_for @contact, url: '/registration/confirm' do |f| %>
   <% if @contact.errors.any? %>
   <ul class="alert alert-danger">
-    <% @contact.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
+    We need a bit more information! Please correct the problems below.
   </ul>
   <% end %>
   <div id="domain-info">
@@ -17,16 +15,16 @@
       <label><%= fa_icon 'user' %> Name</label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :name %></div>
+        <div><%= f.full_error :name %><%= f.text_field :name %></div>
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_name %></div>
+        <div><%= f.full_error :local_name %><%= f.text_field :local_name %></div>
       </div>
     </div>
     <div><!-- form-group -->
       <label><%= fa_icon 'users' %> Organization </label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :organization %></div>
+        <div><%= f.full_error :organization %><%= f.text_field :organization %></div>
         <div class="contact-cat">Local</div>
         <div><%= f.text_field :local_organization %></div>
         <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
@@ -36,7 +34,7 @@
       <label><%= fa_icon 'home' %> Street </label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street %></div>
+        <div><%= f.full_error :street %><%= f.text_field :street %></div>
         <div class="contact-cat">Local</div>
         <div><%= f.text_field :local_street %></div>
       </div>
@@ -63,7 +61,7 @@
       <label><span>City</span></label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :city %></div>
+        <div><%= f.full_error :city %><%= f.text_field :city %></div>
         <div class="contact-cat">Local</div>
         <div><%= f.text_field :local_city %></div>
       </div>
@@ -90,14 +88,14 @@
       <label><span>Country</span></label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.country_select :country_code, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
+        <div><%= f.full_error :country_code %><%= f.country_select :country_code, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
         <div class="contact-cat">Local</div>
         <div><%= f.country_select :local_country_code, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
       </div>
     </div>
     <div><!-- form-group -->
       <label><%= fa_icon 'phone-square' %> Telephone </label>
-      <div class="inputfield">
+      <div class="inputfield"><%= f.full_error :voice %>
         <%= f.text_field :voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
         <span class="text-muted">ext.</span> <%= f.text_field :voice_ext %>
       </div>
@@ -113,7 +111,7 @@
     </div>
     <div>
       <label><%= fa_icon 'envelope' %> Email </label>
-      <div class="inputfield"><%= f.text_field :email %></div>
+      <div class="inputfield"><%= f.full_error :email %><%= f.text_field :email %></div>
       <div></div>
     </div>
   </div>
