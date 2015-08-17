@@ -304,7 +304,7 @@ form.search-bar input.form-control {
   box-shadow: none;
   padding-right: 27px;
   line-height: 1.7;
-  width: 175px;
+  width: 150px;
 }
 
 form.search-bar input.form-control:focus {
@@ -333,7 +333,7 @@ form.search-bar > .btn:hover {
 
 @media (max-width: 768px) {
   form.search-bar input.form-control {
-    width: 100% !important;
+    width: 75px!important;
   }
 
   form.search-bar {
