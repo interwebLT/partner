@@ -10,6 +10,7 @@
         <th>Partner</th>
         <th>Company Name</th>
         <th>Current Balance</th>
+        <th>OTC</th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
         <td><%= link_to partner.name, partner_path(partner) %></td>
         <td><%= partner.organization %></td>
         <td><%= number_to_currency partner.credits %></td>
+        <td><%= link_to "OTC", partner_otc_path(partner.id) %></td>
       </tr>
       <% end %>
     </tbody>

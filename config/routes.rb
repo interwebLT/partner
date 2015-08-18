@@ -20,7 +20,10 @@ Rails.application.routes.draw do
 
   resources :profile, only: :index
 
-  resources :partners, only: [:index, :show]
+  resources :partners, only: [:index, :show] do 
+    get :otc, controller: :credits, action: :new
+    post :otc, controller: :credits, action: :create
+  end
 
   resources :reports, only: :index
 
