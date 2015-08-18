@@ -3,7 +3,7 @@ class OrderDetail
 
   attr_accessor :type, :price,
                 :domain, :authcode, :period, :registrant_handle,
-                :object,
+                :object, :credits, :remarks,
                 :registered_at, :expires_at,
                 :refunded_order_detail
 
@@ -19,12 +19,20 @@ class OrderDetail
   end
 
   def as_json
-    {
-      type: type,
-      domain: domain,
-      authcode: authcode,
-      period: period,
-      registrant_handle: registrant_handle
-    }
+    if type != 'credits'
+      return {
+        type: type,
+        domain: domain,
+        authcode: authcode,
+        period: period,
+        registrant_handle: registrant_handle
+      }
+    else
+      return {
+        type: type,
+        credits: credits, 
+        remarks: remarks
+      }
+    end
   end
 end

@@ -20,4 +20,21 @@ class Partner
   def pricing= pricing
     @pricing = pricing.collect { |price| PartnerPricing.new price }
   end
+
+  def replenish_credits amount, remarks, token
+    order = Order.new( {
+      partner: nil,
+      currency_code: 'USD'
+    } )
+    order.partner = name
+
+    detail = {
+      type: 'credits',
+      credits: amount,
+      remarks: remarks
+    }
+    order.order_details = [detail]
+
+    return Credit.post Credit.url, order.to_json, token: token
+  end
 end

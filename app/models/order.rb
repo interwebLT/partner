@@ -29,6 +29,7 @@ class Order
 
   def to_json
     {
+      partner: partner,
       currency_code: currency_code,
       order_details: @order_details.collect { |det| det.as_json }
     }
