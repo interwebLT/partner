@@ -96,8 +96,8 @@ ul.nav li a {
   @extend .transition;
   height: 60px;
   line-height: 28px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
   border-top: 5px solid transparent;
 }
 
@@ -304,7 +304,12 @@ form.search-bar input.form-control {
   box-shadow: none;
   padding-right: 27px;
   line-height: 1.7;
-  width: 150px;
+}
+.form-control.sm {
+  width: 150px!important;
+}
+.form-control.lg {
+  width: 350px!important;
 }
 
 form.search-bar input.form-control:focus {
@@ -333,7 +338,7 @@ form.search-bar > .btn:hover {
 
 @media (max-width: 768px) {
   form.search-bar input.form-control {
-    width: 75px!important;
+    width: 100%!important;
   }
 
   form.search-bar {

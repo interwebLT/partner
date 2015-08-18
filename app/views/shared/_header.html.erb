@@ -34,7 +34,12 @@
           <% if user_signed_in? %>
             <%= form_tag '/domains', method: 'get', class: 'search-bar navbar-form navbar-left' do %>
               <div class="form-group">
-                <%= text_field_tag :search, nil, class: 'form-control', placeholder: "Search" %>
+                <% if current_user.admin %>
+                  <%= text_field_tag :search, nil, class: 'form-control sm', placeholder: "Search" %>
+                <% end %>
+                <% unless current_user.admin %>
+                  <%= text_field_tag :search, nil, class: 'form-control lg', placeholder: "Search" %>
+                <% end %>
               </div>
               <%= button_tag(type: "submit", class: "btn") do %>
                 <span class="glyphicon glyphicon-search"></span>
