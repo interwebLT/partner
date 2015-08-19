@@ -28,10 +28,10 @@
             <li><%= link_to 'Code of Conduct', coc_about_index_path %></li>
             <li><%= link_to 'Service Agreement', sa_about_index_path %></li>
           <% end %>
-        </ul>
+        <!--/ul>
 
-        <ul class="navbar-right">
-          <% if user_signed_in? %>
+        <ul class="navbar-right"-->
+          <% if user_signed_in? %><li>
             <%= form_tag '/domains', method: 'get', class: 'search-bar navbar-form navbar-left' do %>
               <div class="form-group">
                 <% if current_user.admin %>
@@ -44,7 +44,7 @@
               <%= button_tag(type: "submit", class: "btn") do %>
                 <span class="glyphicon glyphicon-search"></span>
               <% end %>
-            <% end %>
+            <% end %></li>
             <li class="dropdown">
               <a data-toggle="dropdown" href="#">
                  <strong><%= current_user.partner_name.downcase %></strong>
@@ -77,13 +77,16 @@
                 <% end %>
               </li>
             <% end %>
+            
+
             <!--li class="hidden-xs"><a href="#toggle-search" class="animate"><span class="glyphicon glyphicon-search"></span></a></li-->
           <% else %>
+          </ul>
+          <ul class="navbar-right">
             <li><%= link_to "Log In", new_user_session_path %></li>
-
+          </ul>
           <% end %>
 
-        </ul>
       </div>
       <!--SEARCH>
 
