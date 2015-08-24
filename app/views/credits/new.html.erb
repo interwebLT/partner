@@ -1,3 +1,4 @@
+<%= flash[:message] %>
 <%= form_tag partner_otc_path(params[:partner_id]) do %>
   Amount: <%= text_field :order, :amount %>
   Remarks: <%= text_field :order, :remarks %>

@@ -31,6 +31,10 @@ class App
     @reports ||= ReportsPage.new
   end
 
+  def replenish_credits
+    @replenish_credits ||= ReplenishCreditsPage.new
+  end
+
   def domain_info
     @domain_info ||= DomainInfoPage.new
   end
