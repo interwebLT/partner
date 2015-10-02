@@ -12,14 +12,21 @@
 	</div>
 
 	<div class="panel panel-default">
-		<div class="panel-body">
-			<p>Partner: <%= @host.partner %></p>
-			Nameservers:
-			<ul id="addresses">
-				<% @host.host_addresses.each do |address| %>
-				<li><%= address.address %> (<%= address.type %>)</li>
-				<% end %>
-			</ul>
+		<div class="panel-body form-horizontal">
+			<div class="h-info"><!-- form-group -->
+        <label class="control-label"><%= fa_icon 'user' %> Partner:</label>
+        <div class="inputfield"> <%= @host.partner %></div>
+      </div>
+      <div class="h-info"><!-- form-group -->
+        <label class="control-label"><%= fa_icon 'server' %> Nameservers:</label>
+        <div class="inputfield">
+        	<ul id="addresses">
+					<% @host.host_addresses.each do |address| %>
+						<li><%= address.address %> (<%= address.type %>)</li>
+					<% end %>
+					</ul>
+				</div>
+      </div>			
 		</div>
 	</div>
 </div>

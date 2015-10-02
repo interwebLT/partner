@@ -79,9 +79,72 @@
       @extend .btn, .btn-default;
     }
   }
+
 }
 
-#domain-info > div, #admin-info > div, #tech-info > div, #billing-info > div {
+.domain-info-num {
+  .inputfield {
+    div {
+      @extend .col-sm-5;
+    }
+    span {
+      @extend .col-sm-1;
+      @extend .control-label;
+    }
+    div:nth-child(3) {
+      @extend .col-sm-2;
+    }
+
+    p {
+      @extend .form-control-static;
+    }
+    
+  }
+  .help-block {
+      display: none;
+  }
+  label {
+      @extend .col-sm-1;
+    }
+}
+
+
+.info-l10n {
+  @extend .hidden-xs;
+  @extend .row;
+  margin-bottom: 10px;
+
+  label {
+    @extend .col-sm-4;
+    @extend .col-md-2;
+    @extend .control-label;
+    /*@extend .clearfix;*/
+  }
+  div{ /*international*/
+    @extend .col-md-5;
+    @extend .col-sm-4;
+    padding-left: 32px;
+  }
+  div:last-child{ /*local*/
+    margin-left:0;
+    @extend .col-md-4;
+    @extend .col-sm-4;
+  }
+}
+
+#domain-info input, #domain-info select {
+  box-shadow: none !important;
+  border-color: rgba(71, 162, 214, 0) !important;
+}
+
+#domain-info input:focus, #domain-info select:focus  {
+  border-color: rgba(255, 165, 0, 0.37) !important;
+  outline: none !important;
+}
+
+
+
+#domain-info > div:not(:first-child), #admin-info > div, #tech-info > div, #billing-info > div {
   @extend .form-group;
   @extend .clearfix;
   @extend .row;
@@ -89,9 +152,8 @@
   label {
     @extend .control-label;
     @extend .col-xs-12;
-    @extend .col-sm-4;
-    @extend .col-md-3;
-    @extend .clearfix;
+    @extend .col-sm-3;
+    @extend .col-md-2;
 
     padding-top: 0;
 
@@ -102,41 +164,56 @@
 
   > div.inputfield {
     @extend .col-xs-12;
-    @extend .col-sm-8;
-    @extend .col-md-8;
+    @extend .col-sm-9;
+    @extend .col-md-10;
     color: #47A2D6;
 
-    > div.contact-cat, > div:nth-child(3) {
+    input {
+      @extend .form-control;
+      *width: 50%;
+    }
+
+    > div.contact-cat {
       @extend .text-muted;
       @extend .small;
-      @extend .row;
       @extend .visible-xs;
     }
 
     >div:nth-child(2){ /*international*/
-      @extend .col-lg-7;
+      @extend .col-lg-6;
+      @extend .col-md-6;
+      @extend .col-sm-6;
       @extend .col-xs-12;
-      @extend .col-md-7;
-      @extend .row;
+
 
       select {
+        @extend .form-control;
         @extend .col-lg-7;
         @extend .col-md-7;
         border-radius: 1px;
         border: 1px solid #ccc;
       }
+
+      input {
+        @extend .form-control;
+      }
     }
 
-   div:last-child { /*local*/
-      @extend .col-lg-5;
+   div:nth-child(4) { /*local*/
+      @extend .col-lg-6;
+      @extend .col-md-6;
+      @extend .col-sm-6;
       @extend .col-xs-12;
-      @extend .col-md-5;
-      @extend .row;
+      
       select {
+        @extend .form-control;
         @extend .col-lg-10;
         @extend .col-md-10;
         border-radius: 1px;
         border: 1px solid #ccc;
+      }
+      input {
+        @extend .form-control;
       }
     }
 
@@ -147,21 +224,14 @@
   display: inline-block;
 }
 
-.info-l10n {
-  @extend .hidden-xs;
-  label {
-    @extend .col-lg-3;
-    @extend .col-md-3;
-    @extend .clearfix;
-  }
-  div{ /*international*/
-    @extend .col-lg-4;
-    @extend .col-md-4;
-  }
-  div:last-child{ /*local*/
-    margin-left:0;
+.info-static {
+
+  div > div > div:nth-child(2), div > div > div:nth-child(4){
+  @extend .form-control-static;
   }
 }
+
+
 
 .nav#domain-info-tab {
 margin-top: 20px;
@@ -281,8 +351,9 @@ border: none;
 
 
 #domain-info {
-    background-color: rgba(71, 162, 214, 0.13);
-    padding: 20px;
+  @extend .form-horizontal;
+  background-color: #E3EBEF;
+  padding: 20px;
 }
 
 .edit-update input[type="submit"] {
@@ -358,3 +429,11 @@ border: none;
 
 ul.alert li { margin-left: 15px;}
 input#contact_handle {@extend .text-primary;}
+
+@media (min-width: 768px){
+.form-horizontal .control-label {
+    padding-top: 7px !important;
+    margin-bottom: 0;
+    text-align: left !important;
+}
+}

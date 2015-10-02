@@ -5,3 +5,22 @@
 #host-info h4 {
     color: #EC9900;
 }
+
+.h-info {
+    margin-top: 10px;
+    @extend .form-group;
+
+  label {
+    @extend .col-sm-2;
+	}
+
+	div {
+    @extend .col-sm-10;
+    @extend .form-control-static;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+}

@@ -1,4 +1,4 @@
-<div id="domain-info">
+<div id="domain-info" class="info-static">
   <div class="info-l10n">
     <label class=""></label>
     <div class=""><strong>International</strong></div>
@@ -90,7 +90,7 @@
       <div><%= Country[contact.local_country_code].try(:name) %></div>
     </div>
   </div>
-  <div><!-- form-group -->
+  <div class="domain-info-num"><!-- form-group -->
     <label><%= fa_icon 'phone-square' %> Telephone </label>
     <div class="inputfield">
       <%= contact.voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
@@ -100,24 +100,30 @@
     </div>
     <div></div>
   </div>
-  <div><!-- form-group -->
+  <div class="domain-info-num"><!-- form-group -->
     <label><%= fa_icon 'fax' %> Fax </label>
     <div class="inputfield">
-      <%= contact.fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+      <div><%= contact.fax %></div>
+      <span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
       <% unless contact.fax_ext.blank? %>
-      <span class="text-muted">ext.</span> <%=contact.fax_ext %>
+      <span class="text-muted">ext.</span> 
+      <div><%=contact.fax_ext %></div>
       <% end %>
     </div>
     <div></div>
   </div>
-  <div>
+  <div class="domain-info-num">
     <label><%= fa_icon 'envelope' %> Email </label>
-    <div class="inputfield"><%= contact.email %></div>
+    <div class="inputfield">
+      <div><p><%= contact.email %></p></div>
+    </div>
     <div></div>
   </div>
-  <div><!-- form-group -->
+  <div class="domain-info-num"><!-- form-group -->
     <label><%= fa_icon 'user-secret' %> Handle </label>
-    <div class="inputfield"><%= contact.handle %></div>
+    <div class="inputfield">
+      <div><p><%= contact.handle %></p></div>
+    </div>
     <div></div>
   </div>
 </div>

@@ -154,3 +154,12 @@ form.register-form-search input.btn:active, form.register-form-search .btn:focus
 tr.total-amount > td {
     font-size: 20px !important;
 }
+/*
+div#domain-info .inputfield div {
+	display:inline-block;
+}
+
+div#domain-info .inputfield input {
+	@extend .form-control;
+}
+*/

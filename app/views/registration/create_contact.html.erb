@@ -1,10 +1,15 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'user' %>&nbsp;Create Contact
+<% end %>
+
+
 <h3 id="head">Creating contact for order for <b class="text-primary"><%= session[:domain_to_register] %></b></h3>
 <%= simple_form_for @contact, url: '/registration/confirm' do |f| %>
   <% if @contact.errors.any? %>
   <ul class="alert alert-danger">
     We need a bit more information! Please correct the problems below.
   </ul>
-  <% end %>
+  <% end %> 
   <div id="domain-info">
     <div class="info-l10n">
       <label class=""></label>
@@ -34,27 +39,27 @@
       <label><%= fa_icon 'home' %> Street </label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.full_error :street %><%= f.text_field :street %></div>
+        <div><%= f.full_error :street %><%= f.text_field :street, placeholder: 'Street 1' %></div>
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street %></div>
+        <div><%= f.text_field :local_street, placeholder: 'Street 1' %></div>
       </div>
     </div>
     <div><!-- form-group -->
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street2 %></div>
+        <div><%= f.text_field :street2, placeholder: 'Street 2' %></div>
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street2 %></div>
+        <div><%= f.text_field :local_street2, placeholder: 'Street 2' %></div>
       </div>
     </div>
     <div><!-- form-group -->
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street3 %></div>
+        <div><%= f.text_field :street3, placeholder: 'Street 3' %></div>
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street3 %></div>
+        <div><%= f.text_field :local_street3, placeholder: 'Street 3' %></div>
       </div>
     </div>
     <div><!-- form-group -->
@@ -93,25 +98,35 @@
         <div><%= f.country_select :local_country_code, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
       </div>
     </div>
-    <div><!-- form-group -->
+    <div class="domain-info-num"><!-- form-group -->
       <label><%= fa_icon 'phone-square' %> Telephone </label>
-      <div class="inputfield"><%= f.full_error :voice %>
-        <%= f.text_field :voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-        <span class="text-muted">ext.</span> <%= f.text_field :voice_ext %>
+     
+      <div class="inputfield">
+        <div><%= f.text_field :voice %></div>    
+        <span class="text-muted">ext.</span> 
+        <div><%= f.text_field :voice_ext %></div>
+        <span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+        <%= f.full_error :voice %>
       </div>
       <div></div>
     </div>
-    <div><!-- form-group -->
+    <div class="domain-info-num"><!-- form-group -->
       <label><%= fa_icon 'fax' %> Fax </label>
       <div class="inputfield">
-        <%= f.text_field :fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-        <span class="text-muted">ext.</span> <%=f.text_field :fax_ext %>
+        <div><%= f.text_field :fax %></div>
+        <span class="text-muted">ext.</span> 
+        <div><%=f.text_field :fax_ext %></div>
+        <span class="help-block" style="display:none;">
+          <small>e.g. +12.34567890</small>
+        </span>
       </div>
       <div></div>
     </div>
-    <div>
+    <div class="domain-info-num">
       <label><%= fa_icon 'envelope' %> Email </label>
-      <div class="inputfield"><%= f.full_error :email %><%= f.text_field :email %></div>
+      <div class="inputfield">
+        <div><%= f.text_field :email %></div>
+        <%= f.full_error :email %></div>
       <div></div>
     </div>
   </div>

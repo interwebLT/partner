@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" >
-  <head>
-    <%= render partial: 'shared/head' %>
-  </head>
-  <body>
-    <header>
-      <%= render partial: 'shared/header' %>
-    </header>
+<head>
+  <%= render partial: 'shared/head' %>
+</head>
+<body>
+  <header>
+    <%= render partial: 'shared/header' %>
+  </header>
 
-    <main role="main" class="container">
-      <div id="alert">
-        <% if notice %>
-        <div class="alert alert-info" role="alert">
-          <%= notice %>
-        </div>
-        <% end %>
+  <main role="main" class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="alert">
+          <% if notice %>
+          <div class="alert alert-success" role="alert">
+            <%= notice %>
+          </div>
+          <% end %>
 
-        <% if alert %>
-        <div class="alert alert-danger" role="alert">
-          <%= alert %>
+          <% if alert %>
+          <div class="alert alert-danger" role="alert">
+            <%= alert %>
+          </div>
+          <% end %>
         </div>
-        <% end %>
       </div>
-      <%= yield %>
-    </main>
+    </div>
+    <%= yield %>
+  </main>
 
-    <footer class="footer">
-      <%= render partial: 'shared/footer' %>
-    </footer>
+  <footer class="footer">
+    <%= render partial: 'shared/footer' %>
+  </footer>
 
-    <script type="text/javascript">
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-    </script>
-  </body>
+  <script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  </script>
+</body>
 </html>

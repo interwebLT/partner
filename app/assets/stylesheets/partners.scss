@@ -1,0 +1,14 @@
+form#p-otc {
+    background-color: #E3EBEF;
+    padding: 20px;
+}
+
+form#p-otc input  {
+  box-shadow: none !important;
+  border-color: rgba(204, 204, 204, 0.46) !important;
+}
+
+form#p-otc input:focus {
+  border-color: rgba(255, 165, 0, 0.37) !important;
+  outline: none !important;
+}

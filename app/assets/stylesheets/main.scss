@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Muli:300,400|Open+Sans+Condensed:300,700|Poppins:300,400,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Muli:300,400|Open+Sans+Condensed:300,700|Poppins:300,400,500,600,700|Roboto:400,300,500,700,900);
 
 html, body {
   font-family: 'Poppins', Helvetica, Arial, sans-serif;
@@ -13,6 +13,22 @@ strong {
 
 label {
   font-weight: 500 !important;
+}
+
+::-webkit-input-placeholder {
+   color: #d6d6d6 !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #d6d6d6 !important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #d6d6d6 !important;  
+}
+
+:-ms-input-placeholder {  
+   color: #d6d6d6 !important;  
 }
 
 .alert {

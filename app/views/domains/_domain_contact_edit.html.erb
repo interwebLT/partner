@@ -36,27 +36,27 @@
       <label><%= fa_icon 'home' %> Street </label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street %></div>
+        <div><%= f.text_field :street, placeholder: 'Street 1' %></div>
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street %></div>
+        <div><%= f.text_field :local_street, placeholder: 'Street 1' %></div>
       </div>
     </div>
     <div><!-- form-group -->
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street2 %></div>
+        <div><%= f.text_field :street2, placeholder: 'Street 2' %></div>
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street2 %></div>
+        <div><%= f.text_field :local_street2, placeholder: 'Street 2' %></div>
       </div>
     </div>
     <div><!-- form-group -->
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
         <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street3 %></div>
+        <div><%= f.text_field :street3, placeholder: 'Street 3' %></div>
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street3 %></div>
+        <div><%= f.text_field :local_street3, placeholder: 'Street 3' %></div>
       </div>
     </div>
     <div><!-- form-group -->
@@ -95,31 +95,43 @@
         <div><%= f.country_select :local_country_code, value: contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
       </div>
     </div>
-    <div><!-- form-group -->
+    <div class="domain-info-num"><!-- form-group -->
       <label><%= fa_icon 'phone-square' %> Telephone </label>
       <div class="inputfield">
-        <%= f.text_field :voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-        <span class="text-muted">ext.</span> <%= f.text_field :voice_ext %>
+        <div><%= f.text_field :voice %></div>
+        <span>ext.</span>
+        <div><%= f.text_field :voice_ext %></div>
+        <span class="help-block" style="display:none;">
+          <small>e.g. +12.34567890</small>
+        </span>
       </div>
       <div></div>
     </div>
-    <div><!-- form-group -->
+    <div class="domain-info-num"><!-- form-group -->
       <label><%= fa_icon 'fax' %> Fax </label>
       <div class="inputfield">
-        <%= f.text_field :fax %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-        <span class="text-muted">ext.</span> <%=f.text_field :fax_ext %>
+        <div><%= f.text_field :fax %></div>
+        <span>ext.</span>
+        <div><%=f.text_field :fax_ext %></div>
+        <span class="help-block" style="display:none;">
+          <small>e.g. +12.34567890</small>
+        </span>
       </div>
       <div></div>
     </div>
-    <div>
+    <div class="domain-info-num">
       <label><%= fa_icon 'envelope' %> Email </label>
-      <div class="inputfield"><%= f.text_field :email %></div>
+      <div class="inputfield">
+        <div><%= f.text_field :email %></div>
+      </div>
       <div></div>
     </div>
-    <div><!-- form-group -->
+    <div class="domain-info-num"><!-- form-group -->
       <label><%= fa_icon 'user-secret' %> Handle </label>
       <%= f.hidden_field :handle, value: contact.handle %>
-      <div class="inputfield"><%= contact.handle %></div>
+      <div class="inputfield">
+        <div><p><%= contact.handle %></p></div>
+      </div>
       <div></div>
     </div>
   </div>
