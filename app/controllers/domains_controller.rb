@@ -22,7 +22,7 @@ class DomainsController < SecureController
     begin
       @domain.renew(current_user.token)
     rescue Exception => ex 
-      flash[:alert] = ex
+      flash[:alert] = ex.message
     end 
     redirect_to domains_url
   end
