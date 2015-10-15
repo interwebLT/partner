@@ -86,7 +86,7 @@ class Domain
       partner: nil,
       currency_code: 'USD'
     } )
-    order.partner.name = partner
+    order.partner = partner
 
     detail = {
       type: 'domain_renew',
