@@ -17,7 +17,7 @@ class DomainHost
     super resource: "domains/#{domain_id}/hosts", id: id
   end
 
-  def self.destroy domain_id, id, token: token
+  def self.destroy domain_id, id, token:
     response = delete url(domain_id, id: id), {}, token: token
 
     new response
