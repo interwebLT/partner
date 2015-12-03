@@ -24,7 +24,7 @@ handlePaymentToken = (token, value) ->
       value: '" + value + "', \
       currency: 'USD', \
       widgetContainerSelector: '.payment-form', \
-      widgetColor: '#333', \
+      widgetColor: '#4296C6', \
       themeColor: '#3075dd', \
       buttonColor: '#51c470', \
       labelColor: '#333333', \
@@ -42,7 +42,7 @@ getPaymentToken = (amount) ->
     data: { 'value': amount },
     success: (token) ->
       handlePaymentToken token.id, amount
-            
+
 $(document).ready ->
   $("input[name='amount']").change (evt) ->
     value = $("input[name='amount']:checked").val()
