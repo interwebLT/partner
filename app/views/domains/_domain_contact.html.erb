@@ -93,9 +93,11 @@
   <div class="domain-info-num"><!-- form-group -->
     <label><%= fa_icon 'phone-square' %> Telephone </label>
     <div class="inputfield">
-      <%= contact.voice %><span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+      <div><%= contact.voice %></div>
+      <span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
       <% unless contact.voice_ext.blank? %>
-      <span class="text-muted">ext.</span> <%=contact.voice_ext %>
+      <span class="text-muted">ext.</span>
+      <div><%=contact.voice_ext %></div>
       <% end %>
     </div>
     <div></div>
@@ -106,7 +108,7 @@
       <div><%= contact.fax %></div>
       <span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
       <% unless contact.fax_ext.blank? %>
-      <span class="text-muted">ext.</span> 
+      <span class="text-muted">ext.</span>
       <div><%=contact.fax_ext %></div>
       <% end %>
     </div>
