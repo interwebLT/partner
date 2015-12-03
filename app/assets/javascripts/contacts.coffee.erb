@@ -13,3 +13,8 @@
 $ ->
   if $('#showEdit').length == 1
     showEditContact()
+
+$(document).ready ->
+  $('input[name=\'contact[voice]\']').inputmask mask: '+99.999999999'
+  $('input[name=\'contact[fax]\']').inputmask mask: '+99.999999999'
+  return
