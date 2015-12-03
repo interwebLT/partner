@@ -1,0 +1,13 @@
+<% content_for :banner_title do %>
+Replenish Credit
+<% end %>
+
+<div>
+  <input type="radio" id="amount_500" name="amount" value="50000"> <label for="amount_500">500</label>
+  <input type="radio" id="amount_1000" name="amount" value="100000"> <label for="amount_1000">1000</label>
+  <input type="radio" id="amount_2500" name="amount" value="250000"> <label for="amount_2500">2500</label>
+  <input type="radio" id="amount_5000" name="amount" value="500000"> <label for="amount_5000">5000</label>
+</div>
+<%= javascript_include_tag 'https://sandbox.checkout.com/js/v1/checkout.js' %>
+<form id="payment_form" method="POST">
+</form>

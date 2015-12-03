@@ -1,0 +1,49 @@
+handlePaymentToken = (token, value) ->
+  $('#payment_form').html "<script> \
+		var createCharge = function(amount, auth_token) { \
+			var form = $('<form>'); \
+			form.attr({ method: 'post' }); \
+			form.attr({ action: '<%= Rails.application.routes.url_helpers.credits_url :only_path => true %>' }); \
+			form.append(getInput('amount', amount)); \
+			form.append(getInput('authenticity_token', auth_token)); \
+      $('body').append(form); \
+		}; \
+    var getInput = function(name, value) { \
+			var input = $('<input>'); \
+      input.attr({ type: 'hidden' }); \
+			input.attr({ name: name }); \
+			input.val(value); \
+			return input; \
+		}; \
+		Checkout.removeAllEventHandlers(Checkout.Events.CARD_CHARGED); \
+    Checkout.render({ \
+      debugMode: true, \
+      publicKey: 'pk_test_3d7bec5c-b3f4-4053-b9e6-bb16ba1b80ed', \
+      paymentToken: '" + token + "', \
+      customerEmail: 'user@email.com', \
+      value: '" + value + "', \
+      currency: 'USD', \
+      widgetContainerSelector: '.payment-form', \
+      widgetColor: '#333', \
+      themeColor: '#3075dd', \
+      buttonColor: '#51c470', \
+      labelColor: '#333333', \
+      cardCharged: function(event) { \
+        data = event.data;\
+        message = event.msg; \
+				createCharge('" + value + "', data.form_authenticity_token); \
+      } \
+    });</script>"
+
+getPaymentToken = (amount) ->
+  $.ajax '<%=  Rails.application.routes.url_helpers.payment_token_checkout_index_url :only_path => true %>',
+    type: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    data: { 'value': amount },
+    success: (token) ->
+      handlePaymentToken token.id, amount
+            
+$(document).ready ->
+  $("input[name='amount']").change (evt) ->
+    value = $("input[name='amount']:checked").val()
+    getPaymentToken value

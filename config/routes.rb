@@ -41,4 +41,13 @@ Rails.application.routes.draw do
   resources :orders, only: [:index]
 
   resources :register, only: [:index]
+	
+	resources :checkout, only: [:index] do
+		collection do
+			get :payment_token
+			get :verify
+		end
+	end
+	
+	resources :credits, only: [:create]
 end
