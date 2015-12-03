@@ -1,12 +1,15 @@
-handlePaymentToken = (token, value) ->
+handlePaymentToken = (token, auth_token, partner_id, value) ->
   $('#payment_form').html "<script> \
-		var createCharge = function(amount, auth_token) { \
+		var createCharge = function(amount, auth_token, partner_id) { \
 			var form = $('<form>'); \
 			form.attr({ method: 'post' }); \
 			form.attr({ action: '<%= Rails.application.routes.url_helpers.credits_url :only_path => true %>' }); \
-			form.append(getInput('amount', amount)); \
+			form.append(getInput('order[amount]', amount.substr(0, amount.length - 2))); \
+      form.append(getInput('order[remarks]', 'Replenish Credits')); \
+      form.append(getInput('partner_id', partner_id)); \
 			form.append(getInput('authenticity_token', auth_token)); \
       $('body').append(form); \
+      form.submit(); \
 		}; \
     var getInput = function(name, value) { \
 			var input = $('<input>'); \
@@ -31,7 +34,7 @@ handlePaymentToken = (token, value) ->
       cardCharged: function(event) { \
         data = event.data;\
         message = event.msg; \
-				createCharge('" + value + "', data.form_authenticity_token); \
+				createCharge('" + value + "', '" + auth_token + "', '" + partner_id + "'); \
       } \
     });</script>"
 
@@ -41,7 +44,7 @@ getPaymentToken = (amount) ->
     headers: { 'Content-Type': 'application/json' },
     data: { 'value': amount },
     success: (token) ->
-      handlePaymentToken token.id, amount
+      handlePaymentToken token.id, token.form_authenticity_token, token.partner_id, amount
 
 $(document).ready ->
   $("input[name='amount']").change (evt) ->

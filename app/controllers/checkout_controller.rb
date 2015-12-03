@@ -1,5 +1,6 @@
 class CheckoutController < SecureController
-	before_filter :staff_only, :only => [:payment_token, :index]
+  # Is it staff or admin only? CreditsController.create on registry is admin_only
+	#before_filter :staff_only, :only => [:payment_token, :index]
 	
 	def index
 	end
@@ -11,8 +12,7 @@ class CheckoutController < SecureController
 		json = response.body
 		hash = JSON.parse json
 		hash["form_authenticity_token"] = form_authenticity_token
-		puts "#{hash}"
-		puts "#{hash.to_json}"
+    hash["partner_id"] = current_user.id
 		render :status => response.code, :json => hash.to_json
   rescue => e
 		render :status => :internal_server_error, :json => {"error" => "Failed to fetch payment token. Returned: #{e}"}
