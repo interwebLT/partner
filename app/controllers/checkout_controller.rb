@@ -13,6 +13,7 @@ class CheckoutController < SecureController
 		hash = JSON.parse json
 		hash["form_authenticity_token"] = form_authenticity_token
     hash["partner_id"] = current_user.id
+    hash["partner_email"] = current_user.email
 		render :status => response.code, :json => hash.to_json
   rescue => e
 		render :status => :internal_server_error, :json => {"error" => "Failed to fetch payment token. Returned: #{e}"}

@@ -1,4 +1,4 @@
-handlePaymentToken = (token, auth_token, partner_id, value) ->
+handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
   $('#payment_form').html "<script> \
 		var createCharge = function(amount, auth_token, partner_id) { \
 			var form = $('<form>'); \
@@ -23,7 +23,7 @@ handlePaymentToken = (token, auth_token, partner_id, value) ->
       debugMode: true, \
       publicKey: 'pk_test_3d7bec5c-b3f4-4053-b9e6-bb16ba1b80ed', \
       paymentToken: '" + token + "', \
-      customerEmail: 'user@email.com', \
+      customerEmail: '" + partner_email + "', \
       value: '" + value + "', \
       currency: 'USD', \
       widgetContainerSelector: '.payment-form', \
@@ -44,7 +44,7 @@ getPaymentToken = (amount) ->
     headers: { 'Content-Type': 'application/json' },
     data: { 'value': amount },
     success: (token) ->
-      handlePaymentToken token.id, token.form_authenticity_token, token.partner_id, amount
+      handlePaymentToken token.id, token.form_authenticity_token, token.partner_id, token.partner_email, amount
 
 $(document).ready ->
   $("input[name='amount']").change (evt) ->
