@@ -1,0 +1,13 @@
+# Checkout.com configuration
+
+development:
+  secret_key: <%= ENV['CHECKOUT_SECRET_KEY'] %>
+  public_key: <%= ENV['CHECKOUT_PUBLIC_KEY'] %>
+
+test:
+  secret_key: <%= ENV['CHECKOUT_SECRET_KEY'] %>
+  public_key: <%= ENV['CHECKOUT_PUBLIC_KEY'] %>
+
+production:
+  secret_key: <%= ENV['CHECKOUT_SECRET_KEY'] %>
+  public_key: <%= ENV['CHECKOUT_PUBLIC_KEY'] %>

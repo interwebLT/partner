@@ -29,8 +29,7 @@ class CheckoutController < SecureController
 	private
 	
 	def api_key
-		# TODO: externalize key
-		"sk_test_fff76289-8b53-4c2b-88ab-921c27f0f421"
+		Rails.configuration.checkout_sk
 	end
 	
 	def fetch_token payload

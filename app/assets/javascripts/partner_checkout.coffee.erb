@@ -21,7 +21,7 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
 		Checkout.removeAllEventHandlers(Checkout.Events.CARD_CHARGED); \
     Checkout.render({ \
       debugMode: true, \
-      publicKey: 'pk_test_3d7bec5c-b3f4-4053-b9e6-bb16ba1b80ed', \
+      publicKey: '<%= Rails.configuration.checkout_pk %>', \
       paymentToken: '" + token + "', \
       customerEmail: '" + partner_email + "', \
       value: '" + value + "', \
