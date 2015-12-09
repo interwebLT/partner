@@ -24,9 +24,9 @@ class CheckoutController < SecureController
 	end
 	
 	def verify
-    response = HTTParty.post  Rails.configuration.checkout_endpoint + "/charges/#{token}",
-                              headers: checkout_headers,
-                              body: payload
+    token = params[:token]
+    response = HTTParty.get Rails.configuration.checkout_endpoint + "/charges/#{token}",
+                            headers: checkout_headers
 
     render :status => response.code, :json => response.body
 	rescue => e

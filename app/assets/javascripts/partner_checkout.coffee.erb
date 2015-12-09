@@ -5,7 +5,7 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
 			form.attr({ method: 'post' }); \
 			form.attr({ action: '<%= Rails.application.routes.url_helpers.credits_url :only_path => true %>' }); \
 			form.append(getInput('order[amount]', amount.substr(0, amount.length - 2))); \
-      form.append(getInput('order[remarks]', 'Replenish Credits')); \
+      form.append(getInput('order[remarks]', 'Replenish Credits via Checkout: " + token + "')); \
       form.append(getInput('partner_id', partner_id)); \
 			form.append(getInput('authenticity_token', auth_token)); \
       $('body').append(form); \

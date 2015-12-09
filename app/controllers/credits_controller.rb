@@ -9,7 +9,11 @@ class CreditsController < SecureController
       return
     end
 
-    partner = Partner.find params[:partner_id], token: current_user.token
+    if current_user.admin
+      partner = Partner.find params[:partner_id], token: current_user.token
+    else
+      partner = current_user.partner
+    end
     partner.replenish_credits params[:order][:amount], params[:order][:remarks], current_user.token
     redirect_to partners_path
   end
