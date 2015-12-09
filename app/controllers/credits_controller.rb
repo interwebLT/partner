@@ -14,7 +14,11 @@ class CreditsController < SecureController
     else
       partner = current_user.partner
     end
-    partner.replenish_credits params[:order][:amount], params[:order][:remarks], current_user.token
+    if params[:order][:authcode].blank?
+      partner.replenish_credits params[:order][:amount], params[:order][:remarks], current_user.token
+    else
+      partner.replenish_credits params[:order][:amount], params[:order][:remarks], current_user.token, 'checkout_credits', params[:order][:authcode]
+    end
     redirect_to partners_path
   end
 

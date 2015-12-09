@@ -49,5 +49,5 @@ Rails.application.routes.draw do
 		end
 	end
 	
-	resources :credits, only: [:create]
+  resources :credits, only: [:create]
 end

@@ -19,7 +19,14 @@ class OrderDetail
   end
 
   def as_json
-    if type != 'credits'
+    if type == 'checkout_credits'
+      return {
+        type: type,
+        credits: credits, 
+        authcode: authcode,
+        remarks: remarks
+      }
+    elsif type != 'credits' 
       return {
         type: type,
         domain: domain,
