@@ -6,7 +6,7 @@ class User
 
   devise :api_authenticatable
 
-  attr_accessor :id, :username, :password, :token, :partner_id, :partner_name, :credits, :transactions_allowed, :admin, :staff, :email
+  attr_accessor :id, :username, :password, :token, :email, :name, :salt, :encrypted_password, :registered_at, :partner_id, :partner_name, :credits, :transactions_allowed, :admin, :staff
 
   def self.url id = nil
     super id: id, resource: 'user'
