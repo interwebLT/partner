@@ -197,8 +197,8 @@ def credits_response
         local: true,
         admin: false
       },
-      order_number: 1,
-      credits: 150.00,
+      credit_number: 1,
+      amount: 150.00,
       credited_at: '2015-02-27T15:00:00Z',
       created_at: '2015-02-27T15:00:00Z',
       updated_at: '2015-02-27T15:00:00Z'

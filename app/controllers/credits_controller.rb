@@ -3,7 +3,7 @@ class CreditsController < SecureController
   end
 
   def create
-    unless is_number? params[:order][:amount]
+    unless is_number? params[:credit][:amount]
       flash[:message] = "Invalid amount"
       render :new
       return
@@ -14,10 +14,10 @@ class CreditsController < SecureController
     else
       partner = current_user.partner
     end
-    if params[:order][:authcode].blank?
-      partner.replenish_credits params[:order][:amount], params[:order][:remarks], current_user.token
+    if params[:verification_code].blank?
+      partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token
     else
-      partner.replenish_credits params[:order][:amount], params[:order][:remarks], current_user.token, 'checkout_credits', params[:order][:authcode]
+      partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token, 'card_credit', params[:verification_code]
     end
     redirect_to partners_path
   end

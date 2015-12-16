@@ -12,8 +12,8 @@ def new_credits
 end
 
 def replenish amount: '100', remarks: 'remarks'
-  fill_in 'order_amount', with: amount
-  fill_in 'order_remarks', with: remarks
+  fill_in 'credit_amount', with: amount
+  fill_in 'credit_remarks', with: remarks
   find('input[name=commit]').click
 end
 

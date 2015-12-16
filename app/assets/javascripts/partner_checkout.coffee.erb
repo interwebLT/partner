@@ -4,9 +4,9 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
 			var form = $('<form>'); \
 			form.attr({ method: 'post' }); \
 			form.attr({ action: '<%= Rails.application.routes.url_helpers.credits_url :only_path => true %>' }); \
-			form.append(getInput('order[amount]', amount.substr(0, amount.length - 2))); \
-      form.append(getInput('order[remarks]', 'Replenish Credits')); \
-      form.append(getInput('order[authcode]', '" + token + "')); \
+			form.append(getInput('credit[amount]', amount.substr(0, amount.length - 2))); \
+      form.append(getInput('credit[remarks]', 'Replenish Credits')); \
+      form.append(getInput('verification_code', '" + token + "')); \
       form.append(getInput('partner_id', partner_id)); \
 			form.append(getInput('authenticity_token', auth_token)); \
       $('body').append(form); \
@@ -19,6 +19,20 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
 			input.val(value); \
 			return input; \
 		}; \
+    var verifyCharge = function(amount, auth_token, partner_id) {\
+      $.ajax('<%=  Rails.application.routes.url_helpers.verify_checkout_index_url :only_path => true %>', {\
+        type: 'GET',\
+        data: { 'token': '" + token + "' },\
+        success: function(response) {\
+          if (response['responseMessage'] == 'Approved')\
+            createCharge(amount, auth_token, partner_id);\
+          else \
+            alert('charge failed');\
+        },\
+        error: function(jqXHR, textStatus, errorThrown) {\
+        }\
+      });\
+    };\
 		Checkout.removeAllEventHandlers(Checkout.Events.CARD_CHARGED); \
     Checkout.render({ \
       debugMode: true, \
@@ -35,7 +49,7 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
       cardCharged: function(event) { \
         data = event.data;\
         message = event.msg; \
-				createCharge('" + value + "', '" + auth_token + "', '" + partner_id + "'); \
+				verifyCharge('" + value + "', '" + auth_token + "', '" + partner_id + "'); \
       } \
     });</script>"
 
