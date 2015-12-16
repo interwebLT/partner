@@ -1,26 +1,3 @@
 #credits {
-  @extend .panel-group, .clearfix;
-}
-
-#credits > div {
-  @extend .col-md-2;
-  margin-left: -15px;
-
-  div:first-child {
-    @extend .panel;
-    @extend .panel-default;
-
-    div {
-      @extend .panel-heading;
-      border: none;
-
-      h5 {
-        @extend .panel-title, .text-center;
-      }
-    }
-
-    div {
-      @extend .panel-footer, .text-center;
-    }
-  }
+  @extend .container;
 }

@@ -1,31 +1,33 @@
 <% content_for :banner_title do %>
 Replenish Credit
 <% end %>
-<p>With the new dotPH Prepaid system, you can buy domains and mix it with the many add-on services that we offer.</p>
-<p class="text-primary"><strong>Top-up your balance with:</strong></p>
+<div id="credits">
+  <p>With the new dotPH Prepaid system, you can buy domains and mix it with the many add-on services that we offer.</p>
+  <p class="text-primary"><strong>Top-up your balance with:</strong></p>
 
-<ul class="list-group text-center col-lg-6">
-  <li class="list-group-item">
-    <input type="radio" id="amount_150" name="amount" value="15000"> <label for="amount_150">$150.00</label>
-  </li>
-  <li class="list-group-item">
-    <input type="radio" id="amount_250" name="amount" value="25000"> <label for="amount_250">$250.00</label>
-  </li>
-  <li class="list-group-item">
-    <input type="radio" id="amount_500" name="amount" value="50000"> <label for="amount_500">$500.00</label>
-  </li>
-  <li class="list-group-item">
-    <input type="radio" id="amount_1000" name="amount" value="100000"> <label for="amount_1000">$1,000.00</label>
-  </li>
-  <li class="list-group-item">
-    <input type="radio" id="amount_2500" name="amount" value="250000"> <label for="amount_2500">$2,500.00</label>
-  </li>
-  <li class="list-group-item">
-    <input type="radio" id="amount_5000" name="amount" value="500000"> <label for="amount_5000">$5,000.00</label>
-  </li>
-</ul>
-<div class='clearfix'></div>
-<div class="text-danger" >* Credit Card payments are subject to 5% transaction fee.</div>
-<%= javascript_include_tag 'https://sandbox.checkout.com/js/v1/checkout.js' %>
-<form id="payment_form" method="POST">
-</form>
+  <ul class="list-group text-center col-lg-6">
+    <li class="list-group-item">
+      <input type="radio" id="amount_150" name="amount" value="15000"> <label for="amount_150">$150.00</label>
+    </li>
+    <li class="list-group-item">
+      <input type="radio" id="amount_250" name="amount" value="25000"> <label for="amount_250">$250.00</label>
+    </li>
+    <li class="list-group-item">
+      <input type="radio" id="amount_500" name="amount" value="50000"> <label for="amount_500">$500.00</label>
+    </li>
+    <li class="list-group-item">
+      <input type="radio" id="amount_1000" name="amount" value="100000"> <label for="amount_1000">$1,000.00</label>
+    </li>
+    <li class="list-group-item">
+      <input type="radio" id="amount_2500" name="amount" value="250000"> <label for="amount_2500">$2,500.00</label>
+    </li>
+    <li class="list-group-item">
+      <input type="radio" id="amount_5000" name="amount" value="500000"> <label for="amount_5000">$5,000.00</label>
+    </li>
+  </ul>
+  <div class='clearfix'></div>
+  <div class="text-danger" >* Credit Card payments are subject to 5% transaction fee.</div>
+  <%= javascript_include_tag 'https://sandbox.checkout.com/js/v1/checkout.js' %>
+  <form id="payment_form" method="POST">
+  </form>
+</div>
