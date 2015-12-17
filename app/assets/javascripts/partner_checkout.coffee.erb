@@ -19,6 +19,14 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
 			input.val(value); \
 			return input; \
 		}; \
+    var chargeError = function(message) {\
+      var alert = $('#alert'); \
+      var errorDiv = $('<div>');\
+      errorDiv.attr('class', 'alert alert-danger');\
+      errorDiv.attr('role', 'alert');\
+      errorDiv.append(message);\
+      alert.append(errorDiv);\
+    };\
     var verifyCharge = function(amount, auth_token, partner_id) {\
       $.ajax('<%=  Rails.application.routes.url_helpers.verify_checkout_index_url :only_path => true %>', {\
         type: 'GET',\
@@ -27,7 +35,7 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
           if (response['responseMessage'] == 'Approved')\
             createCharge(amount, auth_token, partner_id);\
           else \
-            alert('charge failed');\
+            chargeError('Charge failed');\
         },\
         error: function(jqXHR, textStatus, errorThrown) {\
         }\
