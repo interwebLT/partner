@@ -1,4 +1,3 @@
-set :rbenv_path, '$HOME/.rbenv'
 set :application, 'partner'
 set :repo_url, 'https://github.com/dotph/partner.git'
 set :branch, ENV['REVISION'] || ENV['BRANCH'] || proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -9,6 +8,7 @@ set :log_level, :info
 set :linked_files, %w{config/secrets.yml config/api.yml config/exception_notification.yml config/checkout.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets}
 
+set :rbenv_path, '$HOME/.rbenv'
 set :rbenv_type, :user
 set :rbenv_ruby, proc { `cat .ruby-version`.chomp }.call
 set :rbenv_map_bins, %w{rake gem bundle ruby rails unicorn}
