@@ -5,7 +5,7 @@ set :rails_env, 'production'
 
 set :deploy_to, '/srv/partner'
 set :log_level, :info
-set :linked_files, %w{config/secrets.yml config/api.yml config/exception_notification.yml, config/checkout.yml}
+set :linked_files, %w{config/secrets.yml config/api.yml config/exception_notification.yml config/checkout.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets}
 
 set :rbenv_type, :user
