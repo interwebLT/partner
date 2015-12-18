@@ -35,7 +35,7 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
           if (response['responseMessage'] == 'Approved')\
             createCharge(amount, auth_token, partner_id);\
           else \
-            chargeError('Charge failed');\
+            chargeError('There was a problem verifying the charge.');\
         },\
         error: function(jqXHR, textStatus, errorThrown) {\
         }\
