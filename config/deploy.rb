@@ -1,4 +1,4 @@
-set :rbenv_path, '~/.rbenv/'
+set :rbenv_path, '/home/deploy/.rbenv/'
 set :application, 'partner'
 set :repo_url, 'https://github.com/dotph/partner.git'
 set :branch, ENV['REVISION'] || ENV['BRANCH'] || proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
