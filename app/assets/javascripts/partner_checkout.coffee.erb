@@ -73,7 +73,6 @@ getPaymentToken = (amount) ->
         handlePaymentToken response.id, response.form_authenticity_token, response.partner_id, response.partner_email, amount
     error: (jqXHR, textStatus, errorThrown) ->
       jsonResponse = jQuery.parseJSON jqXHR.responseText
-      console.log jqXHR.status + " " + jqXHR.statusText + ' ' + jqXHR.responseText + " " + jsonResponse.message
       showError jsonResponse.message
 
 showError = (message) ->
