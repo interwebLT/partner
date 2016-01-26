@@ -1,6 +1,6 @@
 <%= simple_form_for contact, url: contact_path(contact.handle), html: {method: 'patch'} do |f| %>
   <% if contact.errors.any? %>
-  <ul>
+  <ul class="alert alert-danger">
     <% contact.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
@@ -99,7 +99,7 @@
       <label><%= fa_icon 'phone-square' %> Telephone </label>
       <div class="inputfield">
         <div><%= f.text_field :voice, :tabindex => 10 %></div>
-        <span>ext.</span>
+        <span class="text-muted">ext.</span>
         <div><%= f.text_field :voice_ext, :tabindex => 11 %></div>
         <span class="help-block" style="display:none;">
           <small>e.g. +12.34567890</small>
@@ -111,7 +111,7 @@
       <label><%= fa_icon 'fax' %> Fax </label>
       <div class="inputfield">
         <div><%= f.text_field :fax, :tabindex => 12 %></div>
-        <span>ext.</span>
+        <span class="text-muted">ext.</span>
         <div><%=f.text_field :fax_ext, :tabindex => 13 %></div>
         <span class="help-block" style="display:none;">
           <small>e.g. +12.34567890</small>

@@ -98,7 +98,7 @@
     p {
       @extend .form-control-static;
     }
-    
+
   }
   .help-block {
       display: none;
@@ -204,7 +204,7 @@
       @extend .col-md-6;
       @extend .col-sm-6;
       @extend .col-xs-12;
-      
+
       select {
         @extend .form-control;
         @extend .col-lg-10;
@@ -408,8 +408,7 @@ border: none;
     padding-left: 0px;
 }
   #domain-info > div > div.inputfield > div.contact-cat{
-    margin-left: 0px;
-    margin-left: 0px;
+    margin-left: 15px;
     clear: left;
   }
   #create-dom-host {
