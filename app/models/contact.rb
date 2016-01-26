@@ -9,18 +9,23 @@ class Contact
                 :local_city, :local_state, :local_postal_code, :local_country_code,
                 :voice, :voice_ext, :fax, :fax_ext, :email
 
-  validates_presence_of :name, :organization, :street, :city, :country_code, :voice, :email
+  validates :local_name,  presence: true, length: { minimum: 1, maximum: 100 }
+  validates :local_organization,  presence: true, length: { minimum: 1, maximum: 100 }
+  validates :local_street,  presence: true, length: { minimum: 1, maximum: 50 }
+  validates :local_city,  presence: true, length: { minimum: 1, maximum: 50 }
+  validates :local_country_code,  presence: true
 
-  validates_format_of :postal_code, with: /^[a-zA-Z0-9-]*$/, multiline: true, allow_blank: true
-  validates_format_of :voice, with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, message: 'Format is +cc.xxxxxxxxxx'
-  validates_format_of :fax, with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, allow_blank: true
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates :voice, presence: true, length: { minimum: 10, maximum: 32 },
+                                    format: { with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, message: 'Format is +cc.xxxxxxxxxx' }
 
-  validates_length_of :name, :organization, minimum: 1, maximum: 100
-  validates_length_of :street, :city, minimum: 1, maximum: 50
-  validates_length_of :postal_code, minimum: 3, maximum: 10, allow_blank: true
-  validates_length_of :voice, minimum: 10, maximum: 32
-  validates_length_of :fax, minimum: 10, maximum: 32, allow_blank: true
+  validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
+
+  validates :local_postal_code, length: { minimum: 3, maximum: 10, allow_blank: true },
+                                format: { with: /^[a-zA-Z0-9-]*$/, multiline: true, allow_blank: true }
+
+  validates :fax, presence: true,
+                  length: { minimum: 10, maximum: 32, allow_blank: true },
+                  format: { with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, allow_blank: true }
 
   def initialize(params=nil)
     super(params)
@@ -31,7 +36,7 @@ class Contact
     timestamp = '%10.6f' % Time.now.to_f
     timestamp.sub('.', '')
 
-    unless params[:handle] 
+    unless params[:handle]
       self.handle = "PH#{timestamp}"[0...16]
     end
   end
@@ -60,7 +65,7 @@ class Contact
   end
 
   def params
-    json = self.as_json 
+    json = self.as_json
     return json
   end
 end
