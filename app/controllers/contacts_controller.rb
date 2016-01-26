@@ -11,8 +11,9 @@ class ContactsController < SecureController
       @domain.set_registrant contact
 
       @show_edit = true
+      @nameserver = DomainHost.new
 
-      render template: "domains/show" 
+      render template: "domains/show"
       # redirect_to "#{domain_url(return_to)}#edit", alert: 'Invalid information entered', invalid_contact: contact
     end
   end
@@ -21,7 +22,7 @@ class ContactsController < SecureController
     @contacts = Contact.all token: current_user.token
   end
 
-  def show 
+  def show
     @contact = Contact.find params[:id], token: current_user.token
   end
 end
