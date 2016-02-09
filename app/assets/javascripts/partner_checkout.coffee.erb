@@ -55,6 +55,7 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
       buttonColor: '#51c470', \
       labelColor: '#333333', \
       renderMode: Checkout.RenderModes.PAY_BUTTON_ONLY, \
+      paymentMode: 'card', \
       cardCharged: function(event) { \
         data = event.data;\
         message = event.msg; \
