@@ -76,6 +76,27 @@ getPaymentToken = (amount) ->
     error: (jqXHR, textStatus, errorThrown) ->
       jsonResponse = jQuery.parseJSON jqXHR.responseText
       showError jsonResponse.message
+      
+getPaymentTokenFor = (element, amount) ->
+  $.ajax '<%=  Rails.application.routes.url_helpers.payment_token_checkout_index_url :only_path => true %>',
+    type: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    data: { 'value': amount },
+    success: (response) ->
+      if response.errorCode 
+        console.log response.message
+      else
+        element.attr "data-payment-token", response.id
+        element.attr "data-auth-token", response.form_authenticity_token
+        element.attr "data-partner-id", response.partner_id
+        element.attr "data-partner-email", response.partner_email
+        count++
+        if count is 6
+          $("#credits").faLoading(false)
+    error: (jqXHR, textStatus, errorThrown) ->
+      jsonResponse = jQuery.parseJSON jqXHR.responseText
+      showError jsonResponse.message
+  
 
 showError = (message) ->
   alert = $('#alert')
@@ -88,9 +109,16 @@ showError = (message) ->
 clearErrors = ->
   alert = $('#alert')
   alert.empty()
+  
+count = 0
 
 $(document).ready ->
+  $("#credits").faLoading()
+  $("input[name='amount']").each ->
+    getPaymentTokenFor $(this), $(this).val()
   $("input[name='amount']").change (evt) ->
-    value = $("input[name='amount']:checked").val()
+#    value = $("input[name='amount']:checked").val()
     clearErrors()
-    getPaymentToken value
+    handlePaymentToken $(this).attr("data-payment-token"), $(this).attr("data-auth-token"), $(this).attr("data-partner-id"), $(this).attr("data-partner-email"), $(this).val()
+#    getPaymentToken value
+  
