@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Contact do
   subject do
     Contact.new local_name: local_name,
