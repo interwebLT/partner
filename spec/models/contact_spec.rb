@@ -34,22 +34,27 @@ RSpec.describe Contact do
     end
 
     describe '#local_name' do
+      it_behaves_like 'a required field', :local_name
       it_behaves_like 'a string field', :local_name
     end
 
     describe '#local_organization' do
+      it_behaves_like 'a required field', :local_organization
       it_behaves_like 'a string field', :local_organization
     end
 
     describe '#local_street' do
+      it_behaves_like 'a required field', :local_street
       it_behaves_like 'an address field', :local_street
     end
 
     describe '#local_city' do
+      it_behaves_like 'a required field', :local_city
       it_behaves_like 'an address field', :local_city
     end
 
     describe '#local_country_code' do
+      it_behaves_like 'a required field', :local_country_code
       it_behaves_like 'a required field', :local_country_code
     end
 
@@ -59,7 +64,7 @@ RSpec.describe Contact do
     end
 
     describe '#email' do
-      it_behaves_like 'a required field', :voice
+      it_behaves_like 'a required field', :email
 
       context 'when not an email address' do
         let(:voice) { 'notanemailaddress' }
