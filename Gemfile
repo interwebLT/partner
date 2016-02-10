@@ -36,6 +36,10 @@ gem 'bootstrap-datepicker-rails'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 group :test do
   gem 'cucumber-rails', require: false
   gem 'site_prism'
