@@ -23,8 +23,7 @@ class Contact
   validates :local_postal_code, length: { minimum: 3, maximum: 10, allow_blank: true },
                                 format: { with: /^[a-zA-Z0-9-]*$/, multiline: true, allow_blank: true }
 
-  validates :fax, presence: true,
-                  length: { minimum: 10, maximum: 32, allow_blank: true },
+  validates :fax, length: { minimum: 10, maximum: 32, allow_blank: true },
                   format: { with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, allow_blank: true }
 
   def initialize(params=nil)
