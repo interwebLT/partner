@@ -92,7 +92,7 @@ getPaymentTokenFor = (element, amount) ->
         element.attr "data-partner-email", response.partner_email
         count++
         if count is 6
-          $("#credits").faLoading(false)
+          $("#load-credit-page").faLoading(false)
     error: (jqXHR, textStatus, errorThrown) ->
       jsonResponse = jQuery.parseJSON jqXHR.responseText
       showError jsonResponse.message
@@ -113,7 +113,7 @@ clearErrors = ->
 count = 0
 
 $(document).ready ->
-  $("#credits").faLoading()
+  $("#load-credit-page").faLoading()
   $("input[name='amount']").each ->
     getPaymentTokenFor $(this), $(this).val()
   $("input[name='amount']").change (evt) ->
