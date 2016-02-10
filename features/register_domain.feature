@@ -10,6 +10,7 @@ Feature: Register a domain
     When I try to register "domain.ph"
     Then it should create a new order
 
+  @wip
   Scenario: Register Existing Domain
     Given I am authenticated as partner
     And the domain "domain.ph" exists
