@@ -34,143 +34,32 @@ RSpec.describe Contact do
     end
 
     describe '#local_name' do
-      context 'when nil' do
-        let(:local_name)  { nil }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when blank' do
-        let(:local_name)  { '' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when too long' do
-        let(:local_name) { '123456789 223456789 323456789 423456789 523456789 623456789 723456789 823456789 923456789 A23456789 X' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'a string field', :local_name
     end
 
     describe '#local_organization' do
-      context 'when nil' do
-        let(:local_organization)  { nil }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when blank' do
-        let(:local_organization)  { '' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when too long' do
-        let(:local_organization)  { '123456789 223456789 323456789 423456789 523456789 623456789 723456789 823456789 923456789 A23456789 X' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'a string field', :local_organization
     end
 
     describe '#local_street' do
-      context 'when nil' do
-        let(:local_street)  { nil }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when blank' do
-        let(:local_street)  { '' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when too long' do
-        let(:local_street)  { '123456789 223456789 323456789 423456789 523456789 X' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'an address field', :local_street
     end
 
     describe '#local_city' do
-      context 'when nil' do
-        let(:local_city)  { nil }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when blank' do
-        let(:local_city)  { '' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when too long' do
-        let(:local_city)  { '123456789 223456789 323456789 423456789 523456789 X' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'an address field', :local_city
     end
 
     describe '#local_country_code' do
-      context 'when nil' do
-        let(:local_country_code)  { nil }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when blank' do
-        let(:local_country_code)  { '' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'a required field', :local_country_code
     end
 
     describe '#voice' do
-      context 'when nil' do
-        let(:voice)  { nil }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when blank' do
-        let(:voice)  { '' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when too short' do
-        let(:voice) { '+63.56789' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when too long' do
-        let(:voice) { '+63.56789022345678903234567890420' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when not in format' do
-        let(:voice) { '123456789 ' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'a required field', :voice
+      it_behaves_like 'a contact number field', :voice
     end
 
     describe '#email' do
-      context 'when nil' do
-        let(:email)  { nil }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when blank' do
-        let(:email)  { '' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'a required field', :voice
 
       context 'when not an email address' do
         let(:voice) { 'notanemailaddress' }
@@ -180,18 +69,6 @@ RSpec.describe Contact do
     end
 
     describe '#local_postal_code' do
-      context 'when nil' do
-        let(:local_postal_code) { nil }
-
-        it { is_expected.to be_valid }
-      end
-
-      context 'when blank' do
-        let(:local_postal_code) { '' }
-
-        it { is_expected.to be_valid }
-      end
-
       context 'when too short' do
         let(:local_postal_code) { '12' }
 
@@ -212,35 +89,7 @@ RSpec.describe Contact do
     end
 
     describe '#fax' do
-      context 'when nil' do
-        let(:fax)  { nil }
-
-        it { is_expected.to be_valid }
-      end
-
-      context 'when blank' do
-        let(:fax)  { '' }
-
-        it { is_expected.to be_valid }
-      end
-
-      context 'when too short' do
-        let(:fax) { '+63.56789' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when too long' do
-        let(:fax) { '+63.56789022345678903234567890420' }
-
-        it { is_expected.to be_invalid }
-      end
-
-      context 'when not in format' do
-        let(:fax) { '123456789 ' }
-
-        it { is_expected.to be_invalid }
-      end
+      it_behaves_like 'a contact number field', :fax
     end
   end
 end
