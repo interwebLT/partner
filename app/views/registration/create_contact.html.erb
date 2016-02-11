@@ -2,139 +2,140 @@
 <%= fa_icon 'user' %>&nbsp;Create Contact
 <% end %>
 
+<div id="domain_info">
+  <h3 id="head">Creating contact for order for <b class="text-primary"><%= session[:domain_to_register] %></b></h3>
+  <%= simple_form_for @contact, url: '/registration/confirm' do |f| %>
+    <% if @contact.errors.any? %>
+    <ul class="alert alert-danger">
+      We need a bit more information! Please correct the problems below.
+    </ul>
+    <% end %>
+    <div id="domain-info">
+      <div class="info-l10n">
+        <label class=""></label>
+        <div class=""><strong>International</strong></div>
+        <div class=""><strong>Local</strong></div>
+      </div>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'user' %> Name</label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :name, :tabindex => 1 %><%= f.full_error :name, class: 'text-danger' %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_name, :tabindex => 15 %><%= f.full_error :local_name, class: 'text-danger' %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'users' %> Organization </label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :organization, :tabindex => 2 %><%= f.full_error :organization, class: 'text-danger' %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_organization, :tabindex => 16 %></div>
+          <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'home' %> Street </label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :street, placeholder: 'Street 1', :tabindex => 3 %><%= f.full_error :street, class: 'text-danger' %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_street, placeholder: 'Street 1', :tabindex => 17 %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label class="hidden-xs">&nbsp;</label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :street2, placeholder: 'Street 2', :tabindex => 4 %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_street2, placeholder: 'Street 2', :tabindex => 18 %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label class="hidden-xs">&nbsp;</label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :street3, placeholder: 'Street 3', :tabindex => 5 %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_street3, placeholder: 'Street 3', :tabindex => 19 %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>City</span></label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :city, :tabindex => 6 %><%= f.full_error :city, class: 'text-danger' %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_city, :tabindex => 20 %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>State/Province</span></label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :state, :tabindex => 7 %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_state, :tabindex => 21 %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>Postal Code</span></label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.text_field :postal_code, :tabindex => 8 %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.text_field :local_postal_code, :tabindex => 22 %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>Country</span></label>
+        <div class="inputfield">
+          <div class="contact-cat">Int'l</div>
+          <div><%= f.country_select :country_code, :tabindex => 9, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true %><%= f.full_error :country_code, class: 'text-danger' %></div>
+          <div class="contact-cat">Local</div>
+          <div><%= f.country_select :local_country_code, :tabindex => 23, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
+        </div>
+      </div>
+      <div class="domain-info-num"><!-- form-group -->
+        <label><%= fa_icon 'phone-square' %> Telephone </label>
 
-<h3 id="head">Creating contact for order for <b class="text-primary"><%= session[:domain_to_register] %></b></h3>
-<%= simple_form_for @contact, url: '/registration/confirm' do |f| %>
-  <% if @contact.errors.any? %>
-  <ul class="alert alert-danger">
-    We need a bit more information! Please correct the problems below.
-  </ul>
-  <% end %>
-  <div id="domain-info">
-    <div class="info-l10n">
-      <label class=""></label>
-      <div class=""><strong>International</strong></div>
-      <div class=""><strong>Local</strong></div>
-    </div>
-    <div><!-- form-group -->
-      <label><%= fa_icon 'user' %> Name</label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :name, :tabindex => 1 %><%= f.full_error :name, class: 'text-danger' %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_name %><%= f.full_error :local_name, class: 'text-danger' %></div>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label><%= fa_icon 'users' %> Organization </label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :organization, :tabindex => 2 %><%= f.full_error :organization, class: 'text-danger' %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_organization %></div>
-        <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label><%= fa_icon 'home' %> Street </label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street, placeholder: 'Street 1', :tabindex => 3 %><%= f.full_error :street, class: 'text-danger' %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street, placeholder: 'Street 1' %></div>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label class="hidden-xs">&nbsp;</label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street2, placeholder: 'Street 2', :tabindex => 4 %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street2, placeholder: 'Street 2' %></div>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label class="hidden-xs">&nbsp;</label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :street3, placeholder: 'Street 3', :tabindex => 5 %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street3, placeholder: 'Street 3' %></div>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label><span>City</span></label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :city, :tabindex => 6 %><%= f.full_error :city, class: 'text-danger' %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_city %></div>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label><span>State/Province</span></label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :state, :tabindex => 7 %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_state %></div>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label><span>Postal Code</span></label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.text_field :postal_code, :tabindex => 8 %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_postal_code %></div>
-      </div>
-    </div>
-    <div><!-- form-group -->
-      <label><span>Country</span></label>
-      <div class="inputfield">
-        <div class="contact-cat">Int'l</div>
-        <div><%= f.country_select :country_code, :tabindex => 9, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true %><%= f.full_error :country_code, class: 'text-danger' %></div>
-        <div class="contact-cat">Local</div>
-        <div><%= f.country_select :local_country_code, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
-      </div>
-    </div>
-    <div class="domain-info-num"><!-- form-group -->
-      <label><%= fa_icon 'phone-square' %> Telephone </label>
-
-      <div class="inputfield">
-        <div><%= f.text_field :voice, :tabindex => 10 %></div>
-        <span class="text-muted">ext.</span>
-        <div><%= f.text_field :voice_ext, :tabindex => 11 %></div>
-        <span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
-        <%= f.full_error :voice, class: 'text-danger' %>
-      </div>
-      <div></div>
-    </div>
-    <div class="domain-info-num"><!-- form-group -->
-      <label><%= fa_icon 'fax' %> Fax </label>
-      <div class="inputfield">
-        <div><%= f.text_field :fax, :tabindex => 12 %></div>
-        <span class="text-muted">ext.</span>
-        <div><%=f.text_field :fax_ext, :tabindex => 13 %></div>
-        <span class="help-block" style="display:none;">
-          <small>e.g. +12.34567890</small>
-        </span>
-      </div>
-      <div></div>
-    </div>
-
-    <div><!-- form-group -->
-      <label><%= fa_icon 'envelope' %> Email</label>
-      <div class="inputfield">
-        <div class="contact-cat"></div>
-        <div><%= f.text_field :email, :tabindex => 14 %><%= f.full_error :email, class: 'text-danger' %></div>
-        <div class="contact-cat"></div>
+        <div class="inputfield">
+          <div><%= f.text_field :voice, :tabindex => 10 %></div>
+          <span class="text-muted">ext.</span>
+          <div><%= f.text_field :voice_ext, :tabindex => 11 %></div>
+          <span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
+          <%= f.full_error :voice, class: 'text-danger' %>
+        </div>
         <div></div>
       </div>
+      <div class="domain-info-num"><!-- form-group -->
+        <label><%= fa_icon 'fax' %> Fax </label>
+        <div class="inputfield">
+          <div><%= f.text_field :fax, :tabindex => 12 %></div>
+          <span class="text-muted">ext.</span>
+          <div><%=f.text_field :fax_ext, :tabindex => 13 %></div>
+          <span class="help-block" style="display:none;">
+            <small>e.g. +12.34567890</small>
+          </span>
+        </div>
+        <div></div>
+      </div>
+
+      <div><!-- form-group -->
+        <label><%= fa_icon 'envelope' %> Email</label>
+        <div class="inputfield">
+          <div class="contact-cat"></div>
+          <div><%= f.text_field :email, :tabindex => 14 %><%= f.full_error :email, class: 'text-danger' %></div>
+          <div class="contact-cat"></div>
+          <div></div>
+        </div>
+      </div>
     </div>
-  </div>
-  <br>
-  <div class="edit-update">
-    <%= f.submit 'Submit' %>
-  </div>
-<% end %>
+    <br>
+    <div class="edit-update">
+      <%= f.submit 'Submit' %>
+    </div>
+  <% end %>
+</div>
