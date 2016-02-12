@@ -29,10 +29,12 @@ When /^I update the registrant of the domain with a blank local name$/ do
 end
 
 Then /^error must be validation failed$/ do
-  expect(site.domain_info.registrant.local_name.value).to eql ''
+  expect(site.domain_info.registrant).to have_error_message
 end
 
 Then /^domain registrant must be updated$/ do
+  expect(site.domain_info.registrant).not_to have_error_message
+
   expect(site.domain_info.registrant.local_name.value).to eql 'Updated'
   expect(site.domain_info.registrant.local_organization.value).to eql 'Updated'
   expect(site.domain_info.registrant.local_street.value).to eql 'Updated'
