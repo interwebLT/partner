@@ -5,12 +5,12 @@
   "registrant": {
     "handle": "registrant",
     "local_name": "Updated",
-    "local_organization": "Organization",
-    "local_street": "Street",
-    "local_city": "City",
+    "local_organization": "Updated",
+    "local_street": "Updated",
+    "local_city": "Updated",
     "local_country_code": "PH",
-    "voice":  "+63.21234567",
-    "email":  "contact@alpha.ph"
+    "voice":  "+63.21000000",
+    "email":  "updated@alpha.ph"
   },
   "admin_handle": null,
   "admin_contact":  {},

@@ -13,10 +13,20 @@ When /^I update the registrant of the domain$/ do
             returns: 'domains/1/get_after_update_response'.json
 
   site.domain_info.registrant.local_name.set 'Updated'
+  site.domain_info.registrant.local_organization.set 'Updated'
+  site.domain_info.registrant.local_street.set 'Updated'
+  site.domain_info.registrant.local_city.set 'Updated'
+  site.domain_info.registrant.voice.set '+63.21000000'
+  site.domain_info.registrant.email.set 'updated@alpha.ph'
 
   site.domain_info.registrant.submit.click
 end
 
 Then /^domain registrant must be updated$/ do
   expect(site.domain_info.registrant.local_name.value).to eql 'Updated'
+  expect(site.domain_info.registrant.local_organization.value).to eql 'Updated'
+  expect(site.domain_info.registrant.local_street.value).to eql 'Updated'
+  expect(site.domain_info.registrant.local_city.value).to eql 'Updated'
+  expect(site.domain_info.registrant.voice.value).to eql '+63.21000000'
+  expect(site.domain_info.registrant.email.value).to eql 'updated@alpha.ph'
 end
