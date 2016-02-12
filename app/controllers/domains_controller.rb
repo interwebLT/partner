@@ -14,12 +14,20 @@ class DomainsController < SecureController
   end
 
   def update
-    domain  = Domain.find params[:id], token: current_user.token
+    @domain = Domain.find params[:id], token: current_user.token
     contact = Contact.new params[:contact]
 
-    contact.update current_user.token
+    if contact.valid?
+      contact.update current_user.token
 
-    redirect_to domain
+      redirect_to @domain
+    else
+      @domain.set_registrant contact
+      @show_edit  = true
+      @nameserver = DomainHost.new
+
+      render :show
+    end
   end
 
   def renew
