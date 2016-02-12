@@ -22,6 +22,14 @@ When /^I update the registrant of the domain$/ do
   site.domain_info.registrant.submit.click
 end
 
+When /^I update the registrant of the domain with a blank local name$/ do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then /^error must be validation failed$/ do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then /^domain registrant must be updated$/ do
   expect(site.domain_info.registrant.local_name.value).to eql 'Updated'
   expect(site.domain_info.registrant.local_organization.value).to eql 'Updated'
