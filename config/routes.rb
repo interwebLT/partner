@@ -9,14 +9,14 @@ Rails.application.routes.draw do
   get 'registration/create_contact', to: 'registration#create_contact'
   post 'registration/confirm', to: 'registration#confirm'
 
-  resources :domains, only: [:index, :show] do
+  resources :domains, only: [:index, :show, :update] do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:create, :destroy], id: /.*/
   end
 
   resources :hosts, only: [:index, :show]
 
-  resources :contacts, only: [:index, :update, :show]
+  resources :contacts, only: [:index, :show]
 
   resources :profile, only: :index
 

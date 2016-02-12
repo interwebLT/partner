@@ -14,6 +14,12 @@ class DomainsController < SecureController
   end
 
   def update
+    domain  = Domain.find params[:id], token: current_user.token
+    contact = Contact.new params[:contact]
+
+    contact.update current_user.token
+
+    redirect_to domain
   end
 
   def renew
@@ -21,9 +27,9 @@ class DomainsController < SecureController
 
     begin
       @domain.renew(current_user.token)
-    rescue Exception => ex 
+    rescue Exception => ex
       flash[:alert] = ex.message
-    end 
+    end
     redirect_to domains_url
   end
 end
