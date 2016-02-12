@@ -18,7 +18,7 @@ class DomainsController < SecureController
     contact = Contact.new params[:contact]
 
     if contact.valid?
-      contact.update current_user.token
+      contact.update token: current_user.token
 
       redirect_to @domain
     else

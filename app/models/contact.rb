@@ -44,7 +44,7 @@ class Contact
     Contact.get Contact.url
   end
 
-  def update token
+  def update token:
     if valid?
       update_params = params
       update_params.delete "handle"
