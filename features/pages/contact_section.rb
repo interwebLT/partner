@@ -8,4 +8,6 @@ class ContactSection < SitePrism::Section
   element :email,               "input[name='contact[email]']"
 
   element :submit,  "input[name='commit']"
+
+  element :error_message, "#error_message"
 end

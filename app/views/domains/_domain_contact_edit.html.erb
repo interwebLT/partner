@@ -1,6 +1,6 @@
 <%= simple_form_for contact, url: domain_path(@domain.id), html: { method: :patch } do |f| %>
   <% if contact.errors.any? %>
-  <ul class="alert alert-danger">
+  <ul id="error_message" class="alert alert-danger">
     <% contact.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
