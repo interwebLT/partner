@@ -10,7 +10,7 @@ class App
   def registration
     @registration ||= RegistrationPage.new
   end
-  
+
   def contact_info
     @contact_info ||= ContactInfoPage.new
   end
@@ -66,12 +66,4 @@ end
 
 def assert_response_message_must_be_not_found
 
-end
-
-def stub_get to:, returns:
-  stub_request(:get, to).to_return(body: returns.to_json)
-end
-
-def stub_post to:, returns:
-  stub_request(:post, to).to_return(status: 201, body: returns.to_json)
 end
