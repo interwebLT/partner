@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :profile, only: :index
 
-  resources :partners, only: [:index, :show] do 
+  resources :partners, only: [:index, :show] do
     get :otc, controller: :credits, action: :new
     post :otc, controller: :credits, action: :create
   end
@@ -41,13 +41,13 @@ Rails.application.routes.draw do
   resources :orders, only: [:index]
 
   resources :register, only: [:index]
-	
-	resources :checkout, only: [:index] do
-		collection do
-			get :payment_token
-			get :verify
-		end
-	end
-	
+
+  resources :checkout, only: [:index] do
+    collection do
+      get :payment_token
+      get :verify
+    end
+  end
+
   resources :credits, only: [:create]
 end
