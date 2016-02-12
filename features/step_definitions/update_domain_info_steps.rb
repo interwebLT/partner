@@ -22,14 +22,15 @@ When /^I update the registrant of the domain$/ do
   site.domain_info.registrant.submit.click
 end
 
-When /^I update the registrant of the domain with a blank local name$/ do
-  site.domain_info.registrant.local_name.set ''
+When /^I update the registrant of the domain with a (.*)$/ do |scenario|
+  data = {
+    'blank local name'          => { local_name:  '' },
+    'blank local organization'  => { local_organization:  '' }
+  }[scenario]
 
-  site.domain_info.registrant.submit.click
-end
-
-When /^I update the registrant of the domain with a blank local organization$/ do
-  site.domain_info.registrant.local_organization.set ''
+  data.keys.each do |field|
+    site.domain_info.registrant.send(field).set data[field]
+  end
 
   site.domain_info.registrant.submit.click
 end
