@@ -28,6 +28,12 @@ When /^I update the registrant of the domain with a blank local name$/ do
   site.domain_info.registrant.submit.click
 end
 
+When /^I update the registrant of the domain with a blank local organization$/ do
+  site.domain_info.registrant.local_organization.set ''
+
+  site.domain_info.registrant.submit.click
+end
+
 Then /^error must be validation failed$/ do
   expect(site.domain_info.registrant).to have_error_message
 end
