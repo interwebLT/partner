@@ -6,5 +6,5 @@ When /^I update the registrant of a domain$/ do
 end
 
 Then /^domain registrant must be updated$/ do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(site.domain_info.registrant.local_name.value).to eql 'Registrant'
 end

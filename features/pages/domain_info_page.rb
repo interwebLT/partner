@@ -4,6 +4,8 @@ class DomainInfoPage < SitePrism::Page
 
   elements :domain_activities, '#domain_activities tbody tr'
   elements :domain_hosts, '#domain_hosts tbody tr'
+
+  section :registrant, ContactSection, '#registrant-contact-edit'
 end
 
 def view_domain_info
@@ -29,13 +31,13 @@ end
 
 def stub_add_host
  stub_request(:post, "http://test.host/domains/domain.ph/hosts").
-        to_return(:status => 200, :body =>       
+        to_return(:status => 200, :body =>
         {
           id: 67,
           name: "ns5.domains.ph",
           created_at: "2015-07-14T08:17:23.967Z",
           updated_at: "2015-07-14T08:17:23.967Z"
-        }.to_json, 
+        }.to_json,
         :headers => {})
 end
 

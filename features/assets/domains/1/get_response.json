@@ -3,7 +3,8 @@
   "name": "domain.ph",
   "registrant_handle":  "registrant",
   "registrant": {
-    "handle": "registrant"
+    "handle": "registrant",
+    "local_name": "Registrant"
   },
   "admin_handle": null,
   "admin_contact":  {},
