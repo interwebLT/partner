@@ -3,6 +3,11 @@ When /^I update the registrant of a domain$/ do
             returns: 'domains/1/get_response'.json
 
   site.domain_info.load(id: 1)
+
+  stub_patch  to: Contact.url(id: 'registrant'),
+              returns: 'contacts/registrant/patch_response'.json
+
+  site.domain_info.registrant.submit.click
 end
 
 Then /^domain registrant must be updated$/ do

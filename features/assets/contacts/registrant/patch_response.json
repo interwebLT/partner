@@ -1,0 +1,10 @@
+{
+  "handle": "registrant",
+  "local_name": "Registrant",
+  "local_organization": "Organization",
+  "local_street": "Street",
+  "local_city": "City",
+  "local_country_code": "PH",
+  "voice":  "+63.21234567",
+  "email":  "contact@alpha.ph"
+}
