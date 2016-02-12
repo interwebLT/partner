@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "name": "domain.ph",
+  "registrant_handle":  "registrant",
+  "registrant": {
+    "handle": "registrant"
+  },
+  "admin_handle": null,
+  "admin_contact":  {},
+  "billing_handle": null,
+  "billing_contact":  {},
+  "tech_handle":  null,
+  "tech_contact": {},
+  "activities": [],
+  "hosts":  []
+}
