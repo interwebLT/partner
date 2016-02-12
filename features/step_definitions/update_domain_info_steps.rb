@@ -5,7 +5,7 @@ Given /^I am viewing a domain$/ do
   site.domain_info.load(id: 1)
 end
 
-When /^I update the registrant of a domain$/ do
+When /^I update the registrant of the domain$/ do
   stub_patch  to: Contact.url(id: 'registrant'),
               returns: 'contacts/registrant/patch_response'.json
 
