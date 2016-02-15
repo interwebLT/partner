@@ -20,18 +20,18 @@
         <label><%= fa_icon 'user' %> Name</label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :name, :tabindex => 1 %><%= f.full_error :name, class: 'text-danger' %></div>
+          <div><%= f.input :name, :tabindex => 1, label: false %><%= f.full_error :name, class: 'text-danger' %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_name, :tabindex => 15 %><%= f.full_error :local_name, class: 'text-danger' %></div>
+          <div><%= f.input :local_name, :tabindex => 15, label: false %><%= f.full_error :local_name, class: 'text-danger' %></div>
         </div>
       </div>
       <div><!-- form-group -->
         <label><%= fa_icon 'users' %> Organization </label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :organization, :tabindex => 2 %><%= f.full_error :organization, class: 'text-danger' %></div>
+          <div><%= f.input :organization, :tabindex => 2, label: false %><%= f.full_error :organization, class: 'text-danger' %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_organization, :tabindex => 16 %></div>
+          <div><%= f.input :local_organization, :tabindex => 16, label: false %></div>
           <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
         </div>
       </div>
@@ -39,72 +39,72 @@
         <label><%= fa_icon 'home' %> Street </label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :street, placeholder: 'Street 1', :tabindex => 3 %><%= f.full_error :street, class: 'text-danger' %></div>
+          <div><%= f.input :street, placeholder: 'Street 1', :tabindex => 3, label: false %><%= f.full_error :street, class: 'text-danger' %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_street, placeholder: 'Street 1', :tabindex => 17 %></div>
+          <div><%= f.input :local_street, placeholder: 'Street 1', :tabindex => 17, label: false %></div>
         </div>
       </div>
       <div><!-- form-group -->
         <label class="hidden-xs">&nbsp;</label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :street2, placeholder: 'Street 2', :tabindex => 4 %></div>
+          <div><%= f.input :street2, placeholder: 'Street 2', :tabindex => 4, label: false %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_street2, placeholder: 'Street 2', :tabindex => 18 %></div>
+          <div><%= f.input :local_street2, placeholder: 'Street 2', :tabindex => 18, label: false %></div>
         </div>
       </div>
       <div><!-- form-group -->
         <label class="hidden-xs">&nbsp;</label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :street3, placeholder: 'Street 3', :tabindex => 5 %></div>
+          <div><%= f.input :street3, placeholder: 'Street 3', :tabindex => 5, label: false %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_street3, placeholder: 'Street 3', :tabindex => 19 %></div>
+          <div><%= f.input :local_street3, placeholder: 'Street 3', :tabindex => 19, label: false %></div>
         </div>
       </div>
       <div><!-- form-group -->
         <label><span>City</span></label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :city, :tabindex => 6 %><%= f.full_error :city, class: 'text-danger' %></div>
+          <div><%= f.input :city, :tabindex => 6, label: false %><%= f.full_error :city, class: 'text-danger' %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_city, :tabindex => 20 %></div>
+          <div><%= f.input :local_city, :tabindex => 20, label: false %></div>
         </div>
       </div>
       <div><!-- form-group -->
         <label><span>State/Province</span></label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :state, :tabindex => 7 %></div>
+          <div><%= f.input :state, :tabindex => 7, label: false %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_state, :tabindex => 21 %></div>
+          <div><%= f.input :local_state, :tabindex => 21, label: false %></div>
         </div>
       </div>
       <div><!-- form-group -->
         <label><span>Postal Code</span></label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.text_field :postal_code, :tabindex => 8 %></div>
+          <div><%= f.input :postal_code, :tabindex => 8, label: false %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.text_field :local_postal_code, :tabindex => 22 %></div>
+          <div><%= f.input :local_postal_code, :tabindex => 22, label: false %></div>
         </div>
       </div>
       <div><!-- form-group -->
         <label><span>Country</span></label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.country_select :country_code, :tabindex => 9, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true %><%= f.full_error :country_code, class: 'text-danger' %></div>
+          <div><%= f.country_select :country_code, :tabindex => 9, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true, label: false %><%= f.full_error :country_code, class: 'text-danger' %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.country_select :local_country_code, :tabindex => 23, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
+          <div><%= f.country_select :local_country_code, :tabindex => 23, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true, label: false %></div>
         </div>
       </div>
       <div class="domain-info-num"><!-- form-group -->
         <label><%= fa_icon 'phone-square' %> Telephone </label>
 
         <div class="inputfield">
-          <div><%= f.text_field :voice, :tabindex => 10 %></div>
+          <%= f.input :voice, :tabindex => 10, label: false %>
           <span class="text-muted">ext.</span>
-          <div><%= f.text_field :voice_ext, :tabindex => 11 %></div>
+          <%= f.input :voice_ext, :tabindex => 11, label: false %>
           <span class="help-block" style="display:none;"><small>e.g. +12.34567890</small></span>
           <%= f.full_error :voice, class: 'text-danger' %>
         </div>
@@ -113,9 +113,9 @@
       <div class="domain-info-num"><!-- form-group -->
         <label><%= fa_icon 'fax' %> Fax </label>
         <div class="inputfield">
-          <div><%= f.text_field :fax, :tabindex => 12 %></div>
+          <%= f.input :fax, :tabindex => 12, label: false %>
           <span class="text-muted">ext.</span>
-          <div><%=f.text_field :fax_ext, :tabindex => 13 %></div>
+          <%=f.input :fax_ext, :tabindex => 13, label: false %>
           <span class="help-block" style="display:none;">
             <small>e.g. +12.34567890</small>
           </span>
@@ -127,7 +127,7 @@
         <label><%= fa_icon 'envelope' %> Email</label>
         <div class="inputfield">
           <div class="contact-cat"></div>
-          <div><%= f.text_field :email, :tabindex => 14 %><%= f.full_error :email, class: 'text-danger' %></div>
+          <%= f.input :email, :tabindex => 14, label: false %><%= f.full_error :email, class: 'text-danger' %>
           <div class="contact-cat"></div>
           <div></div>
         </div>

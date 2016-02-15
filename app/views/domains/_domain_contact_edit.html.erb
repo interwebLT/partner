@@ -1,3 +1,5 @@
+
+
 <%= simple_form_for contact, url: domain_path(@domain.id), html: { method: :patch } do |f| %>
   <% if contact.errors.any? %>
   <ul id="error_message" class="alert alert-danger">
@@ -6,7 +8,6 @@
     <% end %>
   </ul>
   <% end %>
-
   <div id="domain-info">
     <div class="info-l10n">
       <label class=""></label>
@@ -17,7 +18,7 @@
       <label><%= fa_icon 'user' %> Name</label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_name %></div>
+        <div><%= f.input :local_name, label: false%></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.name %></div>
       </div>
@@ -26,7 +27,7 @@
       <label><%= fa_icon 'users' %> Organization </label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_organization %></div>
+        <div><%= f.input :local_organization, label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.organization %></div>
         <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
@@ -36,7 +37,7 @@
       <label><%= fa_icon 'home' %> Street </label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street, placeholder: 'Street 1' %></div>
+        <div><%= f.input :local_street, placeholder: 'Street 1', label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.street %></div>
       </div>
@@ -45,7 +46,7 @@
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street2, placeholder: 'Street 2' %></div>
+        <div><%= f.input :local_street2, placeholder: 'Street 2', label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.street2 %></div>
       </div>
@@ -54,7 +55,7 @@
       <label class="hidden-xs">&nbsp;</label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_street3, placeholder: 'Street 3' %></div>
+        <div><%= f.input :local_street3, placeholder: 'Street 3', label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.street3 %></div>
       </div>
@@ -63,7 +64,7 @@
       <label><span>City</span></label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_city %></div>
+        <div><%= f.input :local_city, label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.city %></div>
       </div>
@@ -72,7 +73,7 @@
       <label><span>State/Province</span></label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_state %></div>
+        <div><%= f.input :local_state, label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.state %></div>
       </div>
@@ -81,7 +82,7 @@
       <label><span>Postal Code</span></label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.text_field :local_postal_code %></div>
+        <div><%= f.input :local_postal_code, label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= contact.postal_code %></div>
       </div>
@@ -90,7 +91,7 @@
       <label><span>Country</span></label>
       <div class="inputfield">
         <div class="contact-cat">Local</div>
-        <div><%= f.country_select :local_country_code, :tabindex => 9, value: contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true %></div>
+        <div ><%= f.country_select :local_country_code, :tabindex => 9, value: contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true, label: false %></div>
         <div class="contact-cat">Int'l</div>
         <div><%= Country[contact.country_code].try(:name) %></div>
       </div>
@@ -98,9 +99,9 @@
     <div class="domain-info-num"><!-- form-group -->
       <label><%= fa_icon 'phone-square' %> Telephone </label>
       <div class="inputfield">
-        <div><%= f.text_field :voice, :tabindex => 10 %></div>
+        <%= f.input :voice, :tabindex => 10, label: false %>
         <span class="text-muted">ext.</span>
-        <div><%= f.text_field :voice_ext, :tabindex => 11 %></div>
+        <%= f.input :voice_ext, :tabindex => 11, label: false %>
         <span class="help-block" style="display:none;">
           <small>e.g. +12.34567890</small>
         </span>
@@ -110,9 +111,9 @@
     <div class="domain-info-num"><!-- form-group -->
       <label><%= fa_icon 'fax' %> Fax </label>
       <div class="inputfield">
-        <div><%= f.text_field :fax, :tabindex => 12 %></div>
+        <%= f.input :fax, :tabindex => 12, label: false %>
         <span class="text-muted">ext.</span>
-        <div><%=f.text_field :fax_ext, :tabindex => 13 %></div>
+        <%=f.input :fax_ext, :tabindex => 13, label: false%>
         <span class="help-block" style="display:none;">
           <small>e.g. +12.34567890</small>
         </span>
@@ -122,7 +123,7 @@
     <div class="domain-info-num">
       <label><%= fa_icon 'envelope' %> Email </label>
       <div class="inputfield">
-        <div><%= f.text_field :email, :tabindex => 14 %></div>
+        <%= f.input :email, :tabindex => 14, label: false %>
       </div>
       <div></div>
     </div>
@@ -130,7 +131,7 @@
       <label><%= fa_icon 'user-secret' %> Handle </label>
       <%= f.hidden_field :handle, value: contact.handle, :tabindex => 15 %>
       <div class="inputfield">
-        <div><p><%= contact.handle %></p></div>
+        <p><%= contact.handle %></p>
       </div>
       <div></div>
     </div>

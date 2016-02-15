@@ -31,6 +31,6 @@ en:
         city: Enter City
         state: Enter State/Province
         postal_code: Enter Postal Code
-        phone: Enter Telephone
+        voice: Enter Telephone
         fax: Enter Fax
         email: Enter Email

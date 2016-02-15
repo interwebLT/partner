@@ -123,10 +123,10 @@
   div{ /*international*/
     @extend .col-md-5;
     @extend .col-sm-4;
-    padding-left: 32px;
+    padding-left: 40px;
   }
   div:last-child{ /*local*/
-    margin-left:0;
+    margin-left:5px;
     @extend .col-md-4;
     @extend .col-sm-4;
   }
@@ -134,11 +134,11 @@
 
 #domain-info input, #domain-info select {
   box-shadow: none !important;
-  border-color: rgba(71, 162, 214, 0) !important;
+  border-color: rgba(71, 162, 214, 0);
 }
 
 #domain-info input:focus, #domain-info select:focus  {
-  border-color: rgba(255, 165, 0, 0.37) !important;
+  border-color: rgba(255, 165, 0, 0.37);
   outline: none !important;
 }
 
@@ -436,3 +436,4 @@ input#contact_handle {@extend .text-primary;}
     text-align: left !important;
 }
 }
+#domain-info .form-group {margin-left: 0 !important;}
