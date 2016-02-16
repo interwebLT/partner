@@ -1,12 +1,8 @@
-
-
 <%= simple_form_for contact, url: domain_path(@domain.id), html: { method: :patch } do |f| %>
   <% if contact.errors.any? %>
-  <ul id="error_message" class="alert alert-danger">
-    <% contact.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+  <div id="error_message" class="alert alert-warning">
+    Some information is missing or incorrect.  Please check your entries and try again.
+  </div>
   <% end %>
   <div id="domain-info">
     <div class="info-l10n">
