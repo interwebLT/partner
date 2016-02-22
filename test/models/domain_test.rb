@@ -74,30 +74,6 @@ describe Domain do
     specify {subject.name.must_equal 'domain.ph' }
   end
 
-  describe :exists? do
-    subject { Domain.exists? domain_name, token: default_token }
-
-    before do
-      stub_request(:get, Domain.url(params: { name: domain_name }))
-        .with(headers: default_headers)
-        .to_return(body: domain_response.to_json)
-    end
-
-    let(:domain_name) { 'domain.ph' }
-
-    context :when_existing do
-      let(:domain_response) { { name: domain_name } }
-
-      specify { subject.must_equal true }
-    end
-
-    context :when_not_existing do
-      let(:domain_response) { [] }
-
-      specify { subject.must_equal false }
-    end
-  end
-
   describe :valid? do
     specify { Domain.valid?('domain-123.ph').must_equal true }
     specify { Domain.valid?('').must_equal false }
