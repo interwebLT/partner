@@ -11,19 +11,17 @@
   <main role="main" class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div id="alert">
-          <% if notice %>
-          <div class="alert alert-success" role="alert">
-            <%= notice %>
-          </div>
-          <% end %>
-
-          <% if alert %>
-          <div class="alert alert-danger" role="alert">
-            <%= alert %>
-          </div>
-          <% end %>
+        <% if notice %>
+        <div id="notice" class="alert alert-success" role="alert">
+          <%= notice %>
         </div>
+        <% end %>
+
+        <% if alert %>
+        <div id="alert" class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
+        <% end %>
       </div>
     </div>
     <%= yield %>
