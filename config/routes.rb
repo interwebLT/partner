@@ -40,7 +40,12 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:index]
 
-  resources :register, only: [:index]
+  get :register, to: 'register#new'
+
+  scope path: :register, as: :register do
+    post  :search,      to: 'register#search'
+    get   :registrant,  to: 'register#registrant'
+  end
 
   resources :checkout, only: [:index] do
     collection do

@@ -1,11 +1,14 @@
 class RegisterController < SecureController
   before_filter :staff_only
 
-  def index
-
+  def new
   end
 
-  def checkout
+  def search
+    redirect_to action: :registrant, domain_name: params[:domain_name]
+  end
 
+  def registrant
+    @domain_name = params[:domain_name]
   end
 end

@@ -58,6 +58,10 @@ class App
   def orders
     @orders ||= OrdersPage.new
   end
+
+  def register
+    @register ||= RegisterPage.new
+  end
 end
 
 def site
