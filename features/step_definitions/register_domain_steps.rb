@@ -1,4 +1,7 @@
 When /^I register an available domain$/  do
+  stub_get  to: Domain.url(params: { name: 'available.ph' }),
+            returns: 'domains/available.ph/get_response'.json
+
   site.register.load
 
   site.register.domain_name.set 'available.ph'
@@ -14,6 +17,20 @@ When /^I register an available domain$/  do
   site.register.registrant.submit.click
 end
 
+When /^I register an existing domain$/  do
+  stub_get  to: Domain.url(params: { name: 'existing.ph' }),
+            returns: 'domains/existing.ph/get_response'.json
+
+  site.register.load
+
+  site.register.domain_name.set 'existing.ph'
+  site.register.submit.click
+end
+
 Then /^domain must be registered$/  do
   expect(site.register.notice.text).to eql 'Domain Registered'
+end
+
+Then /^I must be notified that domain is not available for registration$/  do
+  expect(site.register.alert.text).to eql 'Domain Not Available'
 end
