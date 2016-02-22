@@ -93,9 +93,10 @@
         <label><span>Country</span></label>
         <div class="inputfield">
           <div class="contact-cat">Int'l</div>
-          <div><%= f.country_select :country_code, :tabindex => 9, value: @contact.country_code, priority_countries: ['PH', 'US'], include_blank: true, label: false %><%= f.full_error :country_code, class: 'text-danger' %></div>
+          <div>
+            <%= f.input :country_code, :tabindex => 9, value: @contact.country_code, priority: ['PH', 'US'], include_blank: true, label: false %><%= f.full_error :country_code, class: 'text-danger' %></div>
           <div class="contact-cat">Local</div>
-          <div><%= f.country_select :local_country_code, :tabindex => 23, value: @contact.local_country_code, priority_countries: ['PH', 'US'], include_blank: true, label: false %></div>
+          <div><%= f.input :local_country_code, :tabindex => 23, value: @contact.local_country_code, priority: ['PH', 'US'], include_blank: true, label: false %></div>
         </div>
       </div>
       <div class="domain-info-num"><!-- form-group -->
