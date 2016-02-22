@@ -1,5 +1,9 @@
 def stub_get to:, returns:
-  stub_request(:get, to).to_return(body: returns.to_json)
+  if returns.is_a? Fixnum
+    stub_request(:get, to).to_return(status: returns)
+  else
+    stub_request(:get, to).to_return(body: returns.to_json)
+  end
 end
 
 def stub_post to:, returns:
