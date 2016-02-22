@@ -40,7 +40,8 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:index]
 
-  get :register, to: 'register#new'
+  get   :register, to: 'register#new'
+  post  :register, to: 'register#create'
 
   scope path: :register, as: :register do
     post  :search,      to: 'register#search'

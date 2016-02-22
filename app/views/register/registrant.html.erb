@@ -1,3 +1,20 @@
-<%= form_tag do %>
+<%= simple_form_for @registrant, url: register_path do |f| %>
   <%= hidden_field_tag :domain_name, @domain_name %>
+
+  <%= f.input :local_name %>
+  <%= f.input :local_organization %>
+  <%= f.input :local_street %>
+  <%= f.input :local_street2 %>
+  <%= f.input :local_street3 %>
+  <%= f.input :local_city %>
+  <%= f.input :local_state %>
+  <%= f.input :local_postal_code %>
+  <%= f.input :local_country_code %>
+  <%= f.input :voice %>
+  <%= f.input :voice_ext %>
+  <%= f.input :fax %>
+  <%= f.input :fax_ext %>
+  <%= f.input :email %>
+
+  <%= f.submit %>
 <% end %>
