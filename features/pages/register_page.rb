@@ -1,7 +1,8 @@
 class RegisterPage < SitePrism::Page
   set_url '/register'
 
-  element :notice, '#notice'
+  element :notice,  '#notice'
+  element :alert,   '#alert'
 
   element :domain_name, '#domain_name'
 
