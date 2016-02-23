@@ -39,10 +39,14 @@ When /^I try to register an invalid domain$/ do
 end
 
 Then /^domain must be registered$/  do
+  expect(site.register).to be_displayed
+
   expect(site.register.notice.text).to eql 'Domain Registered'
 end
 
 Then /^I must be notified that domain is not available for registration$/  do
+  expect(site.register).to be_displayed
+
   expect(site.register.alert.text).to eql 'Domain Not Available'
 end
 
