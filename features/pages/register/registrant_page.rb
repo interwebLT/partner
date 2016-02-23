@@ -6,6 +6,7 @@ module Register
 
     element :domain_name, '#domain_name'
 
+    element :handle,              '#contact_handle'
     element :local_name,          '#contact_local_name'
     element :local_organization,  '#contact_local_organization'
     element :local_street,        '#contact_local_street'
@@ -23,6 +24,7 @@ module Register
     element :submit, "input[name='commit']"
 
     def submit_valid_registrant
+      self.handle.set                 'registrant'
       self.local_name.set             'Registrant'
       self.local_organization.set     'Organization'
       self.local_street.set           'Street'
