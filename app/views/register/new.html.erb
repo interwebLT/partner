@@ -1,3 +1,7 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
+<% end %>
+
 <%= form_tag register_path do %>
   <%= text_field_tag :domain_name %>
   <%= submit_tag 'Register' %>
