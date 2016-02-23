@@ -7,6 +7,7 @@ When /^I try register an available domain$/  do
             returns:  'contacts/post_response'.json
 
   stub_post to: Order.url,
+            with:     'orders/post_register_domain_request'.json,
             returns:  'orders/post_register_domain_response'.json
 
   site.register.load
