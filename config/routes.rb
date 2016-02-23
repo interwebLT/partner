@@ -41,11 +41,11 @@ Rails.application.routes.draw do
   resources :orders, only: [:index]
 
   get   :register, to: 'register#new'
-  post  :register, to: 'register#create'
+  post  :register, to: 'register#search'
 
   scope path: :register, as: :register do
-    post  :search,      to: 'register#search'
     get   :registrant,  to: 'register#registrant'
+    post  :registrant,  to: 'register#create'
   end
 
   resources :checkout, only: [:index] do
