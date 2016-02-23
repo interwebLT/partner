@@ -33,7 +33,7 @@ class Contact
 
   def update token:
     if valid?
-      update_params = params
+      update_params = as_json
       update_params.delete "handle"
 
       Contact.patch Contact.url(id: self.handle), update_params, token: token
@@ -46,7 +46,7 @@ class Contact
     return false unless valid?
 
     begin
-      Contact.post Contact.url, params, token: token
+      Contact.post Contact.url, self.as_json, token: token
 
       return true
     rescue Api::Model::UnprocessableEntity
@@ -56,8 +56,23 @@ class Contact
     end
   end
 
-  def params
-    json = self.as_json
-    return json
+  def as_json options = nil
+    {
+      handle:             self.handle,
+      local_name:         self.local_name,
+      local_organization: self.local_organization,
+      local_street:       self.local_street,
+      local_street2:      (self.local_street2.blank?  ? nil : self.local_street2),
+      local_street3:      (self.local_street3.blank?  ? nil : self.local_street3),
+      local_city:         self.local_city,
+      local_state:        (self.local_state.blank?  ? nil : self.local_state),
+      local_postal_code:  (self.local_postal_code.blank?  ? nil : self.local_postal_code),
+      local_country_code: self.local_country_code,
+      voice:              self.voice,
+      voice_ext:          (self.voice_ext.blank?  ? nil : self.voice_ext),
+      fax:                (self.fax.blank?  ? nil : self.fax),
+      fax_ext:            (self.fax_ext.blank?  ? nil : self.fax_ext),
+      email:              self.email
+    }
   end
 end

@@ -1,15 +1,20 @@
 RSpec.describe Contact do
   subject do
-    Contact.new handle: handle,
-                local_name: local_name,
+    Contact.new handle:             handle,
+                local_name:         local_name,
                 local_organization: local_organization,
-                local_street: local_street,
-                local_city: local_city,
-                local_postal_code: local_postal_code,
+                local_street:       local_street,
+                local_street2:      local_street2,
+                local_street3:      local_street3,
+                local_city:         local_city,
+                local_state:        local_state,
+                local_postal_code:  local_postal_code,
                 local_country_code: local_country_code,
-                voice: voice,
-                fax: fax,
-                email: email
+                voice:              voice,
+                voice_ext:          voice_ext,
+                fax:                fax,
+                fax_ext:            fax_ext,
+                email:              email
   end
 
   let(:handle)              { 'handle' }
@@ -21,8 +26,13 @@ RSpec.describe Contact do
   let(:voice)               { '+63.21234567' }
   let(:email)               { 'contact@alpha.ph' }
 
+  let(:local_street2)       { nil }
+  let(:local_street3)       { nil }
+  let(:local_state)         { nil }
   let(:local_postal_code)   { nil }
+  let(:voice_ext)           { nil }
   let(:fax)                 { nil }
+  let(:fax_ext)              { nil }
 
   describe '#valid?' do
     context 'when minimum valid object' do
@@ -191,6 +201,46 @@ RSpec.describe Contact do
       it 'does not create contact' do
         expect(subject.save('ABC123')).to be false
         expect(subject.errors[:handle]).to include 'already exists'
+      end
+    end
+  end
+
+  describe '#as_json' do
+    let(:expected_json) {
+      {
+        handle:             'handle',
+        local_name:         'Local Name',
+        local_organization: 'Local Organization',
+        local_street:       'Local Street',
+        local_street2:      nil,
+        local_street3:      nil,
+        local_city:         'Local City',
+        local_state:        nil,
+        local_postal_code:  nil,
+        local_country_code: 'PH',
+        voice:              '+63.21234567',
+        voice_ext:          nil,
+        fax:                nil,
+        fax_ext:            nil,
+        email:              'contact@alpha.ph'
+      }
+    }
+
+    it 'returns contact json' do
+      expect(subject.as_json).to eql expected_json
+    end
+
+    context 'when optional field blank' do
+      let(:local_street2)     { '' }
+      let(:local_street3)     { '' }
+      let(:local_state)       { '' }
+      let(:local_postal_code) { '' }
+      let(:voice_ext)         { '' }
+      let(:fax)               { '' }
+      let(:fax_ext)           { '' }
+
+      it 'returns null for blank optional fields' do
+        expect(subject.as_json).to eql expected_json
       end
     end
   end
