@@ -2,6 +2,12 @@
 <%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
 <% end %>
 
+<% if @registrant.errors.any? %>
+<div id="warning" class="alert alert-warning">
+  Some information is missing or incorrect.  Please check your entries and try again.
+</div>
+<% end %>
+
 <%= simple_form_for @registrant, url: register_registrant_path do |f| %>
   <%= hidden_field_tag :domain_name, @domain_name %>
 

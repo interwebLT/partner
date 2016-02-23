@@ -2,6 +2,8 @@ module Register
   class RegistrantPage < SitePrism::Page
     set_url '/register/registrant{?domain_name*}'
 
+    element :warning, '#warning'
+
     element :domain_name, '#domain_name'
 
     element :local_name,          '#contact_local_name'

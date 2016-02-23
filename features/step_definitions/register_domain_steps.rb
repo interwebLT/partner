@@ -71,4 +71,6 @@ end
 
 Then /^I must be notified that the registrant info is not valid$/ do
   expect(site.register.registrant).to be_displayed
+
+  expect(site.register.registrant.warning.text).to eql 'Some information is missing or incorrect. Please check your entries and try again.'
 end
