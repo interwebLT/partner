@@ -1,8 +1,10 @@
 def stub_get to:, returns:
+  request = stub_request :get, to
+
   if returns.is_a? Fixnum
-    stub_request(:get, to).to_return(status: returns)
+    request.to_return status: returns
   else
-    stub_request(:get, to).to_return(body: returns.to_json)
+    request.to_return status: 200, body: returns.to_json
   end
 end
 
@@ -25,5 +27,5 @@ def stub_post to:, returns:, with: nil
 end
 
 def stub_patch to:, returns:
-  stub_request(:patch, to).to_return(status: 200, body: returns.to_json)
+  stub_request(:patch, to).to_return status: 200, body: returns.to_json
 end
