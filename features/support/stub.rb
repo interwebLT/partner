@@ -6,11 +6,21 @@ def stub_get to:, returns:
   end
 end
 
-def stub_post to:, returns:
+def stub_post to:, returns:, with: nil
+  request = stub_request :post, to
+
+  default_headers = {
+    'Authorization' => 'Token token=abcd123456',
+    'Content-Type'  => 'application/json',
+    'Accept'        => 'application/json'
+  }
+
+  request.with headers: default_headers, body: with.to_json if with
+
   if returns.is_a? Fixnum
-    stub_request(:post, to).to_return(status: returns)
+    request.to_return status: returns
   else
-    stub_request(:post, to).to_return(status: 201, body: returns.to_json)
+    request.to_return status: 201, body: returns.to_json
   end
 end
 
