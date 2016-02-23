@@ -26,3 +26,7 @@ Feature: Register Domain
   Scenario: Register domain conflict
     When  I try to register a domain that was registered at the same time
     Then  I must be notified that domain is no longer available
+
+  Scenario: Registrant handle exists
+    When  I try to provide a registrant with existing handle
+    Then  I must be notified that the registrant already exists

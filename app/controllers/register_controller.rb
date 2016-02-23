@@ -33,7 +33,7 @@ class RegisterController < SecureController
     @domain_name = params[:contact].delete :domain_name
     @registrant = Contact.new params[:contact]
 
-    if @registrant.valid?
+    if @registrant.save current_user.token
       register_domain
     else
       render :registrant
