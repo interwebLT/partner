@@ -14,3 +14,7 @@ Feature: Register Domain
   Scenario: Registrant with no domain
     When  I try to provide the registrant without selecting a domain
     Then  I must be first asked a domain to register
+
+  Scenario: Register invalid domain
+    When  I try to register an invalid domain
+    Then  I must be notified that domain is not valid

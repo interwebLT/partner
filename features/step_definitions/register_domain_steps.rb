@@ -31,6 +31,13 @@ When /^I try to provide the registrant without selecting a domain$/ do
   site.register.registrant.load
 end
 
+When /^I try to register an invalid domain$/ do
+  site.register.load
+
+  site.register.domain_name.set '123'
+  site.register.submit.click
+end
+
 Then /^domain must be registered$/  do
   expect(site.register.notice.text).to eql 'Domain Registered'
 end
@@ -44,4 +51,10 @@ Then /^I must be first asked a domain to register$/ do
 
   expect(site.register).not_to have_notice
   expect(site.register).not_to have_alert
+end
+
+Then /^I must be notified that domain is not valid$/ do
+  expect(site.register).to be_displayed
+
+  expect(site.register.alert.text).to eql 'Domain Not Valid'
 end
