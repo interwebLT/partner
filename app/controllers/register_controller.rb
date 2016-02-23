@@ -15,7 +15,11 @@ class RegisterController < SecureController
   def registrant
     @domain_name = params[:domain_name]
 
-    @registrant = Contact.new
+    unless @domain_name.blank?
+      @registrant = Contact.new
+    else
+      redirect_to register_path
+    end
   end
 
   def create

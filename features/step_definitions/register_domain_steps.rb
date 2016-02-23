@@ -27,10 +27,21 @@ When /^I register an existing domain$/  do
   site.register.submit.click
 end
 
+When /^I try to provide the registrant without selecting a domain$/ do
+  site.register.registrant.load
+end
+
 Then /^domain must be registered$/  do
   expect(site.register.notice.text).to eql 'Domain Registered'
 end
 
 Then /^I must be notified that domain is not available for registration$/  do
   expect(site.register.alert.text).to eql 'Domain Not Available'
+end
+
+Then /^I must be first asked a domain to register$/ do
+  expect(site.register).to be_displayed
+
+  expect(site.register).not_to have_notice
+  expect(site.register).not_to have_alert
 end
