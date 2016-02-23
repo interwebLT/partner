@@ -3,7 +3,8 @@ When /^I try register an available domain$/  do
             returns: 'domains/available.ph/get_response'.json
 
   stub_post to: Contact.url,
-            returns: 'contacts/registrant/post_response'.json
+            with:     'contacts/registrant/post_request'.json,
+            returns:  'contacts/registrant/post_response'.json
 
   stub_post to: Order.url,
             returns: 'domains/available.ph/post_response'.json
