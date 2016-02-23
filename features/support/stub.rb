@@ -7,7 +7,11 @@ def stub_get to:, returns:
 end
 
 def stub_post to:, returns:
-  stub_request(:post, to).to_return(status: 201, body: returns.to_json)
+  if returns.is_a? Fixnum
+    stub_request(:post, to).to_return(status: returns)
+  else
+    stub_request(:post, to).to_return(status: 201, body: returns.to_json)
+  end
 end
 
 def stub_patch to:, returns:
