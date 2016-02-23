@@ -56,11 +56,17 @@ class Contact
   end
 
   def save token
-    if valid?
+    return false unless valid?
+
+    begin
       Contact.post Contact.url, params, token: token
+
       return true
+    rescue Api::Model::UnprocessableEntity
+      self.errors.add :handle, 'already exists'
+
+      return false
     end
-    return false
   end
 
   def params

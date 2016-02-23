@@ -184,4 +184,28 @@ RSpec.describe Contact do
       end
     end
   end
+
+  describe '#save' do
+    before do
+      stub_request(:post, Contact.url)
+        .to_return status: status, body: {}.to_json
+    end
+
+    context 'when response code is 200' do
+      let(:status) { 200 }
+
+      it 'creates contact' do
+        expect(subject.save('ABC123')).to be true
+      end
+    end
+
+    context 'when response code is 422' do
+      let(:status) { 422 }
+
+      it 'does not create contact' do
+        expect(subject.save('ABC123')).to be false
+        expect(subject.errors[:handle]).to include 'already exists'
+      end
+    end
+  end
 end
