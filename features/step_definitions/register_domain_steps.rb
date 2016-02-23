@@ -12,7 +12,7 @@ When /^I try register an available domain$/  do
   site.register.registrant.local_street.set           'Street'
   site.register.registrant.local_city.set             'City'
   site.register.registrant.local_country_code.select  'Philippines'
-  site.register.registrant.voice.set                  '+63.21234567'
+  site.register.registrant.voice.set                  '+63.123456789'
   site.register.registrant.email.set                  'registrant@available.ph'
   site.register.registrant.submit.click
 end
@@ -38,6 +38,12 @@ When /^I try to register an invalid domain$/ do
   site.register.submit.click
 end
 
+When /^I try to register a domain with invalid registrant info$/ do
+  site.register.registrant.load domain_name: 'available.ph'
+
+  site.register.registrant.submit.click
+end
+
 Then /^domain must be registered$/  do
   expect(site.register).to be_displayed
 
@@ -61,4 +67,8 @@ Then /^I must be notified that domain is not valid$/ do
   expect(site.register).to be_displayed
 
   expect(site.register.alert.text).to eql 'Domain Not Valid'
+end
+
+Then /^I must be notified that the registrant info is not valid$/ do
+  expect(site.register.registrant).to be_displayed
 end

@@ -18,3 +18,7 @@ Feature: Register Domain
   Scenario: Register invalid domain
     When  I try to register an invalid domain
     Then  I must be notified that domain is not valid
+
+  Scenario: Invalid registrant info
+    When  I try to register a domain with invalid registrant info
+    Then  I must be notified that the registrant info is not valid

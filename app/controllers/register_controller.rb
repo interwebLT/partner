@@ -28,6 +28,13 @@ class RegisterController < SecureController
   end
 
   def create
-    redirect_to register_path, notice: 'Domain Registered'
+    @domain_name = params[:contact].delete :domain_name
+    @registrant = Contact.new params[:contact]
+
+    if @registrant.valid?
+      redirect_to register_path, notice: 'Domain Registered'
+    else
+      render :registrant
+    end
   end
 end
