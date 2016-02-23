@@ -16,7 +16,11 @@ RSpec.describe Api::Model do
   let(:default_token) { 'abcd123456' }
 
   let(:default_headers) {
-    { 'Authorization' => "Token token=#{default_token}" }
+    {
+      'Authorization' => "Token token=#{default_token}",
+      'Content-Type'  => 'application/json',
+      'Accept'        => 'application/json'
+    }
   }
 
   describe '.url' do
@@ -78,5 +82,25 @@ RSpec.describe Api::Model do
     end
 
     it { is_expected.not_to be_empty }
+  end
+
+  describe '.post' do
+    subject { Dummy.post 'http://test.host/dummies', {}, token: default_token }
+
+    let(:status) { 201 }
+
+    before do
+      stub_request(:post, Dummy.url)
+        .with(headers: default_headers, body: {})
+        .to_return status: status, body: {}.to_json
+    end
+
+    it { is_expected.to eql({}) }
+
+    context 'when response code is 422' do
+      let(:status)  { 422 }
+
+      it { expect { subject }.to raise_error Api::Model::UnprocessableEntity }
+    end
   end
 end

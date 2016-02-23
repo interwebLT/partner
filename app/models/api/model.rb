@@ -3,6 +3,9 @@ module Api
     class NotFound < Exception
     end
 
+    class UnprocessableEntity < Exception
+    end
+
     def self.included base
       base.include ActiveModel::Model
       base.extend ClassMethods
@@ -43,6 +46,8 @@ module Api
           return JSON.parse response.body, symbolize_names: true
         when 400, 404
           raise Api::Model::NotFound
+        when 422
+          raise Api::Model::UnprocessableEntity
         end
       end
 
