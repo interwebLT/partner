@@ -158,4 +158,30 @@ RSpec.describe Contact do
       expect(subject.country_code).to eql 'PH'
     end
   end
+
+  describe '.handle' do
+    context 'when handle is provided' do
+      before do
+        subject.handle = 'test_handle'
+      end
+
+      it 'uses handle provided' do
+        expect(subject.handle).to eql 'test_handle'
+      end
+    end
+
+    context 'when handle is not provided' do
+      before do
+        Timecop.freeze Time.local(2015)
+      end
+
+      after do
+        Timecop.return
+      end
+
+      it 'generates unique handle' do
+        expect(subject.handle).to eql 'PH1420041600.000'
+      end
+    end
+  end
 end
