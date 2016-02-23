@@ -21,5 +21,17 @@ module Register
     element :fax_ext,             '#contact_fax_ext'
     element :email,               '#contact_email'
     element :submit, "input[name='commit']"
+
+    def submit_valid_registrant
+      self.local_name.set             'Registrant'
+      self.local_organization.set     'Organization'
+      self.local_street.set           'Street'
+      self.local_city.set             'City'
+      self.local_country_code.select  'Philippines'
+      self.voice.set                  '+63.123456789'
+      self.email.set                  'registrant@available.ph'
+
+      self.submit.click
+    end
   end
 end

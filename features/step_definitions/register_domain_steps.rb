@@ -13,14 +13,7 @@ When /^I try register an available domain$/  do
   site.register.domain_name.set 'available.ph'
   site.register.submit.click
 
-  site.register.registrant.local_name.set             'Registrant'
-  site.register.registrant.local_organization.set     'Organization'
-  site.register.registrant.local_street.set           'Street'
-  site.register.registrant.local_city.set             'City'
-  site.register.registrant.local_country_code.select  'Philippines'
-  site.register.registrant.voice.set                  '+63.123456789'
-  site.register.registrant.email.set                  'registrant@available.ph'
-  site.register.registrant.submit.click
+  site.register.registrant.submit_valid_registrant
 end
 
 When /^I try register an existing domain$/  do
@@ -58,14 +51,7 @@ When /^I try to register a domain that was registered at the same time$/ do
 
   site.register.registrant.load domain_name: 'conflict.ph'
 
-  site.register.registrant.local_name.set             'Registrant'
-  site.register.registrant.local_organization.set     'Organization'
-  site.register.registrant.local_street.set           'Street'
-  site.register.registrant.local_city.set             'City'
-  site.register.registrant.local_country_code.select  'Philippines'
-  site.register.registrant.voice.set                  '+63.123456789'
-  site.register.registrant.email.set                  'registrant@available.ph'
-  site.register.registrant.submit.click
+  site.register.registrant.submit_valid_registrant
 end
 
 When /^I try to provide a registrant with existing handle$/ do
@@ -73,14 +59,7 @@ When /^I try to provide a registrant with existing handle$/ do
 
   site.register.registrant.load domain_name: 'existing_handle.ph'
 
-  site.register.registrant.local_name.set             'Registrant'
-  site.register.registrant.local_organization.set     'Organization'
-  site.register.registrant.local_street.set           'Street'
-  site.register.registrant.local_city.set             'City'
-  site.register.registrant.local_country_code.select  'Philippines'
-  site.register.registrant.voice.set                  '+63.123456789'
-  site.register.registrant.email.set                  'registrant@available.ph'
-  site.register.registrant.submit.click
+  site.register.registrant.submit_valid_registrant
 end
 
 Then /^domain must be registered$/  do
