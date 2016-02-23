@@ -42,7 +42,7 @@ class Contact
     return false
   end
 
-  def save token
+  def save token:
     return false unless valid?
 
     begin

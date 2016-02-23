@@ -33,7 +33,7 @@ class RegisterController < SecureController
     @domain_name = params[:contact].delete :domain_name
     @registrant = Contact.new params[:contact]
 
-    if @registrant.save current_user.token
+    if @registrant.save token: current_user.token
       register_domain
     else
       render :registrant
@@ -60,7 +60,7 @@ class RegisterController < SecureController
     order = Order.new json_request
 
     begin
-      order.save current_user.token
+      order.save token: current_user.token
 
       redirect_to register_path, notice: 'Domain Registered'
     rescue Api::Model::UnprocessableEntity

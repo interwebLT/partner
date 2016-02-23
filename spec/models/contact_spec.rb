@@ -191,7 +191,7 @@ RSpec.describe Contact do
       let(:status) { 200 }
 
       it 'creates contact' do
-        expect(subject.save('ABC123')).to be true
+        expect(subject.save(token: 'ABC123')).to be true
       end
     end
 
@@ -199,7 +199,7 @@ RSpec.describe Contact do
       let(:status) { 422 }
 
       it 'does not create contact' do
-        expect(subject.save('ABC123')).to be false
+        expect(subject.save(token: 'ABC123')).to be false
         expect(subject.errors[:handle]).to include 'already exists'
       end
     end

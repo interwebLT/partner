@@ -23,7 +23,7 @@ class Order
     status == ERROR
   end
 
-  def save token
+  def save token:
     Order.post Order.url(id: id), to_json, token: token
   end
 
