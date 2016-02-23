@@ -3,8 +3,8 @@ When /^I try register an available domain$/  do
             returns: 'domains/available.ph/get_response'.json
 
   stub_post to: Contact.url,
-            with:     'contacts/registrant/post_request'.json,
-            returns:  'contacts/registrant/post_response'.json
+            with:     'contacts/post_request'.json,
+            returns:  'contacts/post_response'.json
 
   stub_post to: Order.url,
             returns:  'orders/post_register_domain_response'.json
@@ -46,7 +46,7 @@ end
 
 When /^I try to register a domain that was registered at the same time$/ do
   stub_post to: Contact.url,
-            returns: 'contacts/registrant/post_response'.json
+            returns: 'contacts/post_response'.json
 
   stub_post to: Order.url, returns: 422
 
