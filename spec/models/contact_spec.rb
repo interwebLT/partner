@@ -1,6 +1,7 @@
 RSpec.describe Contact do
   subject do
-    Contact.new local_name: local_name,
+    Contact.new handle: handle,
+                local_name: local_name,
                 local_organization: local_organization,
                 local_street: local_street,
                 local_city: local_city,
@@ -11,6 +12,7 @@ RSpec.describe Contact do
                 email: email
   end
 
+  let(:handle)              { 'handle' }
   let(:local_name)          { 'Local Name' }
   let(:local_organization)  { 'Local Organization' }
   let(:local_street)        { 'Local Street' }
@@ -29,6 +31,16 @@ RSpec.describe Contact do
 
     context 'when new' do
       it { expect(Contact.new).to be_invalid }
+    end
+
+    describe '#handle' do
+      it_behaves_like 'a required field', :handle
+
+      context 'when too long' do
+        let(:handle) { '123456789 123456X' }
+
+        it { is_expected.to be_invalid }
+      end
     end
 
     describe '#local_name' do
@@ -156,24 +168,6 @@ RSpec.describe Contact do
       expect(subject.state).to eql 'Test State'
       expect(subject.postal_code).to eql '1240'
       expect(subject.country_code).to eql 'PH'
-    end
-  end
-
-  describe '.handle' do
-    context 'when handle is provided' do
-      before do
-        subject.handle = 'test_handle'
-      end
-
-      it 'uses handle provided' do
-        expect(subject.handle).to eql 'test_handle'
-      end
-    end
-
-    context 'when handle is not provided' do
-      it 'does not generate any unique handles' do
-        expect(subject.handle).to be nil
-      end
     end
   end
 

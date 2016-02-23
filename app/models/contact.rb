@@ -9,10 +9,11 @@ class Contact
                 :local_city, :local_state, :local_postal_code, :local_country_code,
                 :voice, :voice_ext, :fax, :fax_ext, :email
 
-  validates :local_name,  presence: true, length: { minimum: 1, maximum: 100 }
+  validates :handle,              presence: true, length: { minimum: 1, maximum: 16 }
+  validates :local_name,          presence: true, length: { minimum: 1, maximum: 100 }
   validates :local_organization,  presence: true, length: { minimum: 1, maximum: 100 }
-  validates :local_street,  presence: true, length: { minimum: 1, maximum: 50 }
-  validates :local_city,  presence: true, length: { minimum: 1, maximum: 50 }
+  validates :local_street,        presence: true, length: { minimum: 1, maximum: 50 }
+  validates :local_city,          presence: true, length: { minimum: 1, maximum: 50 }
   validates :local_country_code,  presence: true
 
   validates :voice, presence: true, length: { minimum: 10, maximum: 32 },
