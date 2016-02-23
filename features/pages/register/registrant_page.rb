@@ -21,7 +21,7 @@ module Register
     element :fax,                 '#contact_fax'
     element :fax_ext,             '#contact_fax_ext'
     element :email,               '#contact_email'
-    element :submit, "input[name='commit']"
+    element :submit,              "input[name='commit']"
 
     def submit_valid_registrant
       self.handle.set                 'registrant'
