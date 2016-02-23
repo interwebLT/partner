@@ -1,51 +1,6 @@
 require 'test_helper'
 
 describe Contact do
-  subject { Contact.new params }
-
-  let(:params) {
-    {
-      handle: 'handle',
-      name: 'Test Registrant',
-      organization: 'Test Organization',
-      street: '#123 Test Street',
-      street2: 'Street 2',
-      street3: 'Street 3',
-      city: 'Test City',
-      state: 'Test State',
-      postal_code: '1240',
-      country_code: 'PH',
-      local_name: 'Registrant',
-      local_organization: 'Organization',
-      local_street: 'Street',
-      local_street2: 'Street 2',
-      local_street3: 'Street 3',
-      local_city: 'City',
-      local_state: 'State',
-      local_postal_code: '1234',
-      local_country_code: 'PH',
-      voice: '+63.123456789',
-      voice_ext: nil,
-      fax: '+63.123456789',
-      fax_ext: nil,
-      email: 'sample@dot.ph'
-    }
-  }
-
-  describe :new do
-    specify { subject.street2.must_equal 'Street 2' }
-    specify { subject.street3.must_equal 'Street 3' }
-    specify { subject.local_name.must_equal 'Registrant' }
-    specify { subject.local_organization.must_equal 'Organization' }
-    specify { subject.local_street.must_equal 'Street' }
-    specify { subject.local_street2.must_equal 'Street 2' }
-    specify { subject.local_street3.must_equal 'Street 3' }
-    specify { subject.local_city.must_equal 'City' }
-    specify { subject.local_state.must_equal 'State' }
-    specify { subject.local_postal_code.must_equal '1234' }
-    specify { subject.local_country_code.must_equal 'PH' }
-  end
-
   describe :handle do
     context :when_provided do
       subject {
