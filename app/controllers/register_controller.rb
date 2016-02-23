@@ -52,7 +52,7 @@ class RegisterController < SecureController
           domain:   @domain_name,
           authcode: 'ABC123',
           period:   1,
-          registrant_handle:  'registrant'
+          registrant_handle:  @registrant.handle
         }
       ]
     }
