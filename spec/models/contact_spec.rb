@@ -171,16 +171,8 @@ RSpec.describe Contact do
     end
 
     context 'when handle is not provided' do
-      before do
-        Timecop.freeze Time.local(2015)
-      end
-
-      after do
-        Timecop.return
-      end
-
-      it 'generates unique handle' do
-        expect(subject.handle).to eql 'PH1420041600.000'
+      it 'does not generate any unique handles' do
+        expect(subject.handle).to be nil
       end
     end
   end

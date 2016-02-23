@@ -26,20 +26,6 @@ class Contact
   validates :fax, length: { minimum: 10, maximum: 32, allow_blank: true },
                   format: { with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, allow_blank: true }
 
-  def initialize(params=nil)
-    super(params)
-    unless params
-      return
-    end
-
-    timestamp = '%10.6f' % Time.now.to_f
-    timestamp.sub('.', '')
-
-    unless params[:handle]
-      self.handle = "PH#{timestamp}"[0...16]
-    end
-  end
-
   def all token
     Contact.get Contact.url
   end
