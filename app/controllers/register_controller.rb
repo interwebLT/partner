@@ -5,13 +5,15 @@ class RegisterController < SecureController
   end
 
   def search
-    unless Domain.valid? params[:domain_name]
+    domain_name = params[:domain_name]
+
+    unless Domain.valid? domain_name
       redirect_to register_path, alert: 'Domain Not Valid'
       return
     end
 
-    unless Domain.exists? params[:domain_name], token: current_user.token
-      redirect_to action: :registrant, domain_name: params[:domain_name]
+    unless Domain.exists? domain_name, token: current_user.token
+      redirect_to action: :registrant, domain_name: domain_name
     else
       redirect_to register_path, alert: 'Domain Not Available'
     end
