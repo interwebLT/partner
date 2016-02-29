@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "alpha",
+    "organization": "Alpha Partner",
+    "credits": 1000.00,
+    "local": true,
+    "admin": false
+  },
+  {
+    "id": 2,
+    "name": "beta",
+    "organization": "Beta Partner",
+    "credits": 1000.00,
+    "local": false,
+    "admin": false
+  },
+  {
+    "id": 3,
+    "name": "admin",
+    "organization": "Administrator",
+    "credits": 1000.00,
+    "local": true,
+    "admin":true
+  }
+]
