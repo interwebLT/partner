@@ -1,7 +1,4 @@
-Feature: Authenticate Users
-  In order to manage my domains and other information
-  As a User
-  I must be able to authenticate with the system
+Feature: Authenticate User
 
   Scenario: Not authenticated
     Given I am not authenticated

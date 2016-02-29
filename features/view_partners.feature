@@ -1,7 +1,4 @@
 Feature: View Partners
-  In order to see a list of all partners in the registry
-  As an Administrator
-  I must be able to view all partners
 
   Background:
     Given I am authenticated as administrator

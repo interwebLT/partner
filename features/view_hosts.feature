@@ -1,7 +1,4 @@
-Feature: View hosts
-  In order to see a list of all hosts
-  As an admin
-  I want to be able to view all hosts
+Feature: View Hosts
 
   Background:
     Given I am authenticated as administrator

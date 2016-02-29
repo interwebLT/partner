@@ -1,7 +1,4 @@
 Feature: View Activities
-  In order to be aware of all the activities happening in the zone
-  As an Administrator
-  I must be able to view all activities
 
   Scenario: View activities
     Given I am authenticated as administrator

@@ -1,7 +1,4 @@
 Feature: View Domains
-  In order to see a list of all my domains
-  As a Partner
-  I want to be able to view my domains
 
   Background:
     Given I am authenticated as partner
