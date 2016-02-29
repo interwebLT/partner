@@ -1,9 +1,6 @@
 Feature: View Orders
-  In order to see a list of all my purchases
-  As a Partner
-  I want to be able to view my orders
 
-  Scenario: View Orders
-    Given I am authenticated as partner
-    When  I try to view my orders
-    Then  I must see my orders
+  Scenario: View latest orders
+    Given I am authenticated as administrator
+    When  I try to view the latest purchases in my zone
+    Then  I must see the latest orders
