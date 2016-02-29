@@ -1,25 +1,25 @@
-require 'test_helper'
-
-describe Authorization do
-  describe :authenticate do
+RSpec.describe Authorization do
+  describe '.authenticate' do
     subject { Authorization.authenticate 'username', 'password' }
 
-    context :when_authenticated do
+    context 'when authenticated' do
       before do
         stub_request(:post, Authorization.url)
           .to_return(body: { id: 1, token: 'abcd123456' }.to_json, status: 201)
       end
 
-      specify { subject.id.must_equal 1 }
-      specify { subject.token.must_equal 'abcd123456' }
+      it 'provides authentication info' do
+        expect(subject.id).to eql 1
+        expect(subject.token).to eql 'abcd123456'
+      end
     end
 
-    context :when_authentication_fails do
+    context 'when authentication fails' do
       before do
         stub_request(:post, Authorization.url).to_return(status: 400)
       end
 
-      specify { subject.must_be_nil }
+      it { is_expected.to be nil }
     end
   end
 end
