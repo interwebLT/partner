@@ -1,6 +1,5 @@
 class RegistrationPage < SitePrism::Page
   set_url '/register'
-  set_url_matcher /\/domains$/
 
   element :head, '#head'
   element :search, '#register-search-btn'
