@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "type": "create",
+    "activity_at": "2015-03-03T15:00:00Z",
+    "object": {
+      "id": 1,
+      "type": "domain",
+      "name": "domain.ph"
+    }
+  },
+  {
+    "id": 2,
+    "type": "update",
+    "activity_at": "2015-03-03T15:00:00Z",
+    "object": {
+      "id": 1,
+      "type": "domain",
+      "name": "domain.ph"
+    },
+    "property_changed": "name",
+    "old_value": "old_name",
+    "new_value": "new_name"
+  },
+  {
+    "id": 3,
+    "type": "update",
+    "activity_at": "2015-04-16T19:30:00Z",
+    "object": {
+      "id": 1,
+      "type": "domain",
+      "name": "domain.ph"
+    },
+    "losing_partner": "other_partner"
+  }
+]
