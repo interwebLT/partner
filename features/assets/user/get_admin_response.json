@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "username": "admin",
+  "partner_id": 1,
+  "token": "abcd123456",
+  "partner_name": "alpha",
+  "credits": 1000.00,
+  "admin": true,
+  "staff": false
+}
