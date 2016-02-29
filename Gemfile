@@ -43,7 +43,6 @@ end
 group :test do
   gem 'cucumber-rails', require: false
   gem 'site_prism'
-  gem 'minitest-spec-rails'
   gem 'webmock'
   gem 'timecop'
 end
