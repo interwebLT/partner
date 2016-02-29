@@ -1,14 +1,14 @@
 class LoginPage < SitePrism::Page
   set_url '/users/sign_in'
 
-  element :username_field,  '#user_username'
-  element :password_field,  '#user_password'
-  element :login_button,    "input[name='commit']"
+  element :username,  '#user_username'
+  element :password,  '#user_password'
+  element :login,     "input[name='commit']"
 
   def authenticate
-    username_field.set 'alpha'
-    password_field.set 'password'
+    username.set 'alpha'
+    password.set 'password'
 
-    login_button.click
+    login.click
   end
 end
