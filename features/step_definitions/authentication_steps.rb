@@ -1,22 +1,38 @@
 Given /^I am not authenticated$/ do
 end
 
-Then /^I try to authenticate as partner$/ do
-  partner_authenticated
+When /^I try to authenticate as partner$/ do
+  stub_post to: Authorization.url,  returns: 'authorizations/post_response'.json
+  stub_get  to: User.url,           returns: 'user/get_partner_response'.json
+  stub_get  to: Domain.url,         returns: []
+
+  site.login.load
+  site.login.authenticate
 end
 
-Then /^I try to authenticate as administrator$/ do
-  admin_authenticated
+When /^I try to authenticate as administrator$/ do
+  stub_post to: Authorization.url,  returns: 'authorizations/post_response'.json
+  stub_get  to: User.url,           returns: 'user/get_admin_response'.json
+  stub_get  to: Domain.url,         returns: []
+
+  site.login.load
+  site.login.authenticate
 end
 
 Then /^I must be prompted to authenticate$/ do
-  assert_authentication_prompted
+  expect(site.login).to be_displayed
 end
 
 Then /^I must see the homepage of a partner$/ do
-  assert_partner_homepage_displayed
+  expect(site.domains).to be_displayed
+
+  expect(site.domains.header).to have_current_balance
+  expect(site.domains.header).to have_menu_partner_info
 end
 
 Then /^I must see the homepage of an administrator$/ do
-  assert_admin_homepage_displayed
+  expect(site.domains).to be_displayed
+
+  expect(site.domains.header).not_to have_current_balance
+  expect(site.domains.header).not_to have_menu_partner_info
 end
