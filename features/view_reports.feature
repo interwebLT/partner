@@ -1,6 +1,7 @@
 Feature: View Reports
 
-  Scenario: View Orders
+  Scenario: View reports
     Given I am authenticated as partner
-    When  I try to view my orders
-    Then  I must see my orders
+    When  I try to view my reports
+    Then  I must see all my orders
+    Then  I must see all my credit replenishments

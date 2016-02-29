@@ -1,6 +1,6 @@
 Feature: View Profile
 
-  Scenario: View partner info
+  Scenario: View profile
     Given I am authenticated as partner
-    When  I try to view my partner information
-    Then  I must see my partner information
+    When  I try to view my profile information
+    Then  I must see my profile information

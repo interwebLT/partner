@@ -1,4 +1,4 @@
-When /^I try to view the latest purchases in my zone$/ do
+When /^I try to view the latest orders in my zone$/ do
   stub_get to: Order.url, returns: 'orders/get_response'.json
 
   site.orders.load
