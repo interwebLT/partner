@@ -1,16 +1,8 @@
 class ReportsPage < SitePrism::Page
   set_url '/reports'
-  set_url_matcher /\/reports$/
 
   elements :orders, '#orders tbody tr'
   elements :credits, '#credits tbody tr'
-end
-
-def view_orders
-  stub_get to: Order.url, returns: orders_response
-  stub_get to: Credit.url, returns: credits_response
-
-  site.reports.load
 end
 
 def assert_orders_displayed
