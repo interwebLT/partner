@@ -6,8 +6,7 @@ class ContactSection < SitePrism::Section
   element :local_country_code,  "select[name='contact[local_country_code]']"
   element :voice,               "input[name='contact[voice]']"
   element :email,               "input[name='contact[email]']"
-
-  element :submit,  "input[name='commit']"
+  element :submit,              "input[name='commit']"
 
   element :error_message, "#error_message"
 end
