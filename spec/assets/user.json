@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "username": "alpha",
+  "token": "abcd123456",
+  "partner_name": "alpha",
+  "credits": 20.00,
+  "staff": false
+}
