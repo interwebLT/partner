@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "domain.ph",
+    "expires_at": "2017-03-01T15:00:00Z",
+    "expired": false
+  },
+  {
+    "id": 2,
+    "name": "domain.com.ph",
+    "expires_at": "2017-03-01T15:00:00Z",
+    "expired": false
+  }
+]

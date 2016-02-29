@@ -3,6 +3,7 @@ Feature: Add nameserver to domain
   As an administrator
   I must be able to add a nameserver to the domain
 
+  @wip
   Scenario: Add host
     Given I am authenticated as staff
     When  I try to add a host
