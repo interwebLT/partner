@@ -1,0 +1,10 @@
+{
+  "handle": "registrant",
+  "local_name": "Name",
+  "local_organization": "Organization",
+  "local_street": "Street",
+  "local_city": "City",
+  "local_country_code": "PH",
+  "voice":  "+63.123456789",
+  "email":  "registrant@domains.ph"
+}
