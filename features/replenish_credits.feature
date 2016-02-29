@@ -5,6 +5,7 @@ Feature: Replenish Credits
   Background:
     Given I am authenticated as administrator
 
+  @wip
   Scenario: Successful replenishment
     When  I replenish my credits
     Then  my balance should have changed
