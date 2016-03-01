@@ -3,7 +3,7 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Creating contact for order for <span class="text-primary"><%= session[:domain_to_register] %></span></h3>
+  <h3 id="head">Registrant for <span class="text-primary"><%= @domain_name %></span></h3>
 
   <% if @registrant.errors.any? %>
   <div id="warning" class="alert alert-warning">
@@ -98,9 +98,6 @@
       </div>
     </div>
     <br>
-    <%= f.submit class: 'btn btn-secondary btn-lg' do %>
-      Create Contact
-    <% end %>
+    <%= f.submit class: 'btn btn-secondary btn-lg', value: 'Register Domain' %>
   <% end %>
-
 </div>
