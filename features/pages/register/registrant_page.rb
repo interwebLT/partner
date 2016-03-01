@@ -29,8 +29,8 @@ module Register
       self.local_organization.set     'Organization'
       self.local_street.set           'Street'
       self.local_city.set             'City'
-      self.local_country_code.select  'Philippines'
-      self.voice.set                  '+63.123456789'
+      self.local_country_code.select  'Japan'
+      self.voice.set                  '+81.123456789'
       self.email.set                  'registrant@available.ph'
 
       self.submit.click
