@@ -16,3 +16,8 @@ Feature: Authenticate User
   Scenario: Invalid authentication info
     When  I try to authenticate with invalid authentication info
     Then  I must be notified that authentication failed
+
+  Scenario: Expired authentication token
+    Given I am authenticated as partner
+    When  I try to navigate the app with an expired authentication token
+    Then  I must be prompted to authenticate again

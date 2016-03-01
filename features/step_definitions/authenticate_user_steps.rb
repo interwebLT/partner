@@ -26,6 +26,12 @@ When /^I try to authenticate with invalid authentication info$/ do
   site.login.authenticate
 end
 
+When /^I try to navigate the app with an expired authentication token$/ do
+  stub_get to: User.url, returns: 404
+
+  site.domains.load
+end
+
 Then /^I must be prompted to authenticate$/ do
   expect(site.login).to be_displayed
 end
@@ -48,4 +54,10 @@ Then /^I must be notified that authentication failed$/ do
   expect(site.login).to be_displayed
 
   expect(site.login.alert.text).to eql 'Failed to Login'
+end
+
+Then /^I must be prompted to authenticate again$/ do
+  expect(site.login).to be_displayed
+
+  expect(site.login.alert.text).to eql 'You need to sign in before continuing.'
 end
