@@ -9,10 +9,8 @@ class Authorization
       password: password
     }
 
-    begin
-      create params
-    rescue Api::Model::NotFound
-      nil
-    end
+    create params
+  rescue Api::Model::NotFound, Api::Model::UnprocessableEntity
+    nil
   end
 end

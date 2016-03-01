@@ -12,3 +12,7 @@ Feature: Authenticate User
   Scenario: Authenticate as Administrator
     When  I try to authenticate as administrator
     Then  I must see the homepage of an administrator
+
+  Scenario: Invalid authentication info
+    When  I try to authenticate with invalid authentication info
+    Then  I must be notified that authentication failed

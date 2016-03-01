@@ -16,7 +16,15 @@ RSpec.describe Authorization do
 
     context 'when authentication fails' do
       before do
-        stub_request(:post, Authorization.url).to_return(status: 400)
+        stub_request(:post, Authorization.url).to_return status: 400
+      end
+
+      it { is_expected.to be nil }
+    end
+
+    context 'when authentication info invalid' do
+      before do
+        stub_request(:post, Authorization.url).to_return status: 422
       end
 
       it { is_expected.to be nil }
