@@ -1,8 +1,15 @@
 <% content_for :banner_title do %>
 <%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
 <% end %>
-
-<%= form_tag register_path do %>
-  <%= text_field_tag :domain_name %>
-  <%= submit_tag 'Register' %>
-<% end %>
+<div class="register-page">
+  <%= form_tag register_path 'register-form-search navbar-form' do %>
+    <div class="input-group">
+    <%= text_field_tag :domain_name, nil, class: 'form-control input-lg', placeholder: "Enter the domain you want to register..."  %>
+    <span class="input-group-btn">
+    <%= button_tag(type: "submit", class: "btn btn-secondary btn-lg") do %>
+      Register
+    <% end %>
+    </span>
+    </div>
+  <% end %>
+</div>

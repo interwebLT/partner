@@ -437,3 +437,99 @@ input#contact_handle {@extend .text-primary;}
 }
 }
 #domain-info .form-group {margin-left: 0 !important;}
+
+#new-info {
+  @extend .form-horizontal;
+  background-color: #E3EBEF;
+  padding: 20px;
+}
+#new-info .form-group {margin-left: 0 !important;margin-right: 0;}
+
+#new-info input, #new-info select {
+  box-shadow: none !important;
+}
+
+#new-info input:focus, #new-info select:focus  {
+  border-color: rgba(255, 165, 0, 0.37);
+  outline: none !important;
+}
+
+#new-info .domain-info-num .inputfield div {padding-left: 0;}
+
+#new-info .form-group {margin-bottom: 0px;}
+
+#new-info > div:not(:first-child){
+  @extend .form-group;
+  @extend .clearfix;
+  @extend .row;
+  margin-bottom: 8px!important;
+
+  label {
+    @extend .control-label;
+    @extend .col-xs-12;
+    @extend .col-sm-3;
+    @extend .col-md-3;
+    padding-top: 0;
+
+    span{
+      padding-left: 17px;
+    }
+  }
+
+  > div.inputfield {
+    @extend .col-xs-12;
+    @extend .col-sm-9;
+    @extend .col-md-9;
+    color: #47A2D6;
+
+    input {
+      @extend .form-control;
+      *width: 50%;
+    }
+
+    > div.contact-cat {
+      @extend .text-muted;
+      @extend .small;
+      @extend .visible-xs;
+    }
+
+    >div:nth-child(2){ /*international*/
+      @extend .col-lg-6;
+      @extend .col-md-6;
+      @extend .col-sm-6;
+      @extend .col-xs-12;
+
+
+      select {
+        @extend .form-control;
+        @extend .col-lg-7;
+        @extend .col-md-7;
+        border-radius: 1px;
+        border: 1px solid #ccc;
+      }
+
+      input {
+        @extend .form-control;
+      }
+    }
+
+   div:nth-child(4) { /*local*/
+      @extend .col-lg-6;
+      @extend .col-md-6;
+      @extend .col-sm-6;
+      @extend .col-xs-12;
+
+      select {
+        @extend .form-control;
+        @extend .col-lg-10;
+        @extend .col-md-10;
+        border-radius: 1px;
+        border: 1px solid #ccc;
+      }
+      input {
+        @extend .form-control;
+      }
+    }
+
+  }
+}

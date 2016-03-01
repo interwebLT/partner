@@ -2,30 +2,105 @@
 <%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
 <% end %>
 
-<% if @registrant.errors.any? %>
-<div id="warning" class="alert alert-warning">
-  Some information is missing or incorrect.  Please check your entries and try again.
+<div id="domain_info">
+  <h3 id="head">Creating contact for order for <span class="text-primary"><%= session[:domain_to_register] %></span></h3>
+
+  <% if @registrant.errors.any? %>
+  <div id="warning" class="alert alert-warning">
+    Some information is missing or incorrect.  Please check your entries and try again.
+  </div>
+  <% end %>
+
+  <%= simple_form_for @registrant, url: register_registrant_path do |f| %>
+    <div id="new-info">
+      <%= f.hidden_field :domain_name, value: @domain_name %>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'user-secret' %> Handle</label>
+        <div class="inputfield">
+          <div><%= f.input :handle, label: false, placeholder: 'Handle' %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'user' %> Local Name</label>
+        <div class="inputfield">
+          <div><%= f.input :local_name, label: false, placeholder: 'Name' %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'users' %> Local Organization</label>
+        <div class="inputfield">
+          <div><%= f.input :local_organization, label: false, placeholder: 'Organization' %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'home' %> Local Street</label>
+        <div class="inputfield">
+          <div><%= f.input :local_street, label: false, placeholder: 'Street'  %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label class="hidden-xs">&nbsp;</label>
+        <div class="inputfield">
+          <div><%= f.input :local_street2, placeholder: 'Street 2', label: false %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label class="hidden-xs">&nbsp;</label>
+        <div class="inputfield">
+          <div><%= f.input :local_street3, placeholder: 'Street 3', label: false %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>City</span></label>
+        <div class="inputfield">
+          <div><%= f.input :local_city, label: false, placeholder: 'City'  %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>State/Province</span></label>
+        <div class="inputfield">
+          <div><%= f.input :local_state, label: false, placeholder: 'State/Province'  %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>Postal Code</span></label>
+        <div class="inputfield">
+          <div><%= f.input :local_postal_code, label: false, placeholder: 'Postal Code'  %></div>
+        </div>
+      </div>
+      <div><!-- form-group -->
+        <label><span>Country</span></label>
+        <div class="inputfield">
+          <div><%= f.input :local_country_code, priority: ['PH', 'US'], include_blank: true, label: false, placeholder: 'Select a Country'  %></div>
+        </div>
+      </div>
+      <div class="domain-info-num"><!-- form-group -->
+        <label><%= fa_icon 'phone-square' %> Telephone </label>
+        <div class="inputfield">
+          <%= f.input :voice, label: false, placeholder: 'Telephone'  %>
+          <span class="text-muted">ext.</span>
+          <%= f.input :voice_ext, label: false %>
+        </div>
+      </div>
+      <div class="domain-info-num"><!-- form-group -->
+        <label><%= fa_icon 'fax', placeholder: 'Fax'  %> Fax </label>
+        <div class="inputfield">
+          <%= f.input :fax, label: false %>
+          <span class="text-muted">ext.</span>
+          <%= f.input :fax_ext, label: false %>
+        </div>
+      </div>
+      <div class="domain-info-num"><!-- form-group -->
+        <label><%= fa_icon 'envelope', placeholder: 'Email'  %> Email</label>
+        <div class="inputfield">
+          <%= f.input :email, label: false %>
+        </div>
+      </div>
+    </div>
+    <br>
+    <%= button_tag(type: "submit", class: "btn btn-secondary btn-lg") do %>
+      Create Contact
+    <% end %>
+  <% end %>
+
 </div>
-<% end %>
-
-<%= simple_form_for @registrant, url: register_registrant_path do |f| %>
-  <%= f.hidden_field :domain_name, value: @domain_name %>
-
-  <%= f.input :handle %>
-  <%= f.input :local_name %>
-  <%= f.input :local_organization %>
-  <%= f.input :local_street %>
-  <%= f.input :local_street2 %>
-  <%= f.input :local_street3 %>
-  <%= f.input :local_city %>
-  <%= f.input :local_state %>
-  <%= f.input :local_postal_code %>
-  <%= f.input :local_country_code %>
-  <%= f.input :voice %>
-  <%= f.input :voice_ext %>
-  <%= f.input :fax %>
-  <%= f.input :fax_ext %>
-  <%= f.input :email %>
-
-  <%= f.submit %>
-<% end %>
