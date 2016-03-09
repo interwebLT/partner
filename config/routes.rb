@@ -45,8 +45,8 @@ Rails.application.routes.draw do
   post  :register, to: 'register#search'
 
   scope path: :register, as: :register do
-    get   :registrant,  to: 'register#registrant'
-    post  :registrant,  to: 'register#create'
+    get   :details, to: 'register#details'
+    post  :details, to: 'register#create'
   end
 
   resources :checkout, only: [:index] do

@@ -13,13 +13,13 @@ class RegisterController < SecureController
     end
 
     unless Domain.exists? domain_name, token: current_user.token
-      redirect_to action: :registrant, domain_name: domain_name
+      redirect_to action: :details, domain_name: domain_name
     else
       redirect_to register_path, alert: 'Domain Not Available'
     end
   end
 
-  def registrant
+  def details
     @domain_name = params[:domain_name]
 
     unless @domain_name.blank?
@@ -36,7 +36,7 @@ class RegisterController < SecureController
     if @registrant.save token: current_user.token
       register_domain
     else
-      render :registrant
+      render :details
     end
   end
 

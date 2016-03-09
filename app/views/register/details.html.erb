@@ -11,7 +11,7 @@
   </div>
   <% end %>
 
-  <%= simple_form_for @registrant, url: register_registrant_path do |f| %>
+  <%= simple_form_for @registrant, url: register_details_path do |f| %>
     <div id="new-info">
       <%= f.hidden_field :domain_name, value: @domain_name %>
       <div><!-- form-group -->
