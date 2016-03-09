@@ -35,7 +35,7 @@ class DomainsController < SecureController
     @domain = Domain.find params[:domain_id], token: current_user.token
 
     begin
-      @domain.renew(current_user.token)
+      @domain.renew token: current_user.token
     rescue Exception => ex
       flash[:alert] = ex.message
     end

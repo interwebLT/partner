@@ -76,7 +76,7 @@ class Domain
       or numbers_only or starts_with_dash or double_dash)
   end
 
-  def renew token
+  def renew token:
     order = Order.new( {
       partner: nil,
       currency_code: 'USD'
@@ -93,7 +93,7 @@ class Domain
       }
     order.order_details = [detail]
 
-    return order.save token
+    return order.save token: token
   end
 
   def domain_owner
