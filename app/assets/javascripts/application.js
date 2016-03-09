@@ -17,11 +17,14 @@
 //= require jquery-tablesorter/jquery.tablesorter
 //= require jquery-tablesorter/jquery.tablesorter.widgets
 //= require bootstrap-datepicker
-//= require_tree .
+//= require inputmask
 //= require jquery.inputmask
-//= require jquery.inputmask.extensions
-//= require jquery.inputmask.numeric.extensions
-//= require jquery.inputmask.date.extensions
+//= require inputmask.extensions
+//= require inputmask.date.extensions
+//= require inputmask.phone.extensions
+//= require inputmask.numeric.extensions
+//= require inputmask.regex.extensions
+//= require_tree .
 
 $(document).ready(function() {
   $('i').tooltip();
