@@ -7,6 +7,10 @@ Feature: Register Domain
     When  I try register an available domain
     Then  domain must be registered
 
+  Scenario: Register available domain in all caps
+    When  I try register an available domain in all caps
+    Then  domain must be registered
+
   Scenario: Register existing domain
     When  I try register an existing domain
     Then  I must be notified that domain is not available for registration

@@ -18,6 +18,28 @@ When /^I try register an available domain$/  do
   site.register.registrant.submit_valid_registrant
 end
 
+When /^I try register an available domain in all caps$/  do
+  stub_get  to: Domain.url(params: { name: 'available.ph' }),
+            returns: 'domains/available.ph/get_response'.json
+
+  stub_post to: Contact.url,
+            with:     'contacts/post_request'.json,
+            returns:  'contacts/post_response'.json
+
+  stub_post to: Order.url,
+            with:     'orders/post_register_domain_request'.json,
+            returns:  'orders/post_register_domain_response'.json
+
+  site.register.load
+
+  site.register.domain_name.set 'AVAILABLE.PH'
+  site.register.submit.click
+
+  expect(site.register.registrant).to be_displayed
+
+  site.register.registrant.submit_valid_registrant
+end
+
 When /^I try register an existing domain$/  do
   stub_get  to: Domain.url(params: { name: 'existing.ph' }),
             returns: 'domains/existing.ph/get_response'.json
