@@ -15,6 +15,6 @@ $ ->
     showEditContact()
 
 $(document).ready ->
-  $('input[name=\'contact[voice]\']').inputmask mask: '+99.999999999'
-  $('input[name=\'contact[fax]\']').inputmask mask: '+99.999999999'
+  $('input[name="contact[voice]"]').inputmask mask: '+9{1,3}.9{5,27}'
+  $('input[name="contact[fax]"]').inputmask mask: '+9{1,3}.9{5,27}'
   return
