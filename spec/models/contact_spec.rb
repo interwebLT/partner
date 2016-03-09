@@ -23,7 +23,7 @@ RSpec.describe Contact do
   let(:local_street)        { 'Local Street' }
   let(:local_city)          { 'Local City' }
   let(:local_country_code)  { 'PH' }
-  let(:voice)               { '+63.21234567' }
+  let(:voice)               { '+63.12345' }
   let(:email)               { 'contact@alpha.ph' }
 
   let(:local_street2)       { nil }
@@ -32,7 +32,7 @@ RSpec.describe Contact do
   let(:local_postal_code)   { nil }
   let(:voice_ext)           { nil }
   let(:fax)                 { nil }
-  let(:fax_ext)              { nil }
+  let(:fax_ext)             { nil }
 
   describe '#valid?' do
     context 'when minimum valid object' do
@@ -218,7 +218,7 @@ RSpec.describe Contact do
         local_state:        nil,
         local_postal_code:  nil,
         local_country_code: 'PH',
-        voice:              '+63.21234567',
+        voice:              '+63.12345',
         voice_ext:          nil,
         fax:                nil,
         fax_ext:            nil,

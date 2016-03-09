@@ -30,7 +30,7 @@ end
 
 RSpec.shared_examples_for 'a contact number field' do |field|
   context 'when too short' do
-    let(field) { '+63.56789' }
+    let(field) { '+63.5678' }
 
     it { is_expected.to be_invalid }
   end
