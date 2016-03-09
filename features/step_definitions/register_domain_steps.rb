@@ -15,6 +15,8 @@ When /^I try register an available domain$/  do
   site.register.domain_name.set 'available.ph'
   site.register.submit.click
 
+  expect(site.register.registrant).to be_displayed
+
   site.register.registrant.submit_valid_registrant
 end
 
