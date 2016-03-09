@@ -8,7 +8,7 @@ class RegisterPage < SitePrism::Page
 
   element :submit, "input[name='commit']"
 
-  def registrant
-    @registrant ||= Register::RegistrantPage.new
+  def details
+    @details ||= Register::DetailsPage.new
   end
 end

@@ -15,9 +15,9 @@ When /^I try register an available domain$/  do
   site.register.domain_name.set 'available.ph'
   site.register.submit.click
 
-  expect(site.register.registrant).to be_displayed
+  expect(site.register.details).to be_displayed
 
-  site.register.registrant.submit_valid_registrant
+  site.register.details.submit_valid_registrant
 end
 
 When /^I try register an available domain in all caps$/  do
@@ -37,9 +37,9 @@ When /^I try register an available domain in all caps$/  do
   site.register.domain_name.set 'AVAILABLE.PH'
   site.register.submit.click
 
-  expect(site.register.registrant).to be_displayed
+  expect(site.register.details).to be_displayed
 
-  site.register.registrant.submit_valid_registrant
+  site.register.details.submit_valid_registrant
 end
 
 When /^I try register an existing domain$/  do
@@ -53,7 +53,7 @@ When /^I try register an existing domain$/  do
 end
 
 When /^I try to provide the registrant without selecting a domain$/ do
-  site.register.registrant.load
+  site.register.details.load
 end
 
 When /^I try to register an invalid domain$/ do
@@ -64,9 +64,9 @@ When /^I try to register an invalid domain$/ do
 end
 
 When /^I try to register a domain with invalid registrant info$/ do
-  site.register.registrant.load domain_name: 'available.ph'
+  site.register.details.load domain_name: 'available.ph'
 
-  site.register.registrant.submit.click
+  site.register.details.submit.click
 end
 
 When /^I try to register a domain that was registered at the same time$/ do
@@ -75,17 +75,17 @@ When /^I try to register a domain that was registered at the same time$/ do
 
   stub_post to: Order.url, returns: 422
 
-  site.register.registrant.load domain_name: 'conflict.ph'
+  site.register.details.load domain_name: 'conflict.ph'
 
-  site.register.registrant.submit_valid_registrant
+  site.register.details.submit_valid_registrant
 end
 
 When /^I try to provide a registrant with existing handle$/ do
   stub_post to: Contact.url, returns: 422
 
-  site.register.registrant.load domain_name: 'existing_handle.ph'
+  site.register.details.load domain_name: 'existing_handle.ph'
 
-  site.register.registrant.submit_valid_registrant
+  site.register.details.submit_valid_registrant
 end
 
 Then /^domain must be registered$/  do
@@ -114,9 +114,9 @@ Then /^I must be notified that domain is not valid$/ do
 end
 
 Then /^I must be notified that the registrant info is not valid$/ do
-  expect(site.register.registrant).to be_displayed
+  expect(site.register.details).to be_displayed
 
-  expect(site.register.registrant).to have_warning
+  expect(site.register.details).to have_warning
 end
 
 Then /^I must be notified that domain is no longer available$/ do
@@ -126,7 +126,7 @@ Then /^I must be notified that domain is no longer available$/ do
 end
 
 Then /^I must be notified that the registrant already exists$/ do
-  expect(site.register.registrant).to be_displayed
+  expect(site.register.details).to be_displayed
 
-  expect(site.register.registrant).to have_warning
+  expect(site.register.details).to have_warning
 end
