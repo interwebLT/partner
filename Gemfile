@@ -9,7 +9,6 @@ gem 'therubyracer',  platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'unicorn'
-gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -35,6 +34,7 @@ gem 'font-awesome-rails'
 gem 'httparty'
 gem 'jquery-tablesorter'
 gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
 gem 'autoprefixer-rails'
 gem 'simple_form'
 gem 'country_select'
