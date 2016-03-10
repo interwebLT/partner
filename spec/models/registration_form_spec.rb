@@ -11,7 +11,7 @@ RSpec.describe RegistrationForm do
 
       let(:params) {
         {
-          domain: 'domain.ph',
+          domain_name: 'domain.ph',
           period: 2,
           handle: 'handle',
           name: 'Test Registrant',
@@ -41,7 +41,7 @@ RSpec.describe RegistrationForm do
       }
 
       it 'sets params' do
-        expect(subject.domain).to eql 'domain.ph'
+        expect(subject.domain_name).to eql 'domain.ph'
         expect(subject.period).to eql 2
 
         expect(subject.handle).to eql 'handle'

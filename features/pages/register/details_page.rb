@@ -4,7 +4,7 @@ module Register
 
     element :warning, '#warning'
 
-    element :domain_name, '#registration_form_domain'
+    element :domain_name, '#registration_form_domain_name'
 
     element :local_name,          '#registration_form_local_name'
     element :local_organization,  '#registration_form_local_organization'

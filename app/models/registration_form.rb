@@ -1,7 +1,7 @@
 class RegistrationForm
   include ActiveModel::Model
 
-  attr_accessor :domain, :period, :registrant
+  attr_accessor :domain_name, :period, :registrant
 
   def initialize params = nil
     self.registrant = Contact.new

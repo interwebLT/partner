@@ -23,8 +23,7 @@ class RegisterController < SecureController
     domain_name = params[:domain_name]
 
     unless domain_name.blank?
-      @registration = RegistrationForm.new
-      @registration.domain = domain_name
+      @registration = RegistrationForm.new domain_name: domain_name
     else
       redirect_to register_path
     end
@@ -49,7 +48,7 @@ class RegisterController < SecureController
       order_details: [
         {
           type: 'domain_create',
-          domain:   @registration.domain,
+          domain:   @registration.domain_name,
           authcode: 'ABC123',
           period:   1,
           registrant_handle:  @registration.registrant.handle
