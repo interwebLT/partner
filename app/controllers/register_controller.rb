@@ -20,20 +20,20 @@ class RegisterController < SecureController
   end
 
   def details
-    @domain_name = params[:domain_name]
+    domain_name = params[:domain_name]
 
-    unless @domain_name.blank?
-      @registrant = Contact.new
+    unless domain_name.blank?
+      @registration = Registration.new
+      @registration.domain = domain_name
     else
       redirect_to register_path
     end
   end
 
   def create
-    @domain_name = params[:contact].delete :domain_name
-    @registrant = Contact.new params[:contact]
+    @registration = Registration.new params[:registration]
 
-    if @registrant.save token: current_user.token
+    if @registration.registrant.save token: current_user.token
       register_domain
     else
       render :details
@@ -49,10 +49,10 @@ class RegisterController < SecureController
       order_details: [
         {
           type: 'domain_create',
-          domain:   @domain_name,
+          domain:   @registration.domain,
           authcode: 'ABC123',
           period:   1,
-          registrant_handle:  @registrant.handle
+          registrant_handle:  @registration.registrant.handle
         }
       ]
     }
