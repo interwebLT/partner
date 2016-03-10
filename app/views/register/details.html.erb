@@ -3,7 +3,7 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Registrant for <span class="text-primary"><%= @domain_name %></span></h3>
+  <h3 id="head">Registrant for <span class="text-primary"><%= @registration.domain %></span></h3>
 
   <% if @registration.errors.any? %>
   <div id="warning" class="alert alert-warning">
