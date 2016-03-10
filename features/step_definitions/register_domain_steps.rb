@@ -66,6 +66,7 @@ end
 When /^I try to register a domain with invalid registrant info$/ do
   site.register.details.load domain_name: 'available.ph'
 
+  site.register.details.local_name.set 'Name Only'
   site.register.details.submit.click
 end
 
@@ -117,6 +118,8 @@ Then /^I must be notified that the registrant info is not valid$/ do
   expect(site.register.details).to be_displayed
 
   expect(site.register.details).to have_warning
+
+  expect(site.register.details.local_name.value).to eql 'Name Only'
 end
 
 Then /^I must be notified that domain is no longer available$/ do
