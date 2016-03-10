@@ -50,7 +50,7 @@ class RegisterController < SecureController
           type: 'domain_create',
           domain:   @registration.domain_name,
           authcode: 'ABC123',
-          period:   1,
+          period:   @registration.period.to_i,
           registrant_handle:  @registration.registrant.handle
         }
       ]

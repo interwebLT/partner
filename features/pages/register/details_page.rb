@@ -5,6 +5,7 @@ module Register
     element :warning, '#warning'
 
     element :domain_name, '#registration_form_domain_name'
+    element :period,      '#registration_form_period'
 
     element :local_name,          '#registration_form_local_name'
     element :local_organization,  '#registration_form_local_organization'
@@ -23,6 +24,8 @@ module Register
     element :submit,              "input[name='commit']"
 
     def submit_valid_details
+      self.period.select              '2'
+
       self.local_name.set             'Registrant'
       self.local_organization.set     'Organization'
       self.local_street.set           'Street'

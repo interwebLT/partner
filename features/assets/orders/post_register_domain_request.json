@@ -5,7 +5,7 @@
       "type": "domain_create",
       "domain": "available.ph",
       "authcode": "ABC123",
-      "period": 1,
+      "period": 2,
       "registrant_handle": "123456789ABCDEF"
     }
   ]
