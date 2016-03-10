@@ -13,7 +13,7 @@
 
   <%= simple_form_for @registration, url: register_details_path do |f| %>
 
-    <div id="new-info" class="new-info">
+    <div id="new-info">
       <%= f.hidden_field :domain_name, value: @registration.domain_name %>
       <div><!-- form-group -->
         <label><%= fa_icon 'calendar-o' %> Registration Period </label>
@@ -109,7 +109,31 @@
       </div>
     </div>
     <br>
-    <%= f.submit class: 'btn btn-secondary btn-lg', value: 'Register Domain' %>
+    <div class="register-btn" style="display: none;">
+      <%= f.submit class: 'btn btn-secondary ', value: 'Register Domain'  %>
+      <%= link_to "Edit", "javascript:editInfo()", class: "btn btn-primary" %>
+    </div>
+
+    <div class="submit-btn">
+      <%= link_to "Submit", "javascript:previewInfo()", class: "btn btn-primary" %>
+      <%= link_to "Cancel", "/register", class: "btn btn-default" %>
+    </div>
 
   <% end %>
 </div>
+
+<script type="text/javascript">
+function previewInfo(){
+  $('.submit-btn').hide();
+  $('.register-btn').show();
+  $('form input').attr('readonly', 'readonly');
+  $('form select').attr('disabled', 'disabled');
+}
+function editInfo(){
+  $('.submit-btn').show();
+  $('.register-btn').hide();
+  $('form input').removeAttr("readonly");
+  $('form select').removeAttr('disabled');
+}
+
+</script>
