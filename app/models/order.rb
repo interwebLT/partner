@@ -24,7 +24,11 @@ class Order
   end
 
   def save token:
-    Order.post Order.url(id: id), to_json, token: token
+    order = Order.post Order.url, to_json, token: token
+
+    !order.nil?
+  rescue Api::Model::UnprocessableEntity
+    false
   end
 
   def to_json
