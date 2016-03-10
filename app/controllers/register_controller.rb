@@ -23,7 +23,7 @@ class RegisterController < SecureController
     domain_name = params[:domain_name]
 
     unless domain_name.blank?
-      @registration = Registration.new
+      @registration = RegistrationForm.new
       @registration.domain = domain_name
     else
       redirect_to register_path
@@ -31,7 +31,7 @@ class RegisterController < SecureController
   end
 
   def create
-    @registration = Registration.new params[:registration]
+    @registration = RegistrationForm.new params[:registration_form]
 
     if @registration.registrant.save token: current_user.token
       register_domain

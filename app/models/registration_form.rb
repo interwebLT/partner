@@ -1,4 +1,4 @@
-class Registration
+class RegistrationForm
   include ActiveModel::Model
 
   attr_accessor :domain, :period, :registrant

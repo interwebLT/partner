@@ -4,22 +4,22 @@ module Register
 
     element :warning, '#warning'
 
-    element :domain_name, '#registration_domain'
+    element :domain_name, '#registration_form_domain'
 
-    element :local_name,          '#registration_local_name'
-    element :local_organization,  '#registration_local_organization'
-    element :local_street,        '#registration_local_street'
-    element :local_street2,       '#registration_local_street2'
-    element :local_street3,       '#registration_local_street3'
-    element :local_city,          '#registration_local_city'
-    element :local_state,         '#registration_local_state'
-    element :local_postal_code,   '#registration_local_postal_code'
-    element :local_country_code,  '#registration_local_country_code'
-    element :voice,               '#registration_voice'
-    element :voice_ext,           '#registration_voice_ext'
-    element :fax,                 '#registration_fax'
-    element :fax_ext,             '#registration_fax_ext'
-    element :email,               '#registration_email'
+    element :local_name,          '#registration_form_local_name'
+    element :local_organization,  '#registration_form_local_organization'
+    element :local_street,        '#registration_form_local_street'
+    element :local_street2,       '#registration_form_local_street2'
+    element :local_street3,       '#registration_form_local_street3'
+    element :local_city,          '#registration_form_local_city'
+    element :local_state,         '#registration_form_local_state'
+    element :local_postal_code,   '#registration_form_local_postal_code'
+    element :local_country_code,  '#registration_form_local_country_code'
+    element :voice,               '#registration_form_voice'
+    element :voice_ext,           '#registration_form_voice_ext'
+    element :fax,                 '#registration_form_fax'
+    element :fax_ext,             '#registration_form_fax_ext'
+    element :email,               '#registration_form_email'
     element :submit,              "input[name='commit']"
 
     def submit_valid_details

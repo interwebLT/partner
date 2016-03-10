@@ -1,13 +1,13 @@
-RSpec.describe Registration do
+RSpec.describe RegistrationForm do
   describe '.new' do
-    subject { Registration.new }
+    subject { RegistrationForm.new }
 
     it 'initializes contact' do
       expect(subject.registrant).not_to be nil
     end
 
     context 'when params provided' do
-      subject { Registration.new params }
+      subject { RegistrationForm.new params }
 
       let(:params) {
         {
