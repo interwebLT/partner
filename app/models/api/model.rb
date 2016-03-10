@@ -68,9 +68,9 @@ module Api
       end
 
       def find(id, token:)
-        response = get url(id: id), token: token
-
-        new response
+        new get url(id: id), token: token
+      rescue Api::Model::NotFound
+        nil
       end
 
       def create params, token: nil

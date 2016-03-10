@@ -103,4 +103,24 @@ RSpec.describe Api::Model do
       it { expect { subject }.to raise_error Api::Model::UnprocessableEntity }
     end
   end
+
+  describe '.find' do
+    subject { Dummy.find 1, token: default_token }
+
+    let(:status) { 200 }
+
+    before do
+      stub_request(:get, Dummy.url(id: 1))
+        .with(headers: default_headers)
+        .to_return status: status, body: {}.to_json
+    end
+
+    it { is_expected.not_to be nil }
+
+    context 'when response code is 404' do
+      let(:status)  { 404 }
+
+      it { is_expected.to be nil }
+    end
+  end
 end
