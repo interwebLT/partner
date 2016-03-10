@@ -4,11 +4,18 @@ class Registration
   attr_accessor :domain, :period, :registrant
 
   def initialize params = nil
+    self.registrant = Contact.new
+
+    params.delete(:registrant) if params
+
     super params
+  end
 
-    self.registrant ||= Contact.new
-    self.registrant = Contact.new self.registrant if self.registrant.is_a? Hash
+  def errors
+    self.registrant.errors
+  end
 
-    self
+  def method_missing method, *args
+    self.registrant.send method, *args if self.registrant.respond_to? method
   end
 end
