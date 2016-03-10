@@ -81,6 +81,9 @@ class Contact
   private
 
   def generate_handle
-    '123456789ABCDEF'
+    timestamp = '%10.6f' % Time.now.to_f
+    handle = timestamp.sub('.', '')
+
+    Rails.env.test? ? '123456789ABCDEF' : handle
   end
 end
