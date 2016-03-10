@@ -43,6 +43,8 @@ class Contact
   end
 
   def save token:
+    self.handle ||= generate_handle
+
     return false unless valid?
 
     begin
@@ -74,5 +76,11 @@ class Contact
       fax_ext:            (self.fax_ext.blank?  ? nil : self.fax_ext),
       email:              self.email
     }
+  end
+
+  private
+
+  def generate_handle
+    '123456789ABCDEF'
   end
 end

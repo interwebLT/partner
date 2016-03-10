@@ -17,7 +17,7 @@ RSpec.describe Contact do
                 email:              email
   end
 
-  let(:handle)              { 'handle' }
+  let(:handle)              { '123456789ABCDEF' }
   let(:local_name)          { 'Local Name' }
   let(:local_organization)  { 'Local Organization' }
   let(:local_street)        { 'Local Street' }
@@ -184,14 +184,31 @@ RSpec.describe Contact do
   describe '#save' do
     before do
       stub_request(:post, Contact.url)
+        .with(headers: headers, body: 'contacts/post_request'.body)
         .to_return status: status, body: {}.to_json
     end
+
+    let(:headers) {
+      {
+        'Authorization' => 'Token token=ABC123',
+        'Content-Type'  => 'application/json',
+        'Accept'        => 'application/json'
+      }
+    }
 
     context 'when response code is 200' do
       let(:status) { 200 }
 
       it 'creates contact' do
         expect(subject.save(token: 'ABC123')).to be true
+      end
+
+      context 'when handle is nil' do
+        let(:handle) { nil }
+
+        it 'creates contact' do
+          expect(subject.save(token: 'ABC123')).to be true
+        end
       end
     end
 
@@ -208,7 +225,7 @@ RSpec.describe Contact do
   describe '#as_json' do
     let(:expected_json) {
       {
-        handle:             'handle',
+        handle:             '123456789ABCDEF',
         local_name:         'Local Name',
         local_organization: 'Local Organization',
         local_street:       'Local Street',

@@ -1,0 +1,17 @@
+{
+  "handle": "123456789ABCDEF",
+  "local_name": "Local Name",
+  "local_organization": "Local Organization",
+  "local_street": "Local Street",
+  "local_street2":  null,
+  "local_street3":  null,
+  "local_city": "Local City",
+  "local_state":  null,
+  "local_postal_code":  null,
+  "local_country_code": "PH",
+  "voice":  "+63.1234",
+  "voice_ext":  null,
+  "fax":  null,
+  "fax_ext":  null,
+  "email":  "contact@alpha.ph"
+}

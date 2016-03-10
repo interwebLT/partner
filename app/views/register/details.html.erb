@@ -15,12 +15,6 @@
     <div id="new-info">
       <%= f.hidden_field :domain_name, value: @domain_name %>
       <div><!-- form-group -->
-        <label><%= fa_icon 'user-secret' %> Handle</label>
-        <div class="inputfield">
-          <div><%= f.input :handle, label: false, placeholder: 'Handle' %></div>
-        </div>
-      </div>
-      <div><!-- form-group -->
         <label><%= fa_icon 'user' %> Local Name</label>
         <div class="inputfield">
           <div><%= f.input :local_name, label: false, placeholder: 'Name' %></div>
