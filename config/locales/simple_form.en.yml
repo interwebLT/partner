@@ -32,5 +32,5 @@ en:
         state: Enter State/Province
         postal_code: Enter Postal Code
         voice: Enter Telephone
-        fax: Enter Fax
-        email: Enter Email
+        fax: Fax
+        email:  Email

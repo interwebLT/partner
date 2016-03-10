@@ -12,9 +12,17 @@
   <% end %>
 
   <%= simple_form_for @registration, url: register_details_path do |f| %>
-    <%= f.input :period, collection: [1, 2, 5, 10] %>
-    <div id="new-info">
+
+    <div id="new-info" class="new-info">
       <%= f.hidden_field :domain_name, value: @registration.domain_name %>
+      <div><!-- form-group -->
+        <label><%= fa_icon 'calendar-o' %> Registration Period </label>
+        <div class="inputfield">
+          <div><%= f.input :period, collection: [1, 2, 5, 10], label: false %>
+          </div>
+        </div>
+      </div>
+      <hr>
       <div><!-- form-group -->
         <label><%= fa_icon 'user' %> Name</label>
         <div class="inputfield">
@@ -91,8 +99,17 @@
           <%= f.input :email, label: false %>
         </div>
       </div>
+      <hr>
+      <div class="domain-info-ns"><!-- form-group -->
+        <label><%= fa_icon 'server' %> Nameservers </label>
+        <div class="inputfield">
+          <div></div>
+        </div>
+        <div></div>
+      </div>
     </div>
     <br>
     <%= f.submit class: 'btn btn-secondary btn-lg', value: 'Register Domain' %>
+
   <% end %>
 </div>
