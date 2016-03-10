@@ -17,7 +17,7 @@ When /^I try register an available domain$/  do
 
   expect(site.register.details).to be_displayed
 
-  site.register.details.submit_valid_registrant
+  site.register.details.submit_valid_details
 end
 
 When /^I try register an available domain in all caps$/  do
@@ -39,7 +39,7 @@ When /^I try register an available domain in all caps$/  do
 
   expect(site.register.details).to be_displayed
 
-  site.register.details.submit_valid_registrant
+  site.register.details.submit_valid_details
 end
 
 When /^I try register an existing domain$/  do
@@ -77,7 +77,7 @@ When /^I try to register a domain that was registered at the same time$/ do
 
   site.register.details.load domain_name: 'conflict.ph'
 
-  site.register.details.submit_valid_registrant
+  site.register.details.submit_valid_details
 end
 
 When /^I try to provide a registrant with existing handle$/ do
@@ -85,7 +85,7 @@ When /^I try to provide a registrant with existing handle$/ do
 
   site.register.details.load domain_name: 'existing_handle.ph'
 
-  site.register.details.submit_valid_registrant
+  site.register.details.submit_valid_details
 end
 
 Then /^domain must be registered$/  do

@@ -23,7 +23,7 @@ module Register
     element :email,               '#contact_email'
     element :submit,              "input[name='commit']"
 
-    def submit_valid_registrant
+    def submit_valid_details
       self.handle.set                 'registrant'
       self.local_name.set             'Registrant'
       self.local_organization.set     'Organization'
