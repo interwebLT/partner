@@ -108,6 +108,10 @@
         <div></div>
       </div>
     </div>
+
+    <% @partner.default_nameservers.each do |default_nameserver| %>
+      <%= default_nameserver.name %>
+    <% end %>
     <br>
     <div class="register-btn" style="display: none;">
       <%= f.submit class: 'btn btn-secondary ', value: 'Register Domain'  %>

@@ -24,6 +24,7 @@ class RegisterController < SecureController
 
     unless domain_name.blank?
       @registration = RegistrationForm.new domain_name: domain_name
+      @partner = current_user.partner
     else
       redirect_to register_path
     end
@@ -35,6 +36,8 @@ class RegisterController < SecureController
     if @registration.registrant.save token: current_user.token
       register_domain
     else
+      @partner = current_user.partner
+
       render :details
     end
   end

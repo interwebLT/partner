@@ -1,4 +1,7 @@
 When /^I try register an available domain$/  do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
   stub_get  to: Domain.url(params: { name: 'available.ph' }),
             returns: 'domains/available.ph/get_response'.json
 
@@ -21,6 +24,9 @@ When /^I try register an available domain$/  do
 end
 
 When /^I try register an available domain in all caps$/  do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
   stub_get  to: Domain.url(params: { name: 'available.ph' }),
             returns: 'domains/available.ph/get_response'.json
 
@@ -53,6 +59,9 @@ When /^I try register an existing domain$/  do
 end
 
 When /^I try to provide the registrant without selecting a domain$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
   site.register.details.load
 end
 
@@ -64,6 +73,9 @@ When /^I try to register an invalid domain$/ do
 end
 
 When /^I try to register a domain with invalid registrant info$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
   site.register.details.load domain_name: 'available.ph'
 
   site.register.details.local_name.set 'Name Only'
@@ -71,6 +83,9 @@ When /^I try to register a domain with invalid registrant info$/ do
 end
 
 When /^I try to register a domain that was registered at the same time$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
   stub_post to: Contact.url,
             returns: 'contacts/post_response'.json
 
@@ -82,6 +97,9 @@ When /^I try to register a domain that was registered at the same time$/ do
 end
 
 When /^I try to provide a registrant with existing handle$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
   stub_post to: Contact.url, returns: 422
 
   site.register.details.load domain_name: 'existing_handle.ph'
