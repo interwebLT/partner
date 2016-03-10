@@ -33,40 +33,14 @@ class RegisterController < SecureController
   def create
     @registration = RegistrationForm.new params[:registration_form]
 
-    if @registration.registrant.save token: current_user.token
-      register_domain
+    if @registration.save token: current_user.token
+      redirect_to register_path, notice: 'Domain Registered'
+    elsif Contact.find @registration.registrant.handle, token: current_user.token
+      redirect_to register_path, alert: 'Domain Already Registered!'
     else
       @partner = current_user.partner
 
       render :details
-    end
-  end
-
-  private
-
-  def register_domain
-    json_request = {
-      currency_code: 'USD',
-      ordered_at: DateTime.now.iso8601,
-      order_details: [
-        {
-          type: 'domain_create',
-          domain:   @registration.domain_name,
-          authcode: 'ABC123',
-          period:   @registration.period.to_i,
-          registrant_handle:  @registration.registrant.handle
-        }
-      ]
-    }
-
-    order = Order.new json_request
-
-    begin
-      order.save token: current_user.token
-
-      redirect_to register_path, notice: 'Domain Registered'
-    rescue Api::Model::UnprocessableEntity
-      redirect_to register_path, alert: 'Domain Already Registered!'
     end
   end
 end

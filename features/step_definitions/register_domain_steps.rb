@@ -76,6 +76,9 @@ When /^I try to register a domain with invalid registrant info$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
+  stub_get  to: Contact.url(id: '123456789ABCDEF'),
+            returns:  404
+
   site.register.details.load domain_name: 'available.ph'
 
   site.register.details.local_name.set 'Name Only'
@@ -89,7 +92,11 @@ When /^I try to register a domain that was registered at the same time$/ do
   stub_post to: Contact.url,
             returns: 'contacts/post_response'.json
 
-  stub_post to: Order.url, returns: 422
+  stub_post to: Order.url,
+            returns:  422
+
+  stub_get  to: Contact.url(id: '123456789ABCDEF'),
+            returns: 'contacts/123456789ABCDEF/get_response'.json
 
   site.register.details.load domain_name: 'conflict.ph'
 
@@ -100,7 +107,11 @@ When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_post to: Contact.url, returns: 422
+  stub_post to: Contact.url,
+            returns:  422
+
+  stub_get  to: Contact.url(id: '123456789ABCDEF'),
+            returns: 404
 
   site.register.details.load domain_name: 'existing_handle.ph'
 
