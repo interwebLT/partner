@@ -16,7 +16,7 @@ class Contact
   validates :local_city,          presence: true, length: { minimum: 1, maximum: 50 }
   validates :local_country_code,  presence: true
 
-  validates :voice, presence: true, length: { minimum: 9, maximum: 32 },
+  validates :voice, presence: true, length: { minimum: 8, maximum: 32 },
                                     format: { with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, message: 'Format is +cc.xxxxxxxxxx' }
 
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }

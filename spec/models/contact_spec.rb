@@ -23,7 +23,7 @@ RSpec.describe Contact do
   let(:local_street)        { 'Local Street' }
   let(:local_city)          { 'Local City' }
   let(:local_country_code)  { 'PH' }
-  let(:voice)               { '+63.12345' }
+  let(:voice)               { '+63.1234' }
   let(:email)               { 'contact@alpha.ph' }
 
   let(:local_street2)       { nil }
@@ -218,7 +218,7 @@ RSpec.describe Contact do
         local_state:        nil,
         local_postal_code:  nil,
         local_country_code: 'PH',
-        voice:              '+63.12345',
+        voice:              '+63.1234',
         voice_ext:          nil,
         fax:                nil,
         fax_ext:            nil,

@@ -30,7 +30,7 @@ module Register
       self.local_street.set           'Street'
       self.local_city.set             'City'
       self.local_country_code.select  'Japan'
-      self.voice.set                  '+81.12345'
+      self.voice.set                  '+7.12345'
       self.email.set                  'registrant@available.ph'
 
       self.submit.click
