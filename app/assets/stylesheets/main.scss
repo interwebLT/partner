@@ -152,6 +152,17 @@ label {
   .container {
     width: 1000px;
   }
+  #notice {
+    width: 100%;
+    margin-left: 15px;
+  }
+  #alert{
+    width: 955px;
+    margin-left: 15px;
+  }
+  #alert, #table{
+    width: 955px;
+  }
 }
 
 
