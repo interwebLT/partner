@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  get 'bago', to: 'register#index'
   get 'registration/search', to: 'registration#search'
   get 'registration/create_contact', to: 'registration#create_contact'
   post 'registration/confirm', to: 'registration#confirm'
