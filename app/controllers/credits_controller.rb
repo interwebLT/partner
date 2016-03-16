@@ -19,7 +19,8 @@ class CreditsController < SecureController
     else
       partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token, 'card_credit', params[:verification_code]
     end
-    redirect_to partners_path
+    flash[:notice] = "Replenish credit successful."
+    redirect_to reports_path
   end
 
   private

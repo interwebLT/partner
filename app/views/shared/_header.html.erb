@@ -80,11 +80,12 @@
       <h2><%= yield :banner_title %></h2>
     </div>
     <% if user_signed_in? %>
-      <% if current_user.staff %>
         <div class="col-sm-7 <%= 'hidden' if params[:controller] == 'register' %>">
-          <%= link_to 'Register Domain +', register_path %> <%= link_to 'Replenish Credits', checkout_index_path %>
-        </div>
+      <% if current_user.staff %>
+          <%= link_to 'Register Domain +', register_path %>
       <% end %>
+          <%= link_to 'Replenish Credits', checkout_index_path %>
+        </div>
     <% end %>
   </div>
 </div>
