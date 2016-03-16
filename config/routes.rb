@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'site/sha', to: 'site#sha'
+  get 'transaction', to: 'checkout#transaction'
+  get 'invoice', to: 'checkout#invoice'
+  get 'receipt', to: 'checkout#receipt'
 
   root 'welcome#index'
 

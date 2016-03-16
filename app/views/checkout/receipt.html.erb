@@ -1,0 +1,164 @@
+<style type="text/css">
+.container{
+  margin: 0 auto;
+}
+#invoice-header {
+  display: inline;
+  text-align: right;
+}
+#invoice-header img {
+  display: block;
+  margin-left: 1px;
+  margin-bottom: -100px;
+  width: 140px;
+}
+.spacer {
+    height: 15px;
+}
+table.well th {background-color: #eee;color: #333;}
+table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 18px; font-weight: bold}
+@media print {
+  table.well{
+    background-color: #f5f5f5!important;
+    border: 1px solid #e3e3e3!important;
+    border-radius: 4px!important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)!important;
+  }
+  .table td,    .table th {
+            background-color: inherit !important;
+    }
+  *, *:before, *:after {
+    color:inherit !important;
+    background-color:inherit !important;
+    -webkit-print-color-adjust: exact!important;
+  }
+  html, body { overflow: hidden; }
+  .container {
+    width: auto!important;
+  }
+  html {
+    margin: 0;
+    padding: 0;
+  }
+  body{margin-bottom: 0!important;}
+  header, footer {
+    display: none;
+    visibility: hidden;
+  }
+  section:last-child{
+    page-break-after: avoid!important;
+  }
+}
+</style>
+<div class="container">
+  <div class="spacer"> </div>
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <div id="invoice-header">
+        <div>
+          <%= image_tag "dotphicon2.png", alt: "Brand" %>
+        </div>
+        <div>
+      <address>
+        <strong>dotPH Domains, Inc.</strong><br>
+        Rm A, 7/F, China Overseas Building,<br>
+        139 Hennessy Road,<br>
+        Wanchai, Hong Kong<br>
+        <i class="fa fa-phone"></i> +852-5-8085724
+      </address>
+      </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class=" col-xs-12">
+      <h3>Invoice</h3>
+      <strong>Date: </strong> 2016-03-15 <br>
+      <strong>Invoice No.: FCA5KVA1</strong>
+    </div>
+  </div>
+  <div class="spacer"> </div>
+  <div class="spacer"> </div>
+  <div class="row">
+    <div class=" col-xs-12">
+      <h4 class="text-capitalize"> Partner Information </h4>
+      <div>Partner Organzation</div>
+      <div>Partner Address</div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+  <div class="row">
+  <div class="col-xs-12 ">
+    <h4>Transaction Details</h4>
+    <div class="table-responsive">
+      <table class="table table-hover well table-condensed">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th class="text-right">Amount ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Top Up</td>
+            <td>Replenish Credits</td>
+            <td class="text-right">1,000.00</td>
+          </tr>
+          <tr>
+            <td>Transaction Fee</td>
+            <td> </td>
+            <td class="text-right">7.50</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>TOTAL</td>
+            <td></td>
+            <td class="text-right">$1,007.50</td>
+          </tr>
+        </tfoot>
+      </table>
+      <h4>Payment Details</h4>
+
+      <table class="table table-hover well table-condensed">
+        <tbody>
+          <tr>
+            <th width="35%">Card</th>
+            <td>VISA 1235</td>
+          </tr>
+          <tr>
+            <th>Amount</th>
+            <td>$1,007.50</td>
+          </tr>
+          <tr>
+            <th>Status</th>
+            <td>PAID</td>
+          </tr>
+          <tr>
+            <th>Remarks</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="col-xs-12">
+    <strong> Note: </strong> This invoice is computer generated and no signature is required.
+  </div>
+  <div class="spacer"></div>
+  <div class="col-xs-12   hidden-print">
+    <hr />
+     <a class="btn btn-primary" href="javascript:window.print()">Print Invoice</a>&nbsp;
+     <a class="btn btn-default" href="javascript:window.close()">Close</a>
+  </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('header').hide();
+    $('footer').hide();
+});
+</script>
