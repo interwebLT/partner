@@ -251,3 +251,10 @@ label {
 div.btn label {margin-bottom:0;}
 div.btn {border-radius: 2px; margin-right: 10px;}
 
+nav ul li.nolink{
+    height: 60px;
+    line-height: 28px;
+    padding: 15px 15px 0 15px;
+    border-top: 5px solid transparent;
+    cursor: default;
+}
