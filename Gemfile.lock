@@ -140,6 +140,9 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-tablesorter (1.20.4)
       railties (>= 3.2, < 6)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     json (1.8.3)
     kgio (2.10.0)
     libv8 (3.16.14.13)
@@ -284,6 +287,7 @@ DEPENDENCIES
   jquery-inputmask-rails!
   jquery-rails
   jquery-tablesorter
+  jquery-turbolinks
   rails (= 4.2.5.2)
   rspec-rails
   sass-rails (~> 5.0)
