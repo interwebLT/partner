@@ -2,6 +2,12 @@ class Dummy
   include Api::Model
 
   attr_accessor :id, :name
+
+  def as_json options = nil
+    {
+      name: name
+    }
+  end
 end
 
 class CustomResource
@@ -121,6 +127,42 @@ RSpec.describe Api::Model do
       let(:status)  { 404 }
 
       it { is_expected.to be nil }
+    end
+  end
+
+  describe '#save' do
+    subject do
+      dummy = Dummy.new
+
+      dummy.save token: token
+    end
+
+    let(:headers) {
+      {
+        'Authorization' => 'Token token=ABC123',
+        'Content-Type'  => 'application/json',
+        'Accept'        => 'application/json'
+      }
+    }
+
+    let(:token) { 'ABC123' }
+
+    before do
+      stub_request(:post, Dummy.url)
+        .with(headers: headers, body: 'dummies/post_request'.body)
+        .to_return status: status, body: {}.to_json
+    end
+
+    context 'when response code is 200' do
+      let(:status) { 200 }
+
+      it { is_expected.to be true }
+    end
+
+    context 'when response code is 422' do
+      let(:status) { 422 }
+
+      it { is_expected.to be false }
     end
   end
 end

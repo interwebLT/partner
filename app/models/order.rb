@@ -23,15 +23,7 @@ class Order
     status == ERROR
   end
 
-  def save token:
-    order = Order.post Order.url, to_json, token: token
-
-    !order.nil?
-  rescue Api::Model::UnprocessableEntity
-    false
-  end
-
-  def to_json
+  def as_json options = nil
     {
       currency_code: currency_code,
       order_details: @order_details.collect { |det| det.as_json }

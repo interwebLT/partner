@@ -89,5 +89,13 @@ module Api
         response.map { |entry| new entry }
       end
     end
+
+    def save token:
+      response = self.class.post self.class.url, self.as_json, token: token
+
+      !response.nil?
+    rescue Api::Model::UnprocessableEntity
+      false
+    end
   end
 end
