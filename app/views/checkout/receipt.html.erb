@@ -1,6 +1,10 @@
 <style type="text/css">
 .container{
   margin: 0 auto;
+  font-size: small;
+}
+h3 {
+  margin-top: 0px;
 }
 #invoice-header {
   display: inline;
@@ -13,10 +17,11 @@
   width: 140px;
 }
 .spacer {
-    height: 15px;
+    height: 8px;
 }
+table.well tr th:last-child,table.well tr td:last-child {text-align: right}
 table.well th {background-color: #eee;color: #333;}
-table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 18px; font-weight: bold}
+table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font-weight: bold}
 @media print {
   table.well{
     background-color: #f5f5f5!important;
@@ -51,7 +56,6 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 18px; font
 }
 </style>
 <div class="container">
-  <div class="spacer"> </div>
   <div class="row">
     <div class="col-lg-offset-2 col-lg-8">
       <div id="invoice-header">
@@ -73,7 +77,7 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 18px; font
     <div class=" col-xs-12">
       <h3>Invoice</h3>
       <strong>Date: </strong> 2016-03-15 <br>
-      <strong>Invoice No.: FCA5KVA1</strong>
+      <strong>Invoice No.</strong>: FCA5KVA1
     </div>
   </div>
   <div class="spacer"> </div>
@@ -86,60 +90,58 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 18px; font
     </div>
   </div>
   <div class="spacer"></div>
-  <div class="spacer"></div>
   <div class="row">
   <div class="col-xs-12 ">
     <h4>Transaction Details</h4>
     <div class="table-responsive">
       <table class="table table-hover well table-condensed">
         <thead>
-          <tr>
-            <th>Item</th>
-            <th>Description</th>
-            <th class="text-right">Amount ($)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Top Up</td>
-            <td>Replenish Credits</td>
-            <td class="text-right">1,000.00</td>
-          </tr>
-          <tr>
-            <td>Transaction Fee</td>
-            <td> </td>
-            <td class="text-right">7.50</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>TOTAL</td>
-            <td></td>
-            <td class="text-right">$1,007.50</td>
-          </tr>
-        </tfoot>
+      <tr>
+        <th>Description</th>
+        <th>Amount ($)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Replenish Account</td>
+        <td>1,000.00</td>
+      </tr>
+      <tr>
+        <td>Transaction Fee</td>
+        <td>7.50</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>TOTAL</td>
+        <td>$1,007.50</td>
+      </tr>
+    </tfoot>
       </table>
       <h4>Payment Details</h4>
 
       <table class="table table-hover well table-condensed">
-        <tbody>
-          <tr>
-            <th width="35%">Card</th>
-            <td>VISA 1235</td>
-          </tr>
-          <tr>
-            <th>Amount</th>
-            <td>$1,007.50</td>
-          </tr>
-          <tr>
-            <th>Status</th>
-            <td>PAID</td>
-          </tr>
-          <tr>
-            <th>Remarks</th>
-            <td></td>
-          </tr>
-        </tbody>
+        <thead>
+      <tr>
+        <th>Transaction Date</th>
+        <th>Gateway</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2016-03-10</td>
+        <td>Credit Card</td>
+        <td>$1,007.50</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>TOTAL</td>
+        <td> </td>
+        <td>$1,007.50</td>
+      </tr>
+    </tfoot>
       </table>
     </div>
   </div>
@@ -148,10 +150,9 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 18px; font
     <strong> Note: </strong> This invoice is computer generated and no signature is required.
   </div>
   <div class="spacer"></div>
-  <div class="col-xs-12   hidden-print">
-    <hr />
-     <a class="btn btn-primary" href="javascript:window.print()">Print Invoice</a>&nbsp;
-     <a class="btn btn-default" href="javascript:window.close()">Close</a>
+  <div class="col-xs-12 hidden-print"><hr>
+     <a class="btn btn-primary btn-sm" href="javascript:window.print()">Print Invoice</a>&nbsp;
+     <a class="btn btn-default btn-sm" href="javascript:window.close()">Close</a>
   </div>
 </div>
 </div>

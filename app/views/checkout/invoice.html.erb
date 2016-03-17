@@ -3,36 +3,29 @@
 <% end %>
  <div id="table">
   <h4>Invoice No: <span class="text-success">FCA5KVA1</span></h4>
-  <table id="credits">
+    <table id="credits">
     <thead>
       <tr>
-        <th>Item</th>
         <th>Description</th>
         <th>Amount ($)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Top Up</td>
-        <td>Replenish Credits</td>
+        <td>Replenish Account</td>
         <td>1,000.00</td>
       </tr>
       <tr>
         <td>Transaction Fee</td>
-        <td> </td>
         <td>7.50</td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <td>TOTAL</td>
-        <td></td>
         <td>$1,007.50</td>
       </tr>
     </tfoot>
   </table>
-
-  <button onclick="window.open('/receipt','_blank'); " type="button" class=" btn btn-primary">
-    <i class="fa fa-print"></i>&nbsp;&nbsp;Print Invoice</button>
-
+  <button type="button" class="btn btn-primary" onclick="window.open('/receipt','_blank'); "> &nbsp;<i title="" data-original-title="" class="fa fa-print"></i>  &nbsp; &nbsp;Pay via Credit Card  &nbsp; &nbsp;</button>
 </div>
