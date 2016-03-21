@@ -4,15 +4,15 @@ Feature: Register Domain
     Given I am authenticated as staff
 
   Scenario: Register available domain
-    When  I try register an available domain
+    When  I try to register an available domain
     Then  domain must be registered
 
   Scenario: Register available domain in all caps
-    When  I try register an available domain in all caps
+    When  I try to register an available domain in all caps
     Then  domain must be registered
 
   Scenario: Register existing domain
-    When  I try register an existing domain
+    When  I try to register an existing domain
     Then  I must be notified that domain is not available for registration
 
   Scenario: Registrant with no domain

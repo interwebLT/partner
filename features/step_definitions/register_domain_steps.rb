@@ -1,4 +1,4 @@
-When /^I try register an available domain$/  do
+When /^I try to register an available domain$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
@@ -23,7 +23,7 @@ When /^I try register an available domain$/  do
   site.register.details.submit_valid_details
 end
 
-When /^I try register an available domain in all caps$/  do
+When /^I try to register an available domain in all caps$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
@@ -48,7 +48,7 @@ When /^I try register an available domain in all caps$/  do
   site.register.details.submit_valid_details
 end
 
-When /^I try register an existing domain$/  do
+When /^I try to register an existing domain$/  do
   stub_get  to: Domain.url(params: { name: 'existing.ph' }),
             returns: 'domains/existing.ph/get_response'.json
 
