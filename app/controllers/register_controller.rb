@@ -28,8 +28,13 @@ class RegisterController < SecureController
       @registration = RegistrationForm.new domain_name: domain_name
       @partner      = current_user.partner
 
-      @registration.period      = period unless period.blank?
-      @registration.registrant  = Contact.find handle, token: auth_token unless handle.blank?
+      @registration.period = period unless period.blank?
+
+      unless handle.blank?
+        registrant = Contact.find handle, token: auth_token
+
+        @registration.registrant = registrant if registrant
+      end
     else
       redirect_to register_path
     end

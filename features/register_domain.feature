@@ -49,3 +49,7 @@ Feature: Register Domain
   Scenario: Correct domain details with invalid period
     When  I try to correct domain details with invalid period
     Then  I must provide period as it is blank
+
+  Scenario: Correct domain details with invalid registrant
+    When  I try to correct domain details with invalid registrant
+    Then  I must provide registrant info as it is blank

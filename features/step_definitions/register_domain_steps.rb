@@ -126,8 +126,19 @@ When /^I try to correct domain details with invalid period$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  site.register.details.load  domain_name: 'existing_handle.ph',
+  site.register.details.load  domain_name:  'existing_handle.ph',
                               period:       'invalid'
+end
+
+When /^I try to correct domain details with invalid registrant$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
+  stub_get  to: Contact.url(id: 'invalid'),
+            returns: 404
+
+  site.register.details.load  domain_name:  'existing_handle.ph',
+                              handle:       'invalid'
 end
 
 Then /^domain must be registered$/  do
@@ -205,4 +216,25 @@ Then /^I must provide period as it is blank$/ do
   expect(site.register.details).not_to have_warning
 
   expect(site.register.details.period.value).to be_blank
+end
+
+Then /^I must provide registrant info as it is blank$/ do
+  expect(site.register.details).to be_displayed
+
+  expect(site.register.details).not_to have_warning
+
+  expect(site.register.details.local_name.value).to be_blank
+  expect(site.register.details.local_organization.value).to be_blank
+  expect(site.register.details.local_street.value).to be_blank
+  expect(site.register.details.local_street2.value).to be_blank
+  expect(site.register.details.local_street3.value).to be_blank
+  expect(site.register.details.local_city.value).to be_blank
+  expect(site.register.details.local_state.value).to be_blank
+  expect(site.register.details.local_postal_code.value).to be_blank
+  expect(site.register.details.local_country_code.value).to be_blank
+  expect(site.register.details.voice.value).to be_blank
+  expect(site.register.details.voice_ext.value).to be_blank
+  expect(site.register.details.fax.value).to be_blank
+  expect(site.register.details.fax_ext.value).to be_blank
+  expect(site.register.details.email.value).to be_blank
 end
