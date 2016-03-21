@@ -18,6 +18,9 @@ When /^I provide valid domain details$/ do
             with:     'contacts/post_request'.json,
             returns:  'contacts/post_response'.json
 
+  stub_get  to: Contact.url(id: '123456789ABCDEF'),
+            returns: 'contacts/123456789ABCDEF/get_response'.json
+
   stub_post to: Order.url,
             with:     'orders/post_register_domain_request'.json,
             returns:  'orders/post_register_domain_response'.json
@@ -99,6 +102,8 @@ When /^I try to register a domain that was registered at the same time$/ do
   site.register.details.load domain_name: 'conflict.ph'
 
   site.register.details.submit_valid_details
+
+  site.register.summary.submit.click
 end
 
 When /^I try to provide a registrant with existing handle$/ do
@@ -121,6 +126,12 @@ end
 
 When /^I did not accept the domain details as I have a correction$/ do
   expect(site.register.summary).to be_displayed
+
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
+  stub_get  to: Domain.url(params: { name: 'available.ph' }),
+            returns: 'domains/available.ph/get_response'.json
 
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns: 'contacts/123456789ABCDEF/get_response'.json

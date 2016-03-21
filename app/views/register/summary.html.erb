@@ -1,4 +1,8 @@
-<%= simple_form_for @domain, url: register_summary_path do |f| %>
-<%= f.submit %>
-<%= link_to 'Go Back', register_details_path(domain_name: @domain_name, period: @period, handle: @handle), id: :cancel %>
+<%= simple_form_for @registration, url: register_summary_path do |f| %>
+  <%= f.hidden_field :domain_name,  value: @registration.domain_name %>
+  <%= f.hidden_field :period,       value: @registration.period %>
+  <%= f.hidden_field :handle,       value: @registration.handle %>
+
+  <%= f.submit %>
+  <%= link_to 'Go Back', register_details_path(domain_name: @registration.domain_name, period: @registration.period, handle: @registration.registrant.handle), id: :cancel %>
 <% end %>

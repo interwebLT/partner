@@ -43,12 +43,10 @@ class RegisterController < SecureController
   def create_registrant
     @registration = RegistrationForm.new params[:registration_form]
 
-    if @registration.save token: current_user.token
+    if @registration.registrant.save token: auth_token
       redirect_to action: :summary, domain_name:  @registration.domain_name,
                                     period:       @registration.period,
                                     handle:       @registration.registrant.handle
-    elsif Contact.find @registration.registrant.handle, token: current_user.token
-      redirect_to register_path, alert: 'Domain Already Registered!'
     else
       @partner = current_user.partner
 
@@ -57,14 +55,19 @@ class RegisterController < SecureController
   end
 
   def summary
-    @domain_name  = params[:domain_name]
-    @period       = params[:period]
-    @handle       = params[:handle]
-
-    @domain = Domain.new
+    @registration = RegistrationForm.new
+    @registration.domain_name = params[:domain_name]
+    @registration.period      = params[:period]
+    @registration.registrant  = Contact.find params[:handle], token: auth_token
   end
 
   def create_order
-    redirect_to register_path, notice: 'Domain Registered'
+    registration = RegistrationForm.new params[:registration_form]
+
+    if registration.order.save token: auth_token
+      redirect_to register_path, notice: 'Domain Registered'
+    else
+      redirect_to register_path, alert: 'Domain Already Registered!'
+    end
   end
 end
