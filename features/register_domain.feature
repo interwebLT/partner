@@ -10,6 +10,7 @@ Feature: Register Domain
 
   Scenario: Register available domain in all caps
     When  I try to register an available domain in all caps
+    And   I provide valid domain details
     Then  domain must be registered
 
   Scenario: Register existing domain
@@ -25,7 +26,8 @@ Feature: Register Domain
     Then  I must be notified that domain is not valid
 
   Scenario: Invalid registrant info
-    When  I try to register a domain with invalid registrant info
+    When  I try to register an available domain
+    But   I provide invalid registrant info
     Then  I must be notified that the registrant info is not valid
 
   Scenario: Register domain conflict

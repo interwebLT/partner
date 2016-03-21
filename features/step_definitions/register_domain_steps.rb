@@ -32,22 +32,12 @@ When /^I try to register an available domain in all caps$/  do
   stub_get  to: Domain.url(params: { name: 'available.ph' }),
             returns: 'domains/available.ph/get_response'.json
 
-  stub_post to: Contact.url,
-            with:     'contacts/post_request'.json,
-            returns:  'contacts/post_response'.json
-
-  stub_post to: Order.url,
-            with:     'orders/post_register_domain_request'.json,
-            returns:  'orders/post_register_domain_response'.json
-
   site.register.load
 
   site.register.domain_name.set 'AVAILABLE.PH'
   site.register.submit.click
 
   expect(site.register.details).to be_displayed
-
-  site.register.details.submit_valid_details
 end
 
 When /^I try to register an existing domain$/  do
@@ -74,14 +64,9 @@ When /^I try to register an invalid domain$/ do
   site.register.submit.click
 end
 
-When /^I try to register a domain with invalid registrant info$/ do
-  stub_get  to: User.partner_url,
-            returns:  'partners/1/get_response'.json
-
+When /^I provide invalid registrant info$/ do
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns:  404
-
-  site.register.details.load domain_name: 'available.ph'
 
   site.register.details.local_name.set 'Name Only'
   site.register.details.submit.click
