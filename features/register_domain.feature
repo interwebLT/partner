@@ -46,18 +46,18 @@ Feature: Register Domain
     But   I did not accept the domain details as I have a correction
     Then  I must be able to correct my domain details
 
-  Scenario: Correct domain details with invalid domain
-    When  I try to correct domain details with invalid domain
+  Scenario: Correct domain details when domain is invalid
+    When  I try to correct domain details when domain is invalid
     Then  I must be prompted for a valid domain to register
 
-  Scenario: Correct domain details with existing domain
-    When  I try to correct domain details with existing domain
+  Scenario: Correct domain details when domain exists
+    When  I try to correct domain details when domain exists
     Then  I must be prompted for a valid domain to register
 
-  Scenario: Correct domain details with invalid period
-    When  I try to correct domain details with invalid period
+  Scenario: Correct domain details when period is invalid
+    When  I try to correct domain details when period is invalid
     Then  I must provide period as it is blank
 
-  Scenario: Correct domain details with invalid registrant
-    When  I try to correct domain details with invalid registrant
+  Scenario: Correct domain details when registrant is invalid
+    When  I try to correct domain details when registrant is invalid
     Then  I must provide registrant info as it is blank

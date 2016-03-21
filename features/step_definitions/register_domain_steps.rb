@@ -128,18 +128,18 @@ When /^I did not accept the domain details as I have a correction$/ do
   site.register.summary.cancel.click
 end
 
-When /^I try to correct domain details with invalid domain$/ do
+When /^I try to correct domain details when domain is invalid$/ do
   site.register.details.load domain_name: 'invalid'
 end
 
-When /^I try to correct domain details with existing domain$/ do
+When /^I try to correct domain details when domain exists$/ do
   stub_get  to: Domain.url(params: { name: 'existing.ph' }),
             returns: 'domains/existing.ph/get_response'.json
 
   site.register.details.load domain_name: 'existing.ph'
 end
 
-When /^I try to correct domain details with invalid period$/ do
+When /^I try to correct domain details when period is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
@@ -150,7 +150,7 @@ When /^I try to correct domain details with invalid period$/ do
                               period:       'invalid'
 end
 
-When /^I try to correct domain details with invalid registrant$/ do
+When /^I try to correct domain details when registrant is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
