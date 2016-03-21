@@ -113,31 +113,9 @@
       <%= default_nameserver.name %>
     <% end %>
     <br>
-    <div class="register-btn" style="display: none;">
+    <div class="register-btn">
       <%= f.submit class: 'btn btn-secondary ', value: 'Register Domain'  %>
       <%= link_to "Edit", "javascript:editInfo()", class: "btn btn-primary" %>
     </div>
-
-    <div class="submit-btn">
-      <%= link_to "Submit", "javascript:previewInfo()", class: "btn btn-primary" %>
-      <%= link_to "Cancel", "/register", class: "btn btn-default" %>
-    </div>
-
   <% end %>
 </div>
-
-<script type="text/javascript">
-function previewInfo(){
-  $('.submit-btn').hide();
-  $('.register-btn').show();
-  $('form input').attr('readonly', 'readonly');
-  $('form select').attr('disabled', 'disabled');
-}
-function editInfo(){
-  $('.submit-btn').show();
-  $('.register-btn').hide();
-  $('form input').removeAttr("readonly");
-  $('form select').removeAttr('disabled');
-}
-
-</script>
