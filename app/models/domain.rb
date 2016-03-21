@@ -66,7 +66,7 @@ class Domain
 
     too_short = (root_name.length < 3)
     too_long = (root_name.length > 63)
-    special_chars = (root_name =~ /^[a-zA-Z0-9-]*$/).nil?
+    special_chars = (root_name =~ /^[a-zA-Z0-9\-_]*$/).nil?
     invalid_extension = (not VALID_EXTENSIONS.include? extension)
     numbers_only = !(root_name =~ /^[0-9]*$/).nil?
     starts_with_dash = !(root_name =~ /^-/).nil?
