@@ -24,7 +24,7 @@ class RegisterController < SecureController
     period      = params[:period]
     handle      = params[:handle]
 
-    unless domain_name.blank?
+    if Domain.valid? domain_name
       @registration = RegistrationForm.new domain_name: domain_name
       @partner      = current_user.partner
 

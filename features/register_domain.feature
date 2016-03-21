@@ -21,7 +21,7 @@ Feature: Register Domain
 
   Scenario: Registrant with no domain
     When  I try to provide the registrant without selecting a domain
-    Then  I must be first asked a domain to register
+    Then  I must be prompted for a valid domain to register
 
   Scenario: Register invalid domain
     When  I try to register an invalid domain
@@ -45,6 +45,10 @@ Feature: Register Domain
     And   I provide valid domain details
     But   I did not accept the domain details as I have a correction
     Then  I must be able to correct my domain details
+
+  Scenario: Correct domain details with invalid domain
+    When  I try to correct domain details with invalid domain
+    Then  I must be prompted for a valid domain to register
 
   Scenario: Correct domain details with invalid period
     When  I try to correct domain details with invalid period

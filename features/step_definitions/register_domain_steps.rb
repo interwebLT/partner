@@ -122,11 +122,15 @@ When /^I did not accept the domain details as I have a correction$/ do
   site.register.summary.cancel.click
 end
 
+When /^I try to correct domain details with invalid domain$/ do
+  site.register.details.load domain_name: 'invalid'
+end
+
 When /^I try to correct domain details with invalid period$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  site.register.details.load  domain_name:  'existing_handle.ph',
+  site.register.details.load  domain_name:  'available.ph',
                               period:       'invalid'
 end
 
@@ -137,7 +141,7 @@ When /^I try to correct domain details with invalid registrant$/ do
   stub_get  to: Contact.url(id: 'invalid'),
             returns: 404
 
-  site.register.details.load  domain_name:  'existing_handle.ph',
+  site.register.details.load  domain_name:  'available.ph',
                               handle:       'invalid'
 end
 
@@ -153,7 +157,7 @@ Then /^I must be notified that domain is not available for registration$/  do
   expect(site.register.alert.text).to eql 'Domain Not Available'
 end
 
-Then /^I must be first asked a domain to register$/ do
+Then /^I must be prompted for a valid domain to register$/ do
   expect(site.register).to be_displayed
 
   expect(site.register).not_to have_notice

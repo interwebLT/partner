@@ -1,6 +1,6 @@
 module Register
   class DetailsPage < SitePrism::Page
-    set_url '/register/details{?domain_name*}'
+    set_url '/register/details{?domain_name,period,handle}'
 
     element :warning, '#warning'
 
