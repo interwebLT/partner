@@ -25,6 +25,10 @@ When /^I provide valid domain details$/ do
   site.register.details.submit_valid_details
 end
 
+When /^I accept the registration details and charges$/ do
+
+end
+
 When /^I try to register an available domain in all caps$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
