@@ -3,6 +3,27 @@
   <%= f.hidden_field :period,       value: @registration.period %>
   <%= f.hidden_field :handle,       value: @registration.handle %>
 
+  <table>
+    <tbody>
+      <tr>
+        <th>Domain</th>
+        <td><%= @registration.domain_name %></td>
+      </tr>
+      <tr>
+        <th>Period</th>
+        <td><%= @registration.period %></td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <td><%= @registration.local_name %></td>
+      </tr>
+      <tr>
+        <th>Organization</th>
+        <td><%= @registration.local_organization %></td>
+      </tr>
+    </tbody>
+  </table>
+
   <%= f.submit %>
   <%= link_to 'Go Back', register_details_path(domain_name: @registration.domain_name, period: @registration.period, handle: @registration.registrant.handle), id: :cancel %>
 <% end %>
