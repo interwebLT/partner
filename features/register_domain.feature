@@ -5,6 +5,7 @@ Feature: Register Domain
 
   Scenario: Register available domain
     When  I try to register an available domain
+    And   I provide valid domain details
     Then  domain must be registered
 
   Scenario: Register available domain in all caps

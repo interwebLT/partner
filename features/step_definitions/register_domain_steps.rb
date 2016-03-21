@@ -5,6 +5,15 @@ When /^I try to register an available domain$/  do
   stub_get  to: Domain.url(params: { name: 'available.ph' }),
             returns: 'domains/available.ph/get_response'.json
 
+  site.register.load
+
+  site.register.domain_name.set 'available.ph'
+  site.register.submit.click
+
+  expect(site.register.details).to be_displayed
+end
+
+When /^I provide valid domain details$/ do
   stub_post to: Contact.url,
             with:     'contacts/post_request'.json,
             returns:  'contacts/post_response'.json
@@ -12,13 +21,6 @@ When /^I try to register an available domain$/  do
   stub_post to: Order.url,
             with:     'orders/post_register_domain_request'.json,
             returns:  'orders/post_register_domain_response'.json
-
-  site.register.load
-
-  site.register.domain_name.set 'available.ph'
-  site.register.submit.click
-
-  expect(site.register.details).to be_displayed
 
   site.register.details.submit_valid_details
 end
