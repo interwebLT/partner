@@ -12,4 +12,8 @@ class SecureController < ApplicationController
   def staff_only
     current_user.staff || resource_not_found
   end
+
+  def auth_token
+    current_user.token
+  end
 end
