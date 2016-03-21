@@ -40,7 +40,7 @@ class RegisterController < SecureController
     end
   end
 
-  def create
+  def create_registrant
     @registration = RegistrationForm.new params[:registration_form]
 
     if @registration.save token: current_user.token
