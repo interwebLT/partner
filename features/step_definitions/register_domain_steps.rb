@@ -84,6 +84,9 @@ When /^I try to register a domain that was registered at the same time$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
+  stub_get  to: Domain.url(params: { name: 'conflict.ph' }),
+            returns: 'domains/conflict.ph/get_response'.json
+
   stub_post to: Contact.url,
             returns: 'contacts/post_response'.json
 
@@ -101,6 +104,9 @@ end
 When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
+
+  stub_get  to: Domain.url(params: { name: 'existing_handle.ph' }),
+            returns: 'domains/existing_handle.ph/get_response'.json
 
   stub_post to: Contact.url,
             returns:  422
@@ -126,9 +132,19 @@ When /^I try to correct domain details with invalid domain$/ do
   site.register.details.load domain_name: 'invalid'
 end
 
+When /^I try to correct domain details with existing domain$/ do
+  stub_get  to: Domain.url(params: { name: 'existing.ph' }),
+            returns: 'domains/existing.ph/get_response'.json
+
+  site.register.details.load domain_name: 'existing.ph'
+end
+
 When /^I try to correct domain details with invalid period$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
+
+  stub_get  to: Domain.url(params: { name: 'available.ph' }),
+            returns: 'domains/available.ph/get_response'.json
 
   site.register.details.load  domain_name:  'available.ph',
                               period:       'invalid'
@@ -137,6 +153,9 @@ end
 When /^I try to correct domain details with invalid registrant$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
+
+  stub_get  to: Domain.url(params: { name: 'available.ph' }),
+            returns: 'domains/available.ph/get_response'.json
 
   stub_get  to: Contact.url(id: 'invalid'),
             returns: 404

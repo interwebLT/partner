@@ -50,6 +50,10 @@ Feature: Register Domain
     When  I try to correct domain details with invalid domain
     Then  I must be prompted for a valid domain to register
 
+  Scenario: Correct domain details with existing domain
+    When  I try to correct domain details with existing domain
+    Then  I must be prompted for a valid domain to register
+
   Scenario: Correct domain details with invalid period
     When  I try to correct domain details with invalid period
     Then  I must provide period as it is blank
