@@ -9,11 +9,11 @@ When /^I try to register an available domain$/  do
 
   site.register.domain_name.set 'available.ph'
   site.register.submit.click
-
-  expect(site.register.details).to be_displayed
 end
 
 When /^I provide valid domain details$/ do
+  expect(site.register.details).to be_displayed
+
   stub_post to: Contact.url,
             with:     'contacts/post_request'.json,
             returns:  'contacts/post_response'.json
@@ -69,6 +69,8 @@ When /^I try to register an invalid domain$/ do
 end
 
 When /^I provide invalid registrant info$/ do
+  expect(site.register.details).to be_displayed
+
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns:  404
 
