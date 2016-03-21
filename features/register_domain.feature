@@ -39,3 +39,9 @@ Feature: Register Domain
   Scenario: Registrant handle exists
     When  I try to provide a registrant with existing handle
     Then  I must be notified that the registrant already exists
+
+  Scenario: Correct domain details
+    When  I try to register an available domain
+    And   I provide valid domain details
+    But   I did not accept the domain details as I have a correction
+    Then  I must be able to correct my domain details

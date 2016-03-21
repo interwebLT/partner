@@ -1,2 +1,17 @@
 {
+  "handle": "123456789ABCDEF",
+  "local_name": "Registrant",
+  "local_organization": "Organization",
+  "local_street": "Street",
+  "local_street2":  null,
+  "local_street3":  null,
+  "local_city": "City",
+  "local_state":  null,
+  "local_postal_code":  null,
+  "local_country_code": "JP",
+  "voice":  "+7.12345",
+  "voice_ext":  null,
+  "fax":  null,
+  "fax_ext":  null,
+  "email":  "registrant@available.ph"
 }

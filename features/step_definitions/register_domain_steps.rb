@@ -113,6 +113,15 @@ When /^I try to provide a registrant with existing handle$/ do
   site.register.details.submit_valid_details
 end
 
+When /^I did not accept the domain details as I have a correction$/ do
+  expect(site.register.summary).to be_displayed
+
+  stub_get  to: Contact.url(id: '123456789ABCDEF'),
+            returns: 'contacts/123456789ABCDEF/get_response'.json
+
+  site.register.summary.cancel.click
+end
+
 Then /^domain must be registered$/  do
   expect(site.register).to be_displayed
 
@@ -156,4 +165,28 @@ Then /^I must be notified that the registrant already exists$/ do
   expect(site.register.details).to be_displayed
 
   expect(site.register.details).to have_warning
+end
+
+Then /^I must be able to correct my domain details$/ do
+  expect(site.register.details).to be_displayed
+
+  expect(site.register.details).not_to have_warning
+
+  expect(site.register.details.domain_name.value).to eql 'available.ph'
+  expect(site.register.details.period.value).to eql '2'
+
+  expect(site.register.details.local_name.value).to eql 'Registrant'
+  expect(site.register.details.local_organization.value).to eql 'Organization'
+  expect(site.register.details.local_street.value).to eql 'Street'
+  expect(site.register.details.local_street2.value).to be nil
+  expect(site.register.details.local_street3.value).to be nil
+  expect(site.register.details.local_city.value).to eql 'City'
+  expect(site.register.details.local_state.value).to be nil
+  expect(site.register.details.local_postal_code.value).to be nil
+  expect(site.register.details.local_country_code.value).to eql 'JP'
+  expect(site.register.details.voice.value).to eql '+7.12345'
+  expect(site.register.details.voice_ext.value).to be nil
+  expect(site.register.details.fax.value).to be nil
+  expect(site.register.details.fax_ext.value).to be nil
+  expect(site.register.details.email.value).to eql 'registrant@available.ph'
 end
