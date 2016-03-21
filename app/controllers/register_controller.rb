@@ -34,7 +34,7 @@ class RegisterController < SecureController
     @registration = RegistrationForm.new params[:registration_form]
 
     if @registration.save token: current_user.token
-      redirect_to register_path, notice: 'Domain Registered'
+      redirect_to action: :summary, domain_name: @registration.domain_name
     elsif Contact.find @registration.registrant.handle, token: current_user.token
       redirect_to register_path, alert: 'Domain Already Registered!'
     else
@@ -42,5 +42,13 @@ class RegisterController < SecureController
 
       render :details
     end
+  end
+
+  def summary
+    @domain = Domain.new
+  end
+
+  def create_order
+    redirect_to register_path, notice: 'Domain Registered'
   end
 end

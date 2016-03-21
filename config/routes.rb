@@ -49,6 +49,9 @@ Rails.application.routes.draw do
   scope path: :register, as: :register do
     get   :details, to: 'register#details'
     post  :details, to: 'register#create'
+
+    get   :summary, to: 'register#summary'
+    post  :summary, to: 'register#create_order'
   end
 
   resources :checkout, only: [:index] do

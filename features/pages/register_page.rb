@@ -11,4 +11,8 @@ class RegisterPage < SitePrism::Page
   def details
     @details ||= Register::DetailsPage.new
   end
+
+  def summary
+    @summary ||= Register::SummaryPage.new
+  end
 end

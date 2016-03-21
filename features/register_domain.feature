@@ -12,6 +12,7 @@ Feature: Register Domain
   Scenario: Register available domain in all caps
     When  I try to register an available domain in all caps
     And   I provide valid domain details
+    And   I accept the registration details and charges
     Then  domain must be registered
 
   Scenario: Register existing domain

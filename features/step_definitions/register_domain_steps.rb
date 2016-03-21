@@ -26,7 +26,9 @@ When /^I provide valid domain details$/ do
 end
 
 When /^I accept the registration details and charges$/ do
+  expect(site.register.summary).to be_displayed
 
+  site.register.summary.submit.click
 end
 
 When /^I try to register an available domain in all caps$/  do
