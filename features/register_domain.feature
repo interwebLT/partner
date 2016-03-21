@@ -45,3 +45,7 @@ Feature: Register Domain
     And   I provide valid domain details
     But   I did not accept the domain details as I have a correction
     Then  I must be able to correct my domain details
+
+  Scenario: Correct domain details with invalid period
+    When  I try to correct domain details with invalid period
+    Then  I must provide period as it is blank

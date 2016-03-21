@@ -122,6 +122,14 @@ When /^I did not accept the domain details as I have a correction$/ do
   site.register.summary.cancel.click
 end
 
+When /^I try to correct domain details with invalid period$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
+  site.register.details.load  domain_name: 'existing_handle.ph',
+                              period:       'invalid'
+end
+
 Then /^domain must be registered$/  do
   expect(site.register).to be_displayed
 
@@ -189,4 +197,12 @@ Then /^I must be able to correct my domain details$/ do
   expect(site.register.details.fax.value).to be nil
   expect(site.register.details.fax_ext.value).to be nil
   expect(site.register.details.email.value).to eql 'registrant@available.ph'
+end
+
+Then /^I must provide period as it is blank$/ do
+  expect(site.register.details).to be_displayed
+
+  expect(site.register.details).not_to have_warning
+
+  expect(site.register.details.period.value).to be_blank
 end
