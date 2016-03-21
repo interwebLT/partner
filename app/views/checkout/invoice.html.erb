@@ -1,9 +1,9 @@
 <% content_for :banner_title do %>
   <%= fa_icon 'paste lg' %>&nbsp;Invoice
 <% end %>
- <div id="table">
-  <h4>Invoice No: <span class="text-success">FCA5KVA1</span></h4>
-    <table id="credits">
+<div id="table">
+  <h4>Invoice No: <span class="text-success"><%= @credit.credit_number %></span></h4>
+  <table id="credits">
     <thead>
       <tr>
         <th>Description</th>
@@ -13,19 +13,21 @@
     <tbody>
       <tr>
         <td>Top-up Balance</td>
-        <td>1,000.00</td>
+        <td><%= @amount.format %></td>
       </tr>
       <tr>
         <td>Transaction Fee</td>
-        <td>7.50</td>
+        <td><%= @transaction_fee.format %> </td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <td>TOTAL</td>
-        <td>$1,007.50</td>
+        <td><%= @total.format %></td>
       </tr>
     </tfoot>
   </table>
-  <button type="submit" class="btn btn-primary pull-right" onclick="window.open('/receipt','_blank'); "> &nbsp;<i title="" data-original-title="" class="fa fa-print"></i>  &nbsp; &nbsp;Pay via Credit Card  &nbsp; &nbsp;</button>
+
+  <button onclick="window.open('<%= "#{receipt_path}?id=#{@credit.id}" %>','_blank'); " type="button" class=" btn btn-primary"><i class="fa fa-print"></i>&nbsp;&nbsp;Print Invoice</button>
+
 </div>

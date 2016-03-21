@@ -1,0 +1,15 @@
+development:
+  logo: dotphicon2.png
+  organization_name: dotPH Domains, Inc.
+  address1: Rm A, 7/F, China Overseas Building,
+  address2: 139 Hennessy Road,
+  address3: Wanchai, Hong Kong
+  phone: +852-5-8085724
+
+production:
+  logo: dotphicon2.png
+  organization_name: dotPH Domains, Inc.
+  address1: Rm A, 7/F, China Overseas Building,
+  address2: 139 Hennessy Road,
+  address3: Wanchai, Hong Kong
+  phone: +852-5-8085724

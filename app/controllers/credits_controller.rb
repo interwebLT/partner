@@ -14,13 +14,16 @@ class CreditsController < SecureController
     else
       partner = current_user.partner
     end
-    if params[:verification_code].blank?
+    credit = if params[:verification_code].blank?
       partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token
     else
       partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token, 'card_credit', params[:verification_code]
     end
     flash[:notice] = "Replenish credit successful."
-    redirect_to reports_path
+  puts "credit id #{credit[:id]}"
+    ReplenishMailer.receipt(id: credit[:id], token: current_user.token).deliver_now
+  
+    redirect_to invoice_path :id => credit[:id]
   end
 
   private

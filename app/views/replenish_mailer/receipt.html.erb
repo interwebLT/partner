@@ -1,0 +1,17 @@
+<p>Dear <%= @partner.name %>,</p>
+
+<p>We would like to inform you that your application for transaction <%= @credit.credit_number %> has been accepted.</p>
+
+<p>
+Top-up Amount: <%= @amount.format %><br>
+Transaction Fee: <%= @transaction_fee.format %><br>
+</p>
+<p>Total: <%= @total.format %></p>
+
+<p>Thank you.</p>
+
+<p>
+Best regards,<br>
+dotPH<br>
+www.dot.ph<br>
+</p>

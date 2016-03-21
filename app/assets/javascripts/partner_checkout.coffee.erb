@@ -1,4 +1,4 @@
-handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
+handlePaymentToken = (token, auth_token, partner_id, partner_email, value, credit) ->
   $('#payment_form').html "<script> \
 		var createCharge = function(amount, auth_token, partner_id) { \
 			var form = $('<form>'); \
@@ -59,7 +59,7 @@ handlePaymentToken = (token, auth_token, partner_id, partner_email, value) ->
       cardCharged: function(event) { \
         data = event.data;\
         message = event.msg; \
-				verifyCharge('" + value + "', '" + auth_token + "', '" + partner_id + "'); \
+				verifyCharge('" + credit + "', '" + auth_token + "', '" + partner_id + "'); \
       } \
     });</script>"
 
@@ -90,9 +90,8 @@ getPaymentTokenFor = (element, amount) ->
         element.attr "data-auth-token", response.form_authenticity_token
         element.attr "data-partner-id", response.partner_id
         element.attr "data-partner-email", response.partner_email
-        count++
-        if count is 6
-          $("#load-credit-page").faLoading(false)
+        handlePaymentToken element.attr("data-payment-token"), element.attr("data-auth-token"), element.attr("data-partner-id"), element.attr("data-partner-email"), amount, element.attr("data-credit")
+        $("#transaction-page").faLoading(false)
     error: (jqXHR, textStatus, errorThrown) ->
       jsonResponse = jQuery.parseJSON jqXHR.responseText
       showError jsonResponse.message
@@ -113,12 +112,6 @@ clearErrors = ->
 count = 0
 
 $(document).ready ->
-  $("#load-credit-page").faLoading()
-  $("input[name='amount']").each ->
-    getPaymentTokenFor $(this), $(this).val()
-  $("input[name='amount']").change (evt) ->
-#    value = $("input[name='amount']:checked").val()
-    clearErrors()
-    handlePaymentToken $(this).attr("data-payment-token"), $(this).attr("data-auth-token"), $(this).attr("data-partner-id"), $(this).attr("data-partner-email"), $(this).val()
-#    getPaymentToken value
-  
+  if $('#replenish_total')[0]
+    $("#transaction-page").faLoading()
+    getPaymentTokenFor $('#replenish_total'), $('#replenish_total').attr("data-value")

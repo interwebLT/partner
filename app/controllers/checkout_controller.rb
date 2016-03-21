@@ -1,9 +1,42 @@
 class CheckoutController < SecureController
   # Is it staff or admin only? CreditsController.create on registry is admin_only
 	#before_filter :staff_only, :only => [:payment_token, :index]
-	
+  
 	def index
 	end
+  
+  def transaction
+    unless is_number? params[:amount]
+      flash[:alert] = "Please choose from the following replenish amounts."
+      redirect_to checkout_index_path and return
+    end
+    @amount = params[:amount].money
+    @transaction_fee = @amount * Credit::TRANSACTION_FEE
+    @total = @amount + @transaction_fee
+  end
+  
+  def invoice
+    if params[:id].blank?
+      flash[:alert] = "Record not found."
+      redirect_to root_path and return
+    end
+    @credit = Credit.find params[:id], token: current_user.token
+    @amount = @credit.amount.money
+    @transaction_fee = @amount * Credit::TRANSACTION_FEE
+    @total = @amount + @transaction_fee
+  end
+  
+  def receipt
+    if params[:id].blank?
+      flash[:alert] = "Record not found."
+      redirect_to root_path and return
+    end
+    @credit = Credit.find params[:id], token: current_user.token
+    @partner = Partner.find @credit.partner_id, token: current_user.token
+    @amount = @credit.amount.money
+    @transaction_fee = @amount * Credit::TRANSACTION_FEE
+    @total = @amount + @transaction_fee
+  end
 	
 	def payment_token
     payload = payment_token_payload params[:value]
@@ -53,4 +86,8 @@ class CheckoutController < SecureController
 		}.to_json
 	end
 	
+  def is_number? string
+    true if Float(string) rescue false
+  end
+
 end

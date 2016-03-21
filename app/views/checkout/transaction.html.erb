@@ -1,7 +1,7 @@
 <% content_for :banner_title do %>
   <%= fa_icon 'file lg' %>&nbsp;Transaction
 <% end %>
- <div id="table">
+ <div id="transaction-page">
   <table id="credits">
     <thead>
       <tr>
@@ -12,20 +12,21 @@
     <tbody>
       <tr>
         <td>Top-up Balance</td>
-        <td>1,000.00</td>
+        <td><%= @amount.format %></td>
       </tr>
       <tr>
         <td>Transaction Fee</td>
-        <td>7.50</td>
+        <td><%= @transaction_fee.format %></td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <td>TOTAL</td>
-        <td>$1,007.50</td>
+        <td id="replenish_total" data-value="<%= @total.cents %>" data-credit="<%= @amount.cents %>"><%= @total.format %></td>
       </tr>
     </tfoot>
   </table>
-
-  <button type="button" class="btn btn-primary pull-right" onclick="location.href='/invoice';"> &nbsp;<i title="" data-original-title="" class="fa fa-credit-card "></i>  &nbsp; &nbsp;Pay via Credit Card  &nbsp; &nbsp;</button>
+  <%= javascript_include_tag 'https://sandbox.checkout.com/js/v1/checkout.js' %>
+  <form id="payment_form" method="POST">
+  </form>
 </div>

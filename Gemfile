@@ -27,6 +27,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'letter_opener'
 end
 
 gem 'devise'
@@ -41,3 +42,4 @@ gem 'country_select'
 gem 'countries', require: 'countries/global'
 gem 'exception_notification'
 gem 'jquery-inputmask-rails', github: 'knapo/jquery-inputmask-rails'
+gem 'money-rails', '>= 1.0.0'
