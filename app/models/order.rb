@@ -1,14 +1,24 @@
 class Order
   include Api::Model
 
-  attr_accessor :id, :partner, :order_number, :total_price, :fee, :ordered_at, :status, :currency_code, :order_details
+  attr_accessor :id, :partner, :order_number, :ordered_at,
+                :type, :price, :domain, :period, :registrant_handle
+
+  # Legacy
+  attr_accessor :total_price, :fee, :status, :currency_code, :order_details
 
   COMPLETE  = 'complete'
   PENDING   = 'pending'
   ERROR     = 'error'
 
   def order_details= order_details
-    @order_details = order_details.collect { |order_detail| OrderDetail.new order_detail }
+    order_detail = order_details.last
+
+    self.type               = order_detail[:type]
+    self.price              = order_detail[:price]
+    self.domain             = order_detail[:domain]
+    self.period             = order_detail[:period]
+    self.registrant_handle  = order_detail[:registrant_handle]
   end
 
   def complete?
@@ -25,8 +35,16 @@ class Order
 
   def as_json options = nil
     {
-      currency_code: currency_code,
-      order_details: @order_details.collect { |det| det.as_json }
+      currency_code: 'USD',
+      order_details: [
+        {
+          type:     self.type,
+          domain:   self.domain,
+          authcode: 'ABC123',
+          period:   self.period,
+          registrant_handle:  self.registrant_handle
+        }
+      ]
     }
   end
 end

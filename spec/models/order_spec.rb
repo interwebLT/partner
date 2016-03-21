@@ -28,12 +28,14 @@ RSpec.describe Order do
       expect(subject.id).to eql 1
       expect(subject.partner).to eql 'alpha'
       expect(subject.order_number).to eql 'ABCD123'
-      expect(subject.total_price).to eql 70.00
-      expect(subject.fee).to eql 0.00
       expect(subject.ordered_at).to eql '2015-02-04T00:00:00Z'
+
+      # Legacy
       expect(subject.status).to eql 'complete'
       expect(subject.currency_code).to eql 'USD'
-      expect(subject.order_details).not_to be_empty
+      expect(subject.total_price).to eql 70.00
+      expect(subject.fee).to eql 0.00
+      expect(subject.order_details).to be nil
     end
   end
 
