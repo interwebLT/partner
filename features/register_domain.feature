@@ -63,6 +63,9 @@ Feature: Register Domain
     Then  I must provide registrant info as it is blank
 
   Scenario: Confirm registration details when domain is invalid
+    When  I try to confirm registration details when domain is invalid
+    Then  I must be prompted for a valid domain to register
+
   Scenario: Confirm registration details when domain exists
 
   Scenario: Confirm registration details when period is invalid
