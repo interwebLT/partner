@@ -61,3 +61,8 @@ Feature: Register Domain
   Scenario: Correct domain details when registrant is invalid
     When  I try to correct domain details when registrant is invalid
     Then  I must provide registrant info as it is blank
+
+  Scenario: Confirm registration details when domain is invalid
+  Scenario: Confirm registration details when domain exists
+  Scenario: Confirm registration details when period is invalid
+  Scenario: Confirm registration details when registrant is invalid
