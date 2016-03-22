@@ -175,6 +175,17 @@ When /^I try to correct domain details when registrant is invalid$/ do
                               handle:       'invalid'
 end
 
+When /^I try to confirm registration details when period is invalid$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
+  stub_get  to: Domain.url(params: { name: 'available.ph' }),
+            returns: 'domains/available.ph/get_response'.json
+
+  site.register.summary.load  domain_name:  'available.ph',
+                              period:       'invalid'
+end
+
 When /I try to confirm registration details when registrant is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
