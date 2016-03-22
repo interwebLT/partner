@@ -206,6 +206,10 @@ RSpec.describe Contact do
       context 'when handle is nil' do
         let(:handle) { nil }
 
+        before do
+          subject.handle = Contact.generate_handle
+        end
+
         it 'creates contact' do
           expect(subject.save(token: 'ABC123')).to be true
         end

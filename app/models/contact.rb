@@ -27,6 +27,13 @@ class Contact
   validates :fax, length: { minimum: 9, maximum: 32, allow_blank: true },
                   format: { with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, allow_blank: true }
 
+  def self.generate_handle
+    timestamp = '%10.6f' % Time.now.to_f
+    handle = timestamp.sub('.', '')
+
+    Rails.env.test? ? '123456789ABCDEF' : handle
+  end
+
   def all token
     Contact.get Contact.url
   end
@@ -43,8 +50,6 @@ class Contact
   end
 
   def save token:
-    self.handle ||= generate_handle
-
     return false unless valid?
 
     begin
@@ -76,14 +81,5 @@ class Contact
       fax_ext:            (self.fax_ext.blank?  ? nil : self.fax_ext),
       email:              self.email
     }
-  end
-
-  private
-
-  def generate_handle
-    timestamp = '%10.6f' % Time.now.to_f
-    handle = timestamp.sub('.', '')
-
-    Rails.env.test? ? '123456789ABCDEF' : handle
   end
 end
