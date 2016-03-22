@@ -21,7 +21,9 @@ class RegistrationForm
   end
 
   def save_registrant token:
-    result = self.registrant.save token: token
+    self.registrant.handle = Contact.generate_handle
+
+    result = (self.valid? and self.registrant.save token: token)
 
     copy_registrant_errors
 
