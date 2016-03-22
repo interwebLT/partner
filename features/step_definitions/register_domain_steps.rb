@@ -110,8 +110,8 @@ When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'existing_handle.ph' }),
-            returns: 'domains/existing_handle.ph/get_response'.json
+  stub_get  to: Domain.url(params: { name: 'existing-handle.ph' }),
+            returns: 'domains/existing-handle.ph/get_response'.json
 
   stub_post to: Contact.url,
             returns:  422
@@ -119,7 +119,7 @@ When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns: 404
 
-  site.register.details.load domain_name: 'existing_handle.ph'
+  site.register.details.load domain_name: 'existing-handle.ph'
 
   site.register.details.submit_valid_details
 end

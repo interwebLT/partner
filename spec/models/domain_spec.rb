@@ -74,9 +74,10 @@ RSpec.describe Domain do
     specify { expect(subject.expiring?).to eql true }
   end
 
-  describe '#valid?' do
-    specify { expect(Domain.valid?('domain-123_.ph')).to eql true }
+  describe '.valid?' do
+    specify { expect(Domain.valid?('domain-123.ph')).to eql true }
     specify { expect(Domain.valid?('')).to eql false }
+    specify { expect(Domain.valid?('under_score.ph')).to eql false }
     specify { expect(Domain.valid?('a.ph')).to eql false }
     specify { expect(Domain.valid?('abcd123456789012345678901234567890123456789012345678901234567890.ph')).to eql false }
     specify { expect(Domain.valid?('test-123-!@#$.ph')).to eql false }
