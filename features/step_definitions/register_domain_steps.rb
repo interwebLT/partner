@@ -179,6 +179,18 @@ When /^I try to confirm registration details when domain is invalid$/ do
   site.register.summary.load domain_name: 'invalid'
 end
 
+When /^I try to confirm registration details when domain exists$/ do
+  stub_get  to: Domain.url(params: { name: 'existing.ph' }),
+            returns: 'domains/existing.ph/get_response'.json
+
+  stub_get  to: Contact.url(id: '123456789ABCDEF'),
+            returns: 'contacts/123456789ABCDEF/get_response'.json
+
+  site.register.summary.load  domain_name:  'existing.ph',
+                              period:       '1',
+                              handle:       '123456789ABCDEF'
+end
+
 When /^I try to confirm registration details when period is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json

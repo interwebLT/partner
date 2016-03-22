@@ -67,6 +67,8 @@ Feature: Register Domain
     Then  I must be prompted for a valid domain to register
 
   Scenario: Confirm registration details when domain exists
+    When  I try to confirm registration details when domain exists
+    Then  I must be prompted for a valid domain to register
 
   Scenario: Confirm registration details when period is invalid
     When  I try to confirm registration details when period is invalid

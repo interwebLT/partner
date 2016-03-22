@@ -47,7 +47,11 @@ class RegisterController < SecureController
     @registration = RegistrationForm.new request_params
     @registration.registrant = registrant if @registration.handle
 
-    if !@registration.valid?
+    if !Domain.valid? @registration.domain_name
+      redirect_to register_path
+    elsif Domain.exists? @registration.domain_name, token: auth_token
+      redirect_to register_path
+    elsif !@registration.valid?
       redirect_to action: :details, domain_name:  @registration.domain_name,
                                     period:       @registration.period,
                                     handle:       @registration.handle
