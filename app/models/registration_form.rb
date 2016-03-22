@@ -5,7 +5,8 @@ class RegistrationForm
 
   validates :domain_name, presence: true
 
-  validate  :domain_name_must_be_valid
+  validate  :domain_name_must_be_valid,
+            :registrant_has_valid_fields
 
   def initialize params = nil
     self.registrant = Contact.new
@@ -31,5 +32,15 @@ class RegistrationForm
 
   def domain_name_must_be_valid
     errors.add :domain_name, 'is not valid' unless Domain.valid? domain_name
+  end
+
+  def registrant_has_valid_fields
+    self.registrant.valid?
+
+    self.registrant.errors.each do |error|
+      self.registrant.errors[error].each do |message|
+        errors.add error, message
+      end
+    end
   end
 end

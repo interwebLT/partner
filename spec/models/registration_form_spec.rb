@@ -120,5 +120,11 @@ RSpec.describe RegistrationForm do
 
       it { is_expected.to be_invalid }
     end
+
+    context 'when registrant field is not valid' do
+      let(:local_name) { nil }
+
+      it { is_expected.to be_invalid }
+    end
   end
 end
