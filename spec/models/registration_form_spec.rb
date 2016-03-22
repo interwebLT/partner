@@ -114,5 +114,11 @@ RSpec.describe RegistrationForm do
 
       it { is_expected.to be_invalid }
     end
+
+    context 'when domain_name is not valid' do
+      let(:domain_name) { 'notvalid' }
+
+      it { is_expected.to be_invalid }
+    end
   end
 end
