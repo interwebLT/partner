@@ -3,14 +3,14 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Domain details for <span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
+  <h3 id="head"><span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
 
   <%= simple_form_for @registration, url: register_summary_path do |f| %>
     <%= f.hidden_field :domain_name,  value: @registration.domain_name %>
     <%= f.hidden_field :period,       value: @registration.period %>
     <%= f.hidden_field :handle,       value: @registration.handle %>
 
-    <div id="new-info">
+    <div id="new-info" class="new-info-summary">
       <div>
         <label><%= fa_icon 'calendar-o' %> Registration Period</label>
         <div class="inputfield">
@@ -76,27 +76,27 @@
           <div><span class="string"><%= @registration.local_country_code %></span></div>
         </div>
       </div>
-      <div class="domain-info-num">
+      <div>
         <label><%= fa_icon 'phone-square' %> Telephone</label>
         <div class="inputfield">
           <div>
-            <span class="string"><%= @registration.voice %></span>
+            <span class="string"><%= @registration.voice %>&nbsp;</span>
             <span class="text-muted">ext.</span>
-            <span class="string"><%= @registration.voice_ext %></span>
+            <span class="string"><%= @registration.voice_ext %>&nbsp;</span>
           </div>
         </div>
       </div>
-      <div class="domain-info-num">
+      <div>
         <label><%= fa_icon 'fax' %> Fax</label>
         <div class="inputfield">
           <div>
-            <span class="string"><%= @registration.fax %></span>
+            <span class="string"><%= @registration.fax %>&nbsp;</span>
             <span class="text-muted">ext.</span>
-            <span class="string"><%= @registration.fax_ext %></span>
+            <span class="string"><%= @registration.fax_ext %>&nbsp;</span>
           </div>
         </div>
       </div>
-      <div class="domain-info-num">
+      <div>
         <label><%= fa_icon 'envelope' %> Email</label>
         <div class="inputfield">
           <div><span class="string"><%= @registration.email %></span></div>

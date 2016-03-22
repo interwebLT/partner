@@ -190,3 +190,73 @@ table#domain_info_summary {
     width: 70%;
     }
   }
+
+#new-info.new-info-summary {
+	 div {
+	 	display: flex;
+	 	margin-bottom: 5px;
+
+
+	 	.inputfield {
+	 		width: 75%;
+	 		color: #47A2D6;
+	 		padding-left: 15px;
+    	padding-right: 15px;
+	 		div {
+	 			width: 65%;
+	 			float: left;
+	 			.text-muted {
+	 				float: left;
+	 			}
+	 			.string {
+	 				
+	 				
+	 			}
+	 		}
+	 	}
+	 	label {
+	 		width: 25%;
+	 		float: left;
+	 		padding-top: 0px !important;
+	    margin-bottom: 0;
+	    text-align: left !important;
+	    padding-left: 20px;
+	 	}
+	 }
+}
+
+
+@media (max-width: 768px) {
+	#new-info.new-info-summary div label {
+		width: 50% !important;
+	}
+	#new-info.new-info-summary > div > div.inputfield {
+		width: 50% !important;
+	}
+	#new-info.new-info-summary div .inputfield div span {
+    margin-left: 20px;
+	}
+	#new-info.new-info-summary div .inputfield div {
+		width: 100%;
+	}
+}
+
+
+
+@media (max-width: 480px) {
+
+	#new-info.new-info-summary > div {
+		 	display: block;
+		 	margin-bottom: 5px;
+	}
+	#new-info.new-info-summary div label {
+		width: 100% !important;
+	}
+	#new-info.new-info-summary > div > div.inputfield {
+		width: 100% !important;
+	}
+
+}
+
+
+
