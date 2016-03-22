@@ -1,36 +1,112 @@
-<%= simple_form_for @registration, url: register_summary_path do |f| %>
-  <%= f.hidden_field :domain_name,  value: @registration.domain_name %>
-  <%= f.hidden_field :period,       value: @registration.period %>
-  <%= f.hidden_field :handle,       value: @registration.handle %>
-
-  <h3 id="head">Domain details for <span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
-  <br>
-  <table id="domain_info_summary">
-    <thead>
-      <th width="30%" >&nbsp;</th>
-      <th width="70%">&nbsp;</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Domain Name</td>
-        <td><%= @registration.domain_name %></td>
-      </tr>
-      <tr>
-        <td>Registration Period</td>
-        <td><%= @registration.period %></td>
-      </tr>
-      <tr>
-        <td>Name of Registrant</td>
-        <td><%= @registration.local_name %></td>
-      </tr>
-      <tr>
-        <td>Organization</td>
-        <td><%= @registration.local_organization %></td>
-      </tr>
-    </tbody>
-  </table>
-  <br>
-  <%= link_to 'Go Back', register_details_path(domain_name: @registration.domain_name, period: @registration.period, handle: @registration.registrant.handle), id: :cancel , :class => "btn btn-default" %>
-  <%= f.submit "Create Registration Form", class: "btn btn-secondary" %>
-  
+<% content_for :banner_title do %>
+<%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
 <% end %>
+
+<div id="domain_info">
+  <h3 id="head">Domain details for <span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
+
+  <%= simple_form_for @registration, url: register_summary_path do |f| %>
+    <%= f.hidden_field :domain_name,  value: @registration.domain_name %>
+    <%= f.hidden_field :period,       value: @registration.period %>
+    <%= f.hidden_field :handle,       value: @registration.handle %>
+
+    <div id="new-info">
+      <div>
+        <label><%= fa_icon 'calendar-o' %> Registration Period</label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.period %> years</span></div>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <label><%= fa_icon 'user' %> Name</label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.local_name %></span></div>
+        </div>
+      </div>
+      <div>
+        <label><%= fa_icon 'users' %> Organization</label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.local_organization %></span></div>
+        </div>
+      </div>
+      <div>
+        <label><%= fa_icon 'home' %> Street</label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.local_street %></span></div>
+        </div>
+      </div>
+      <% if @registration.local_street2 %>
+        <div>
+          <label class="hidden-xs">&nbsp;</label>
+          <div class="inputfield">
+            <div><span class="string"><%= @registration.local_street2 %></span></div>
+          </div>
+        </div>
+      <% end %>
+      <% if @registration.local_street3 %>
+        <div>
+          <label class="hidden-xs">&nbsp;</label>
+          <div class="inputfield">
+            <div><span class="string"><%= @registration.local_street3 %></span></div>
+          </div>
+        </div>
+      <% end %>
+      <div>
+        <label><span>City</span></label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.local_city %></span></div>
+        </div>
+      </div>
+      <div>
+        <label><span>State/Province</span></label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.local_state %></span></div>
+        </div>
+      </div>
+      <div>
+        <label><span>Postal Code</span></label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.local_postal_code %></span></div>
+        </div>
+      </div>
+      <div>
+        <label><span>Country</span></label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.local_country_code %></span></div>
+        </div>
+      </div>
+      <div class="domain-info-num">
+        <label><%= fa_icon 'phone-square' %> Telephone</label>
+        <div class="inputfield">
+          <div>
+            <span class="string"><%= @registration.voice %></span>
+            <span class="text-muted">ext.</span>
+            <span class="string"><%= @registration.voice_ext %></span>
+          </div>
+        </div>
+      </div>
+      <div class="domain-info-num">
+        <label><%= fa_icon 'fax' %> Fax</label>
+        <div class="inputfield">
+          <div>
+            <span class="string"><%= @registration.fax %></span>
+            <span class="text-muted">ext.</span>
+            <span class="string"><%= @registration.fax_ext %></span>
+          </div>
+        </div>
+      </div>
+      <div class="domain-info-num">
+        <label><%= fa_icon 'envelope' %> Email</label>
+        <div class="inputfield">
+          <div><span class="string"><%= @registration.email %></span></div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <%= link_to 'Go Back', register_details_path(domain_name: @registration.domain_name, period: @registration.period, handle: @registration.registrant.handle), id: :cancel , class: 'btn btn-default' %>
+    <%= f.submit 'Register Domain', class: "btn btn-secondary" %>
+    <% end %>
+  </div>
