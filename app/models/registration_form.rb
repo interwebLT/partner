@@ -4,6 +4,7 @@ class RegistrationForm
   attr_accessor :domain_name, :period, :registrant
 
   validates :domain_name, presence: true
+  validates :period,      presence: true, inclusion: { in: %w(1 2 5 10) }
 
   validate  :domain_name_must_be_valid,
             :registrant_has_valid_fields

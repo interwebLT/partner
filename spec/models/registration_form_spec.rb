@@ -90,7 +90,7 @@ RSpec.describe RegistrationForm do
     end
 
     let(:domain_name)         { 'domain.ph' }
-    let(:period)              { 1 }
+    let(:period)              { '1' }
 
     let(:handle)              { '123456789ABCDEF' }
     let(:local_name)          { 'Local Name' }
@@ -117,6 +117,48 @@ RSpec.describe RegistrationForm do
 
     context 'when domain_name is not valid' do
       let(:domain_name) { 'notvalid' }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context 'when period is nil' do
+      let(:period) { nil }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context 'when period is blank' do
+      let(:period) { '' }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context 'when period is 1' do
+      let(:period) { '1' }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when period is 2' do
+      let(:period) { '2' }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when period is 5' do
+      let(:period) { '5' }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when period is 10' do
+      let(:period) { '10' }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when period not an allowed value' do
+      let(:period) { '-1' }
 
       it { is_expected.to be_invalid }
     end

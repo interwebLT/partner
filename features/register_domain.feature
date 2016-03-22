@@ -27,6 +27,11 @@ Feature: Register Domain
     When  I try to register an invalid domain
     Then  I must be notified that domain is not valid
 
+  Scenario: Invalid period
+    When  I try to register an available domain
+    But   I provide an invalid period
+    Then  I must be notified that period is not valid
+
   Scenario: Invalid registrant info
     When  I try to register an available domain
     But   I provide invalid registrant info

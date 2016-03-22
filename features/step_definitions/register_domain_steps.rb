@@ -74,6 +74,14 @@ When /^I try to register an invalid domain$/ do
   site.register.submit.click
 end
 
+When /^I provide an invalid period$/ do
+  expect(site.register.details).to be_displayed
+
+  site.register.details.enter_valid_details
+  site.register.details.period.select ''
+  site.register.details.submit.click
+end
+
 When /^I provide invalid registrant info$/ do
   expect(site.register.details).to be_displayed
 
@@ -243,6 +251,15 @@ Then /^I must be notified that domain is not valid$/ do
   expect(site.register).to be_displayed
 
   expect(site.register.alert.text).to eql 'Domain Not Valid'
+end
+
+Then /^I must be notified that period is not valid$/ do
+  expect(site.register.details).to be_displayed
+
+  expect(site.register.details).to have_warning
+
+  expect(site.register.details.period.value).to be_blank
+  expect(site.register.details.local_name.value).to eql 'Registrant'
 end
 
 Then /^I must be notified that the registrant info is not valid$/ do
