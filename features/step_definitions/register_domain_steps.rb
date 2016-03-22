@@ -25,7 +25,8 @@ When /^I provide valid domain details$/ do
             with:     'orders/post_register_domain_request'.json,
             returns:  'orders/post_register_domain_response'.json
 
-  site.register.details.submit_valid_details
+  site.register.details.enter_valid_details
+  site.register.details.submit.click
 end
 
 When /^I accept the registration details and charges$/ do
@@ -101,7 +102,8 @@ When /^I try to register a domain that was registered at the same time$/ do
 
   site.register.details.load domain_name: 'conflict.ph'
 
-  site.register.details.submit_valid_details
+  site.register.details.enter_valid_details
+  site.register.details.submit.click
 
   site.register.summary.submit.click
 end
@@ -121,7 +123,8 @@ When /^I try to provide a registrant with existing handle$/ do
 
   site.register.details.load domain_name: 'existing-handle.ph'
 
-  site.register.details.submit_valid_details
+  site.register.details.enter_valid_details
+  site.register.details.submit.click
 end
 
 When /^I did not accept the domain details as I have a correction$/ do

@@ -23,7 +23,7 @@ module Register
     element :email,               '#registration_form_email'
     element :submit,              "input[name='commit']"
 
-    def submit_valid_details
+    def enter_valid_details
       self.period.select              '2'
 
       self.local_name.set             'Registrant'
@@ -33,8 +33,6 @@ module Register
       self.local_country_code.select  'Japan'
       self.voice.set                  '+7.12345'
       self.email.set                  'registrant@available.ph'
-
-      self.submit.click
     end
   end
 end
