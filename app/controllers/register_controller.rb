@@ -43,7 +43,7 @@ class RegisterController < SecureController
   def create_registrant
     @registration = RegistrationForm.new params[:registration_form]
 
-    if @registration.registrant.save token: auth_token
+    if @registration.save_registrant token: auth_token
       redirect_to action: :summary, domain_name:  @registration.domain_name,
                                     period:       @registration.period,
                                     handle:       @registration.registrant.handle

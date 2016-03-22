@@ -127,4 +127,20 @@ RSpec.describe RegistrationForm do
       it { is_expected.to be_invalid }
     end
   end
+
+  describe '#save_registrant' do
+    context 'when registrant is not valid' do
+      subject { RegistrationForm.new }
+
+      before do
+        subject.save_registrant token: 'ABC123'
+      end
+
+      it { is_expected.to be_invalid }
+
+      it 'has errors' do
+        expect(subject.errors).not_to be_empty
+      end
+    end
+  end
 end

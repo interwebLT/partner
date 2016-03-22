@@ -20,6 +20,14 @@ class RegistrationForm
     self.registrant.send method, *args if self.registrant.respond_to? method
   end
 
+  def save_registrant token:
+    result = self.registrant.save token: token
+
+    copy_registrant_errors
+
+    result
+  end
+
   def order
     Order.new ordered_at:         DateTime.now,
               type:               'domain_create',
@@ -37,6 +45,10 @@ class RegistrationForm
   def registrant_has_valid_fields
     self.registrant.valid?
 
+    copy_registrant_errors
+  end
+
+  def copy_registrant_errors
     self.registrant.errors.each do |error|
       self.registrant.errors[error].each do |message|
         errors.add error, message
