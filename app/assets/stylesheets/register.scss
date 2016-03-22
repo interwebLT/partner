@@ -163,3 +163,30 @@ div#domain-info .inputfield input {
 	@extend .form-control;
 }
 */
+
+table#domain_info_summary {
+	thead {
+		background-color: transparent !important;
+		display: none;
+	}
+
+	tbody {
+		background-color: #E3EBEF;
+		border-radius: 4px;
+		
+		tr:nth-of-type(odd) {
+    	background-color: transparent !important;
+		}
+
+	}
+
+	td:first-child {
+		color: #A2A2A2;
+		width: 30%;
+	}
+
+	td:nth-child(2) {
+    font-weight: bold !important;
+    width: 70%;
+    }
+  }

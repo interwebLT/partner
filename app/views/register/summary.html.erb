@@ -3,27 +3,34 @@
   <%= f.hidden_field :period,       value: @registration.period %>
   <%= f.hidden_field :handle,       value: @registration.handle %>
 
-  <table>
+  <h3 id="head">Domain details for <span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
+  <br>
+  <table id="domain_info_summary">
+    <thead>
+      <th width="30%" >&nbsp;</th>
+      <th width="70%">&nbsp;</th>
+    </thead>
     <tbody>
       <tr>
-        <th>Domain</th>
+        <td>Domain Name</td>
         <td><%= @registration.domain_name %></td>
       </tr>
       <tr>
-        <th>Period</th>
+        <td>Registration Period</td>
         <td><%= @registration.period %></td>
       </tr>
       <tr>
-        <th>Name</th>
+        <td>Name of Registrant</td>
         <td><%= @registration.local_name %></td>
       </tr>
       <tr>
-        <th>Organization</th>
+        <td>Organization</td>
         <td><%= @registration.local_organization %></td>
       </tr>
     </tbody>
   </table>
-
-  <%= f.submit %>
-  <%= link_to 'Go Back', register_details_path(domain_name: @registration.domain_name, period: @registration.period, handle: @registration.registrant.handle), id: :cancel %>
+  <br>
+  <%= link_to 'Go Back', register_details_path(domain_name: @registration.domain_name, period: @registration.period, handle: @registration.registrant.handle), id: :cancel , :class => "btn btn-default" %>
+  <%= f.submit "Create Registration Form", class: "btn btn-secondary" %>
+  
 <% end %>

@@ -407,3 +407,11 @@ td.order-status i {
 td.order-status i.fa-clock-o {
   font-size: 15px;
 }
+
+th:first-child {
+  border-radius: 5px 0 0 0;
+}
+
+th:last-child {
+  border-radius: 0 5px 0 0;
+}
