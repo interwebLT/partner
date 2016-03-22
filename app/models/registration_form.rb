@@ -3,16 +3,14 @@ class RegistrationForm
 
   attr_accessor :domain_name, :period, :registrant
 
+  validates :domain_name, presence: true
+
   def initialize params = nil
     self.registrant = Contact.new
 
     params.delete(:registrant) if params
 
     super params
-  end
-
-  def errors
-    self.registrant.errors
   end
 
   def method_missing method, *args

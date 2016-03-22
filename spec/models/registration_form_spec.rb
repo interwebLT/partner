@@ -74,4 +74,45 @@ RSpec.describe RegistrationForm do
       end
     end
   end
+
+  describe '#valid?' do
+    subject do
+      RegistrationForm.new  domain_name:        domain_name,
+                            period:             period,
+                            handle:             handle,
+                            local_name:         local_name,
+                            local_organization: local_organization,
+                            local_street:       local_street,
+                            local_city:         local_city,
+                            local_country_code: local_country_code,
+                            voice:              voice,
+                            email:              email
+    end
+
+    let(:domain_name)         { 'domain.ph' }
+    let(:period)              { 1 }
+
+    let(:handle)              { '123456789ABCDEF' }
+    let(:local_name)          { 'Local Name' }
+    let(:local_organization)  { 'Local Organization' }
+    let(:local_street)        { 'Local Street' }
+    let(:local_city)          { 'Local City' }
+    let(:local_country_code)  { 'PH' }
+    let(:voice)               { '+63.1234' }
+    let(:email)               { 'contact@alpha.ph' }
+
+    it { is_expected.to be_valid }
+
+    context 'when domain_name is nil' do
+      let(:domain_name) { nil }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context 'when domain_name is blank' do
+      let(:domain_name) { '' }
+
+      it { is_expected.to be_invalid }
+    end
+  end
 end
