@@ -41,7 +41,7 @@ class RegisterController < SecureController
   end
 
   def create_registrant
-    @registration = RegistrationForm.new params[:registration_form]
+    @registration = RegistrationForm.new registration_params
 
     if @registration.save_registrant token: auth_token
       redirect_to action: :summary, domain_name:  @registration.domain_name,
@@ -62,12 +62,25 @@ class RegisterController < SecureController
   end
 
   def create_order
-    registration = RegistrationForm.new params[:registration_form]
+    registration = RegistrationForm.new registration_params
 
     if registration.order.save token: auth_token
       redirect_to register_path, notice: 'Domain Registered'
     else
       redirect_to register_path, alert: 'Domain Already Registered!'
     end
+  end
+
+  private
+
+  REGISTRATION_FORM_FIELDS = [
+    :domain_name, :period, :handle,
+    :local_name, :local_organization, :local_street, :local_street2, :local_street3,
+    :local_city, :local_state, :local_postal_code, :local_country_code,
+    :voice, :voice_ext, :fax, :fax_ext, :email
+  ]
+
+  def registration_params
+    params.require(:registration_form).permit(REGISTRATION_FORM_FIELDS)
   end
 end
