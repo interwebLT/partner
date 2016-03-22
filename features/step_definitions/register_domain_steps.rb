@@ -175,6 +175,21 @@ When /^I try to correct domain details when registrant is invalid$/ do
                               handle:       'invalid'
 end
 
+When /I try to confirm registration details when registrant is invalid$/ do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
+  stub_get  to: Domain.url(params: { name: 'available.ph' }),
+            returns: 'domains/available.ph/get_response'.json
+
+  stub_get  to: Contact.url(id: 'invalid'),
+            returns: 404
+
+  site.register.summary.load  domain_name:  'available.ph',
+                              period:       '1',
+                              handle:       'invalid'
+end
+
 Then /^domain must be registered$/  do
   expect(site.register).to be_displayed
 

@@ -46,6 +46,12 @@ class RegisterController < SecureController
   def summary
     @registration = RegistrationForm.new request_params
     @registration.registrant = registrant if @registration.handle
+
+    if !@registration.valid?
+      redirect_to action: :details, domain_name:  @registration.domain_name,
+                                    period:       @registration.period,
+                                    handle:       @registration.handle
+    end
   end
 
   def create_order
