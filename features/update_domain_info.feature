@@ -4,12 +4,12 @@ Feature: Update Domain Info
     Given I am authenticated as staff
 
   Scenario: Update Domain Registrant
-    And   I am viewing a domain
+    Given I am viewing a domain
     When  I update the registrant of the domain
     Then  domain registrant must be updated
 
   Scenario Outline: Update Domain Registrant with Invalid Data
-    And   I am viewing a domain
+    Given I am viewing a domain
     When  I update the registrant of the domain with a <invalid data>
     Then  error must be validation failed
 
