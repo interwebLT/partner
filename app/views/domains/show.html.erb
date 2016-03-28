@@ -54,8 +54,7 @@
           <% if current_user.staff %>
             <div role="tabpanel" class="tab-pane" id="registrant-contact-edit">
 
-              <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
-              <br> <br>
+              <!--a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a-->
               <%= render partial: 'domains/domain_contact_edit', locals: { contact: @registrant } %>
 
             </div>

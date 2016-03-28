@@ -4,6 +4,9 @@
     Some information is missing or incorrect.  Please check your entries and try again.
   </div>
   <% end %>
+  <div class="edit-update">
+    <%= f.submit 'Update'%> <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
+  </div>
   <div id="domain-info">
     <div class="info-l10n">
       <label class=""></label>
