@@ -103,8 +103,13 @@
       <div class="domain-info-ns"><!-- form-group -->
         <label><%= fa_icon 'server' %> Nameservers </label>
         <div class="inputfield">
-          <div><% @partner.default_nameservers.each do |default_nameserver| %>
-              <%= default_nameserver.name %>
+          <div>
+            <% unless @partner.default_nameservers.empty? %>
+              <% @partner.default_nameservers.each do |default_nameserver| %>
+                <%= default_nameserver.name %>
+              <% end %>
+            <% else %>
+              No default nameservers.  Domain will be registered but inactive.
             <% end %>
           </div>
         </div>
@@ -112,7 +117,6 @@
       </div>
     </div>
 
-    
     <br>
     <div class="register-btn text-center">
       <%= f.submit class: 'btn btn-success btn-lg', value: 'Register Domain'  %>
