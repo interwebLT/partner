@@ -3,7 +3,7 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head"><span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
+  <h3 id="head">Summary: <span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
 
   <%= simple_form_for @registration, url: register_summary_path do |f| %>
     <%= f.hidden_field :domain_name,  value: @registration.domain_name %>
