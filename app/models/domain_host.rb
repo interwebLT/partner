@@ -3,7 +3,7 @@ class DomainHost
 
   attr_accessor :id, :domain, :name, :created_at, :updated_at
 
-  def to_json
+  def as_json options = nil
     {
       name: name
     }
@@ -17,5 +17,13 @@ class DomainHost
     response = delete url(domain_id, id: id), {}, token: token
 
     new response
+  end
+
+  def save token:
+    response = self.class.post self.class.url(self.domain), self.as_json, token: token
+
+    !response.nil?
+  rescue Api::Model::UnprocessableEntity
+    false
   end
 end

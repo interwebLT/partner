@@ -64,6 +64,13 @@ class RegisterController < SecureController
     registration = RegistrationForm.new registration_params
 
     if registration.order.save token: auth_token
+      current_user.partner.default_nameservers.each do |nameserver|
+        domain_host = DomainHost.new  domain: registration.domain_name,
+                                      name:   nameserver.name
+
+        domain_host.save token: auth_token
+      end
+
       redirect_to register_path, notice: 'Domain Registered'
     else
       redirect_to register_path, alert: 'Domain Already Registered!'

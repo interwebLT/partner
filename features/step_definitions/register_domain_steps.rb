@@ -35,6 +35,17 @@ end
 When /^I accept the registration details and charges$/ do
   expect(site.register.summary).to be_displayed
 
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
+  stub_post to: DomainHost.url('available.ph'),
+            with:     'domains/available.ph/hosts/post_ns1_request'.json,
+            returns:  'domains/available.ph/hosts/post_ns1_response'.json
+
+  stub_post to: DomainHost.url('available.ph'),
+            with:     'domains/available.ph/hosts/post_ns2_request'.json,
+            returns:  'domains/available.ph/hosts/post_ns2_response'.json
+
   site.register.summary.submit.click
 end
 
