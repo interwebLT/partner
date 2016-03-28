@@ -9,7 +9,7 @@ class ReplenishMailer < ActionMailer::Base
     @total = @amount + @transaction_fee
 
     
-    mail to: @partner.email, subject: "Partner Top-up Payment Notice"
+    mail to: @partner.email, bcc: ["invoice@dot.ph"], subject: "Partner Top-up Payment Notice"
   end
 
 end
