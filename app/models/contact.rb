@@ -46,8 +46,8 @@ class Contact
 
   def update token:
     if valid?
-      update_params = as_json
-      update_params.delete "handle"
+      update_params = self.as_json
+      update_params.delete :handle
 
       Contact.patch Contact.url(id: self.handle), update_params, token: token
       return true

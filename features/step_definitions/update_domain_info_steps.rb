@@ -7,7 +7,8 @@ end
 
 When /^I update the registrant of the domain$/ do
   stub_patch  to: Contact.url(id: 'registrant'),
-              returns: 'contacts/registrant/patch_response'.json
+              with:     'contacts/registrant/patch_request'.json,
+              returns:  'contacts/registrant/patch_response'.json
 
   stub_get  to: Domain.url(id: 1),
             returns: 'domains/1/get_after_update_response'.json
