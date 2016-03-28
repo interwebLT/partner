@@ -265,4 +265,28 @@ RSpec.describe Contact do
       end
     end
   end
+
+  describe '#local_country_name' do
+    subject do
+      contact = Contact.new local_country_code: local_country_code
+
+      contact.local_country_name
+    end
+
+    let(:local_country_code) { 'PH' }
+
+    it { is_expected.to eq 'Philippines' }
+
+    context 'when local_country_code is nil' do
+      let(:local_country_code) { nil }
+
+      it { is_expected.to be nil }
+    end
+
+    context 'when local_country_code is not a country' do
+      let(:local_country_code) { 'E&L' }
+
+      it { is_expected.to be nil }
+    end
+  end
 end

@@ -34,6 +34,12 @@ class Contact
     Rails.env.test? ? '123456789ABCDEF' : handle
   end
 
+  def local_country_name
+    country = ISO3166::Country[local_country_code]
+
+    country.name if country
+  end
+
   def all token
     Contact.get Contact.url
   end
