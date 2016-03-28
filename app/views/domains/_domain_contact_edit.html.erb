@@ -5,7 +5,7 @@
   </div>
   <% end %>
   <div class="edit-update">
-    <%= f.submit 'Update'%> <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
+    <%= f.submit 'Update', id: :submit_up %> <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
   </div>
   <div id="domain-info">
     <div class="info-l10n">
@@ -137,6 +137,6 @@
   </div>
   <br>
   <div class="edit-update">
-    <%= f.submit 'Update'%> <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
+    <%= f.submit 'Update', id: :submit %> <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
   </div>
 <% end %>
