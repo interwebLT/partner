@@ -81,8 +81,10 @@
         <div class="inputfield">
           <div>
             <span class="string"><%= @registration.voice %>&nbsp;</span>
-            <span class="text-muted">ext.</span>
-            <span class="string"><%= @registration.voice_ext %>&nbsp;</span>
+            <% unless @registration.voice_ext.blank? %>
+              <span class="text-muted">ext.</span>
+              <span class="string"><%= @registration.voice_ext %>&nbsp;</span>
+            <% end %>
           </div>
         </div>
       </div>
@@ -91,8 +93,10 @@
         <div class="inputfield">
           <div>
             <span class="string"><%= @registration.fax %>&nbsp;</span>
-            <span class="text-muted">ext.</span>
-            <span class="string"><%= @registration.fax_ext %>&nbsp;</span>
+            <% unless @registration.fax_ext.blank? %>
+              <span class="text-muted">ext.</span>
+              <span class="string"><%= @registration.fax_ext %>&nbsp;</span>
+            <% end %>
           </div>
         </div>
       </div>
