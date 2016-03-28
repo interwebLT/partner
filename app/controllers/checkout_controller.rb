@@ -22,7 +22,7 @@ class CheckoutController < SecureController
     end
     @credit = Credit.find params[:id], token: current_user.token
     @amount = @credit.amount.money
-    @transaction_fee = @amount * Credit::TRANSACTION_FEE
+    @transaction_fee = @credit.fee.money
     @total = @amount + @transaction_fee
   end
   
@@ -34,7 +34,7 @@ class CheckoutController < SecureController
     @credit = Credit.find params[:id], token: current_user.token
     @partner = Partner.find @credit.partner_id, token: current_user.token
     @amount = @credit.amount.money
-    @transaction_fee = @amount * Credit::TRANSACTION_FEE
+    @transaction_fee = @credit.fee.money
     @total = @amount + @transaction_fee
   end
 	

@@ -21,7 +21,7 @@ class Partner
     @pricing = pricing.collect { |price| PartnerPricing.new price }
   end
 
-  def replenish_credits amount, remarks, token, type='bank_credit', verification_code=nil
+  def replenish_credits amount, remarks, token, type='bank_credit', verification_code=nil, fee=0
     credit = Credit.new( {
       partner: name,
       type: type,

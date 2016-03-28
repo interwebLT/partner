@@ -21,9 +21,9 @@ class CreditsController < SecureController
     end
     flash[:notice] = "Replenish credit successful."
 
-    ReplenishMailer.receipt(id: credit[:id], token: current_user.token).deliver_now
+    ReplenishMailer.receipt(id: credit[:credit_number], token: current_user.token).deliver_now
   
-    redirect_to invoice_path :id => credit[:id]
+    redirect_to invoice_path :id => credit[:credit_number]
   end
 
   private
