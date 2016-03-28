@@ -106,6 +106,17 @@
           <div><span class="string"><%= @registration.email %></span></div>
         </div>
       </div>
+      <hr>
+      <div class="domain-info-ns">
+        <label><%= fa_icon 'server' %> Nameservers </label>
+        <div class="inputfield">
+          <div>
+            <% @partner.default_nameservers.each do |default_nameserver| %>
+              <%= default_nameserver.name %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
 
     <br />

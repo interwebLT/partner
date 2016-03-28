@@ -25,6 +25,9 @@ When /^I provide valid domain details$/ do
             with:     'orders/post_register_domain_request'.json,
             returns:  'orders/post_register_domain_response'.json
 
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
   site.register.details.enter_valid_details
   site.register.details.submit.click
 end

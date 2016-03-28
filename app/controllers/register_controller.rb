@@ -55,6 +55,8 @@ class RegisterController < SecureController
       redirect_to action: :details, domain_name:  @registration.domain_name,
                                     period:       @registration.period,
                                     handle:       @registration.handle
+    else
+      @partner = current_user.partner
     end
   end
 
