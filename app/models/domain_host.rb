@@ -3,10 +3,6 @@ class DomainHost
 
   attr_accessor :id, :domain, :name, :created_at, :updated_at
 
-  def save token
-    DomainHost.post DomainHost.url(domain.name), to_json, token: token
-  end
-
   def to_json
     {
       name: name
