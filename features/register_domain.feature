@@ -15,6 +15,12 @@ Feature: Register Domain
     And   I accept the registration details and charges
     Then  domain must be registered
 
+  Scenario: Register available domain with whitespaces
+    When  I try to register an available domain with whitespaces
+    And   I provide valid domain details
+    And   I accept the registration details and charges
+    Then  domain must be registered
+
   Scenario: Register existing domain
     When  I try to register an existing domain
     Then  I must be notified that domain is not available for registration

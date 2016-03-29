@@ -237,6 +237,19 @@ When /I try to confirm registration details when registrant is invalid$/ do
                               handle:       'invalid'
 end
 
+When /^I try to register an available domain with whitespaces$/  do
+  stub_get  to: User.partner_url,
+            returns:  'partners/1/get_response'.json
+
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
+
+  site.register.load
+
+  site.register.domain_name.set '  available.ph  '
+  site.register.submit.click
+end
+
 Then /^domain must be registered$/  do
   expect(site.register).to be_displayed
 

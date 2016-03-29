@@ -5,7 +5,7 @@ class RegisterController < SecureController
   end
 
   def search
-    domain_name = params[:domain_name].downcase
+    domain_name = params[:domain_name].strip.downcase
 
     if not Domain.valid? domain_name
       redirect_to register_path, alert: "Domain #{domain_name} is not valid."
