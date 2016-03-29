@@ -144,4 +144,16 @@ RSpec.describe Domain do
       it { is_expected.to eql 'Local' }
     end
   end
+
+  describe '#renew_allowed?' do
+    subject { Domain.new expires_at: expires_at }
+
+    before do
+      Timecop.freeze '2016-03-29 15:00:00'.in_time_zone
+    end
+
+    let(:expires_at) { '2016-03-29 15:00:00'.in_time_zone }
+
+    it { is_expected.to be_renew_allowed }
+  end
 end

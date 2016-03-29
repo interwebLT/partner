@@ -99,4 +99,8 @@ class Domain
   def domain_owner
     registrant.name.present? ? registrant.name : registrant.local_name
   end
+
+  def renew_allowed?
+    true
+  end
 end
