@@ -57,7 +57,7 @@ Feature: Register Domain
 
   Scenario: Correct domain details when domain exists
     When  I try to correct domain details when domain exists
-    Then  I must be prompted for a valid domain to register
+    Then  I must be notified that domain is no longer available
 
   Scenario: Correct domain details when period is invalid
     When  I try to correct domain details when period is invalid
@@ -73,7 +73,7 @@ Feature: Register Domain
 
   Scenario: Confirm registration details when domain exists
     When  I try to confirm registration details when domain exists
-    Then  I must be prompted for a valid domain to register
+    Then  I must be notified that domain is no longer available
 
   Scenario: Confirm registration details when period is invalid
     When  I try to confirm registration details when period is invalid

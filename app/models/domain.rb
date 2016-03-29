@@ -49,9 +49,9 @@ class Domain
   end
 
   def self.exists?(name, token:)
-    response = get url, { name: name }, token: token
+    response = find name, token: token
 
-    !response.empty?
+    !response.nil?
   end
 
   def self.valid? domain_name

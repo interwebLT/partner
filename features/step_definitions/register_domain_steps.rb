@@ -2,8 +2,8 @@ When /^I try to register an available domain$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'available.ph' }),
-            returns: 'domains/available.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
 
   site.register.load
 
@@ -53,8 +53,8 @@ When /^I try to register an available domain in all caps$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'available.ph' }),
-            returns: 'domains/available.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
 
   site.register.load
 
@@ -65,7 +65,7 @@ When /^I try to register an available domain in all caps$/  do
 end
 
 When /^I try to register an existing domain$/  do
-  stub_get  to: Domain.url(params: { name: 'existing.ph' }),
+  stub_get  to: Domain.url(id: 'existing.ph'),
             returns: 'domains/existing.ph/get_response'.json
 
   site.register.load
@@ -110,7 +110,7 @@ When /^I try to register a domain that was registered at the same time$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'conflict.ph' }),
+  stub_get  to: Domain.url(id: 'conflict.ph'),
             returns: 'domains/conflict.ph/get_response'.json
 
   stub_post to: Contact.url,
@@ -123,19 +123,14 @@ When /^I try to register a domain that was registered at the same time$/ do
             returns: 'contacts/123456789ABCDEF/get_response'.json
 
   site.register.details.load domain_name: 'conflict.ph'
-
-  site.register.details.enter_valid_details
-  site.register.details.submit.click
-
-  site.register.summary.submit.click
 end
 
 When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'existing-handle.ph' }),
-            returns: 'domains/existing-handle.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'existing-handle.ph'),
+            returns: 404
 
   stub_post to: Contact.url,
             returns:  422
@@ -155,8 +150,8 @@ When /^I did not accept the domain details as I have a correction$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'available.ph' }),
-            returns: 'domains/available.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
 
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns: 'contacts/123456789ABCDEF/get_response'.json
@@ -169,7 +164,7 @@ When /^I try to correct domain details when domain is invalid$/ do
 end
 
 When /^I try to correct domain details when domain exists$/ do
-  stub_get  to: Domain.url(params: { name: 'existing.ph' }),
+  stub_get  to: Domain.url(id: 'existing.ph'),
             returns: 'domains/existing.ph/get_response'.json
 
   site.register.details.load domain_name: 'existing.ph'
@@ -179,8 +174,8 @@ When /^I try to correct domain details when period is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'available.ph' }),
-            returns: 'domains/available.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
 
   site.register.details.load  domain_name:  'available.ph',
                               period:       'invalid'
@@ -190,8 +185,8 @@ When /^I try to correct domain details when registrant is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'available.ph' }),
-            returns: 'domains/available.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
 
   stub_get  to: Contact.url(id: 'invalid'),
             returns: 404
@@ -205,7 +200,7 @@ When /^I try to confirm registration details when domain is invalid$/ do
 end
 
 When /^I try to confirm registration details when domain exists$/ do
-  stub_get  to: Domain.url(params: { name: 'existing.ph' }),
+  stub_get  to: Domain.url(id: 'existing.ph'),
             returns: 'domains/existing.ph/get_response'.json
 
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
@@ -220,8 +215,8 @@ When /^I try to confirm registration details when period is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'available.ph' }),
-            returns: 'domains/available.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
 
   site.register.summary.load  domain_name:  'available.ph',
                               period:       'invalid'
@@ -231,8 +226,8 @@ When /I try to confirm registration details when registrant is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(params: { name: 'available.ph' }),
-            returns: 'domains/available.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'available.ph'),
+            returns: 404
 
   stub_get  to: Contact.url(id: 'invalid'),
             returns: 404

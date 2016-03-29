@@ -6,8 +6,10 @@ RSpec.describe Domain do
 
     context 'when domain exists' do
       before do
-        stub_request(:get, Domain.url(params: { name: domain }))
-          .to_return(body: { id: 1 }.to_json)
+        response = { id: 1 }
+
+        stub_request(:get, Domain.url(id: domain))
+          .to_return body: response.to_json
       end
 
       it { is_expected.to be true }
@@ -15,8 +17,8 @@ RSpec.describe Domain do
 
     context 'when domain does not exist' do
       before do
-        stub_request(:get, Domain.url(params: { name: domain }))
-          .to_return(body: {}.to_json)
+        stub_request(:get, Domain.url(id: domain))
+          .to_return status: 404
       end
 
       it { is_expected.to be false }

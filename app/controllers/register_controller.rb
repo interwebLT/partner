@@ -25,7 +25,7 @@ class RegisterController < SecureController
     elsif !Domain.exists? @registration.domain_name, token: auth_token
       @partner = current_user.partner
     else
-      redirect_to register_path
+      redirect_to register_path, alert: 'Domain Already Registered!'
     end
   end
 
@@ -50,7 +50,7 @@ class RegisterController < SecureController
     if !Domain.valid? @registration.domain_name
       redirect_to register_path
     elsif Domain.exists? @registration.domain_name, token: auth_token
-      redirect_to register_path
+      redirect_to register_path, alert: 'Domain Already Registered!'
     elsif !@registration.valid?
       redirect_to action: :details, domain_name:  @registration.domain_name,
                                     period:       @registration.period,
