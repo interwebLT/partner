@@ -8,11 +8,11 @@ class RegisterController < SecureController
     domain_name = params[:domain_name].downcase
 
     if !Domain.valid? domain_name
-      redirect_to register_path, alert: 'Domain Not Valid'
+      redirect_to register_path, alert: "Domain #{domain_name} is not valid."
     elsif !Domain.exists? domain_name, token: auth_token
       redirect_to action: :details, domain_name: domain_name
     else
-      redirect_to register_path, alert: 'Domain Not Available'
+      redirect_to register_path, alert: "Domain #{domain_name} is not available."
     end
   end
 

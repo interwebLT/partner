@@ -246,7 +246,7 @@ end
 Then /^I must be notified that domain is not available for registration$/  do
   expect(site.register).to be_displayed
 
-  expect(site.register.alert.text).to eql 'Domain Not Available'
+  expect(site.register.alert.text).to eql 'Domain existing.ph is not available.'
 end
 
 Then /^I must be prompted for a valid domain to register$/ do
@@ -259,7 +259,7 @@ end
 Then /^I must be notified that domain is not valid$/ do
   expect(site.register).to be_displayed
 
-  expect(site.register.alert.text).to eql 'Domain Not Valid'
+  expect(site.register.alert.text).to eql 'Domain 123 is not valid.'
 end
 
 Then /^I must be notified that period is not valid$/ do
