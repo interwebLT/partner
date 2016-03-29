@@ -129,7 +129,7 @@ When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Whois.url(id: 'existing-handle.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   stub_post to: Contact.url,
@@ -138,7 +138,7 @@ When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns: 404
 
-  site.register.details.load domain_name: 'existing-handle.ph'
+  site.register.details.load domain_name: 'available.ph'
 
   site.register.details.enter_valid_details
   site.register.details.submit.click
