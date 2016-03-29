@@ -282,7 +282,7 @@ end
 Then /^I must be notified that domain is no longer available$/ do
   expect(site.register).to be_displayed
 
-  expect(site.register.alert.text).to eql 'Domain existing.ph is no longer available!'
+  expect(site.register.alert.text).to eql 'Domain existing.ph is no longer available.'
 end
 
 Then /^I must be notified that the registrant already exists$/ do
