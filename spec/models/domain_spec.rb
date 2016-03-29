@@ -155,5 +155,17 @@ RSpec.describe Domain do
     let(:expires_at) { '2016-03-29 15:00:00'.in_time_zone }
 
     it { is_expected.to be_renew_allowed }
+
+    context 'when expires_at after renewal after 10 years from now' do
+      let(:expires_at) { '2025-03-30 15:00:00'.in_time_zone }
+
+      it { is_expected.not_to be_renew_allowed }
+    end
+
+    context 'when expires_at after renewal is exactly 10 years from now' do
+      let(:expires_at) { '2025-03-29 15:00:00'.in_time_zone }
+
+      it { is_expected.to be_renew_allowed }
+    end
   end
 end
