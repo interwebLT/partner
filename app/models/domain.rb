@@ -49,7 +49,7 @@ class Domain
   end
 
   def self.exists?(name, token:)
-    response = find name, token: token
+    response = Whois.find name, token: token
 
     !response.nil?
   end

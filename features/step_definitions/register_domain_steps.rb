@@ -2,7 +2,7 @@ When /^I try to register an available domain$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   site.register.load
@@ -53,7 +53,7 @@ When /^I try to register an available domain in all caps$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   site.register.load
@@ -65,8 +65,8 @@ When /^I try to register an available domain in all caps$/  do
 end
 
 When /^I try to register an existing domain$/  do
-  stub_get  to: Domain.url(id: 'existing.ph'),
-            returns: 'domains/existing.ph/get_response'.json
+  stub_get  to: Whois.url(id: 'existing.ph'),
+            returns: 'whois/existing.ph/get_response'.json
 
   site.register.load
 
@@ -110,8 +110,8 @@ When /^I try to register a domain that was registered at the same time$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'existing.ph'),
-            returns: 'domains/existing.ph/get_response'.json
+  stub_get  to: Whois.url(id: 'existing.ph'),
+            returns: 'whois/existing.ph/get_response'.json
 
   stub_post to: Contact.url,
             returns: 'contacts/post_response'.json
@@ -129,7 +129,7 @@ When /^I try to provide a registrant with existing handle$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'existing-handle.ph'),
+  stub_get  to: Whois.url(id: 'existing-handle.ph'),
             returns: 404
 
   stub_post to: Contact.url,
@@ -150,7 +150,7 @@ When /^I did not accept the domain details as I have a correction$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
@@ -164,8 +164,8 @@ When /^I try to correct domain details when domain is invalid$/ do
 end
 
 When /^I try to correct domain details when domain exists$/ do
-  stub_get  to: Domain.url(id: 'existing.ph'),
-            returns: 'domains/existing.ph/get_response'.json
+  stub_get  to: Whois.url(id: 'existing.ph'),
+            returns: 'whois/existing.ph/get_response'.json
 
   site.register.details.load domain_name: 'existing.ph'
 end
@@ -174,7 +174,7 @@ When /^I try to correct domain details when period is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   site.register.details.load  domain_name:  'available.ph',
@@ -185,7 +185,7 @@ When /^I try to correct domain details when registrant is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   stub_get  to: Contact.url(id: 'invalid'),
@@ -200,8 +200,8 @@ When /^I try to confirm registration details when domain is invalid$/ do
 end
 
 When /^I try to confirm registration details when domain exists$/ do
-  stub_get  to: Domain.url(id: 'existing.ph'),
-            returns: 'domains/existing.ph/get_response'.json
+  stub_get  to: Whois.url(id: 'existing.ph'),
+            returns: 'whois/existing.ph/get_response'.json
 
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns: 'contacts/123456789ABCDEF/get_response'.json
@@ -215,7 +215,7 @@ When /^I try to confirm registration details when period is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   site.register.summary.load  domain_name:  'available.ph',
@@ -226,7 +226,7 @@ When /I try to confirm registration details when registrant is invalid$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   stub_get  to: Contact.url(id: 'invalid'),
@@ -241,7 +241,7 @@ When /^I try to register an available domain with whitespaces$/  do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'available.ph'),
+  stub_get  to: Whois.url(id: 'available.ph'),
             returns: 404
 
   site.register.load
