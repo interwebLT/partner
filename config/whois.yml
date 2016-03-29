@@ -2,7 +2,7 @@ development:
   url: http://localhost:9000/whois
 
 test:
-  url: test.host
+  url: http://test.host
 
 production:
   url: http://localhost:9000/whois
