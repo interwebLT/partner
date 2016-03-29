@@ -101,7 +101,7 @@ class Domain
   end
 
   def renew_allowed?
-    target_expires_at = self.expires_at + 1.year
+    target_expires_at = self.expires_at.in_time_zone + 1.year
     max_expires_at    = Time.current + 10.years
 
     target_expires_at <= max_expires_at
