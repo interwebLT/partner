@@ -7,9 +7,9 @@ class RegisterController < SecureController
   def search
     domain_name = params[:domain_name].downcase
 
-    if !Domain.valid? domain_name
+    if not Domain.valid? domain_name
       redirect_to register_path, alert: "Domain #{domain_name} is not valid."
-    elsif !Domain.exists? domain_name, token: auth_token
+    elsif not Domain.exists? domain_name, token: auth_token
       redirect_to action: :details, domain_name: domain_name
     else
       redirect_to register_path, alert: "Domain #{domain_name} is not available."
@@ -20,9 +20,9 @@ class RegisterController < SecureController
     @registration = RegistrationForm.new request_params
     @registration.registrant = registrant if @registration.handle
 
-    if !Domain.valid? @registration.domain_name
+    if not Domain.valid? @registration.domain_name
       redirect_to register_path
-    elsif !Domain.exists? @registration.domain_name, token: auth_token
+    elsif not Domain.exists? @registration.domain_name, token: auth_token
       @partner = current_user.partner
     else
       redirect_to register_path, alert: "Domain #{@registration.domain_name} is no longer available."
@@ -47,11 +47,11 @@ class RegisterController < SecureController
     @registration = RegistrationForm.new request_params
     @registration.registrant = registrant if @registration.handle
 
-    if !Domain.valid? @registration.domain_name
+    if not Domain.valid? @registration.domain_name
       redirect_to register_path
     elsif Domain.exists? @registration.domain_name, token: auth_token
       redirect_to register_path, alert: "Domain #{@registration.domain_name} is no longer available."
-    elsif !@registration.valid?
+    elsif not @registration.valid?
       redirect_to action: :details, domain_name:  @registration.domain_name,
                                     period:       @registration.period,
                                     handle:       @registration.handle
