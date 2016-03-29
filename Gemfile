@@ -19,6 +19,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'site_prism'
   gem 'webmock'
+  gem 'timecop'
 end
 
 group :development do
