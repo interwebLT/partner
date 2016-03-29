@@ -110,8 +110,8 @@ When /^I try to register a domain that was registered at the same time$/ do
   stub_get  to: User.partner_url,
             returns:  'partners/1/get_response'.json
 
-  stub_get  to: Domain.url(id: 'conflict.ph'),
-            returns: 'domains/conflict.ph/get_response'.json
+  stub_get  to: Domain.url(id: 'existing.ph'),
+            returns: 'domains/existing.ph/get_response'.json
 
   stub_post to: Contact.url,
             returns: 'contacts/post_response'.json
@@ -122,7 +122,7 @@ When /^I try to register a domain that was registered at the same time$/ do
   stub_get  to: Contact.url(id: '123456789ABCDEF'),
             returns: 'contacts/123456789ABCDEF/get_response'.json
 
-  site.register.details.load domain_name: 'conflict.ph'
+  site.register.details.load domain_name: 'existing.ph'
 end
 
 When /^I try to provide a registrant with existing handle$/ do
@@ -282,7 +282,7 @@ end
 Then /^I must be notified that domain is no longer available$/ do
   expect(site.register).to be_displayed
 
-  expect(site.register.alert.text).to eql 'Domain Already Registered!'
+  expect(site.register.alert.text).to eql 'Domain existing.ph is no longer available!'
 end
 
 Then /^I must be notified that the registrant already exists$/ do
