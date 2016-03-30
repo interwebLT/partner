@@ -8,6 +8,8 @@ Transaction Fee: <%= @transaction_fee.format %><br>
 </p>
 <p>Total: <%= @total.format %></p>
 
+<p>View and print your receipt at: <%= link_to receipt_url(id: @credit.credit_number), receipt_url(id: @credit.credit_number)  %></p>
+
 <p>Thank you.</p>
 
 <p>
