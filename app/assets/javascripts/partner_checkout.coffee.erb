@@ -1,3 +1,4 @@
+
 handlePaymentToken = (token, auth_token, partner_id, partner_email, value, credit) ->
   $('#payment_form').html "<script> \
 		var createCharge = function(amount, auth_token, partner_id) { \
@@ -69,21 +70,21 @@ getPaymentToken = (amount) ->
     headers: { 'Content-Type': 'application/json' },
     data: { 'value': amount },
     success: (response) ->
-      if response.errorCode 
+      if response.errorCode
         console.log response.message
       else
         handlePaymentToken response.id, response.form_authenticity_token, response.partner_id, response.partner_email, amount
     error: (jqXHR, textStatus, errorThrown) ->
       jsonResponse = jQuery.parseJSON jqXHR.responseText
       showError jsonResponse.message
-      
+
 getPaymentTokenFor = (element, amount) ->
   $.ajax '<%=  Rails.application.routes.url_helpers.payment_token_checkout_index_url :only_path => true %>',
     type: 'GET',
     headers: { 'Content-Type': 'application/json' },
     data: { 'value': amount },
     success: (response) ->
-      if response.errorCode 
+      if response.errorCode
         console.log response.message
       else
         element.attr "data-payment-token", response.id
@@ -95,7 +96,7 @@ getPaymentTokenFor = (element, amount) ->
     error: (jqXHR, textStatus, errorThrown) ->
       jsonResponse = jQuery.parseJSON jqXHR.responseText
       showError jsonResponse.message
-  
+
 
 showError = (message) ->
   alert = $('#alert')
@@ -108,7 +109,7 @@ showError = (message) ->
 clearErrors = ->
   alert = $('#alert')
   alert.empty()
-  
+
 count = 0
 
 $(document).ready ->
