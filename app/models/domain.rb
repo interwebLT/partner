@@ -50,6 +50,7 @@ class Domain
 
   def self.exists?(name, token:)
     response = Whois.find name, token: token
+    response ||= GlobalWhois.find name, token: token
 
     !response.nil?
   end
