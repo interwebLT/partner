@@ -1,6 +1,4 @@
 class RegisterController < SecureController
-  before_filter :staff_only
-
   def new
   end
 

@@ -41,24 +41,18 @@
         <!-- Tab panes -->
         <div class="tab-content" id="domain-info-tab-content">
           <div role="tabpanel" class="tab-pane active" id="registrant-contact">
-            <% if current_user.staff %>
               <a onclick="showEditContact()" class="btn btn-sm btn-secondary"><%= fa_icon 'pencil' %> &nbsp;Edit Contact Details</a>
               <br><br>
-            <% end %>
             <%= render partial: 'domains/domain_contact', locals: { contact: @registrant } %>
-            <% if current_user.staff %>
             <br>
               <a onclick="showEditContact()" class="btn btn-sm btn-secondary"><%= fa_icon 'pencil' %> &nbsp;Edit Contact Details</a>
-            <% end %>
           </div>
-          <% if current_user.staff %>
             <div role="tabpanel" class="tab-pane" id="registrant-contact-edit">
 
               <!--a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a-->
               <%= render partial: 'domains/domain_contact_edit', locals: { contact: @registrant } %>
 
             </div>
-          <% end %>
           <div role="tabpanel" class="tab-pane" id="admin-contact">
             <%= render partial: 'domains/domain_contact', locals: { contact: @domain.admin_contact } %>
           </div>

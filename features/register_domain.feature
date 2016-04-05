@@ -1,7 +1,7 @@
 Feature: Register Domain
 
   Background:
-    Given I am authenticated as staff
+    Given I am authenticated as partner
 
   Scenario: Register available domain
     When  I try to register an available domain
