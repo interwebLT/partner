@@ -2,7 +2,7 @@
 
 <%= simple_form_for @contact, url: contact_path(@contact.handle), html: { method: :patch } do |f| %>
   <% if @contact.errors.any? %>
-  <div id="error_message" class="alert alert-warning">
+  <div id="warning" class="alert alert-warning">
     Some information is missing or incorrect.  Please check your entries and try again.
   </div>
   <% end %>

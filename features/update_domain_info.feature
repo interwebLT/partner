@@ -3,13 +3,11 @@ Feature: Update Domain Info
   Background:
     Given I am authenticated as staff
 
-  @wip
   Scenario: Update Domain Registrant
     Given I am viewing a domain
     When  I update the registrant of the domain
     Then  domain registrant must be updated
 
-  @wip
   Scenario Outline: Update Domain Registrant with Invalid Data
     Given I am viewing a domain
     When  I update the registrant of the domain with a <invalid data>
