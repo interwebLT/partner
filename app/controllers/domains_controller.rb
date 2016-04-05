@@ -9,26 +9,6 @@ class DomainsController < SecureController
 
   def show
     @domain = Domain.find params[:id], token: current_user.token
-    @registrant = @domain.registrant
-
-    @nameserver = DomainHost.new
-    @nameserver.domain = @domain
-  end
-
-  def update
-    @domain = Domain.find params[:id], token: current_user.token
-    @registrant = Contact.new params[:contact]
-
-    if @registrant.valid?
-      @registrant.update token: current_user.token
-
-      redirect_to @domain
-    else
-      @show_edit  = true
-      @nameserver = DomainHost.new
-
-      render :show
-    end
   end
 
   def renew
