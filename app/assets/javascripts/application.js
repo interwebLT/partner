@@ -29,6 +29,7 @@
 
 $(document).ready(function() {
   $('i').tooltip();
+  $('.collapse').siblings('#viewdetails').collapse(hide);
 });
 
 (jQuery, window, document), $(function() {

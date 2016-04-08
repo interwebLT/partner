@@ -17,11 +17,106 @@
         <% end %> <%= @domain.name %>
       </h3>
     </div>
-    <div class=" "></div>
+    <div></div>
     <span class="sr-only"><strong>Domain Status:</strong> Active</span>
     <div id="dom-reg-date">Creation Date: <%= formatted_date @domain.registered_at %></div>
     <div id="dom-exp-date">Expiration Date: <%= formatted_date @domain.expires_at %></div>
-    <div><br></div>
+    <br>
+    <!--new-->
+    <h4> Domain Information</h4>
+    <div class="contact-info-wrapper">
+      <div class="title">Registrant</div>
+      <div class="contact-info"><%= render partial: 'domains/domain_contact_edit_new', locals: { contact: @registrant } %></div>
+      <div class="button">
+        <% if current_user.staff %>
+          <%= link_to '', :class => 'btn btn-default btn-small' do %>   Edit
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="contact-info-wrapper">
+      <div class="title">Administrative</div>
+      <div class="contact-info"><%= render partial: 'domains/domain_contact_edit_new', locals: { contact: @domain.admin_contact } %></div>
+      <div class="button">
+        <% if current_user.staff %>
+          <%= link_to '', :class => 'btn btn-default' do %>   Edit
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="contact-info-wrapper">
+      <div class="title">Billing</div>
+      <div class="contact-info"><%= render partial: 'domains/domain_contact_edit_new', locals: { contact: @domain.billing_contact } %></div>
+      <div class="button">
+        <% if current_user.staff %>
+          <%= link_to '', :class => 'btn btn-default' do %>   Edit
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="contact-info-wrapper">
+      <div class="title">Technical</div>
+      <div class="contact-info"><%= render partial: 'domains/domain_contact_edit_new', locals: { contact: @domain.tech_contact } %></div>
+      <div class="button">
+        <% if current_user.staff %>
+          <%= link_to '', :class => 'btn btn-default' do %>   Edit
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <br>
+
+    <div class="pull-right">
+    <% if current_user.staff %>
+      <a class="btn-link"> Add Nameservers </a>
+    <% end %>
+    </div>
+    <h4>Nameservers</h4>
+    <div class="contact-info-wrapper">
+      <div class="title">Nameservers</div>
+      <div class="contact-info">
+            <ul class="list-unstyled"><% @domain.hosts.each do |host| %>
+            <li>
+              <% if current_user.staff %>
+              <%= link_to domain_host_path(@domain.id, host.name), method: :delete, class: 'text-muted' do %>
+              <%= fa_icon 'times' %>
+              <% end %>
+              <%end%>
+              &nbsp;<%= host.name %>
+            </li>
+              <% end %>
+            </ul>
+      </div>
+    </div>
+    <br>
+    <div class="pull-right"><a class="btn-link"> View All</a></div>
+    <h4> Latest Domain Activity</h4>
+    <div class="contact-info-wrapper">
+      <div class="title">Activities</div>
+      <div class="contact-info">
+            <table id="domain_activities">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @domain.activities.each do |activity| %>
+                <tr>
+                  <td><%= formatted_timestamp activity.activity_at %></td>
+                  <td><%= activity_description(activity).html_safe %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--new-->
 
     <ul id="tab-list" class="dm" role="tablist">
       <li class="active"><a href="#info" role="tab" data-toggle="tab">Domain Info</a></li>
