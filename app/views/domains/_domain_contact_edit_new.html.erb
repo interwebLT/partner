@@ -1,0 +1,32 @@
+<div><%= contact.local_name %> Juan Dela Cruz</div>
+<div><%= contact.local_organization %> JDC Company</div>
+<div>
+  <%= contact.local_street %> 2708 Jollibee Plaza bldg
+  <% if contact.street2 || @domain.try(:registrant).try(:local_street2) %><Br>
+  <%= contact.local_street2 %> F.Ortigas Junior Road
+  <% end %>
+  <% if contact.street3 ||  @domain.try(:registrant).try(:local_street3) %><Br>
+  <%= contact.local_street3 %> Ortigas Center
+  <% end %>
+  <%= contact.local_city %> Pasig City
+  <%= contact.local_state %> NCR
+  <%= contact.local_postal_code %> 1605
+  <%= Country[contact.local_country_code].try(:name) %> Philippines
+</div>
+<div class="collapse" id="viewdetails">
+  <div>
+    <%= contact.voice %> +63.26372104
+    <% unless contact.voice_ext.blank? %>
+    extn <%=contact.voice_ext %>228
+    <% end %>
+  </div>
+  <div>
+    <%= contact.fax %> +63.26327319
+    <% unless contact.fax_ext.blank? %>
+    extn <%=contact.fax_ext %> 000
+    <% end %>
+  </div>
+  <div><%= contact.email %> juan@delacruz.ph</div>
+  <div><%= contact.handle %> </div>
+</div>
+<a class="btn-link showdetails" data-toggle="collapse" data-target="#viewdetails"></a>

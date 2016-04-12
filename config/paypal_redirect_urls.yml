@@ -1,0 +1,11 @@
+test:
+  paypal_return_url: http://localhost:3003/paypal/return
+  paypal_cancel_url: http://localhost:3003/paypal/cancel
+
+development:
+  paypal_return_url: http://localhost:3003/paypal/return
+  paypal_cancel_url: http://localhost:3003/paypal/cancel
+
+production:
+  paypal_return_url: http://localhost:3003/paypal/return
+  paypal_cancel_url: http://localhost:3003/paypal/cancel

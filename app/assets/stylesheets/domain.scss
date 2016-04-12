@@ -427,6 +427,11 @@ border: none;
     }
 
   }
+
+.contact-info-wrapper .title {
+  text-align: left!important;
+  padding-bottom: 15px!important;
+}
 }
 
 ul.alert li { margin-left: 15px;}
@@ -437,6 +442,11 @@ input#contact_handle {@extend .text-primary;}
     padding-top: 7px !important;
     margin-bottom: 0;
     text-align: left !important;
+}
+
+.contact-info-wrapper .title {
+  text-align: left!important;
+  padding-bottom: 15px!important;
 }
 }
 #domain-info .form-group {margin-left: 0 !important;}
@@ -536,3 +546,55 @@ input#contact_handle {@extend .text-primary;}
 
   }
 }
+
+.in.collapse+a.btn-link.showdetails:before
+{
+    content:'Hide details...';
+    font-size: smaller;
+}
+.collapse+a.btn-link.showdetails:before
+{
+    content:'View more...';
+    font-size: smaller;
+}
+.contact-info-wrapper {
+  @extend .clearfix;
+  padding: 20px;
+  border: 1px solid #eee;
+  min-height: 100px;
+}
+.contact-info-wrapper .title{
+  @extend .col-lg-3;
+  margin-top: 20px;
+  text-align: right;
+  font-size: larger;
+  color: #111;
+  padding-right:100px;
+}
+.contact-info {
+  @extend .col-lg-8;
+  line-height: 24px;
+}
+
+.contact-info-wrapper .button {
+  @extend .col-lg-1;
+  z-index: 99999999;
+  margin-top: 3%;
+}
+.contact-info ul li {line-height: 30px;}
+.contact-info ul {margin-bottom: 0!important;}
+.contact-info table thead{
+  background-color: #fff !important;
+  font-weight: normal;
+  color: inherit;
+  }
+ .contact-info table > tbody > tr:nth-of-type(2n+1) {
+    background-color: #fff !important;
+    padding-left: 0;
+}
+.contact-info table tr td:first-child,
+.contact-info table tr th:first-child,
+.contact-info table tr td,
+.contact-info table tr th {padding-left: 0!important; font-weight: 100!important}
+.contact-info a.btn-link {font-size:15px;}
+.pull-right {margin-top: 10px;}

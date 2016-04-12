@@ -28,8 +28,11 @@
             <li><%= link_to 'Code of Conduct', coc_about_index_path %></li>
             <li><%= link_to 'Service Agreement', sa_about_index_path %></li>
           <% end %>
-          <% if user_signed_in? %>
-            <li>
+
+          </ul>
+          <ul class="navbar-right">
+            <% if user_signed_in? %>
+            <li class="nb">
             <%= form_tag '/domains', method: 'get', class: 'search-bar navbar-form navbar-left' do %>
               <div class="form-group">
                 <% if current_user.admin %>
@@ -64,8 +67,6 @@
             </li>
             <% end %>
           <% else %>
-          </ul>
-          <ul class="navbar-right">
             <li><%= link_to "Log In", new_user_session_path %></li>
           </ul>
           <% end %>
