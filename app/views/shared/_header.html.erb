@@ -83,7 +83,9 @@
     <% if user_signed_in? %>
         <div class="col-sm-7 <%= 'hidden' if params[:controller] == 'register'  %>, <%= 'hidden' if params[:controller] == 'checkout'  %>">
           <%= link_to 'Register Domain +', register_path %>
+          <% if current_user.staff %>
           <%= link_to 'Replenish Account', checkout_index_path  %>
+          <% end %>
         </div>
     <% end %>
   </div>
