@@ -60,6 +60,14 @@ Rails.application.routes.draw do
       get :verify
     end
   end
+  
+  scope path: :paypal, as: :paypal do
+    get :setup_payment, to: 'paypal#setup_payment'
+    match :return, to: 'paypal#returns', via: [:get, :post]
+    match :cancel, to: 'paypal#cancel', via: [:get, :post]
+  end
 
-  resources :credits, only: [:create]
+  scope path: :credits do
+    match :create, to: 'credits#create', via: [:get, :post], as: :credits
+  end
 end

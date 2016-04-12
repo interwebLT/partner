@@ -1,7 +1,7 @@
 <% content_for :banner_title do %>
   <%= fa_icon 'file lg' %>&nbsp;Transaction
 <% end %>
- <div id="transaction-page">
+ <div id="transaction-page-paypal">
   <table id="credits">
     <thead>
       <tr>
@@ -26,7 +26,10 @@
       </tr>
     </tfoot>
   </table>
-  <%= javascript_include_tag Rails.configuration.checkout_script %>
-  <form id="payment_form" method="POST">
-  </form>
+  <%= link_to "PAY NOW", paypal_setup_payment_path(:amount => @total.format({:symbol => '', :thousands_separator => ''})), class: "btn btn-success pull-right" %>
+<%
+#   < %= javascript_include_tag Rails.configuration.checkout_script % >
+#  <form id="payment_form" method="POST">
+#  </form>
+ %>
 </div>
