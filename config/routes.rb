@@ -67,7 +67,8 @@ Rails.application.routes.draw do
     match :cancel, to: 'paypal#cancel', via: [:get, :post]
   end
 
-  scope path: :credits do
-    match :create, to: 'credits#create', via: [:get, :post], as: :credits
-  end
+  resources :credits, only: [:create]
+#  scope path: :credits do
+#    match :create, to: 'credits#create', via: [:get, :post], as: :credits
+#  end
 end
