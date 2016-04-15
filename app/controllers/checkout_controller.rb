@@ -83,7 +83,8 @@ class CheckoutController < SecureController
 	def payment_token_payload amount
     fee = (1 + Credit::TRANSACTION_FEE).money
     amount_f = amount.to_f / 100
-    credit = (amount_f.money / fee).money
+    amount_money = amount_f.money
+    credit = (amount_money / fee).money
 
     return {
 			"value" => amount,
@@ -92,7 +93,7 @@ class CheckoutController < SecureController
       "products" => [
         {
           "name" => "Topup for #{current_user.partner_name.downcase}",
-          "price" => amount,
+          "price" => amount_f,
           "quantity" => 1
         }
       ],
