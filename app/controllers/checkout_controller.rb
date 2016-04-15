@@ -93,7 +93,7 @@ class CheckoutController < SecureController
       "products" => [
         {
           "name" => "Topup for #{current_user.partner_name.downcase}",
-          "price" => amount_money.format,
+          "price" => amount_f,
           "quantity" => 1
         }
       ],
