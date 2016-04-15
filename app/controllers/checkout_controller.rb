@@ -53,6 +53,7 @@ class CheckoutController < SecureController
 
 		render :status => response.code, :json => hash.to_json
   rescue => e
+    puts "#{e}"
 		render :status => :internal_server_error, :json => {"error" => "Failed to fetch payment token. Returned: #{e}"}
 	end
 	
@@ -80,9 +81,22 @@ class CheckoutController < SecureController
   end
 	
 	def payment_token_payload amount
-		{
+    fee = (1 + Credit::TRANSACTION_FEE).money
+    amount_f = amount.to_f / 100
+    credit = (amount_f.money / fee).money
+
+    return {
 			"value" => amount,
-			"currency" => "USD"
+			"currency" => "USD",
+      "trackId" => current_user.partner_name.downcase,
+      "products" => [
+        {
+          "name" => "Topup for #{current_user.partner_name.downcase}",
+          "price" => amount,
+          "quantity" => 1
+        }
+      ],
+      "description" => "#{credit.format} credit for #{current_user.partner_name.downcase}"
 		}.to_json
 	end
 	
