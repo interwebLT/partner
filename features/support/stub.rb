@@ -26,6 +26,12 @@ def stub_patch to:, with:, returns:
     .to_return status: 200, body: returns.to_json
 end
 
+def stub_delete to:, returns:
+  stub_request(:delete, to)
+    .with(headers: default_headers)
+    .to_return status: 200, body: returns.to_json
+end
+
 def default_headers
   {
     'Authorization' => 'Token token=abcd123456',
