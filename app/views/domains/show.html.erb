@@ -95,7 +95,7 @@
       <div class="contact-info">
         <ul>
           <% @domain.hosts.each do |domain_host| %>
-          <li><%= domain_host.name %></li>
+          <li><%= domain_host.name %> <%= link_to 'Remove', domain_host_path(@domain.id, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' %></li>
           <% end %>
         </ul>
       </div>
