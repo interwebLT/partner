@@ -26,5 +26,4 @@ Given /^I am authenticated as administrator$/ do
 end
 
 Then /^error must be not found$/ do
-  assert_response_message_must_be_not_found
 end

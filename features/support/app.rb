@@ -67,7 +67,3 @@ end
 def site
   @app ||= App.new
 end
-
-def assert_response_message_must_be_not_found
-
-end
