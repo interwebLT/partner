@@ -598,3 +598,31 @@ input#contact_handle {@extend .text-primary;}
 .contact-info table tr th {padding-left: 0!important; font-weight: 100!important}
 .contact-info a.btn-link {font-size:15px;}
 .pull-right {margin-top: 10px;}
+
+@media (max-width: 768px) {
+  .contact-info-wrapper {
+    .title {
+      text-align: left;
+    }
+
+  }
+}
+
+.dom-status-icon {
+  display: inline-block;
+  padding: 3px 6px 1px;
+  border: 1px solid #CECECE;
+  border-radius: 15px;
+  margin: 5px 0 8px;
+  i {
+    cursor: pointer;
+  }
+  
+  .glyphicon {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+
+
