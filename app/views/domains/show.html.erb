@@ -10,7 +10,7 @@ Expires:    <%= formatted_date @domain.expires_at %>
 <h4>Registrant</h4>
 <%= render partial: 'domains/domain_contact', locals: { contact: @domain.registrant } %>
 
-<%= link_to 'Edit', edit_contact_path(@domain.registrant.handle, d: @domain.id), id: 'edit_registrant' %>
+<%= link_to 'Edit', contact_path(@domain.registrant.handle, d: @domain.id), id: 'edit_registrant' %>
 
 <% if @domain.admin_handle %>
 <h4>Admin Contact</h4>

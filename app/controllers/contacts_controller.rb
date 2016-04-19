@@ -5,22 +5,17 @@ class ContactsController < SecureController
 
   def show
     @contact = Contact.find params[:id], token: auth_token
-  end
-
-  def edit
-    @contact = Contact.find params[:id], token: auth_token
     @domain_id = params[:d]
   end
 
   def update
     @contact = Contact.new contact_params
+    @domain_id = params[:contact].delete :d
 
     if @contact.update token: auth_token
-      domain_id = params[:contact].delete :d
-
-      redirect_to domain_path(domain_id), notice: 'Contact was updated!'
+      redirect_to domain_path(@domain_id), notice: 'Contact was updated!'
     else
-      render :edit
+      render :show
     end
   end
 
