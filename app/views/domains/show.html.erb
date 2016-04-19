@@ -27,18 +27,16 @@
     </div>
     <div id="dom-reg-date">Registration Date: <%= formatted_date @domain.registered_at %></div>
     <div id="dom-exp-date">Expiration Date: <%= formatted_date @domain.expires_at %></div>
-    
+
     <br>
     <!--new-->
     <h4> Domain Information</h4>
     <div class="contact-info-wrapper">
-      
+
       <div class="title">Registrant</div>
       <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.registrant } %></div>
       <div class="button">
-        <% if current_user.staff %>
-          <%= link_to 'Edit', contact_path(@domain.registrant.handle, d: @domain.id), id: 'edit_registrant', :class => 'btn btn-primary btn-small' %>
-        <% end %>
+        <%= link_to 'Edit', contact_path(@domain.registrant.handle, d: @domain.id), id: 'edit_registrant', :class => 'btn btn-primary btn-small' %>
       </div>
     </div>
 
@@ -78,9 +76,9 @@
           <% end %>
         <% end %>
       </div>
-    </div>   
+    </div>
     <% end %>
-    
+
     <br>
 
     <div class="pull-right">
@@ -90,7 +88,7 @@
     </div>
 
     <h4>Nameservers</h4>
-    
+
     <% unless @domain.hosts.empty? %>
     <div class="contact-info-wrapper">
       <div class="title">Nameservers</div>
@@ -102,13 +100,13 @@
         </ul>
       </div>
     </div>
-    
+
     <% else %>
     No Nameservers
     <% end %>
-    
+
     <br>
-    
+
     <div class="pull-right"><a class="btn-link"><i class="fa fa-list-ul"></i> View All</a></div>
     <h4>Domain Activity</h4>
     <div class="contact-info-wrapper">
