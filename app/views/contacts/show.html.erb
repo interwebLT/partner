@@ -1,18 +1,145 @@
-<% content_for :banner_title do %>
-<%= fa_icon 'phone lg' %>&nbsp;Contacts <% unless current_user.admin %><span><%= @contacts.count %></span><% end %>
-<% end %>
+<h3>Edit Contact</h3>
 
-<div id="contacts-info">
-	<div class="contact-header info-header">
-		<h3>
-			<%= link_to contacts_path, :class => 'btn btn-default btn-xs back-btn' do %>
-				<i class="fa fa-chevron-left"></i> 
-			<% end %> <%= @contact.handle %>
-		</h3>
-	</div>
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<%= render partial: 'domains/domain_contact', locals: { contact: @contact } %>
-		</div>
-	</div>
-</div>
+<%= simple_form_for @contact, url: contact_path(@contact.handle), html: { method: :patch } do |f| %>
+  <% if @contact.errors.any? %>
+  <div id="warning" class="alert alert-warning">
+    Some information is missing or incorrect.  Please check your entries and try again.
+  </div>
+  <% end %>
+
+  <%= f.hidden_field :d, value: @domain_id %>
+  <%= f.hidden_field :handle, value: @contact.handle %>
+
+  <div id="domain-info">
+    <div class="info-l10n">
+      <label class=""></label>
+      <div class=""><strong>Local</strong></div>
+      <div class=""><strong>International</strong></div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'user' %> Name</label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_name, label: false%></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.name %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'users' %> Organization </label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_organization, label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.organization %></div>
+        <span class="help-block" style="display:none"><small>Enter your name if you are not registering the domain on behalf of an organization</small></span>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'home' %> Street </label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_street, placeholder: 'Street 1', label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.street %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label class="hidden-xs">&nbsp;</label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_street2, placeholder: 'Street 2', label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.street2 %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label class="hidden-xs">&nbsp;</label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_street3, placeholder: 'Street 3', label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.street3 %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>City</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_city, label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.city %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>State/Province</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_state, label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.state %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>Postal Code</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_postal_code, label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= @contact.postal_code %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>Country</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_country_code, :tabindex => 9, value: @contact.local_country_code, priority: ['PH', 'US'], include_blank: true, label: false %></div>
+        <div class="contact-cat">Int'l</div>
+        <div><%= Country[@contact.country_code].try(:name) %></div>
+      </div>
+    </div>
+    <div class="domain-info-num"><!-- form-group -->
+      <label><%= fa_icon 'phone-square' %> Telephone </label>
+      <div class="inputfield">
+        <%= f.input :voice, :tabindex => 10, label: false %>
+        <span class="text-muted">ext.</span>
+        <%= f.input :voice_ext, :tabindex => 11, label: false %>
+        <span class="help-block" style="display:none;">
+          <small>e.g. +12.34567890</small>
+        </span>
+      </div>
+      <div></div>
+    </div>
+    <div class="domain-info-num"><!-- form-group -->
+      <label><%= fa_icon 'fax' %> Fax </label>
+      <div class="inputfield">
+        <%= f.input :fax, :tabindex => 12, label: false %>
+        <span class="text-muted">ext.</span>
+        <%=f.input :fax_ext, :tabindex => 13, label: false%>
+        <span class="help-block" style="display:none;">
+          <small>e.g. +12.34567890</small>
+        </span>
+      </div>
+      <div></div>
+    </div>
+    <div class="domain-info-num">
+      <label><%= fa_icon 'envelope' %> Email </label>
+      <div class="inputfield">
+        <%= f.input :email, :tabindex => 14, label: false %>
+      </div>
+      <div></div>
+    </div>
+    <div class="domain-info-num"><!-- form-group -->
+      <label><%= fa_icon 'user-secret' %> Handle </label>
+      <%= f.hidden_field :handle, value: @contact.handle, :tabindex => 15 %>
+      <div class="inputfield">
+        <div><%= @contact.handle %></div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <br>
+  <div class="edit-update">
+    <%= f.submit 'Update', id: :submit %> <a onclick="hideEditContact()" class="btn btn-sm btn-danger"><%= fa_icon 'ban' %> &nbsp;Cancel</a>
+  </div>
+<% end %>

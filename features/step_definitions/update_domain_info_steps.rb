@@ -15,16 +15,16 @@ When /^I update the registrant of the domain$/ do
 
   site.domain_info.edit_registrant.click
 
-  expect(site.contact_info.edit).to be_displayed id: 'registrant'
+  expect(site.contact_info).to be_displayed id: 'registrant'
 
-  site.contact_info.edit.local_name.set 'Updated'
-  site.contact_info.edit.local_organization.set 'Updated'
-  site.contact_info.edit.local_street.set 'Updated'
-  site.contact_info.edit.local_city.set 'Updated'
-  site.contact_info.edit.voice.set '+63.21000000'
-  site.contact_info.edit.email.set 'updated@alpha.ph'
+  site.contact_info.local_name.set 'Updated'
+  site.contact_info.local_organization.set 'Updated'
+  site.contact_info.local_street.set 'Updated'
+  site.contact_info.local_city.set 'Updated'
+  site.contact_info.voice.set '+63.21000000'
+  site.contact_info.email.set 'updated@alpha.ph'
 
-  site.contact_info.edit.submit.click
+  site.contact_info.submit.click
 end
 
 When /^I update the registrant of the domain with a (.*)$/ do |scenario|
@@ -33,7 +33,7 @@ When /^I update the registrant of the domain with a (.*)$/ do |scenario|
 
   site.domain_info.edit_registrant.click
 
-  expect(site.contact_info.edit).to be_displayed id: 'registrant'
+  expect(site.contact_info).to be_displayed id: 'registrant'
 
   data = {
     'blank local name'          => { local_name:  '' },
@@ -41,16 +41,16 @@ When /^I update the registrant of the domain with a (.*)$/ do |scenario|
   }[scenario]
 
   data.keys.each do |field|
-    site.contact_info.edit.send(field).set data[field]
+    site.contact_info.send(field).set data[field]
   end
 
-  site.contact_info.edit.submit.click
+  site.contact_info.submit.click
 end
 
 Then /^error must be validation failed$/ do
   expect(site.contact_info).to be_displayed id: 'registrant'
 
-  expect(site.contact_info.edit).to have_warning
+  expect(site.contact_info).to have_warning
 end
 
 Then /^domain registrant must be updated$/ do
