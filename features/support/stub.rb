@@ -27,9 +27,14 @@ def stub_patch to:, with:, returns:
 end
 
 def stub_delete to:, returns:
-  stub_request(:delete, to)
-    .with(headers: default_headers)
-    .to_return status: 200, body: returns.to_json
+  request = stub_request :delete, to
+  request.with headers: default_headers
+
+  if returns.is_a? Fixnum
+    request.to_return status: returns
+  else
+    request.to_return status: 200, body: returns.to_json
+  end
 end
 
 def default_headers
