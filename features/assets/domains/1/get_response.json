@@ -19,5 +19,14 @@
   "tech_handle":  null,
   "tech_contact": {},
   "activities": [],
-  "hosts":  []
+  "hosts":  [
+    {
+      "id": 1,
+      "name": "ns5.domains.ph"
+    },
+    {
+      "id": 2,
+      "name": "ns6.domains.ph"
+    }
+  ]
 }

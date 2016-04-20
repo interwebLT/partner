@@ -7,5 +7,5 @@ class DomainInfoPage < SitePrism::Page
   element :edit_registrant, '#edit_registrant'
 
   elements :domain_activities, '#domain_activities tbody tr'
-  elements :domain_hosts, '#domain_hosts tbody tr'
+  elements :domain_hosts, '#domain_hosts li'
 end

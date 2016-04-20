@@ -20,6 +20,6 @@ Then /^I must see the info of my domain$/ do
   expect(site.domain_info).to be_displayed
 
   expect(site.domain_info.domain_activities).to be_empty
-  expect(site.domain_info.domain_hosts).to be_empty
+  expect(site.domain_info.domain_hosts).not_to be_empty
 end
 
