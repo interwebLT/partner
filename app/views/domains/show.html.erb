@@ -15,16 +15,6 @@
       </h3>
     </div>
     <div></div>
-    <span class="sr-only"><strong>Domain Status:</strong> Active</span>
-    <div class="dom-status-icon">
-      <i class="fa fa-circle green" data-toggle="tooltip" data-placement="right" title="OK"></i>
-      <i class="fa fa-circle grey" data-toggle="tooltip" data-placement="right" title="INACTIVE"></i>
-      <i class="fa fa-hand-paper-o red" data-toggle="tooltip" data-placement="right" title="&#215; CLIENT Hold"></i>
-      <i class="fa fa-trash red" data-toggle="tooltip" data-placement="right" title="&#215; CLIENT Delete Prohibit"></i>
-      <i class="fa fa-refresh red" data-toggle="tooltip" data-placement="right" title="&#215; CLIENT Renew"></i>
-      <i class="fa fa-arrow-circle-o-right red" data-toggle="tooltip" data-placement="right" title="&#215; CLIENT Transfer"></i>
-      <i class="glyphicon glyphicon-repeat red" data-toggle="tooltip" data-placement="right" title="&#215; CLIENT Update"></i>
-    </div>
     <div id="dom-reg-date">Registration Date: <%= formatted_date @domain.registered_at %></div>
     <div id="dom-exp-date">Expiration Date: <%= formatted_date @domain.expires_at %></div>
 
