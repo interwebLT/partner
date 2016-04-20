@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'registration/create_contact', to: 'registration#create_contact'
   post 'registration/confirm', to: 'registration#confirm'
 
-  resources :domains, only: [:index, :show, :update] do
+  resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:create, :destroy], id: /.*/
   end
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
       get :verify
     end
   end
-  
+
   scope path: :paypal, as: :paypal do
     get :setup_payment, to: 'paypal#setup_payment'
     match :return, to: 'paypal#returns', via: [:get, :post]
