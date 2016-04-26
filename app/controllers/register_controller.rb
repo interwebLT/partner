@@ -89,8 +89,8 @@ class RegisterController < SecureController
   end
 
   def registrant
-    registrant = Contact.find params[:handle], token: auth_token
-
-    registrant.nil? ? Contact.new : registrant
+    Contact.find params[:handle], token: auth_token
+  rescue Api::Model::NotFound
+    Contact.new
   end
 end

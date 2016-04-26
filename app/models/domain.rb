@@ -53,6 +53,8 @@ class Domain
     response ||= GlobalWhois.find name, token: token
 
     !response.nil?
+  rescue Api::Model::NotFound
+   false
   end
 
   def self.valid? domain_name
