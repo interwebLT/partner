@@ -126,7 +126,7 @@ RSpec.describe Api::Model do
     context 'when response code is 404' do
       let(:status)  { 404 }
 
-      it { is_expected.to be nil }
+      it { expect { subject }.to raise_error Api::Model::NotFound }
     end
   end
 
