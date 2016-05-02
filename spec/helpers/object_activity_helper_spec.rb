@@ -178,6 +178,86 @@ RSpec.describe ObjectActivityHelper do
       it { is_expected.to eql 'status: is no longer <strong>client update prohibited</strong>' }
     end
 
+    context 'when status is server_hold' do
+      let(:property_changed) { 'server_hold' }
+      let(:old_value) { 'false' }
+      let(:new_value) { 'true' }
+
+      it { is_expected.to eql 'status: is now <strong>server hold</strong>' }
+    end
+
+    context 'when status is no longer server_hold' do
+      let(:property_changed) { 'server_hold' }
+      let(:old_value) { 'true' }
+      let(:new_value) { 'false' }
+
+      it { is_expected.to eql 'status: is no longer <strong>server hold</strong>' }
+    end
+
+    context 'when status is server_delete_prohibited' do
+      let(:property_changed) { 'server_delete_prohibited' }
+      let(:old_value) { 'false' }
+      let(:new_value) { 'true' }
+
+      it { is_expected.to eql 'status: is now <strong>server delete prohibited</strong>' }
+    end
+
+    context 'when status is no longer server_delete_prohibited' do
+      let(:property_changed) { 'server_delete_prohibited' }
+      let(:old_value) { 'true' }
+      let(:new_value) { 'false' }
+
+      it { is_expected.to eql 'status: is no longer <strong>server delete prohibited</strong>' }
+    end
+
+    context 'when status is server_renew_prohibited' do
+      let(:property_changed) { 'server_renew_prohibited' }
+      let(:old_value) { 'false' }
+      let(:new_value) { 'true' }
+
+      it { is_expected.to eql 'status: is now <strong>server renew prohibited</strong>' }
+    end
+
+    context 'when status is no longer server_renew_prohibited' do
+      let(:property_changed) { 'server_renew_prohibited' }
+      let(:old_value) { 'true' }
+      let(:new_value) { 'false' }
+
+      it { is_expected.to eql 'status: is no longer <strong>server renew prohibited</strong>' }
+    end
+
+    context 'when status is server_transfer_prohibited' do
+      let(:property_changed) { 'server_transfer_prohibited' }
+      let(:old_value) { 'false' }
+      let(:new_value) { 'true' }
+
+      it { is_expected.to eql 'status: is now <strong>server transfer prohibited</strong>' }
+    end
+
+    context 'when status is no longer server_transfer_prohibited' do
+      let(:property_changed) { 'server_transfer_prohibited' }
+      let(:old_value) { 'true' }
+      let(:new_value) { 'false' }
+
+      it { is_expected.to eql 'status: is no longer <strong>server transfer prohibited</strong>' }
+    end
+
+    context 'when status is server_update_prohibited' do
+      let(:property_changed) { 'server_update_prohibited' }
+      let(:old_value) { 'false' }
+      let(:new_value) { 'true' }
+
+      it { is_expected.to eql 'status: is now <strong>server update prohibited</strong>' }
+    end
+
+    context 'when status is no longer server_update_prohibited' do
+      let(:property_changed) { 'server_update_prohibited' }
+      let(:old_value) { 'true' }
+      let(:new_value) { 'false' }
+
+      it { is_expected.to eql 'status: is no longer <strong>server update prohibited</strong>' }
+    end
+
     context 'when property_changed is registrant_handle' do
       let(:property_changed) { 'registrant_handle' }
       let(:old_value) { '' }
