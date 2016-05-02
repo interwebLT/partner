@@ -3,12 +3,22 @@
     "id": 1,
     "name": "domain.ph",
     "expires_at": "2017-03-01T15:00:00Z",
-    "expired": false
+    "expired": false,
+    "server_delete_prohibited": false,
+    "server_hold": false,
+    "server_renew_prohibited": false,
+    "server_transfer_prohibited": false,
+    "server_update_prohibited": false
   },
   {
     "id": 2,
     "name": "domain.com.ph",
     "expires_at": "2017-03-01T15:00:00Z",
-    "expired": false
+    "expired": false,
+    "server_delete_prohibited": false,
+    "server_hold": false,
+    "server_renew_prohibited": false,
+    "server_transfer_prohibited": false,
+    "server_update_prohibited": false
   }
 ]

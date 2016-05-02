@@ -9,6 +9,8 @@ class Domain
                 :registrant, :admin_contact, :billing_contact, :tech_contact,
                 :client_hold, :client_delete_prohibited, :client_renew_prohibited,
                 :client_transfer_prohibited, :client_update_prohibited,
+                :server_hold, :server_delete_prohibited, :server_renew_prohibited,
+                :server_transfer_prohibited, :server_update_prohibited,
                 :expiring, :expired,
                 :activities, :hosts
 

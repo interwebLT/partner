@@ -18,6 +18,11 @@
   "billing_contact":  {},
   "tech_handle":  null,
   "tech_contact": {},
+  "server_delete_prohibited": false,
+  "server_hold": false,
+  "server_renew_prohibited": false,
+  "server_transfer_prohibited": false,
+  "server_update_prohibited": false,
   "activities": [],
   "hosts":  [
     {
