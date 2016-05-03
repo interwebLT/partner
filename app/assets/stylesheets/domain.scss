@@ -583,9 +583,9 @@ input#contact_handle {@extend .text-primary;}
 .contact-info ul li {line-height: 30px;}
 .contact-info ul {margin-bottom: 0!important;}
 .contact-info table thead{
-  background-color: #999 !important;
+  background-color: #eee !important;
   font-weight: normal;
-  color: #000;
+  color: inherit;
   }
  .contact-info table > tbody > tr:nth-of-type(2n+1) {
     background-color: #f9f9f9 !important;
