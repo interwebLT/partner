@@ -54,6 +54,26 @@ module ObjectActivityHelper
       'status: is now <strong>client update prohibited</strong>'
     elsif property == 'client_update_prohibited' and status_disabled(activity)
       'status: is no longer <strong>client update prohibited</strong>'
+    elsif property == 'server_hold' and status_enabled(activity)
+      'status: is now <strong>server hold</strong>'
+    elsif property == 'server_hold' and status_disabled(activity)
+      'status: is no longer <strong>server hold</strong>'
+    elsif property == 'server_delete_prohibited' and status_enabled(activity)
+      'status: is now <strong>server delete prohibited</strong>'
+    elsif property == 'server_delete_prohibited' and status_disabled(activity)
+      'status: is no longer <strong>server delete prohibited</strong>'
+    elsif property == 'server_renew_prohibited' and status_enabled(activity)
+      'status: is now <strong>server renew prohibited</strong>'
+    elsif property == 'server_renew_prohibited' and status_disabled(activity)
+      'status: is no longer <strong>server renew prohibited</strong>'
+    elsif property == 'server_transfer_prohibited' and status_enabled(activity)
+      'status: is now <strong>server transfer prohibited</strong>'
+    elsif property == 'server_transfer_prohibited' and status_disabled(activity)
+      'status: is no longer <strong>server transfer prohibited</strong>'
+    elsif property == 'server_update_prohibited' and status_enabled(activity)
+      'status: is now <strong>server update prohibited</strong>'
+    elsif property == 'server_update_prohibited' and status_disabled(activity)
+      'status: is no longer <strong>server update prohibited</strong>'
     elsif property == 'authcode'
       'authcode: updated value'
     else
