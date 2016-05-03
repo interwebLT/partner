@@ -73,7 +73,7 @@
 
     <div class="pull-right">
     <% if current_user.staff %>
-      <%= fa_icon 'plus' %> <%= link_to 'Add Nameservers', domain_hosts_path(@domain.name), id: :add_domain_host %>
+      <%= fa_icon 'plus' %> <%= link_to 'Add Nameservers', domain_hosts_path(@domain.id), id: :add_domain_host %>
     <% end %>
     </div>
 

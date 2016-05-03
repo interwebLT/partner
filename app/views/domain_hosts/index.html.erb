@@ -1,0 +1,16 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'gears lg' %>&nbsp;Domains
+<% end %>
+
+<h3>Add Nameserver</h3>
+
+<%= simple_form_for @domain_host do |f| %>
+  <%= f.hidden_field :domain_id, value: @domain_id %>
+
+  <div>
+    <div>Name</div>
+    <div><%= f.input :name, label: false %></div>
+  </div>
+
+  <%= f.submit 'Add Domain Host', id: :submit %>
+<% end %>
