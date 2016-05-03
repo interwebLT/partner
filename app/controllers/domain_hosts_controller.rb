@@ -11,7 +11,7 @@ class DomainHostsController < SecureController
     domain_host = DomainHost.new create_params.merge(domain: domain.name)
     domain_host.save token: auth_token
 
-    redirect_to domain_url(domain.id)
+    redirect_to domain_url(domain.id), notice: 'Nameserver added!'
   end
 
   def destroy

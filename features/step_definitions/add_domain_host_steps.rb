@@ -15,4 +15,6 @@ When /^I add a domain host$/  do
 end
 
 Then /^domain must now have domain host$/  do
+  expect(site.domain_info).to be_displayed
+  expect(site.domain_info.notice).to have_attributes text: 'Nameserver added!'
 end
