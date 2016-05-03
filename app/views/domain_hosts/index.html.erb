@@ -5,6 +5,12 @@
 <h3>Add Nameserver</h3>
 
 <%= simple_form_for @domain_host do |f| %>
+  <% if @domain_host.errors.any? %>
+  <div id="warning" class="alert alert-warning">
+    Some information is missing or incorrect.  Please check your entries and try again.
+  </div>
+
+  <% end %>
   <%= f.hidden_field :domain_id, value: @domain_id %>
 
   <div>

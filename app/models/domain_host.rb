@@ -23,6 +23,8 @@ class DomainHost
   end
 
   def save token:
+    return false unless valid?
+
     response = self.class.post self.class.url(self.domain), self.as_json, token: token
 
     !response.nil?

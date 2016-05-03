@@ -8,10 +8,15 @@ class DomainHostsController < SecureController
   def create
     domain = Domain.find params[:domain_id], token: auth_token
 
-    domain_host = DomainHost.new create_params.merge(domain: domain.name)
-    domain_host.save token: auth_token
+    @domain_host = DomainHost.new create_params.merge(domain: domain.name)
 
-    redirect_to domain_url(domain.id), notice: 'Nameserver added!'
+    if @domain_host.save token: auth_token
+      redirect_to domain_url(domain.id), notice: 'Nameserver added!'
+    else
+      @domain_id = domain.id
+
+      render :index
+    end
   end
 
   def destroy
