@@ -1,4 +1,8 @@
 class DomainHostsController < SecureController
+  def index
+    render text: 'Add Domain Host'
+  end
+
   def create
     domain = Domain.find params[:domain_id], token: current_user.token
 

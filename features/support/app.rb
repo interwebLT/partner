@@ -62,6 +62,10 @@ class App
   def register
     @register ||= RegisterPage.new
   end
+
+  def add_domain_host
+    @add_domain_host ||= AddDomainHostPage.new
+  end
 end
 
 def site
