@@ -3,6 +3,9 @@ class DomainHost
 
   attr_accessor :id, :domain, :name, :created_at, :updated_at
 
+  validates :domain,  presence: true
+  validates :name,    presence: true
+
   def as_json options = nil
     {
       name: name
