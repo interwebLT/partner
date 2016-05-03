@@ -29,6 +29,8 @@ class DomainHost
 
     !response.nil?
   rescue Api::Model::UnprocessableEntity
+    self.errors.add :name, 'already in use'
+
     false
   end
 end

@@ -11,3 +11,7 @@ Feature: Add Domain Host
   Scenario: Add Blank Domain Host
     When  I add a blank domain host
     Then  I must be notified that domain host is not valid
+
+  Scenario: Add Existing Domain Host
+    When  I add an existing domain host
+    Then  I must be notified that domain host is not valid
