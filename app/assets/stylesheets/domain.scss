@@ -560,7 +560,6 @@ input#contact_handle {@extend .text-primary;}
 .contact-info-wrapper {
   @extend .clearfix;
   padding: 20px;
-  border: 1px solid #eee;
   min-height: 100px;
 }
 .contact-info-wrapper .title{
@@ -584,18 +583,18 @@ input#contact_handle {@extend .text-primary;}
 .contact-info ul li {line-height: 30px;}
 .contact-info ul {margin-bottom: 0!important;}
 .contact-info table thead{
-  background-color: #fff !important;
+  background-color: #999 !important;
   font-weight: normal;
-  color: inherit;
+  color: #000;
   }
  .contact-info table > tbody > tr:nth-of-type(2n+1) {
-    background-color: #fff !important;
+    background-color: #f9f9f9 !important;
     padding-left: 0;
 }
 .contact-info table tr td:first-child,
 .contact-info table tr th:first-child,
 .contact-info table tr td,
-.contact-info table tr th {padding-left: 0!important; font-weight: 100!important}
+.contact-info table tr th {padding-left: 5!important; font-weight: 100!important}
 .contact-info a.btn-link {font-size:15px;}
 .pull-right {margin-top: 10px;}
 
@@ -617,12 +616,16 @@ input#contact_handle {@extend .text-primary;}
   i {
     cursor: pointer;
   }
-  
+
   .glyphicon {
     font-size: 12px;
     font-weight: bold;
   }
 }
 
-
-
+#MyDomains{
+hr.line{
+    border-top: 2px solid #e5e5e5;
+  }
+}
+ul li a {color: #636363 !important}
