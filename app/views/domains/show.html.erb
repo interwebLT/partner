@@ -58,9 +58,6 @@
     <hr class="line">
 
     <div class="pull-right">
-    <% if current_user.staff %>
-      <%= fa_icon 'plus' %> <%= link_to 'Add Nameservers', domain_hosts_path(@domain.id), id: :add_domain_host %>
-    <% end %>
     </div>
 
     <% unless @domain.hosts.empty? %>
@@ -69,21 +66,23 @@
       <div class="contact-info">
         <ul id="domain_hosts" class="list-unstyled">
           <% @domain.hosts.each do |domain_host| %>
-          <li><%= domain_host.name %> <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do%>
+          <li>
+            <%= domain_host.name %> <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do %>
             <i class="fa fa-close"></i>
-        <% end %>
-
+            <% end %>
           </li>
           <% end %>
         </ul>
       </div>
       <div class="button">
-        <%= link_to 'Add', contact_path(@domain.tech_contact.handle, d: @domain.id), id: 'edit_tech', :class => 'btn btn-success btn-small' %>
+        <% if current_user.staff %>
+          <%= link_to 'Add', domain_hosts_path(@domain.id), id: :add_domain_host, class: 'btn btn-success btn-small' %>
+        <% end %>
       </div>
     </div>
 
     <% else %>
-    No Nameservers
+      No Nameservers
     <% end %>
 
     <hr class="line">
