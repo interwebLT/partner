@@ -57,13 +57,11 @@
 
     <hr class="line">
 
-    <div class="pull-right">
-    </div>
 
-    <% unless @domain.hosts.empty? %>
     <div class="contact-info-wrapper">
       <div class="title">Nameservers</div>
       <div class="contact-info">
+        <% unless @domain.hosts.empty? %>
         <ul id="domain_hosts" class="list-unstyled">
           <% @domain.hosts.each do |domain_host| %>
           <li>
@@ -73,17 +71,16 @@
           </li>
           <% end %>
         </ul>
+        <% else %>
+        <p>No Nameservers</p>
+        <% end %>
       </div>
       <div class="button">
-        <% if current_user.staff %>
           <%= link_to 'Add', domain_hosts_path(@domain.id), id: :add_domain_host, class: 'btn btn-success btn-small' %>
-        <% end %>
       </div>
     </div>
 
-    <% else %>
-      No Nameservers
-    <% end %>
+
 
     <hr class="line">
 

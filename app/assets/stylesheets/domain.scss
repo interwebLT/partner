@@ -573,12 +573,12 @@ input#contact_handle {@extend .text-primary;}
 .contact-info {
   @extend .col-lg-8;
   line-height: 24px;
+  p{margin:17px  0 0 0;}
 }
 
 .contact-info-wrapper .button {
   @extend .col-lg-1;
-  z-index: 99999999;
-  margin-top: 3%;
+  margin-top: 0.5em;
 }
 .contact-info ul li {line-height: 30px;}
 .contact-info ul {margin-bottom: 0!important;}
