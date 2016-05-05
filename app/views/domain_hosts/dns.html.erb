@@ -1,0 +1,37 @@
+
+<h3>Add DNS</h3>
+
+
+  <div id="nameserver-info">
+    <div>
+      <label>Name</label>
+      <div>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div>
+      <label>Type</label>
+      <div>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div>
+      <label>Priority</label>
+      <div>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div>
+      <label>Content</label>
+      <div>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="edit-update">
+    <%= link_to 'Add DNS', domains_path, class: 'btn btn-sm btn-success' %>
+    <%= link_to 'Cancel', domains_path, class: 'btn btn-sm btn-danger' %>
+  </div>
+
+

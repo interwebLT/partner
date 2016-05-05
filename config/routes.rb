@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'transaction', to: 'checkout#transaction'
   get 'invoice', to: 'checkout#invoice'
   get 'receipt', to: 'checkout#receipt'
+  get 'dns' => 'domain_hosts#dns'
 
   root 'welcome#index'
 

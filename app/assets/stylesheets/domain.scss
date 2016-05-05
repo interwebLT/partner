@@ -575,6 +575,9 @@ input#contact_handle {@extend .text-primary;}
   line-height: 24px;
   p{margin:17px  0 0 0;}
 }
+.contact-info2 {
+  @extend .col-lg-9;
+}
 
 .contact-info-wrapper .button {
   @extend .col-lg-1;
@@ -582,20 +585,23 @@ input#contact_handle {@extend .text-primary;}
 }
 .contact-info ul li {line-height: 30px;}
 .contact-info ul {margin-bottom: 0!important;}
-.contact-info table thead{
+.contact-info table thead,.contact-info2 table thead{
   background-color: #eee !important;
   font-weight: normal;
   color: inherit;
   }
- .contact-info table > tbody > tr:nth-of-type(2n+1) {
+ .contact-info table > tbody > tr:nth-of-type(2n+1), .contact-info2 table > tbody > tr:nth-of-type(2n+1) {
     background-color: #f9f9f9 !important;
     padding-left: 0;
 }
 .contact-info table tr td:first-child,
 .contact-info table tr th:first-child,
 .contact-info table tr td,
-.contact-info table tr th {padding-left: 5!important; font-weight: 100!important}
-.contact-info a.btn-link {font-size:15px;}
+.contact-info table tr th,
+.contact-info2 table tr td:first-child,
+.contact-info2 table tr th:first-child,
+.contact-info2 table tr td,
+.contact-info2 table tr th {padding-left: 5!important; font-weight: 100!important}
 .pull-right {margin-top: 10px;}
 
 @media (max-width: 768px) {
@@ -625,10 +631,10 @@ input#contact_handle {@extend .text-primary;}
 
 #MyDomains{
 hr.line{
-    border-top: 2px solid #e5e5e5;
+    border-top: 3px solid #e5e5e5;
   }
 }
-ul li a {color: #636363 !important}
+ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !important;}
 
 #nameserver-info {
   @extend .clearfix;
