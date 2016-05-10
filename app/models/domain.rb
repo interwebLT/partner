@@ -51,12 +51,19 @@ class Domain
   end
 
   def self.exists?(name, token:)
-    response = Whois.find name, token: token
-    response ||= GlobalWhois.find name, token: token
+    response = nil
+
+    begin
+      response ||= Whois.find name, token: token
+    rescue Api::Model::NotFound
+    end
+
+    begin
+      response ||= GlobalWhois.find name, token: token
+    rescue Api::Model::NotFound
+    end
 
     !response.nil?
-  rescue Api::Model::NotFound
-   false
   end
 
   def self.valid? domain_name
