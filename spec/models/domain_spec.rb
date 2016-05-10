@@ -19,9 +19,26 @@ RSpec.describe Domain do
       before do
         stub_request(:get, Whois.url(id: domain))
           .to_return status: 404
+
+        stub_request(:get, GlobalWhois.url(id: domain))
+          .to_return status: 404
       end
 
       it { is_expected.to be false }
+    end
+
+    context 'when domain exists in global' do
+      before do
+        stub_request(:get, Whois.url(id: domain))
+          .to_return status: 404
+
+        response = { name: domain }
+
+        stub_request(:get, GlobalWhois.url(id: domain))
+          .to_return body: response.to_json
+      end
+
+      it { is_expected.to be true }
     end
   end
 
