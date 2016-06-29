@@ -118,4 +118,15 @@ class Domain
 
     target_expires_at <= max_expires_at
   end
+
+  def matched_nameserver? nameservers
+    if @hosts.count != nameservers.count
+      false
+    else
+      @hosts.each do |host|
+        output = nameservers.map{|nameserver| nameserver.name}.include?(host.name.strip)
+        break if !output
+      end
+    end
+  end
 end

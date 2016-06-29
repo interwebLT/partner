@@ -8,6 +8,7 @@ class DomainsController < SecureController
   end
 
   def show
+    @nameservers = Nameserver.all token: current_user.token
     @domain = Domain.find params[:id], token: current_user.token
   end
 
