@@ -11,7 +11,7 @@ class Domain
                 :client_transfer_prohibited, :client_update_prohibited,
                 :server_hold, :server_delete_prohibited, :server_renew_prohibited,
                 :server_transfer_prohibited, :server_update_prohibited,
-                :expiring, :expired,
+                :expiring, :expired, :powerdns_domain, :powerdns_records,
                 :activities, :hosts
 
   def expired?
@@ -48,6 +48,14 @@ class Domain
 
   def hosts= hosts
     @hosts = hosts.collect { |host| DomainHost.new host }
+  end
+
+  def powerdns_domain= powerdns_domain
+    @powerdns_domain = Powerdns::Domain.new powerdns_domain
+  end
+
+  def powerdns_records= powerdns_records
+    @powerdns_records = powerdns_records.collect { |record| Powerdns::Record.new record }
   end
 
   def self.exists?(name, token:)

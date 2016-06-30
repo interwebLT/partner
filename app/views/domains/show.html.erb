@@ -76,7 +76,7 @@
         <%= link_to 'Add', domain_hosts_path(@domain.id), id: :add_domain_host, class: 'btn btn-success btn-small' %>
       </div>
     </div>
-    
+
     <% if @domain.matched_nameserver? @nameservers %>
       <%= render "dns_records" %>
     <% end %>

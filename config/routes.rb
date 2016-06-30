@@ -44,6 +44,11 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:index]
 
+  namespace :powerdns do
+    resources :records
+    resources :domains
+  end
+
   get   :register, to: 'register#new'
   post  :register, to: 'register#search'
 

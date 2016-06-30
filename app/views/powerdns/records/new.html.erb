@@ -1,0 +1,41 @@
+<h3>Add DNS Record</h3>
+<%= simple_form_for @pdns_record do |f| %>
+  <% if @pdns_record.errors.any? %>
+    <div id="warning" class="alert alert-warning">
+      Some information is missing or incorrect.  Please check your entries and try again.
+    </div>
+  <% end %>
+  <%= f.hidden_field :powerdns_domain_id, value: @domain_id %>
+  <div id="nameserver-info">
+    <div>
+      <label>Name</label>
+      <div>
+        <%= f.input :name, label: false, class: "form-control" %>
+        <span><b>.<%= @domain_name %></b></span>
+      </div>
+    </div>
+    <div>
+      <label>Type</label>
+      <div>
+        <%= f.input :type, label: false, class: "form-control",
+          collection: [:NS, :AAAA, :MX, :CNAME, :TXT, :SRV] %>
+      </div>
+    </div>
+    <div>
+      <label>Priority</label>
+      <div>
+        <%= f.input :prio, label: false, as: :numeric, class: "form-control" %>
+      </div>
+    </div>
+    <div>
+      <label>Content</label>
+      <div>
+        <%= f.input :content, label: false, class: "form-control" %>
+      </div>
+  </div>
+  <br>
+  <div class="edit-update">
+    <%= f.submit 'Add DNS Record', class: 'btn btn-sm btn-success' %>
+    <%= link_to 'Cancel', domain_url(@domain_id), class: 'btn btn-sm btn-danger' %>
+  </div>
+<% end %>

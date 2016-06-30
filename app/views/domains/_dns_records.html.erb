@@ -1,5 +1,4 @@
 <hr class="line">
-
 <div class="contact-info-wrapper">
   <div class="title">DNS Records</div>
   <div class="contact-info">
@@ -14,38 +13,30 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td><%= @domain.name %></td>
-          <td>A</td>
-          <td></td>
-          <td>210.3.25.9</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>www.<%= @domain.name %></td>
-          <td>A</td>
-          <td></td>
-          <td>210.3.25.9</td>
-        </tr>
-        <tr>
-          <td><%= link_to domains_path, 'data-confirm': 'Are you sure you want to remove this record?' do %><i class="fa fa-close"></i><% end %></td>
-          <td>mx.<%= @domain.name %></td>
-          <td>MX</td>
-          <td>10</td>
-          <td>mx.isp.com.ph</td>
-        </tr>
-        <tr>
-          <td><%= link_to domains_path, 'data-confirm': 'Are you sure you want to remove this record?' do %><i class="fa fa-close"></i><% end %></td>
-          <td>mx2.<%= @domain.name %></td>
-          <td>MX</td>
-          <td>20</td>
-          <td>mx2.isp.com.ph</td>
-        </tr>
+        <% unless @domain.powerdns_records.empty? %>
+          <% @domain.powerdns_records.each do |record| %>
+            <tr>
+              <td>
+                <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?' do %>
+                  <i class="fa fa-close"></i>
+                <% end %>
+                <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id) do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
+              </td>
+              <td><%= record.name %></td>
+              <td><%= record.type %></td>
+              <td><%= record.prio %></td>
+              <td><%= record.content %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <p>No DNS Records</p>
+        <% end %>
       </tbody>
     </table>
   </div>
   <div class="button">
-    <%= link_to "Add", dns_path, class: 'btn btn-success btn-small' %>
+    <%= link_to "Add", new_powerdns_record_path(domain_id: @domain.id), class: 'btn btn-success btn-small' %>
   </div>
 </div>
