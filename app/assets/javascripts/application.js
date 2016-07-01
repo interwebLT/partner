@@ -25,6 +25,8 @@
 //= require inputmask.phone.extensions
 //= require inputmask.numeric.extensions
 //= require inputmask.regex.extensions
+//= require jquery.validate
+//= require jquery.validate.additional-methods
 //= require_tree .
 
 $(document).ready(function() {

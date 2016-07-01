@@ -148,6 +148,17 @@ label {
     border-radius: 4px 4px 0 0;
 }
 
+.has-input-error {
+    border-color: red;
+}
+
+label.error-validator-label {
+    width: 100%;
+    color: red;
+    font-size: 12px;
+    font-style: italic;
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 1000px;

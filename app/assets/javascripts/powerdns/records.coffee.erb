@@ -1,0 +1,56 @@
+$(document).ready ->
+  record_type = ""
+
+  $(".srv-fields").hide()
+
+  change_fields = (type) ->
+    if type == "SRV"
+      $(".srv-fields").show()
+      $(".non-srv-fields").hide()
+    else
+      $(".srv-fields").hide()
+      $(".non-srv-fields").show()
+    return
+
+  ##PENDING##
+  change_validators = (type) ->
+    switch record_type
+      when "NS" then 
+      when "A" then 
+      when "AAAA" then 
+      when "MX" then 
+      when "CNAME" then 
+      when "TXT" then 
+      when "SRV" then 
+    return
+
+
+  $('#powerdns_record_type').click((e) ->
+    record_type = $(this).val()
+    change_fields(record_type)
+    change_validators(record_type)
+  ).keyup((e) ->
+    record_type = $(this).val()
+    change_fields(record_type)
+    change_validators(record_type)
+  )
+
+  $ ->
+    $("#new_powerdns_record").validate
+      errorPlacement: (label, element) ->
+        label.addClass('error-validator-label')
+        label.insertAfter(element)
+      rules:
+        "powerdns_record[name]":
+          required: true
+        "powerdns_record[type]":
+          required: true
+        "powerdns_record[prio]":
+          required: true
+        "powerdns_record[content]":
+          required: true
+      highlight: (element) ->
+        $(element).addClass('has-input-error');
+      unhighlight: (element) ->
+        $(element).removeClass('has-input-error');
+    return

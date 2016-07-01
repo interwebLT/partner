@@ -11,7 +11,6 @@
       <label>Name</label>
       <div>
         <%= f.input :name, label: false, class: "form-control" %>
-        <span><b>.<%= @domain_name %></b></span>
       </div>
     </div>
     <div>
@@ -27,11 +26,27 @@
         <%= f.input :prio, label: false, as: :numeric, class: "form-control" %>
       </div>
     </div>
-    <div>
+    <!--Partial fields-->
+    <div class="non-srv-fields">
       <label>Content</label>
       <div>
         <%= f.input :content, label: false, class: "form-control" %>
       </div>
+    </div>
+    <div class="srv-fields">
+      <label>Weight</label>
+      <div>
+        <%= f.input :content, label: false, as: :numeric, class: "form-control" %>
+      </div>
+      <label>Port</label>
+      <div>
+        <%= f.input :content, label: false, as: :numeric, class: "form-control" %>
+      </div>
+      <label>Content</label>
+      <div>
+        <%= f.input :content, label: false, class: "form-control" %>
+      </div>
+    </div>
   </div>
   <br>
   <div class="edit-update">
