@@ -152,8 +152,8 @@ label {
     border-color: red;
 }
 
-label.error-validator-label {
-    width: 100%;
+label.error.error-validator-label {
+    width: 100% !important;
     color: red;
     font-size: 12px;
     font-style: italic;

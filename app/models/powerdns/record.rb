@@ -2,7 +2,7 @@ class Powerdns::Record
   include Api::Model
 
   attr_accessor :id, :powerdns_domain_id, :name, :type, :content, :ttl, :prio, :change_date,
-                :created_at, :updated_at
+                :created_at, :updated_at, :preferences
   @resource = "powerdns/records"
 
   def self.url id: nil
