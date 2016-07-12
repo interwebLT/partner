@@ -3,14 +3,39 @@ class RegisterController < SecureController
   end
 
   def search
-    domain_name = params[:domain_name].strip.downcase
+    params[:bulk_registration] = true
 
-    if not Domain.valid? domain_name
-      redirect_to register_path, alert: "Domain #{domain_name} is not valid."
-    elsif not Domain.exists? domain_name, token: auth_token
-      redirect_to action: :details, domain_name: domain_name
+    if params[:bulk_registration]
+      domain_names = params[:domain_name].split
+      valid_domain = true
+
+      domain_names.each do |domain_name|
+        if not Domain.valid? domain_name
+          valid_domain = false
+          redirect_to register_path, alert: "Domain #{domain_name} is not valid."
+          break
+        elsif not Domain.exists? domain_name, token: auth_token
+        else
+          valid_domain = false
+          redirect_to register_path, alert: "Domain #{domain_name} is not available."
+          break
+        end
+      end
+
+      if valid_domain
+        redirect_to action: :details, domain_name: domain_names.join(", "),
+          bulk_registration: params[:bulk_registration]
+      end
     else
-      redirect_to register_path, alert: "Domain #{domain_name} is not available."
+      domain_name = params[:domain_name].strip.downcase
+
+      if not Domain.valid? domain_name
+        redirect_to register_path, alert: "Domain #{domain_name} is not valid."
+      elsif not Domain.exists? domain_name, token: auth_token
+        redirect_to action: :details, domain_name: domain_name
+      else
+        redirect_to register_path, alert: "Domain #{domain_name} is not available."
+      end
     end
   end
 
@@ -18,58 +43,195 @@ class RegisterController < SecureController
     @registration = RegistrationForm.new request_params
     @registration.registrant = registrant if @registration.handle
 
-    if not Domain.valid? @registration.domain_name
-      redirect_to register_path
-    elsif not Domain.exists? @registration.domain_name, token: auth_token
-      @partner = current_user.partner
+    if params[:bulk_registration]
+      domain_names = params[:domain_name].split(',')
+      valid_domain = true
+
+      domain_names.each do |domain_name|
+        domain = domain_name.strip
+        if not Domain.valid? domain
+          valid_domain = false
+          redirect_to register_path
+          break
+        elsif not Domain.exists? domain, token: auth_token
+        else
+          valid_domain = false
+          redirect_to register_path, alert: "Domain #{domain} is no longer available."
+          break
+        end
+      end
+
+      if valid_domain
+        @partner = current_user.partner
+        @bulk_registration = params[:bulk_registration]
+      end
     else
-      redirect_to register_path, alert: "Domain #{@registration.domain_name} is no longer available."
+      if not Domain.valid? @registration.domain_name
+        redirect_to register_path
+      elsif not Domain.exists? @registration.domain_name, token: auth_token
+        @partner = current_user.partner
+      else
+        redirect_to register_path, alert: "Domain #{@registration.domain_name} is no longer available."
+      end
     end
   end
 
   def create_registrant
+    domain_saved = true
+    bulk_handle_list = []
     @registration = RegistrationForm.new registration_params
+    if params[:bulk_registration]
+      domain_names = registration_params[:domain_name].split(',')
 
-    if @registration.save_registrant token: auth_token
-      redirect_to action: :summary, domain_name:  @registration.domain_name,
-                                    period:       @registration.period,
-                                    handle:       @registration.registrant.handle
+      domain_names.each do |domain_name|
+        domain = domain_name.strip
+        @registration.domain_name = domain
+        if @registration.save_registrant token: auth_token
+          bulk_handle_list << @registration.registrant.handle
+          domain_saved = true
+        else
+          domain_saved = false
+          break
+        end
+      end
+    else
+      if @registration.save_registrant token: auth_token
+        domain_saved = true
+      else
+        domain_saved = false
+      end
+    end
+
+    if domain_saved
+      if params[:bulk_registration]
+        domain  = domain_names.join(',')
+        handle  = bulk_handle_list.join(',')
+        bulk    = true
+      else
+        domain  = @registration.domain_name
+        handle  = @registration.registrant.handle
+        bulk    = false
+      end
+      redirect_to action: :summary, domain_name:        domain,
+                                    period:             @registration.period,
+                                    handle:             handle,
+                                    bulk_registration:  bulk
     else
       @partner = current_user.partner
-
       render :details
     end
   end
 
   def summary
+    validate_domain = ""
+    bulk_handle_list = []
     @registration = RegistrationForm.new request_params
-    @registration.registrant = registrant if @registration.handle
+    if params[:bulk_registration]
+      domain_names = params[:domain_name].split(',')
+      handles      = params[:handle].split(',')
 
-    if not Domain.valid? @registration.domain_name
-      redirect_to register_path
-    elsif Domain.exists? @registration.domain_name, token: auth_token
-      redirect_to register_path, alert: "Domain #{@registration.domain_name} is no longer available."
-    elsif not @registration.valid?
-      redirect_to action: :details, domain_name:  @registration.domain_name,
-                                    period:       @registration.period,
-                                    handle:       @registration.handle
+      domain_names.each_with_index do |domain_name, key|
+        domain = domain_name.strip
+        @registration.domain_name = domain
+        @registration.handle      = handles[key]
+        params[:handle] = handles[key]
+        bulk_handle_list << handles[key]
+        @registration.registrant = registrant if @registration.handle
+
+        if not Domain.valid? @registration.domain_name
+          validate_domain = "domain_invalid"
+          break
+        elsif Domain.exists? @registration.domain_name, token: auth_token
+          validate_domain = "domain_exist"
+          break
+        elsif not @registration.valid?
+          validate_domain = "registration_invalid"
+          break
+        else
+          validate_domain = "passed"
+        end
+      end
     else
-      @partner = current_user.partner
+      @registration.registrant = registrant if @registration.handle
+
+      if not Domain.valid? @registration.domain_name
+        validate_domain = "domain_invalid"
+      elsif Domain.exists? @registration.domain_name, token: auth_token
+        validate_domain = "domain_exist"
+      elsif not @registration.valid?
+        validate_domain = "registration_invalid"
+      else
+        validate_domain = "passed"
+      end
+    end
+
+    case validate_domain
+      when "domain_invalid"
+        redirect_to register_path
+      when "domain_exist"
+        redirect_to register_path, alert: "Domain #{@registration.domain_name} is no longer available."
+      when "registration_invalid"
+        if params[:bulk_registration]
+          domain  = domain_names.join(',')
+          handle  = bulk_handle_list.join(',')
+          bulk    = true
+        else
+          domain  = @registration.domain_name
+          handle  = @registration.registrant.handle
+          bulk    = false
+        end
+        redirect_to action: :details, domain_name:        domain,
+                                      period:             @registration.period,
+                                      handle:             handle,
+                                      bulk_registration:  bulk
+      when "passed"
+        if params[:bulk_registration]
+          params[:handle] = handles.join(',')
+          @bulk_registration = params[:bulk_registration]
+          @registration.domain_name = domain_names.join(',')
+          @registration.handle = handles.join(',')
+        end
+        @partner = current_user.partner
     end
   end
 
   def create_order
+    domain_saved = true
     registration = RegistrationForm.new registration_params
+    if params[:bulk_registration]
+      domain_names = registration_params[:domain_name].split(',')
+      handles      = registration_params[:handle].split(',')
 
-    if registration.order.save token: auth_token
-      current_user.partner.default_nameservers.each do |nameserver|
-        domain_host = DomainHost.new  domain: registration.domain_name,
-                                      name:   nameserver.name
+      domain_names.each_with_index do |domain_name, key|
+        domain = domain_name.strip
+        registration.domain_name = domain
+        registration.handle      = handles[key]
 
-        domain_host.save token: auth_token
+        if registration.order.save token: auth_token
+          current_user.partner.default_nameservers.each do |nameserver|
+            domain_host = DomainHost.new  domain: registration.domain_name,
+                                          name:   nameserver.name
+            domain_host.save token: auth_token
+          end
+        else
+          domain_saved = false
+          break
+        end
       end
+    else
+      if registration.order.save token: auth_token
+        current_user.partner.default_nameservers.each do |nameserver|
+          domain_host = DomainHost.new  domain: registration.domain_name,
+                                        name:   nameserver.name
+          domain_host.save token: auth_token
+        end
+      else
+        domain_saved = false
+      end
+    end
 
-      redirect_to register_path, notice: 'Domain Registered'
+    if domain_saved
+      redirect_to register_path, notice: 'Domain(s) Registered'
     else
       redirect_to register_path, alert: "Domain #{registration.domain_name} is no longer available."
     end
@@ -85,7 +247,7 @@ class RegisterController < SecureController
   end
 
   def request_params
-    params.permit :domain_name, :period, :handle
+    params.permit :domain_name, :period, :handle, :bulk_registration
   end
 
   def registrant
