@@ -8,14 +8,53 @@ class ContactsController < SecureController
     @domain_id = params[:d]
   end
 
-  def update
-    @contact = Contact.new contact_params
-    @domain_id = params[:contact].delete :d
+  def edit_multiple
+    @contact = Contact.new
 
-    if @contact.update token: auth_token
-      redirect_to domain_path(@domain_id), notice: 'Contact was updated!'
+    unless params[:list].nil?
+      list_for_edit = params[:list].split
+      ids = []
+      list_for_edit.each do |item|
+        domain = Domain.search term: item, token: current_user.token
+        ids << domain.first.id
+      end
+      params[:ids] = ids
+    end
+  end
+
+  def update
+    if params[:ids].nil?
+      @contact = Contact.new contact_params
+      @domain_id = params[:contact].delete :d
+
+      if @contact.update token: auth_token
+        redirect_to domain_path(@domain_id), notice: 'Contact was updated!'
+      else
+        render :show
+      end
     else
-      render :show
+      multiple_update_success = true
+      domain_ids_list = params[:ids].split
+
+      domain_ids_list.each do |domain_id|
+        domain = Domain.find(domain_id, token: auth_token)
+        handle = domain.registrant_handle
+
+        @contact = Contact.new contact_params
+        @contact.handle = handle
+        @contact.update token: auth_token
+
+        if @contact.update token: auth_token
+        else
+          multiple_update_success = false
+          render :edit_multiple
+          break
+        end
+      end
+
+      if multiple_update_success
+        redirect_to domains_path, notice: 'Multiple Domains updated!'
+      end
     end
   end
 
