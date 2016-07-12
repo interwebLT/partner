@@ -10,6 +10,7 @@
           <th>Type</th>
           <th>Priority</th>
           <th>Content</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -20,14 +21,16 @@
                 <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?' do %>
                   <i class="fa fa-close"></i>
                 <% end %>
-                <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id) do %>
-                  <i class="fa fa-edit"></i>
-                <% end %>
               </td>
               <td><%= record.name %></td>
               <td><%= record.type %></td>
               <td><%= record.prio %></td>
               <td><%= record.content %></td>
+              <td>
+                <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id) do %>
+                  <i class="fa fa-pencil"></i>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         <% else %>
