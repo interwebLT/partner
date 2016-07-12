@@ -55,7 +55,11 @@ class Domain
   end
 
   def powerdns_records= powerdns_records
-    @powerdns_records = powerdns_records.collect { |record| Powerdns::Record.new record }
+    unless powerdns_records.nil?
+      @powerdns_records = powerdns_records.collect { |record| Powerdns::Record.new record }
+    else
+      @powerdns_records = ""
+    end
   end
 
   def self.exists?(name, token:)
