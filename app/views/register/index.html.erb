@@ -516,13 +516,13 @@
 			$('.register-available').html('<i class="fa fa-close"></i>');
 		}).mouseleave( function(){
 			$('.register-available').html('<i class="fa fa-check green"></i>');
-		}); 
+		});
 		$("#register-search-btn").off('click').on('click', hideRegistrantForm);
 	}
 
 	function hideRegistrantForm() {
 		$('#register-form').fadeOut("fast");
-		$('.register-form-search > .btn').html('<i class="fa fa-search"></i>');   
+		$('.register-form-search > .btn').html('<i class="fa fa-search"></i>');
 		$('.register-form-search > .btn').removeClass('register-available');
 		$('.register-form-search > .btn').removeClass('register-cancel');
 		$('.register-form-search input').removeClass('register-available-input');

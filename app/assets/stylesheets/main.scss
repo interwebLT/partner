@@ -42,6 +42,7 @@ label {
   -moz-transition: 0.05s;
   -webkit-transition: 0.05s;
   -o-transition: 0.05;
+  border-radius: 3px!important;
 }
 
 .btn-link {
@@ -285,3 +286,5 @@ ul li a i.fa-close, table tr td i.fa-close{color:#999!important}
     border: 1px solid #ccc;
     -moz-appearance: none;
 }
+
+textarea {resize: none;outline: none;}
