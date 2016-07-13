@@ -175,10 +175,11 @@
         <td><%= formatted_date domain.expires_at %></td>
         <td>
           <% if domain.renew_allowed? %>
-            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %><br>
-          <a href="#" class="btn" data-toggle="modal" data-target="#modal-renew">
+            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %>
+          <!-- <a href="#" class="btn" data-toggle="modal" data-target="#modal-renew">
             Renew
-          </a>
+          </a>-->
+
           <% end %>
         </td>
       </tr>
