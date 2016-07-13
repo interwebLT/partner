@@ -9,6 +9,7 @@ class ContactsController < SecureController
   end
 
   def edit_multiple
+    # raise params[:list].split.inspect
     @contact = Contact.new
 
     unless params[:list].nil?

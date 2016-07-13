@@ -123,6 +123,11 @@ GEM
       actionmailer (~> 4.0)
       activesupport (~> 4.0)
     execjs (2.6.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
     gherkin (3.2.0)
@@ -307,6 +312,7 @@ DEPENDENCIES
   cucumber-rails
   devise
   exception_notification
+  factory_girl_rails
   font-awesome-rails
   httparty
   jquery-inputmask-rails!

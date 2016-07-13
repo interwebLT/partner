@@ -1,5 +1,8 @@
 <% content_for :banner_title do %>
-<%= fa_icon 'gears lg' %>&nbsp;Domains <% unless current_user.admin %><span><%= @domains.count %></span><% end %>
+  <%= fa_icon 'gears lg' %>&nbsp;Domains
+    <% unless current_user.admin %><
+      span><%= @domains.count %></span>
+    <% end %>
 <% end %>
 <!--buttons for bulk options-->
 <p class="btn-container">
@@ -24,33 +27,36 @@
 <div class="modal fade" id="modal-editc" tabindex="-1" role="dialog" aria-labelledby="modal-editc" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Edit Contact Information</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
-            <textarea class="form-control input-lg" rows="5"></textarea>
+      <%= form_for Contact.new, url: edit_multiple_contacts_path(id: 0), method: :get do |f| %>
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Contact Information</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
+              <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",id:
+                "bulk-edit-contact-text-area" %>
+            </div>
+          </div>
+          <!--error msg-->
+          <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            Domain is not valid.
+          </div>
+          <!--error msg-->
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <%= f.submit class: "btn btn-primary" %>
+            </div>
           </div>
         </div>
-        <!--error msg-->
-        <div class="alert alert-danger" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          Domain is not valid.
-        </div>
-        <!--error msg-->
-      </div>
-      <div class="modal-footer">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div><!-- /.modal-content -->
   </div>
 </div>
