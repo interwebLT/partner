@@ -69,7 +69,7 @@
             <Br>
             <label>Select renewal term</label><Br>
             <select class="c-select col-lg-12">
-              <option value="1">1</option>
+              <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="5">5</option>
               <option value="10">10</option>
@@ -109,8 +109,8 @@
         <div class="row">
           <div class="form-group col-md-12">
             <label>Select renewal term</label><Br>
-            <select class="c-select col-lg-12">
-              <option value="1">1</option>
+            <select class="c-select col-lg-12" id="renew-domain-single-select">
+              <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="5">5</option>
               <option value="10">10</option>
@@ -122,7 +122,7 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <%= link_to "Submit", "#", "data-dismiss": "modal", class: 'renew btn btn-primary btn-renew-domain-single' %>
           </div>
         </div>
       </div>
@@ -143,46 +143,52 @@
     </thead>
     <tbody>
       <% @domains.each do |domain| %>
-      <% if domain.expired? %>
-      <tr class="expire">
-        <td><%= fa_icon 'flag', class: 'red', data: { placement: :left, toggle: :tooltip, original_title: 'Expired Domain' } %></td>
-        <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain has expired. You should renew it now.' } %></td>
-        <td><%= formatted_date domain.registered_at %></td>
-        <td><%= formatted_date domain.expires_at %></td>
-        <td>
-          <% if domain.renew_allowed? %>
-            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %>
-          <% end %>
-        </td>
-      </tr>
-      <% elsif domain.expiring? %>
-      <tr class="expire">
-        <td><%= fa_icon 'flag', class: 'yellow', data: { placement: :left, toggle: :tooltip, original_title: 'Expiring Domain' } %></td>
-        <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain is about to expire. You should renew it now.' } %></td>
-        <td><%= formatted_date domain.registered_at %></td>
-        <td><%= formatted_date domain.expires_at %></td>
-        <td>
-          <% if domain.renew_allowed? %>
-            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %>
-          <% end %>
-        </td>
-      </tr>
-      <% else %>
-      <tr>
-        <td></td>
-        <td><%= link_to domain.name, domain_path(domain) %></td>
-        <td><%= formatted_date domain.registered_at %></td>
-        <td><%= formatted_date domain.expires_at %></td>
-        <td>
-          <% if domain.renew_allowed? %>
-            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %><br>
-          <a href="#" class="btn" data-toggle="modal" data-target="#modal-renew">
-            Renew
-          </a>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
+        <% if domain.expired? %>
+          <tr class="expire">
+            <td><%= fa_icon 'flag', class: 'red', data: { placement: :left, toggle: :tooltip, original_title: 'Expired Domain' } %></td>
+            <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain has expired. You should renew it now.' } %></td>
+            <td><%= formatted_date domain.registered_at %></td>
+            <td><%= formatted_date domain.expires_at %></td>
+            <td>
+              <% if domain.renew_allowed? %>
+                <a href="#" class="btn btn-renew-link" data-toggle="modal"
+                  data-target="#modal-renew" data-domain=<%= domain.id %>>
+                  Renew
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% elsif domain.expiring? %>
+          <tr class="expire">
+            <td><%= fa_icon 'flag', class: 'yellow', data: { placement: :left, toggle: :tooltip, original_title: 'Expiring Domain' } %></td>
+            <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain is about to expire. You should renew it now.' } %></td>
+            <td><%= formatted_date domain.registered_at %></td>
+            <td><%= formatted_date domain.expires_at %></td>
+            <td>
+              <% if domain.renew_allowed? %>
+                <a href="#" class="btn btn-renew-link" data-toggle="modal"
+                  data-target="#modal-renew" data-domain=<%= domain.id %>>
+                  Renew
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% else %>
+          <tr>
+            <td></td>
+            <td><%= link_to domain.name, domain_path(domain) %></td>
+            <td><%= formatted_date domain.registered_at %></td>
+            <td><%= formatted_date domain.expires_at %></td>
+            <td>
+              <% if domain.renew_allowed? %>
+                <a href="#" class="btn btn-renew-link" data-toggle="modal"
+                  data-target="#modal-renew" data-domain=<%= domain.id %>>
+                  Renew
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

@@ -14,9 +14,9 @@ class DomainsController < SecureController
 
   def renew
     @domain = Domain.find params[:domain_id], token: current_user.token
-
+    term = params[:renewal_term]
     begin
-      @domain.renew token: current_user.token if @domain.renew_allowed?
+      @domain.renew(term, token: current_user.token) if @domain.renew_allowed?
     rescue Exception => ex
       flash[:alert] = ex.message
     end

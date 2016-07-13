@@ -1,0 +1,20 @@
+$ ->
+  domain_id = undefined
+  selected_option = undefined
+
+  $("#renew-domain-single-select").change ->
+    selected_option = $("#renew-domain-single-select option:selected").text()
+    return
+
+  $(".btn-renew-domain-single").click ->
+    id = domain_id
+    output = confirm("Are you sure you want to renew for " + selected_option + " year?")
+    if output
+      location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+    return
+
+  $(".btn-renew-link").click ->
+    domain_id = $(this).data("domain")
+    selected_option = $("#renew-domain-single-select option:selected").text()
+    return
+  return

@@ -100,7 +100,7 @@ class Domain
       or numbers_only or starts_with_dash or double_dash)
   end
 
-  def renew token:
+  def renew term, token:
     order = Order.new( {
       partner: nil,
       currency_code: 'USD'
@@ -111,7 +111,7 @@ class Domain
       type: 'domain_renew',
       domain: name,
       authcode: nil,
-      period: 1,
+      period: term,
       registrant_handle: registrant_handle,
       registered_at: registered_at
       }
