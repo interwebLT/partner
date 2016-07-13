@@ -3,6 +3,7 @@ class RegisterController < SecureController
   end
 
   def search
+    ##PENDING MULTIPLE REGISTRATION##
     params[:bulk_registration] = true
 
     if params[:bulk_registration]
@@ -10,14 +11,15 @@ class RegisterController < SecureController
       valid_domain = true
 
       domain_names.each do |domain_name|
-        if not Domain.valid? domain_name
+        domain = domain_name.strip.downcase
+        if not Domain.valid? domain
           valid_domain = false
-          redirect_to register_path, alert: "Domain #{domain_name} is not valid."
+          redirect_to register_path, alert: "Domain #{domain} is not valid."
           break
-        elsif not Domain.exists? domain_name, token: auth_token
+        elsif not Domain.exists? domain, token: auth_token
         else
           valid_domain = false
-          redirect_to register_path, alert: "Domain #{domain_name} is not available."
+          redirect_to register_path, alert: "Domain #{domain} is not available."
           break
         end
       end
@@ -48,7 +50,7 @@ class RegisterController < SecureController
       valid_domain = true
 
       domain_names.each do |domain_name|
-        domain = domain_name.strip
+        domain = domain_name.strip.downcase
         if not Domain.valid? domain
           valid_domain = false
           redirect_to register_path
@@ -84,7 +86,7 @@ class RegisterController < SecureController
       domain_names = registration_params[:domain_name].split(',')
 
       domain_names.each do |domain_name|
-        domain = domain_name.strip
+        domain = domain_name.strip.downcase
         @registration.domain_name = domain
         if @registration.save_registrant token: auth_token
           bulk_handle_list << @registration.registrant.handle
@@ -131,7 +133,7 @@ class RegisterController < SecureController
       handles      = params[:handle].split(',')
 
       domain_names.each_with_index do |domain_name, key|
-        domain = domain_name.strip
+        domain = domain_name.strip.downcase
         @registration.domain_name = domain
         @registration.handle      = handles[key]
         params[:handle] = handles[key]
@@ -203,7 +205,7 @@ class RegisterController < SecureController
       handles      = registration_params[:handle].split(',')
 
       domain_names.each_with_index do |domain_name, key|
-        domain = domain_name.strip
+        domain = domain_name.strip.downcase
         registration.domain_name = domain
         registration.handle      = handles[key]
 

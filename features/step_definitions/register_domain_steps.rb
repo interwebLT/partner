@@ -283,7 +283,7 @@ end
 Then /^domain must be registered$/  do
   expect(site.register).to be_displayed
 
-  expect(site.register.notice.text).to eql 'Domain Registered'
+  expect(site.register.notice.text).to eql 'Domain(s) Registered'
 end
 
 Then /^I must be notified that domain is not available for registration$/  do
