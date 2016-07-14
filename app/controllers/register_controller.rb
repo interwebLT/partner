@@ -3,7 +3,6 @@ class RegisterController < SecureController
   end
 
   def search
-    ##PENDING MULTIPLE REGISTRATION##
     params[:bulk_registration] = true
 
     if params[:bulk_registration]

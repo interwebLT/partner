@@ -12,15 +12,40 @@ class DomainsController < SecureController
     @domain = Domain.find params[:id], token: current_user.token
   end
 
-  def renew
-    @domain = Domain.find params[:domain_id], token: current_user.token
-    term = params[:renewal_term]
-    begin
-      @domain.renew(term, token: current_user.token) if @domain.renew_allowed?
-    rescue Exception => ex
-      flash[:alert] = ex.message
+  def renew_multiple
+    domain_names = params[:list].split
+    domain_id = []
+
+    if domain_names
+      domain_names.each do |domain_name|
+        domain = Domain.search term: domain_name.strip, token: current_user.token
+        domain_id << domain.first.id
+      end
     end
 
-    redirect_to domains_url
+    redirect_to action: :renew, domain_id: domain_id.join(","),
+      renewal_term: params[:renewal_term]
+  end
+
+  def renew
+    domain_ids = params[:domain_id].split(',')
+    renew_saved = true
+
+    domain_ids.each do |domain_id|
+      @domain = Domain.find domain_id, token: current_user.token
+      term = params[:renewal_term]
+
+      begin
+        @domain.renew(term, token: current_user.token) if @domain.renew_allowed?
+      rescue Exception => ex
+        renew_saved = false
+        break
+        flash[:alert] = ex.message
+      end
+    end
+
+    if renew_saved
+      redirect_to domains_url, notice: "Domain(s) successfully renewed!"
+    end
   end
 end

@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get 'registration/create_contact', to: 'registration#create_contact'
   post 'registration/confirm', to: 'registration#confirm'
 
-  get 'contacts/:id/multiple', to: 'contacts#edit_multiple', as: 'edit_multiple_contacts'
+  post 'contacts/:id/multiple', to: 'contacts#edit_multiple', as: 'edit_multiple_contacts'
+  post 'domains/:id/multiple', to: 'domains#renew_multiple', as: 'renew_multiple_domains'
 
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew

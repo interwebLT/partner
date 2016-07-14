@@ -2,6 +2,42 @@ $ ->
   domain_id = undefined
   selected_option = undefined
 
+  $("#bulk-contact-edit-button").hide()
+  $("#bulk-renew-term-button").hide()
+
+  $(".modal").on "hidden.bs.modal", ->
+    $("#bulk-edit-contact-text-area").val("")
+    $("#bulk-renew-term-text-area").val("")
+    $("#bulk-contact-edit-button").hide()
+    $("#bulk-contact-edit-error").show()
+    $("#bulk-renew-term-button").hide()
+    $("#bulk-renew-term-error").show()
+    return
+
+  validateDomainNames = (text_area_values, domain_list) ->
+    output = true
+    line_values = text_area_values.split('\n')
+    domain_list = domain_list.split(' ')
+
+    for value in line_values
+      single_value = value.split(' ')
+      for value in single_value
+        if value
+          if $.inArray(value, domain_list) == -1
+            output = false
+
+    if (text_area_values.trim().length != 0) and output
+      $("#bulk-contact-edit-error").fadeOut()
+      $("#bulk-contact-edit-button").fadeIn()
+      $("#bulk-renew-term-error").fadeOut()
+      $("#bulk-renew-term-button").fadeIn()
+    else
+      $("#bulk-contact-edit-error").fadeIn()
+      $("#bulk-contact-edit-button").fadeOut()
+      $("#bulk-renew-term-error").fadeIn()
+      $("#bulk-renew-term-button").fadeOut()
+    return
+
   $("#renew-domain-single-select").change ->
     selected_option = $("#renew-domain-single-select option:selected").text()
     return
@@ -17,4 +53,11 @@ $ ->
     domain_id = $(this).data("domain")
     selected_option = $("#renew-domain-single-select option:selected").text()
     return
+
+  $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").keyup ->
+    text_area_values = $(this).val()
+    domain_list = $(this).data("domains")
+    validateDomainNames(text_area_values, domain_list)
+    return
+
   return
