@@ -154,10 +154,11 @@ label {
 }
 
 label.error.error-validator-label {
+  @extend .alert;
+  @extend .alert-danger;
     width: 100% !important;
-    color: red;
-    font-size: 12px;
-    font-style: italic;
+    text-align: center;
+    margin-bottom: 0;
 }
 
 @media (min-width: 1200px) {
@@ -287,4 +288,4 @@ ul li a i.fa-close, table tr td i.fa-close{color:#999!important}
     -moz-appearance: none;
 }
 
-textarea {resize: none;outline: none;}
+textarea {resize: none;outline: none;margin-bottom: 10px;}

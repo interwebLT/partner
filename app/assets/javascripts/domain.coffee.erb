@@ -2,15 +2,15 @@ $ ->
   domain_id = undefined
   selected_option = undefined
 
-  $("#bulk-contact-edit-button").hide()
-  $("#bulk-renew-term-button").hide()
+  $("#bulk-contact-edit-button").addClass('disabled')
+  $("#bulk-renew-term-button").addClass('disabled')
 
   $(".modal").on "hidden.bs.modal", ->
     $("#bulk-edit-contact-text-area").val("")
     $("#bulk-renew-term-text-area").val("")
-    $("#bulk-contact-edit-button").hide()
+    $("#bulk-contact-edit-button").addClass('disabled')
     $("#bulk-contact-edit-error").show()
-    $("#bulk-renew-term-button").hide()
+    $("#bulk-renew-term-button").addClass('disabled')
     $("#bulk-renew-term-error").show()
     return
 
@@ -28,14 +28,14 @@ $ ->
 
     if (text_area_values.trim().length != 0) and output
       $("#bulk-contact-edit-error").fadeOut()
-      $("#bulk-contact-edit-button").fadeIn()
+      $("#bulk-contact-edit-button").removeClass('disabled')
       $("#bulk-renew-term-error").fadeOut()
-      $("#bulk-renew-term-button").fadeIn()
+      $("#bulk-renew-term-button").removeClass('disabled')
     else
       $("#bulk-contact-edit-error").fadeIn()
-      $("#bulk-contact-edit-button").fadeOut()
+      $("#bulk-contact-edit-button").addClass('disabled')
       $("#bulk-renew-term-error").fadeIn()
-      $("#bulk-renew-term-button").fadeOut()
+      $("#bulk-renew-term-button").addClass('disabled')
     return
 
   $("#renew-domain-single-select").change ->
@@ -44,10 +44,13 @@ $ ->
 
   $(".btn-renew-domain-single").click ->
     id = domain_id
-    output = confirm("Are you sure you want to renew for " + selected_option + " year?")
-    if output
-      location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+    bootbox.confirm ("Are you sure you want to renew for " + selected_option + "?"), (confirmed) ->
+      if confirmed
+        location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+      return
     return
+
+
 
   $(".btn-renew-link").click ->
     domain_id = $(this).data("domain")

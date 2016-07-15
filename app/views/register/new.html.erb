@@ -2,12 +2,9 @@
   <%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
 <% end %>
 <div class="register-page">
-  <p>For bulk registration, separate domain with line break or space.
-    <a href="#" data-toggle="modal" data-target="#tipBulkReg">
-      <%= fa_icon 'question-circle' %>
-    </a>
+  <p>For bulk registration, separate domain with line break or space.<br>
+     Available domain extensions are .PH, .COM.PH, .NET.PH, .ORG.PH.
   </p>
-  <p>Available domain extensions are .PH, .COM.PH, .ORG.PH, .NET.PH</p>
 
   <%= form_tag register_path, class: "'register-form-search navbar-form' reg-new-domain-form" do %>
     <div class="form-group">
@@ -17,34 +14,4 @@
     </div>
     <%= submit_tag "Register", class: 'btn btn-primary btn-lg', id: "reg-new-domain-button" %>
   <% end %>
-</div>
-<!-- Modal -->
-<div class="modal" id="tipBulkReg" tabindex="-1" role="dialog" aria-labelledby="tipBulkReg" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title"><%= fa_icon 'question-circle' %>Bulk Registration</h4>
-      </div>
-      <div class="modal-body">
-        Domains separated by line break.
-        <div class="form-group">
-          <%= text_area_tag nil, @sample_breaked_domains.html_safe, class: 'form-control input-lg', rows: 5,
-            placeholder: "Enter the domain you want to register." %>
-        </div>
-        Domains separated by space.
-        <div class="form-group">
-          <%= text_area_tag nil, @sample_spaced_domains.html_safe, class: 'form-control input-lg', rows: 5,
-            placeholder: "Enter the domain you want to register." %>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-          Back to Domain Registration
-        </button>
-      </div>
-    </div>
-  </div>
 </div>

@@ -32,13 +32,9 @@
           <h4 class="modal-title">Edit Contact Information</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
+          <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
               <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
                 id: "bulk-edit-contact-text-area", "data-domains": @domains.map{|d| d.name} %>
-            </div>
-          </div>
           <!--error msg-->
           <div class="alert alert-danger" role="alert" id="bulk-contact-edit-error">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -48,13 +44,9 @@
           </div>
           <!--error msg-->
         </div>
-        <div class="modal-footer">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <div class="modal-footer text-center">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
               <%= submit_tag nil, class: "btn btn-primary", id: "bulk-contact-edit-button" %>
-            </div>
-          </div>
         </div>
       <% end %>
     </div><!-- /.modal-content -->
@@ -69,32 +61,49 @@
           <h4 class="modal-title">Bulk Renew Domain</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="form-group col-md-12">
-              <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
-                <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
-                  id: "bulk-renew-term-text-area", "data-domains": @domains.map{|d| d.name} %>
-              <Br>
-              <label>Select renewal term</label><Br>
-              <%= select_tag :renewal_term, options_for_select(["1","2","5","10"], "1"), class: "c-select col-lg-12" %>
+          <div id="step1-brenew">
+            <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
+            <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
+              id: "bulk-renew-term-text-area", "data-domains": @domains.map{|d| d.name} %>
+
+            <!--error msg-->
+            <div class="alert alert-danger" role="alert" id="bulk-renew-term-error">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              You have entered an invalid Domain. Please check.
             </div>
+            <!--error msg-->
           </div>
-          <!--error msg-->
-          <div class="alert alert-danger" role="alert" id="bulk-renew-term-error">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            You have entered an invalid Domain. Please check.
+          <div id="step2-brenew" style="display:none;">
+            <p>The additional renewal term will be added to the existing duration of these domains.</p>
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Domain</th>
+                  <th>Expiry Date</th>
+                  <th width="50px">Renewal Term</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>complete.ph</td>
+                  <td>2016-07-15 </td>
+                  <td><%= select_tag :renewal_term, options_for_select(["1","2","5","10"], "1"), class: "c-select col-lg-12" %></td>
+                </tr>
+                <tr>
+                  <td>alpha.com.ph</td>
+                  <td>2016-07-15 </td>
+                  <td><%= select_tag :renewal_term, options_for_select(["1","2","5","10"], "1"), class: "c-select col-lg-12" %></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <!--error msg-->
         </div>
-        <div class="modal-footer">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <%= submit_tag nil, class: "btn btn-primary", id: "bulk-renew-term-button" %>
-            </div>
-          </div>
+        <div class="modal-footer text-center">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <%= button_tag 'Continue', type: 'button', class: "btn btn-primary", id: "bulk-renew-term-button", :onclick => "return SelectTerm();" %>
+          <%= submit_tag 'Renew Domain(s)', class: "btn btn-primary", id: "bulk-renew-term-button2", style: "display:none;" %>
         </div>
       <% end %>
     </div><!-- /.modal-content -->
@@ -109,25 +118,17 @@
         <h4 class="modal-title">Renew Domain</h4>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label>Select renewal term</label><Br>
-            <select class="c-select col-lg-12" id="renew-domain-single-select">
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="5">5</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-        </div>
+        <label>Select renewal term.</label><Br>
+        <select class="c-select col-lg-12" id="renew-domain-single-select">
+          <option value="1" selected>1 year</option>
+          <option value="2">2 years</option>
+          <option value="5">5 years</option>
+          <option value="10">10 years</option>
+        </select>
       </div>
-      <div class="modal-footer">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <%= link_to "Submit", "#", "data-dismiss": "modal", class: 'renew btn btn-primary btn-renew-domain-single' %>
-          </div>
-        </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= link_to "Submit", "#", "data-dismiss": "modal", class: 'renew btn btn-primary btn-renew-domain-single' %>
       </div>
     </div><!-- /.modal-content -->
   </div>
@@ -154,7 +155,7 @@
             <td><%= formatted_date domain.expires_at %></td>
             <td>
               <% if domain.renew_allowed? %>
-                <a href="#" class="btn btn-renew-link" data-toggle="modal"
+                <a href="#" class="btn-renew-link" data-toggle="modal"
                   data-target="#modal-renew" data-domain=<%= domain.id %>>
                   Renew
                 </a>
@@ -169,7 +170,7 @@
             <td><%= formatted_date domain.expires_at %></td>
             <td>
               <% if domain.renew_allowed? %>
-                <a href="#" class="btn btn-renew-link" data-toggle="modal"
+                <a href="#" class="btn-renew-link" data-toggle="modal"
                   data-target="#modal-renew" data-domain=<%= domain.id %>>
                   Renew
                 </a>
@@ -184,7 +185,7 @@
             <td><%= formatted_date domain.expires_at %></td>
             <td>
               <% if domain.renew_allowed? %>
-                <a href="#" class="btn btn-renew-link" data-toggle="modal"
+                <a href="#" class="btn-renew-link" data-toggle="modal"
                   data-target="#modal-renew" data-domain=<%= domain.id %>>
                   Renew
                 </a>
@@ -196,3 +197,11 @@
     </tbody>
   </table>
 </div>
+<script type="text/javascript">
+  function SelectTerm(){
+     $('#bulk-renew-term-button').hide();
+     $('#bulk-renew-term-button2').show();
+     $('#step1-brenew').hide();
+     $('#step2-brenew').fadeIn();
+  }
+</script>
