@@ -36,7 +36,7 @@ class Powerdns::RecordsController < SecureController
 
   private
   def pdns_params
-    params.require(:powerdns_record).permit :name, :type, :prio, :content, :powerdns_domain_id,
+    params.require(:powerdns_record).permit :name, :type, :prio, :content, :powerdns_domain_id, :end_date,
                                             :ttl, :change_date, preferences: [:weight, :port, :srv_content]
   end
 
@@ -59,5 +59,6 @@ class Powerdns::RecordsController < SecureController
   def load_domain
     @domain_id = params[:domain_id]
     @domain_name = Domain.find(@domain_id, token: auth_token).name
+    @domain_expires_at = Domain.find(@domain_id, token: auth_token).expires_at
   end
 end

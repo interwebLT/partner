@@ -6,6 +6,7 @@
     </div>
   <% end %>
   <%= f.hidden_field :powerdns_domain_id, value: @domain_id %>
+  <%= f.hidden_field :end_date, value: @domain_expires_at %>
   <div id="nameserver-info">
     <div>
       <label>Type</label>
