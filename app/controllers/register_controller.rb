@@ -1,11 +1,19 @@
 class RegisterController < SecureController
   def new
+    if params[:list]
+      @entered_domains = params[:list]
+    else
+      @entered_domains = ""
+    end
+    @domains = Domain.all token: current_user.token
+    @sample_breaked_domains = "mydomain.ph\nabc.com.ph\nhello.net.ph\nschool.org.ph"
+    @sample_spaced_domains = "mydomain.ph abc.com.ph hello.net.ph school.org.ph"
   end
 
   def search
     params[:bulk_registration] = true
 
-    if params[:bulk_registration]
+    if params[:bulk_registration] && !params[:domain_name].empty?
       domain_names = params[:domain_name].split
       valid_domain = true
 
@@ -13,12 +21,14 @@ class RegisterController < SecureController
         domain = domain_name.strip.downcase
         if not Domain.valid? domain
           valid_domain = false
-          redirect_to register_path, alert: "Domain #{domain} is not valid."
+          redirect_to register_path(list: params[:domain_name]),
+            alert: "Domain #{domain} is not valid."
           break
         elsif not Domain.exists? domain, token: auth_token
         else
           valid_domain = false
-          redirect_to register_path, alert: "Domain #{domain} is not available."
+          redirect_to register_path(list: params[:domain_name]),
+            alert: "Domain #{domain} is not available."
           break
         end
       end
@@ -28,15 +38,7 @@ class RegisterController < SecureController
           bulk_registration: params[:bulk_registration]
       end
     else
-      domain_name = params[:domain_name].strip.downcase
-
-      if not Domain.valid? domain_name
-        redirect_to register_path, alert: "Domain #{domain_name} is not valid."
-      elsif not Domain.exists? domain_name, token: auth_token
-        redirect_to action: :details, domain_name: domain_name
-      else
-        redirect_to register_path, alert: "Domain #{domain_name} is not available."
-      end
+      redirect_to register_path, alert: "Please enter a valid Domain."
     end
   end
 
@@ -44,7 +46,7 @@ class RegisterController < SecureController
     @registration = RegistrationForm.new request_params
     @registration.registrant = registrant if @registration.handle
 
-    if params[:bulk_registration]
+    if params[:bulk_registration] && !params[:domain_name].empty?
       domain_names = params[:domain_name].split(',')
       valid_domain = true
 

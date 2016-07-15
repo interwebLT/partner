@@ -1,19 +1,23 @@
 <% content_for :banner_title do %>
-<%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
+  <%= fa_icon 'pencil-square-o lg' %>&nbsp;Register Domain
 <% end %>
-  <div class="register-page">
+<div class="register-page">
   <p>For bulk registration, separate domain with line break or space.
-    <a href="#" data-toggle="modal" data-target="#tipBulkReg"><%= fa_icon 'question-circle' %></a></p>
+    <a href="#" data-toggle="modal" data-target="#tipBulkReg">
+      <%= fa_icon 'question-circle' %>
+    </a>
+  </p>
   <p>Available domain extensions are .PH, .COM.PH, .ORG.PH, .NET.PH</p>
-  <%= form_tag register_path 'register-form-search navbar-form' do %>
+
+  <%= form_tag register_path, class: "'register-form-search navbar-form' reg-new-domain-form" do %>
     <div class="form-group">
-      <%= text_area_tag :domain_name, nil, class: 'form-control input-lg', rows: 5,
-        placeholder: "Enter the domain you want to register."  %>
+      <%= text_area_tag :domain_name, @entered_domains, class: 'form-control input-lg',
+        id: "reg-new-domain-text-area", "data-domains": @domains.map{|d| d.name}, rows: 5,
+        placeholder: "Enter the domain you want to register." %>
     </div>
-    <%= submit_tag "Register", class: 'btn btn-primary btn-lg' %>
+    <%= submit_tag "Register", class: 'btn btn-primary btn-lg', id: "reg-new-domain-button" %>
   <% end %>
 </div>
-
 <!-- Modal -->
 <div class="modal" id="tipBulkReg" tabindex="-1" role="dialog" aria-labelledby="tipBulkReg" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -22,27 +26,24 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title"><%= fa_icon 'question-circle ' %>  Bulk Registration</h4>
+        <h4 class="modal-title"><%= fa_icon 'question-circle' %>Bulk Registration</h4>
       </div>
       <div class="modal-body">
         Domains separated by line break.
         <div class="form-group">
-          <textarea class="form-control input-lg" placeholder="Enter the domain you want to register. " rows="5">
-            mydomain.ph
-            abc.com.ph
-            hello.net.ph
-            school.org.ph
-          </textarea>
+          <%= text_area_tag nil, @sample_breaked_domains.html_safe, class: 'form-control input-lg', rows: 5,
+            placeholder: "Enter the domain you want to register." %>
         </div>
         Domains separated by space.
         <div class="form-group">
-          <textarea class="form-control input-lg" placeholder="Enter the domain you want to register. " rows="5">
-            mydomain.ph abc.com.ph hello.net.ph school.org.ph
-          </textarea>
+          <%= text_area_tag nil, @sample_spaced_domains.html_safe, class: 'form-control input-lg', rows: 5,
+            placeholder: "Enter the domain you want to register." %>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Back to Domain Registration</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Back to Domain Registration
+        </button>
       </div>
     </div>
   </div>

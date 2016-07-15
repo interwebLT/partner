@@ -6,6 +6,8 @@ class RegisterPage < SitePrism::Page
 
   element :domain_name, '#domain_name'
 
+  element :domain_name, '#reg-new-domain-text-area'
+
   element :submit, "input[name='commit']"
 
   def details
