@@ -27,6 +27,7 @@
 //= require inputmask.regex.extensions
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require bootbox
 //= require_tree .
 
 $(document).ready(function() {
