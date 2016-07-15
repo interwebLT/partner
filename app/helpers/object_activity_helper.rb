@@ -17,6 +17,7 @@ module ObjectActivityHelper
     property = 'billing'      if property == 'billing_handle'
     property = 'tech'         if property == 'tech_handle'
     property = 'expiry date'  if property == 'expires_at'
+    property = 'DNS Record'   if property == 'powerdns_record'
 
     if activity.old_value.nil?
       "#{property}: added entry <strong>#{activity.new_value}</strong>"

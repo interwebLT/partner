@@ -6,14 +6,17 @@ class ContactsController < SecureController
   def show
     @contact = Contact.find params[:id], token: auth_token
     @domain_id = params[:d]
+    @domain = Domain.find params[:d], token: auth_token
   end
 
   def edit_multiple
     @contact = Contact.new
 
     unless params[:list].nil?
+      @list_for_edit = params[:list].split.join(', ')
       list_for_edit = params[:list].split
       ids = []
+
       list_for_edit.each do |item|
         domain = Domain.search term: item, token: current_user.token
         if domain

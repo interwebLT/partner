@@ -1,5 +1,4 @@
-<h3>Edit Contact</h3>
-
+<h3>Edit Contact <span class="text-primary"><%= @domain.name if @domain %></span></h3>
 <%= simple_form_for @contact, url: contact_path(@contact.handle), html: { method: :patch } do |f| %>
   <% if @contact.errors.any? %>
   <div id="warning" class="alert alert-warning">
