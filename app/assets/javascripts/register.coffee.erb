@@ -38,6 +38,24 @@ $ ->
     valid == true
   ), "You entered an invalid Domain name format!"
 
+  $.validator.addMethod 'uniqueDomainName',((value,element) ->
+    text_area_values = $("#reg-new-domain-text-area").val()
+    valid = true
+    tempArray = []
+    line_values = text_area_values.split('\n')
+
+    for value in line_values
+      single_value = value.split(' ')
+      for value in single_value
+        if value
+          if $.inArray(value, tempArray) > -1
+            valid = false
+          else
+            tempArray.push value
+
+    valid == true
+  ), "You entered duplicate Domain Name"
+
   $(".reg-new-domain-form").validate
     errorPlacement: (label, element) ->
       label.addClass('error-validator-label')
@@ -46,5 +64,6 @@ $ ->
       domain_name:
         required: true,
         domainEntriesValidation: true,
-        domainFormatValidation: true
+        domainFormatValidation: true,
+        uniqueDomainName: true
   return
