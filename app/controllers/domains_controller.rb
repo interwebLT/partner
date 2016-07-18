@@ -24,19 +24,25 @@ class DomainsController < SecureController
     end
 
     redirect_to action: :renew, domain_id: domain_id.join(","),
-      renewal_term: params[:renewal_term]
+      renewal_term: params[:renewal_term], bulk: true
   end
 
   def renew
     domain_ids = params[:domain_id].split(',')
     renew_saved = true
+    renewal_index = 0
 
     domain_ids.each do |domain_id|
       @domain = Domain.find domain_id, token: current_user.token
-      term = params[:renewal_term]
+      if params[:bulk]
+        term = params[:renewal_term][renewal_index.to_s]
+      else
+        term = params[:renewal_term]
+      end
 
       begin
         @domain.renew(term, token: current_user.token) if @domain.renew_allowed?
+        renewal_index += 1
       rescue Exception => ex
         renew_saved = false
         break

@@ -2,17 +2,8 @@ $ ->
   domain_id = undefined
   selected_option = undefined
 
-  $("#bulk-contact-edit-button").addClass('disabled')
-  $("#bulk-renew-term-button").addClass('disabled')
-
-  $(".modal").on "hidden.bs.modal", ->
-    $("#bulk-edit-contact-text-area").val("")
-    $("#bulk-renew-term-text-area").val("")
-    $("#bulk-contact-edit-button").addClass('disabled')
-    $("#bulk-contact-edit-error").show()
-    $("#bulk-renew-term-button").addClass('disabled')
-    $("#bulk-renew-term-error").show()
-    return
+  $("#bulk-contact-edit-button").attr('disabled','disabled')
+  $("#bulk-renew-term-button").attr('disabled','disabled')
 
   validateDomainNames = (text_area_values, domain_list) ->
     output = true
@@ -27,34 +18,71 @@ $ ->
             output = false
 
     if (text_area_values.trim().length != 0) and output
-      $("#bulk-contact-edit-error").fadeOut()
-      $("#bulk-contact-edit-button").removeClass('disabled')
-      $("#bulk-renew-term-error").fadeOut()
-      $("#bulk-renew-term-button").removeClass('disabled')
+      $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeOut()
+      $("#bulk-contact-edit-button, #bulk-renew-term-button").removeAttr('disabled')
     else
-      $("#bulk-contact-edit-error").fadeIn()
-      $("#bulk-contact-edit-button").addClass('disabled')
-      $("#bulk-renew-term-error").fadeIn()
-      $("#bulk-renew-term-button").addClass('disabled')
+      $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeIn()
+      $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
+    return
+
+  assignValuesToTable = (list_for_renew, domain_expiration) ->
+    line_values = list_for_renew.split('\n')
+    renewal_index = 0
+
+    for value in line_values
+      single_value = value.split(' ')
+      for value in single_value
+        if value
+          terms =  '<select name="renewal_term[' + renewal_index + ']" id="renewal_term" class="c-select col-lg-12">
+                      <option selected="selected" value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                    </select>'
+          row =  '<tr>
+                    <td>' + value + '</td>
+                    <td>' + domain_expiration[value] + '</td>
+                    <td>' + terms + '</td>
+                  </tr>'
+          renewal_index++
+          $("#renewal-term-table-body").append(row)
+
+  selectTerm = () ->
+    $('#bulk-renew-term-button').hide()
+    $('#bulk-renew-term-button2').show()
+    $('#step1-brenew').hide()
+    $('#step2-brenew').fadeIn()
+    return
+
+  abortRenewal = () ->
+    $('#bulk-renew-term-button').show()
+    $('#bulk-renew-term-button2').hide()
+    $('#step1-brenew').show()
+    $('#step2-brenew').hide()
+    $("#renewal-term-table-body").empty()
+    return
+
+  $(".modal").on "hidden.bs.modal", ->
+    $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val("")
+    $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
+    $("#bulk-renew-term-button").attr('disabled','disabled')
     return
 
   $("#renew-domain-single-select").change ->
-    selected_option = $("#renew-domain-single-select option:selected").text()
+    selected_option = $("#renew-domain-single-select option:selected").val()
     return
 
   $(".btn-renew-domain-single").click ->
     id = domain_id
-    bootbox.confirm ("Are you sure you want to renew for " + selected_option + "?"), (confirmed) ->
+    bootbox.confirm ("Are you sure you want to renew for " + selected_option + " year(s)?"), (confirmed) ->
       if confirmed
         location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
       return
     return
 
-
-
   $(".btn-renew-link").click ->
     domain_id = $(this).data("domain")
-    selected_option = $("#renew-domain-single-select option:selected").text()
+    selected_option = $("#renew-domain-single-select option:selected").val()
     return
 
   $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").keyup ->
@@ -62,5 +90,15 @@ $ ->
     domain_list = $(this).data("domains")
     validateDomainNames(text_area_values, domain_list)
     return
+
+  $("#bulk-renew-term-button").click ->
+    domain_expiration = $(this).data("domains")
+    list_for_renew = $("#bulk-renew-term-text-area").val()
+    assignValuesToTable(list_for_renew, domain_expiration)
+    selectTerm()
+    return
+
+  $("#bulk-renew-term-cancel").click ->
+    abortRenewal()
 
   return
