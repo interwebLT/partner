@@ -27,12 +27,37 @@
 <%= render "bulk_edit_modal" %>
 <%= render "bulk_renew_term_modal" %>
 <%= render "renew_term_modal" %>
+<!--modal for renew-->
+<div class="modal fade" id="modal-renew" tabindex="-1" role="dialog" aria-labelledby="modal-renew" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Renew Domain</h4>
+      </div>
+      <div class="modal-body">
+        <label>Select renewal term.</label><Br>
+        <select class="c-select" id="renew-domain-single-select">
+          <option value="1" selected>1 year</option>
+          <option value="2">2 years</option>
+          <option value="5">5 years</option>
+          <option value="10">10 years</option>
+        </select>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= link_to "Submit", "#", "data-dismiss": "modal", class: 'renew btn btn-primary btn-renew-domain-single' %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+</div>
 <!--modal-->
 <div id="table">
   <table id="domains">
     <thead>
       <tr>
-        <th></th>
+        <th>
+          <input id="checkall" type="checkbox" />
+          <label for="checkall"></label></th>
         <th>Domain</th>
         <% if current_user.admin %>
         <th>Partner</th>
@@ -46,7 +71,7 @@
       <% @domains.each do |domain| %>
         <% if domain.expired? %>
           <tr class="expire">
-            <td><%= fa_icon 'flag', class: 'red', data: { placement: :left, toggle: :tooltip, original_title: 'Expired Domain' } %></td>
+            <td><input id="domain1" type="checkbox"/> <label for="domain1"></label></td>
             <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain has expired. You should renew it now.' } %></td>
             <% if current_user.admin %>
             <td><%= domain.partner %></td>
@@ -64,7 +89,7 @@
           </tr>
         <% elsif domain.expiring? %>
           <tr class="expire">
-            <td><%= fa_icon 'flag', class: 'yellow', data: { placement: :left, toggle: :tooltip, original_title: 'Expiring Domain' } %></td>
+            <td><input id="domain2" type="checkbox" /> <label for="domain2"></label></td>
             <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain is about to expire. You should renew it now.' } %></td>
             <% if current_user.admin %>
             <td><%= domain.partner %></td>
@@ -82,7 +107,7 @@
           </tr>
         <% else %>
           <tr>
-            <td></td>
+            <td><input id="domain3" type="checkbox" /> <label for="domain3"></label></td>
             <td><%= link_to domain.name, domain_path(domain) %></td>
             <% if current_user.admin %>
             <td><%= domain.partner %></td>
