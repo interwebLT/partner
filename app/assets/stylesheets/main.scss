@@ -287,5 +287,24 @@ ul li a i.fa-close, table tr td i.fa-close{color:#999!important}
     border: 1px solid #ccc;
     -moz-appearance: none;
 }
-
+select#renew-domain-single-select{@extend .col-lg-12;}
 textarea {resize: none;outline: none;margin-bottom: 10px;}
+
+/*custom checkbox*/
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: 15px;
+
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; @extend .text-primary;} /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 10px; } /* allow space for check mark */
+
+
+/*custom checkbox*/
+

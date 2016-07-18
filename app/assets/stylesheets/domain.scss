@@ -663,3 +663,8 @@ ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !im
 #modal-editc, #modal-brenew {
   .alert {margin-bottom: 0px;}
 }
+
+table#domains {
+  label {margin-bottom: 0px;}
+  th:first-child {width: 10px;}
+}
