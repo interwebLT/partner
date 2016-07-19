@@ -44,7 +44,7 @@ class DomainHostsController < SecureController
     domain = Domain.find params[:domain_id], token: auth_token
 
     @domain_host = DomainHost.new create_params.merge(domain: domain.name)
-    # raise @domain_host.inspect
+
     if @domain_host.save token: auth_token
       redirect_to domain_url(domain.id), notice: 'Nameserver added!'
     else
