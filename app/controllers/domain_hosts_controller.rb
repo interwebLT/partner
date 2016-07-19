@@ -10,30 +10,35 @@ class DomainHostsController < SecureController
     output = true
 
     if params[:dotph_default]
-      nameservers = Nameserver.all token: auth_token
+      nameserver_datas = Nameserver.all token: auth_token
     else
-      nameservers = current_user.partner.default_nameservers
+      nameserver_datas = current_user.partner.default_nameservers
     end
 
-    domain.hosts.map{|host| DomainHost.destroy domain.name, host.name, token: auth_token}
+    nameservers = nameserver_datas.map{|ns| ns.name}
+    domain_hosts = domain.hosts.map{|host| host.name}
+
+    domain.hosts.each do |host|
+      unless nameservers.include? host.name
+        DomainHost.destroy domain.name, host.name, token: auth_token
+      end
+    end
 
     nameservers.each do |nameserver|
-      @domain_host = DomainHost.new
-      @domain_host.domain = domain.name
-      @domain_host.name = nameserver.name
+      unless domain_hosts.include? nameserver
+        @domain_host = DomainHost.new
+        @domain_host.domain = domain.name
+        @domain_host.name = nameserver
 
-      if @domain_host.save token: auth_token
-      else
-        output = false
+        if @domain_host.save token: auth_token
+        else
+          output = false
+        end
       end
     end
 
     if output
-      if params[:dotph_default]
-        redirect_to domain_url(domain.id), notice: 'DotPH Nameservers added!'
-      else
-        redirect_to domain_url(domain.id), notice: 'Partner Nameservers added!'
-      end
+      redirect_to domain_url(domain.id), notice: 'Nameserver list updated!'
     else
       @domain_id = domain.id
       render :index
