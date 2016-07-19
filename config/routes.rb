@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post 'contacts/:id/multiple', to: 'contacts#edit_multiple', as: 'edit_multiple_contacts'
   post 'domains/:id/multiple', to: 'domains#renew_multiple', as: 'renew_multiple_domains'
 
+  get 'domains/:id/default_nameservers', to: 'domain_hosts#add_default_nameservers', as: 'add_default_nameserver'
+
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :destroy], id: /.*/
