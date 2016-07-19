@@ -6,8 +6,6 @@ class RegisterController < SecureController
       @entered_domains = ""
     end
     @domains = Domain.all token: current_user.token
-    @sample_breaked_domains = "mydomain.ph\nabc.com.ph\nhello.net.ph\nschool.org.ph"
-    @sample_spaced_domains = "mydomain.ph abc.com.ph hello.net.ph school.org.ph"
   end
 
   def search
