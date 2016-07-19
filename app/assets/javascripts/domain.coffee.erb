@@ -62,12 +62,6 @@ $ ->
     $("#renewal-term-table-body").empty()
     return
 
-  $(".modal").on "hidden.bs.modal", ->
-    $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val("")
-    $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
-    $("#bulk-renew-term-button").attr('disabled','disabled')
-    return
-
   $("#renew-domain-single-select").change ->
     selected_option = $("#renew-domain-single-select option:selected").val()
     return
@@ -100,5 +94,26 @@ $ ->
 
   $("#bulk-renew-term-cancel").click ->
     abortRenewal()
+
+  $(".btn-bulk-modal").click ->
+    domainList = ""
+    $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val("")
+    $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
+    $("#bulk-renew-term-button").attr('disabled','disabled')
+
+    $(".domain-list-checkbox").each (i) ->
+      if $(this).is(":checked")
+        domainList += $(".domain-list-checkbox").eq(i).data("name") + " "
+
+    $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val(domainList)
+    $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").trigger("keyup")
+
+  $("#checkall").click ->
+    if $(this).is(":checked")
+      $(".domain-list-checkbox").each (i) ->
+        $(this).prop('checked', true)
+    else
+      $(".domain-list-checkbox").each (i) ->
+        $(this).prop('checked', false)
 
   return

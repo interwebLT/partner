@@ -6,11 +6,11 @@
 <% end %>
 <!--buttons for bulk options-->
 <p class="btn-container">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-editc">
+  <button type="button" class="btn btn-primary btn-bulk-modal" data-toggle="modal" data-target="#modal-editc">
     <i class="fa fa-pencil-square-o"></i>
     <span>Edit Contact Information</span>
   </button>
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-brenew">
+  <button type="button" class="btn btn-success btn-bulk-modal" data-toggle="modal" data-target="#modal-brenew">
     <i class="fa fa-refresh "></i>
     <span>Bulk Renew</span>
   </button>
@@ -58,8 +58,13 @@
         <% end %>
 
         <tr class=<%= tr_class %>>
-          <td><input id="domain1" type="checkbox"/> <label for="domain1"></label></td>
-          <td class=<%= tr_class %>><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: original_title } %></td>
+          <td>
+            <input id="domain<%= domain.id %>" class="domain-list-checkbox"
+              data-name=<%= domain.name%> type="checkbox"/>
+            <label for="domain<%= domain.id %>"></label>
+          </td>
+          <td class=<%= tr_class %>><%= link_to domain.name, domain_path(domain),
+            data: { placement: :right, toggle: :tooltip, original_title: original_title } %></td>
           <% if current_user.admin %>
           <td><%= domain.partner %></td>
           <% end %>
