@@ -5,6 +5,7 @@ $ ->
   $("#bulk-contact-edit-button").attr('disabled','disabled')
   $("#bulk-renew-term-button").attr('disabled','disabled')
 
+
   validateDomainNames = (text_area_values, domain_list) ->
     output = true
     line_values = text_area_values.split('\n')
@@ -18,10 +19,8 @@ $ ->
             output = false
 
     if (text_area_values.trim().length != 0) and output
-      $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeOut()
       $("#bulk-contact-edit-button, #bulk-renew-term-button").removeAttr('disabled')
     else
-      $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeIn()
       $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
     return
 
@@ -67,12 +66,44 @@ $ ->
     return
 
   $(".btn-renew-domain-single").click ->
-    id = domain_id
-    bootbox.confirm ("Are you sure you want to renew for " + selected_option + " year(s)?"), (confirmed) ->
-      if confirmed
-        location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
-      return
-    return
+    bootbox.dialog {
+      size: 'small'
+      message: 'Are you sure you want to renew for ' + selected_option + 'year(s)?',
+      title: 'Confirm Renewal',
+      buttons: {
+        No: {
+          className: 'btn-default',
+          label: 'Cancel'
+        },
+        Yes: {
+          className: 'btn-success',
+          label: "Yes, I want to renew",
+          callback: ->
+            location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+        }
+      }
+    }
+    return false
+
+  $("#bulk-renew-term-button2").click ->
+    bootbox.dialog {
+      message: 'Are you sure you want to renew these domains?',
+      title: 'Confirm Renewal',
+      buttons: {
+        No: {
+          className: 'btn-default',
+          label: 'Cancel'
+        },
+        Yes: {
+          className: 'btn-success',
+          label: "Yes, I want to renew",
+          callback: ->
+            location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+        }
+      }
+    }
+    return false
+
 
   $(".btn-renew-link").click ->
     domain_id = $(this).data("domain")
