@@ -1,0 +1,2 @@
+$('#domains').append('<%= escape_javascript render(@domains) %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@domains) %>');

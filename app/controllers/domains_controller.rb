@@ -5,6 +5,8 @@ class DomainsController < SecureController
     else
       @domains = Domain.all token: current_user.token
     end
+    @domain_count = @domains.count
+    @domains = @domains.paginate page: params[:page], per_page: 20
   end
 
   def show

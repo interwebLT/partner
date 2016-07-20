@@ -1,0 +1,35 @@
+<!-- <tbody> -->
+  <% if domain.expired? %>
+    <% tr_class = 'expire' %>
+    <% original_title = 'This domain has expired. You should renew it now.' %>
+  <% elsif domain.expiring? %>
+    <% tr_class = 'expire' %>
+    <% original_title = 'This domain is about to expire. You should renew it now.' %>
+  <% else %>
+    <% tr_class = '' %>
+    <% original_title = '' %>
+  <% end %>
+
+  <tr class=<%= tr_class %>>
+    <td>
+      <input id="domain<%= domain.id %>" class="domain-list-checkbox"
+        data-name=<%= domain.name%> type="checkbox"/>
+      <label for="domain<%= domain.id %>"></label>
+    </td>
+    <td class=<%= tr_class %>><%= link_to domain.name, domain_path(domain),
+      data: { placement: :right, toggle: :tooltip, original_title: original_title } %></td>
+    <% if current_user.admin %>
+    <td><%= domain.partner %></td>
+    <% end %>
+    <td><%= formatted_date domain.registered_at %></td>
+    <td><%= formatted_date domain.expires_at %></td>
+    <td>
+      <% if domain.renew_allowed? %>
+        <a href="#" class="btn-renew-link" data-toggle="modal"
+          data-target="#modal-renew" data-domain=<%= domain.id %>>
+          Renew
+        </a>
+      <% end %>
+    </td>
+  </tr>
+<!-- </tbody> -->
