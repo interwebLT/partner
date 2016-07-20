@@ -1,4 +1,10 @@
-<h3>Edit DNS Record</h3>
+<% content_for :banner_title do %>
+  <%= fa_icon 'pencil lg' %>&nbsp;Edit DNS Record
+<% end %>
+
+<h3>yourdomain.ph</h3>
+<hr>
+
 <%= simple_form_for @pdns_record,
   url: powerdns_record_path(id: @pdns_record.id, domain_id: @domain_id),
   html: {method: :patch} do |f| %>

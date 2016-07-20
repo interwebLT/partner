@@ -1,7 +1,12 @@
+<% content_for :banner_title do %>
+  <%= fa_icon 'server lg' %>&nbsp;Add Nameserver
+    <% unless current_user.admin %>
+      <span><%= @domain_count %></span>
+    <% end %>
+<% end %>
 
-
-<h3>Add Nameserver</h3>
-
+<h3>yourdomain.ph</h3>
+<hr>
 <%= simple_form_for @domain_host do |f| %>
   <% if @domain_host.errors.any? %>
   <div id="warning" class="alert alert-warning">

@@ -1,4 +1,10 @@
-<h3>Add DNS Record</h3>
+<% content_for :banner_title do %>
+  <%= fa_icon 'server lg' %>&nbsp;Add DNS Record
+<% end %>
+
+<h3>yourdomain.ph</h3>
+<hr>
+
 <%= simple_form_for @pdns_record do |f| %>
   <% if @pdns_record.errors.any? %>
     <div id="warning" class="alert alert-warning">

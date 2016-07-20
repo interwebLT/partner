@@ -1,4 +1,9 @@
-<h3>Edit Contact <span class="text-primary"><%= @domain.name if @domain %></span></h3>
+<% content_for :banner_title do %>
+  <%= fa_icon 'pencil lg' %>&nbsp;Edit Contact Info
+<% end %>
+
+<h3 class="text-primary"><%= @domain.name if @domain %></h3>
+<hr>
 <%= simple_form_for @contact, url: contact_path(@contact.handle), html: { method: :patch } do |f| %>
   <% if @contact.errors.any? %>
   <div id="warning" class="alert alert-warning">
