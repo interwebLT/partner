@@ -16,6 +16,13 @@
         data-name=<%= domain.name%> type="checkbox"/>
       <label for="domain<%= domain.id %>"></label>
     </td>
+  <% if domain.expired? %>
+    <td><%= fa_icon 'flag', class: 'red', data: { placement: :left, toggle: :tooltip, original_title: 'Expired Domain' } %></td>
+  <% elsif domain.expiring? %>
+    <td><%= fa_icon 'flag', class: 'yellow', data: { placement: :left, toggle: :tooltip, original_title: 'Expiring Domain' } %></td>
+  <% else %>
+    <td></td>
+  <% end %>
     <td class=<%= tr_class %>><%= link_to domain.name, domain_path(domain),
       data: { placement: :right, toggle: :tooltip, original_title: original_title } %></td>
     <% if current_user.admin %>
