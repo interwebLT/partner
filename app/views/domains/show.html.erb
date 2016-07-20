@@ -73,14 +73,21 @@
         <% end %>
       </div>
       <div class="button">
-        <%= link_to 'Add', domain_hosts_path(@domain.id), id: :add_domain_host, class: 'btn btn-success btn-small' %>
-        <br><br>
-        <%= link_to 'Add Partner NS', add_default_nameserver_path(id: @domain.id),
-          class: 'btn btn-success btn-small' %>
-        <br><br>
-        <%= link_to 'Add DotPH NS', add_default_nameserver_path(id: @domain.id, dotph_default: true),
-          class: 'btn btn-success btn-small' %>
+        <div class="dropdown">
+          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Add
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><%= link_to 'Add Own Nameservers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %></li>
+            <li><%= link_to 'Add Partner Nameservers', add_default_nameserver_path(id: @domain.id), class: '' %></li>
+            <li><%= link_to 'Add DotPH Nameservers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '' %></li>
+          </ul>
+        </div>
       </div>
+
+
+
     </div>
 
     <% if @domain.matched_nameserver? @nameservers %>
