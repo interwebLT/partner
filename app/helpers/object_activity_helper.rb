@@ -22,11 +22,19 @@ module ObjectActivityHelper
     if activity.old_value.nil?
       "#{property}: added entry <strong>#{activity.new_value}</strong>"
     elsif activity.old_value.blank?
-      "#{property}: set value to <strong>#{activity.new_value}</strong>"
+      if ['admin', 'billing', 'tech'].include?(property)
+        "Added new <strong>#{property.capitalize}</strong> contact"
+      else
+        "#{property}: set value to <strong>#{activity.new_value}</strong>"
+      end
     elsif activity.new_value.nil?
       "#{property}: removed entry <strong>#{activity.old_value}</strong>"
     elsif activity.new_value.blank?
-      "#{property}: set value from <strong>#{activity.old_value}</strong> to <strong>blank</strong>"
+      if ['admin', 'billing', 'tech'].include?(property)
+        "Removed <strong>#{property.capitalize}</strong> contact"
+      else
+        "#{property}: set value from <strong>#{activity.old_value}</strong> to <strong>blank</strong>"
+      end
     elsif property == 'ok' and status_enabled(activity)
       'status: is now <strong>OK</strong>'
     elsif property == 'ok' and status_disabled(activity)
