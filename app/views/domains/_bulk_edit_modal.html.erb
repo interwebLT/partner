@@ -10,7 +10,7 @@
               <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
                 id: "bulk-edit-contact-text-area", "data-domains": @domains.map{|d| d.name} %>
           <!--error msg-->
-          <div class="alert alert-danger" role="alert" id="bulk-contact-edit-error">
+          <div class="alert alert-danger" role="alert" id="bulk-contact-edit-error" style="display:none;">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -20,7 +20,7 @@
         </div>
         <div class="modal-footer text-center">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <%= submit_tag nil, class: "btn btn-primary", id: "bulk-contact-edit-button" %>
+          <%= submit_tag nil, class: "btn btn-success", id: "bulk-contact-edit-button" %>
         </div>
       <% end %>
     </div>

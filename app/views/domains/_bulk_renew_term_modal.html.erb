@@ -11,7 +11,7 @@
             <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
               id: "bulk-renew-term-text-area", "data-domains": @domains.map{|d| d.name} %>
             <!--error msg-->
-            <div class="alert alert-danger" role="alert" id="bulk-renew-term-error">
+            <div class="alert alert-danger" role="alert" id="bulk-renew-term-error" style="display:none">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -38,9 +38,9 @@
           <button type="button" class="btn btn-default" data-dismiss="modal" id="bulk-renew-term-cancel">
             Cancel
           </button>
-          <%= button_tag 'Continue', type: 'button', class: "btn btn-primary", id: "bulk-renew-term-button",
+          <%= button_tag 'Continue', type: 'button', class: "btn btn-success", id: "bulk-renew-term-button",
             "data-domains": @domains.map{|d| [d.name, d.expires_at.to_datetime.strftime("%F")]}.to_h.to_json %>
-          <%= submit_tag 'Renew Domain(s)', class: "btn btn-primary", id: "bulk-renew-term-button2",
+          <%= submit_tag 'Renew Domain(s)', class: "btn btn-success", id: "bulk-renew-term-button2",
             style: "display:none;" %>
         </div>
       <% end %>
