@@ -34,6 +34,12 @@ class Contact
     Rails.env.test? ? '123456789ABCDEF' : handle
   end
 
+  def self.destroy id, token:
+    response = delete url(id: id), {}, token: token
+
+    new response
+  end
+
   def local_country_name
     country = ISO3166::Country[local_country_code]
 

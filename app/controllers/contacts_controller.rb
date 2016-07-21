@@ -84,6 +84,14 @@ class ContactsController < SecureController
     end
   end
 
+  def destroy
+    domain = params[:d]
+    type = params[:type]
+    Domain.update_new_contacts domain, nil, type, auth_token
+    Contact.destroy params[:id], token: auth_token
+    redirect_to domain_url(domain), notice: "Contact successfully deleted!"
+  end
+
   private
 
   def contact_params
