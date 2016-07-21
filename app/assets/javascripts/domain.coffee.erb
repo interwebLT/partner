@@ -19,8 +19,11 @@ $ ->
             output = false
 
     if (text_area_values.trim().length != 0) and output
+      $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeOut()
       $("#bulk-contact-edit-button, #bulk-renew-term-button").removeAttr('disabled')
     else
+      if (text_area_values.trim().length != 0)
+        $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeIn()
       $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
     return
 
@@ -131,6 +134,7 @@ $ ->
 
   $(".btn-bulk-modal").click ->
     domainList = ""
+    $("#bulk-contact-edit-error, #bulk-renew-term-error").hide()
     $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val("")
     $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
     $("#bulk-renew-term-button").attr('disabled','disabled')
@@ -141,6 +145,7 @@ $ ->
 
     $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val(domainList)
     $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").trigger("keyup")
+    return
 
   $("#checkall").click ->
     if $(this).is(":checked")
