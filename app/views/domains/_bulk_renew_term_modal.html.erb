@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal-brenew" tabindex="-1" role="dialog" aria-labelledby="modal-brenew" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <%= form_tag renew_multiple_domains_path(id: 0), method: :post do |f| %>
+      <%= form_tag renew_multiple_domains_path(id: 0), method: :post, id: "renew-multiple-form" do |f| %>
         <div class="modal-header">
           <h4 class="modal-title">Bulk Renew Domain</h4>
         </div>

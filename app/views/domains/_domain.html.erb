@@ -32,7 +32,7 @@
     <td><%= formatted_date domain.expires_at %></td>
     <td>
       <% if domain.renew_allowed? %>
-        <a href="#" class="btn-renew-link" data-toggle="modal"
+        <a href="#" class="btn-renew-link" data-toggle="modal" data-name=<%= domain.name %>
           data-target="#modal-renew" data-domain=<%= domain.id %>>
           Renew
         </a>

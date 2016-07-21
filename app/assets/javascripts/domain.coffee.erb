@@ -66,6 +66,7 @@ $ ->
     return
 
   $(".btn-renew-domain-single").click ->
+    id = domain_id
     bootbox.dialog {
       size: 'small'
       message: 'Are you sure you want to renew for ' + selected_option + 'year(s)?',
@@ -98,7 +99,7 @@ $ ->
           className: 'btn-success',
           label: "Yes, I want to renew",
           callback: ->
-            location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+            $("#renew-multiple-form").submit()
         }
       }
     }
@@ -107,6 +108,8 @@ $ ->
 
   $(".btn-renew-link").click ->
     domain_id = $(this).data("domain")
+    domain_name = $(this).data("name")
+    $("#renew-modal-domain-name").text(domain_name)
     selected_option = $("#renew-domain-single-select option:selected").val()
     return
 
