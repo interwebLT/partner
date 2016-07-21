@@ -1,3 +1,8 @@
+<% content_for :banner_title do %>
+  <%= fa_icon 'pencil lg' %>&nbsp;Edit Contact Info
+<% end %>
+
+
 <h3>Edit Contact <span class="text-primary"><%= @list_for_edit %></span></h3>
 <%= simple_form_for @contact, url: contact_path, html: { method: :patch } do |f| %>
   <% if @contact.errors.any? %>
@@ -112,6 +117,6 @@
   <br>
   <div class="edit-update">
     <%= f.submit 'Update', id: :submit %>
-    <%= link_to 'Cancel', domains_path, class: 'btn btn-sm btn-danger' %>
+    <%= link_to 'Cancel', domains_path %>
   </div>
 <% end %>

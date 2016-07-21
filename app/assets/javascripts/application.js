@@ -48,7 +48,7 @@ $(document).ready(function() {
 });
 
 $(document).on('page:change', function(){
-  $(".alert-success").delay(5000).fadeOut(500, function(){
+  $(".alert-success, .alert-danger").delay(5000).fadeOut(500, function(){
         $(".alert-success").alert('close');
     });
 });

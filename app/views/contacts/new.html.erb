@@ -3,8 +3,8 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Add contact for <span class="text-primary"><%= @domain.name %></span></h3>
-
+  <h3 id="head"><span class="text-primary"><%= @domain.name %></span></h3>
+  <hr>
   <% if @contact.errors.messages.any? %>
   <div id="warning" class="alert alert-warning">
     Some information is missing or incorrect.  Please check your entries and try again.
@@ -97,8 +97,9 @@
       <hr>
     </div>
     <br>
-    <div class="register-btn text-center">
-      <%= f.submit class: 'btn btn-success btn-lg', value: 'Create Contact'  %>
+    <div class="register-btn">
+      <%= f.submit value: 'Create Contact'  %>
+      <%= link_to 'Cancel', domain_path(@domain.name) %>
     </div>
   <% end %>
 </div>

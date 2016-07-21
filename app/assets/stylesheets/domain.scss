@@ -581,7 +581,6 @@ input#contact_handle {@extend .text-primary;}
 
 .contact-info-wrapper .button {
   @extend .col-lg-1;
-  margin-top: 0.5em;
 }
 .contact-info ul li {line-height: 30px;}
 .contact-info ul {margin-bottom: 0!important;}
@@ -670,5 +669,27 @@ table#domains {
 }
 
 .btn-add-contact {
-  margin-top: -25px;
+  @extend .button;
+  margin-right: 30px;
 }
+
+.btn-add-ns {
+  @extend .button;
+}
+
+.edit-update, .register-btn {
+  @extend .text-center;
+  input{
+    @extend .btn;
+    @extend .btn-success;
+    font-weight: inherit !important;
+    font-size: 14px !important;
+  }
+  a{
+    @extend .btn;
+    @extend .btn-default;
+  }
+
+}
+.alert {text-align: center;}
+#registration_form_period, #registration_form_local_country_code {width: 50%}
