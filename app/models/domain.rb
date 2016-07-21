@@ -141,4 +141,32 @@ class Domain
       end
     end
   end
+
+  def update token:
+    if valid?
+      self_params = self.as_json
+
+      update_params = ["registrant_handle", "admin_handle", "billing_handle", "tech_handle"]
+
+      params = self_params.select{|k,v| update_params.include?(k) }
+
+      Domain.patch Domain.url(id: self.name), params, token: token
+      return true
+    end
+    return false
+  end
+
+  def self.update_new_contacts id, handle, type, auth_token
+    domain = Domain.find id, token: auth_token
+    if type == "admin"
+      domain.admin_handle = handle
+    elsif type == "billing"
+      domain.billing_handle = handle
+    elsif type == "tech"
+      domain.tech_handle = handle
+    else
+    end
+
+    domain.update token: auth_token
+  end
 end

@@ -13,6 +13,14 @@
     <div></div>
     <div>Registered: <%= formatted_date @domain.registered_at %> | Expires: <%= formatted_date @domain.expires_at %></div>
     <br>
+
+    <%= link_to "Add Admin Contact", new_contact_path(domain_id: @domain.id, type: "admin"),
+      class: "btn btn-success" %>
+    <%= link_to "Add Billing Contact", new_contact_path(domain_id: @domain.id, type: "billing"),
+      class: "btn btn-success" %>
+    <%= link_to "Add Technical Contact", new_contact_path(domain_id: @domain.id, type: "tech"),
+      class: "btn btn-success" %>
+
     <hr class="line">
     <div class="contact-info-wrapper">
       <div class="title">Registrant</div>
@@ -29,6 +37,7 @@
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.admin_contact } %></div>
         <div class="button">
           <%= link_to 'Edit', contact_path(@domain.admin_contact.handle, d: @domain.id), id: 'edit_admin', :class => 'btn btn-primary btn-small' %>
+          <%= link_to 'Delete', "#", :class => 'btn btn-danger btn-small' %>
         </div>
       </div>
     <% end %>
@@ -40,6 +49,7 @@
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.billing_contact } %></div>
         <div class="button">
           <%= link_to 'Edit', contact_path(@domain.billing_contact.handle, d: @domain.id), id: 'edit_billing', :class => 'btn btn-primary btn-small' %>
+          <%= link_to 'Delete', "#", :class => 'btn btn-danger btn-small' %>
         </div>
       </div>
     <% end %>
@@ -51,6 +61,7 @@
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.tech_contact } %></div>
         <div class="button">
           <%= link_to 'Edit', contact_path(@domain.tech_contact.handle, d: @domain.id), id: 'edit_tech', :class => 'btn btn-primary btn-small' %>
+          <%= link_to 'Delete', "#", :class => 'btn btn-danger btn-small' %>
         </div>
       </div>
     <% end %>
@@ -85,9 +96,6 @@
           </ul>
         </div>
       </div>
-
-
-
     </div>
 
     <% if @domain.matched_nameserver? @nameservers %>

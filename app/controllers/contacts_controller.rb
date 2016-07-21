@@ -9,6 +9,27 @@ class ContactsController < SecureController
     @domain = Domain.find params[:d], token: auth_token
   end
 
+  def new
+    @domain = Domain.find params[:domain_id], token: auth_token
+    @type = params[:type]
+    @contact = Contact.new
+  end
+
+  def create
+    @domain = Domain.find params[:domain_id], token: auth_token
+    @type = params[:type]
+    @contact = Contact.new contact_params
+
+    handle = Contact.generate_handle
+    @contact.handle = handle
+    if @contact.save token: auth_token
+      Domain.update_new_contacts @domain.id, @contact.handle, @type, auth_token
+      redirect_to domain_path(@domain.id), notice: "New Contact Added"
+    else
+      render :new
+    end
+  end
+
   def edit_multiple
     @contact = Contact.new
 
