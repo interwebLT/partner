@@ -269,21 +269,21 @@ RSpec.describe ObjectActivityHelper do
       let(:property_changed) { 'admin_handle' }
       let(:old_value) { '' }
 
-      it { is_expected.to eql 'admin: set value to <strong>new value</strong>' }
+      it { is_expected.to eql 'added new <strong>Admin</strong> contact' }
     end
 
     context 'when property_changed is billing_handle' do
       let(:property_changed) { 'billing_handle' }
       let(:old_value) { '' }
 
-      it { is_expected.to eql 'billing: set value to <strong>new value</strong>' }
+      it { is_expected.to eql 'added new <strong>Billing</strong> contact' }
     end
 
     context 'when property_changed is tech_handle' do
       let(:property_changed) { 'tech_handle' }
       let(:old_value) { '' }
 
-      it { is_expected.to eql 'tech: set value to <strong>new value</strong>' }
+      it { is_expected.to eql 'added new <strong>Tech</strong> contact' }
     end
 
     context 'when property_changed is expires_at' do

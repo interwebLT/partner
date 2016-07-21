@@ -23,7 +23,7 @@ module ObjectActivityHelper
       "#{property}: added entry <strong>#{activity.new_value}</strong>"
     elsif activity.old_value.blank?
       if ['admin', 'billing', 'tech'].include?(property)
-        "Added new <strong>#{property.capitalize}</strong> contact"
+        "added new <strong>#{property.capitalize}</strong> contact"
       else
         "#{property}: set value to <strong>#{activity.new_value}</strong>"
       end
@@ -31,7 +31,7 @@ module ObjectActivityHelper
       "#{property}: removed entry <strong>#{activity.old_value}</strong>"
     elsif activity.new_value.blank?
       if ['admin', 'billing', 'tech'].include?(property)
-        "Removed <strong>#{property.capitalize}</strong> contact"
+        "removed <strong>#{property.capitalize}</strong> contact"
       else
         "#{property}: set value from <strong>#{activity.old_value}</strong> to <strong>blank</strong>"
       end
