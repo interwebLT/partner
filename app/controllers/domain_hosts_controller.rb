@@ -1,7 +1,8 @@
 class DomainHostsController < SecureController
   def index
     @domain_id = params[:domain_id]
-
+    domain = Domain.find @domain_id, token: auth_token
+    @domain_name = domain.name
     @domain_host = DomainHost.new
   end
 

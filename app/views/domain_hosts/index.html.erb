@@ -5,7 +5,7 @@
     <% end %>
 <% end %>
 
-<h3>yourdomain.ph</h3>
+<h3><%= @domain_name %></h3>
 <hr>
 <%= simple_form_for @domain_host do |f| %>
   <% if @domain_host.errors.any? %>
