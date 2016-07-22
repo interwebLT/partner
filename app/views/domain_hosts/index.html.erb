@@ -5,7 +5,11 @@
     <% end %>
 <% end %>
 
+
 <h3><%= @domain_name %></h3>
+
+<h3 class="text-primary"><%= @domain_name %></h3>
+>>>>>>> UI for IPV4 and IPV6 of add own name server
 <hr>
 <%= simple_form_for @domain_host do |f| %>
   <% if @domain_host.errors.any? %>
@@ -22,7 +26,54 @@
         <%= f.input :name, label: false, class: "form-control" %>
       </div>
     </div>
+
+    <div id="own-ns-v4">
+      <p>
+        <label>IPv4</label>
+        <div>
+          <%= f.input :name, label: false, class: "form-control", placeholder: "Enter IP Address" %>
+          <a class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i>
+            <span class=""> Add More</span>
+          </a>
+        </div>
+      </p>
+      <p class="moreIPV4">
+        <label></label>
+        <div>
+          <%= f.input :name, label: false, class: "form-control", placeholder: "Enter IP Address" %>
+          <a class="btn btn-default btn-sm">
+            <i class="fa fa-close"></i>
+            <span class="sr-only">Delete</span>
+          </a>
+        </div>
+      </p>
+    </div>
+
+    <div id="own-ns-v6">
+      <p>
+        <label>IPv6</label>
+        <div>
+          <%= f.input :name, label: false, class: "form-control", placeholder: "Enter IP Address" %>
+          <a class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i>
+            <span class=""> Add More</span>
+          </a>
+        </div>
+      </p>
+      <p class="moreIPV6">
+        <label></label>
+        <div>
+          <%= f.input :name, label: false, class: "form-control", placeholder: "Enter IP Address" %>
+          <a class="btn btn-default btn-sm">
+            <i class="fa fa-close"></i>
+            <span class="sr-only">Delete</span>
+          </a>
+        </div>
+      </p>
+    </div>
   </div>
+
   <br>
   <div class="edit-update">
     <%= f.submit 'Add Domain Host', id: :submit %>
