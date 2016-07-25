@@ -4,33 +4,35 @@
 
 <section>
   <div id="MyDomains">
-    <div class="pull-right">
-      <div class="btn-add-contact">
-        <div class="dropdown">
-          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Add Contact
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li>
-              <% unless @domain.admin_handle %>
-                <%= link_to "Admin Contact", new_contact_path(domain_id: @domain.id, type: "admin") %>
-              <% end %>
-            </li>
-            <li>
-              <% unless @domain.billing_handle %>
-                <%= link_to "Billing Contact", new_contact_path(domain_id: @domain.id, type: "billing") %>
-              <% end %>
-            </li>
-            <li>
-              <% unless @domain.tech_handle %>
-                <%= link_to "Technical Contact", new_contact_path(domain_id: @domain.id, type: "tech") %>
-              <% end %>
-            </li>
-          </ul>
+    <% unless @domain.admin_handle && @domain.billing_handle && @domain.tech_handle %>
+      <div class="pull-right">
+        <div class="btn-add-contact">
+          <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Add Contact
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>
+                <% unless @domain.admin_handle %>
+                  <%= link_to "Admin Contact", new_contact_path(domain_id: @domain.id, type: "admin") %>
+                <% end %>
+              </li>
+              <li>
+                <% unless @domain.billing_handle %>
+                  <%= link_to "Billing Contact", new_contact_path(domain_id: @domain.id, type: "billing") %>
+                <% end %>
+              </li>
+              <li>
+                <% unless @domain.tech_handle %>
+                  <%= link_to "Technical Contact", new_contact_path(domain_id: @domain.id, type: "tech") %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
     <div class="info-header">
       <h3><%= @domain.name %></h3>
     </div>
