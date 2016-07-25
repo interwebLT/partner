@@ -1,8 +1,8 @@
 class Powerdns::Record
   include Api::Model
 
-  attr_accessor :id, :powerdns_domain_id, :name, :type, :content, :ttl, :end_date,
-                :prio, :change_date, :created_at, :updated_at, :preferences
+  attr_accessor :id, :powerdns_domain_id, :name, :type, :content, :ttl, :start_date, :end_date,
+                :active, :prio, :change_date, :created_at, :updated_at, :preferences
 
   @resource = "powerdns/records"
 
