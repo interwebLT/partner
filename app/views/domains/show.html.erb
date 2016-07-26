@@ -50,13 +50,13 @@
     <% if @domain.admin_handle %>
       <hr>
       <div class="contact-info-wrapper">
-        <div class="title">Administrative</div>
+        <div class="title">
+          <%= link_to contact_path(@domain.admin_contact.handle, d: @domain.id, type: "admin"), method: :delete, 'data-confirm': 'Are you sure you want to remove administrative contact?' do %><i class="fa fa-close"></i><% end %>
+          Administrative</div>
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.admin_contact } %></div>
         <div class="button">
           <%= link_to 'Edit', contact_path(@domain.admin_contact.handle, d: @domain.id), id: 'edit_admin', :class => 'btn btn-primary btn-small' %>
-          <br><br>
-          <%= link_to 'Delete', contact_path(@domain.admin_contact.handle, d: @domain.id, type: "admin"),
-            method: :delete, :class => 'btn btn-danger btn-small', "data-confirm": "Are you sure you want to delete?" %>
+
         </div>
       </div>
     <% end %>
@@ -64,13 +64,12 @@
     <% if @domain.billing_handle %>
       <hr class="one">
       <div class="contact-info-wrapper">
-        <div class="title">Billing</div>
+        <div class="title">
+          <%= link_to contact_path(@domain.billing_contact.handle, d: @domain.id, type: "billing"), method: :delete, 'data-confirm': 'Are you sure you want to remove billing contact?' do %><i class="fa fa-close"></i><% end %>
+          Billing</div>
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.billing_contact } %></div>
         <div class="button">
           <%= link_to 'Edit', contact_path(@domain.billing_contact.handle, d: @domain.id), id: 'edit_billing', :class => 'btn btn-primary btn-small' %>
-          <br><br>
-          <%= link_to 'Delete', contact_path(@domain.billing_contact.handle, d: @domain.id, type: "billing"),
-            method: :delete, :class => 'btn btn-danger btn-small', "data-confirm": "Are you sure you want to delete?" %>
         </div>
       </div>
     <% end %>
@@ -78,14 +77,13 @@
     <% if @domain.tech_handle %>
       <hr class="one">
       <div class="contact-info-wrapper">
-        <div class="title">Technical</div>
+        <div class="title">
+          <%= link_to contact_path(@domain.tech_contact.handle, d: @domain.id, type: "tech"), method: :delete, 'data-confirm': 'Are you sure you want to remove technical contact?' do %><i class="fa fa-close"></i><% end %>
+          Technical</div>
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.tech_contact } %></div>
         <div class="button">
           <%= link_to 'Edit', contact_path(@domain.tech_contact.handle, d: @domain.id), id: 'edit_tech',
             :class => 'btn btn-primary btn-small' %>
-          <br><br>
-          <%= link_to 'Delete', contact_path(@domain.tech_contact.handle, d: @domain.id, type: "tech"),
-            method: :delete, :class => 'btn btn-danger btn-small', "data-confirm": "Are you sure you want to delete?" %>
         </div>
       </div>
     <% end %>

@@ -569,6 +569,11 @@ input#contact_handle {@extend .text-primary;}
   font-size: larger;
   color: #111;
   padding-right:100px;
+
+  a {
+    @extend .text-muted;
+    @extend .small;
+    margin-left: -20px;}
 }
 .contact-info {
   @extend .col-lg-8;
