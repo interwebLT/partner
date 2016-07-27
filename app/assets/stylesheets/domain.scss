@@ -148,6 +148,7 @@
   @extend .form-group;
   @extend .clearfix;
   @extend .row;
+  margin-bottom: 0px!important;
 
   label {
     @extend .control-label;
@@ -204,6 +205,7 @@
       @extend .col-md-6;
       @extend .col-sm-6;
       @extend .col-xs-12;
+      padding: 10px 15px;
 
       select {
         @extend .form-control;
