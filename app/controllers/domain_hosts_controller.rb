@@ -47,9 +47,12 @@ class DomainHostsController < SecureController
   end
 
   def create
+    list = {"ipv4": params[:ipv4], "ipv6": params[:ipv6]}.to_json
+
     domain = Domain.find params[:domain_id], token: auth_token
 
     @domain_host = DomainHost.new create_params.merge(domain: domain.name)
+    @domain_host.ip_list = list
 
     if @domain_host.save token: auth_token
       redirect_to domain_url(domain.id), notice: 'Nameserver added!'
@@ -70,6 +73,6 @@ class DomainHostsController < SecureController
   private
 
   def create_params
-    params.require(:domain_host).permit :name
+    params.require(:domain_host).permit :name, :ip_list
   end
 end
