@@ -21,7 +21,7 @@
           <div>
             <%= f.input :period, label: false do %>
               <%= f.select :period, options_for_select({"1 year" => "1", "2 years" => "2",
-                "5 years" => "5","10 years" => "10"}), {},{class: "form-control"} %>
+                "5 years" => "5","10 years" => "10"}), {include_blank: true},{class: "form-control"} %>
             <% end %>
           </div>
         </div>
