@@ -57,8 +57,9 @@ class Powerdns::RecordsController < SecureController
   end
 
   def load_domain
-    @domain_id = params[:domain_id]
-    @domain_name = Domain.find(@domain_id, token: auth_token).name
-    @domain_expires_at = Domain.find(@domain_id, token: auth_token).expires_at
+    domain = Domain.find(params[:domain_id], token: auth_token)
+    @domain_id = domain.id
+    @domain_name = domain.name
+    @domain_expires_at = domain.expires_at
   end
 end
