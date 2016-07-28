@@ -340,7 +340,7 @@ Then /^I must be able to correct my domain details$/ do
   expect(site.register.details).not_to have_warning
 
   expect(site.register.details.domain_name.value).to eql 'available.ph'
-  expect(site.register.details.period.value).to eql '2'
+  expect(site.register.details.period.value).to eql ''
 
   expect(site.register.details.local_name.value).to eql 'Registrant'
   expect(site.register.details.local_organization.value).to eql 'Organization'
