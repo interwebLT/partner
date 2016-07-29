@@ -79,7 +79,6 @@ before_fork do |server, worker|
       # someone else did our job for us
     end
   end
-end
   #
   # Throttle the master from forking too quickly by sleeping.  Due
   # to the implementation of standard Unix signal handlers, this
