@@ -97,7 +97,11 @@
           <ul id="domain_hosts" class="list-unstyled">
             <% @domain.hosts.each do |domain_host| %>
             <li>
-              <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do %><i class="fa fa-close"></i><% end %> <%= domain_host.name %>
+              <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do %><i class="fa fa-close"></i><% end %>
+              <%= domain_host.name %>
+              <%= link_to edit_domain_host_path(id: domain_host.id, domain_id: @domain.id) do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
             </li>
             <% end %>
           </ul>
