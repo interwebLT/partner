@@ -22,8 +22,13 @@ after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
   task :restart do
-    on roles :all do
-      execute "sudo service unicorn upgrade"
-    end
+    invoke 'unicorn:restart'
   end
 end
+#namespace :deploy do
+#  task :restart do
+#    on roles :all do
+#      execute "sudo service unicorn upgrade"
+#    end
+#  end
+#end
