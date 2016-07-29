@@ -36,3 +36,14 @@ $ ->
     thisParentClass = $(this).parent().prop('className')
     $('.' + thisParentClass).remove()
     return
+
+  $("#domain_host_name").keyup ->
+    domainName = $(this).data("domain")
+    if $(this).val() == domainName
+      $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").show()
+    else
+      $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").find('input:text').val('');
+      $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").hide()
+    return
+
+  $("#domain_host_name").trigger("keyup")

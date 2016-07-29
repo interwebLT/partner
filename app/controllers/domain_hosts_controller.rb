@@ -64,7 +64,7 @@ class DomainHostsController < SecureController
   end
 
   def edit
-    @domain_id = params[:domain_id]
+    @domain = Domain.find params[:domain_id], token: auth_token
     @domain_host = DomainHost.find params[:domain_id], params[:id], token: auth_token
     if @domain_host.ip_list
       ip_list = @domain_host.ip_list
