@@ -39,7 +39,8 @@ $ ->
 
   $("#domain_host_name").keyup ->
     domainName = $(this).data("domain")
-    if $(this).val() == "ns." + domainName
+    glue_record_requirement = "." + domainName
+    if $(this).val().indexOf(glue_record_requirement) >= 0
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").show()
     else
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").find('input:text').val('');
