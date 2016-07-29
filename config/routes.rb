@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'invoice', to: 'checkout#invoice'
   get 'receipt', to: 'checkout#receipt'
   get 'dns' => 'domain_hosts#dns'
+  get 'invoice/month' => 'checkout#invoicemonthly'
 
   root 'welcome#index'
 
