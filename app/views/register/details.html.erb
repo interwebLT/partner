@@ -4,14 +4,16 @@
 
 <div id="domain_info">
   <h3 id="head">Domain details for <span class="text-primary"><%= @registration.domain_name %></span></h3>
-
-  <% if @registration.errors.any? %>
-  <div id="warning" class="alert alert-warning">
-    Some information is missing or incorrect.  Please check your entries and try again.
+  <div class="alert alert-warning credit-balance-alert">
+    You don't have enough credit balance to continue this registration.
   </div>
+  <% if @registration.errors.any? %>
+    <div id="warning" class="alert alert-warning">
+      Some information is missing or incorrect.  Please check your entries and try again.
+    </div>
   <% end %>
-
-  <%= simple_form_for @registration, url: register_details_path do |f| %>
+  <%= simple_form_for @registration, url: register_details_path,
+    html: {"data-totalcredit": @total_credit, "data-pricinglist": @pricing, "data-domaincount": @domain_count} do |f| %>
     <%= hidden_field_tag(:bulk_registration, @bulk_registration) %>
     <div id="new-info">
       <%= f.hidden_field :domain_name, value: @registration.domain_name %>
