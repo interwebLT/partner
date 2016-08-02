@@ -1,4 +1,6 @@
-$ ->
+$(document).ready ->
+  $(".credit-balance-alert").hide()
+
   $.validator.addMethod 'domainEntriesValidation', ((value, element) ->
     text_area_values = $("#reg-new-domain-text-area").val()
     domain_list = $("#reg-new-domain-text-area").data("domains")
@@ -66,4 +68,44 @@ $ ->
         domainEntriesValidation: true,
         domainFormatValidation: true,
         uniqueDomainName: true
+
+  $(".new_registration_form").validate
+    errorPlacement: (label, element) ->
+      label.addClass('error-validator-label-simple')
+      element.addClass('has-input-error')
+      label.insertAfter(element)
+    rules:
+      "registration_form[period]":
+        required: true
+      "registration_form[local_name]":
+        required: true
+      "registration_form[local_organization]":
+        required: true
+      "registration_form[local_street]":
+        required: true
+      "registration_form[local_city]":
+        required: true
+      "registration_form[local_country_code]":
+        required: true
+      "registration_form[voice]":
+        required: true
+      "registration_form[email]":
+        required: true
+
+  $(".new_registration_form").submit (e) ->
+    period = $("#registration_form_period").val()
+    if period
+      totalCredit = $(this).data("totalcredit")
+      pricingList = $(this).data("pricinglist")
+      domainCount = $(this).data("domaincount")
+      totalPrice  = pricingList[period] * domainCount
+      sufficientCredit = totalCredit >= totalPrice
+
+      if !sufficientCredit
+        $(".credit-balance-alert").fadeIn()
+        e.preventDefault()
+      else
+        $(".credit-balance-alert").fadeOut()
+    else
+      $(".credit-balance-alert").fadeOut()
   return
