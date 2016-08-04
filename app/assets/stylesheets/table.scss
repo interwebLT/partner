@@ -415,3 +415,6 @@ th:first-child {
 th:last-child {
   border-radius: 0 5px 0 0;
 }
+table#domains tr th:first-child, table#domains tr td:first-child {
+    padding-left: 25px !important;
+}
