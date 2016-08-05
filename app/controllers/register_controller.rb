@@ -45,7 +45,11 @@ class RegisterController < SecureController
     @registration.registrant = registrant if @registration.handle
 
     if params[:bulk_registration] && !params[:domain_name].empty?
-      domain_names = params[:domain_name].split(',')
+      domain_names  = params[:domain_name].split(',')
+      @pricing      = current_user.partner.pricing.map{|pricing| [pricing.period, pricing.price]}.to_h.to_json
+      @total_credit = current_user.credits.to_f + current_user.partner.credit_limit.to_f
+      @domain_count = domain_names.count
+
       valid_domain = true
 
       domain_names.each do |domain_name|
@@ -81,6 +85,7 @@ class RegisterController < SecureController
     domain_saved = true
     bulk_handle_list = []
     @registration = RegistrationForm.new registration_params
+
     if params[:bulk_registration]
       domain_names = registration_params[:domain_name].split(',')
 
