@@ -22,6 +22,8 @@ after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
   task :restart do
-    invoke 'unicorn:restart'
+    on roles :all do
+      execute "/etc/init.d/unicorn upgrade"
+    end
   end
 end
