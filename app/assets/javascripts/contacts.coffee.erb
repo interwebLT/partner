@@ -23,4 +23,50 @@ $(document).ready ->
   $('input[name="registration_form[voice]"]').inputmask mask: mask
   $('input[name="registration_form[fax]"]').inputmask mask: mask
 
+  $.validator.addMethod 'inputAsciiFormat', ((value, element) ->
+    printable_ascii_char = /^[ -~]*$/
+    printable_ascii_char.test value
+  ), 'It should be a printable ASCII Char.'
+
+  $(".new_contact").validate
+    errorPlacement: (label, element) ->
+      label.addClass('error-validator-label-simple')
+      element.addClass('has-input-error')
+      label.insertAfter(element)
+    rules:
+      "contact[local_name]":
+        required: true,
+        inputAsciiFormat: true
+      "contact[local_organization]":
+        required: true,
+        inputAsciiFormat: true
+      "contact[local_street]":
+        required: true,
+        inputAsciiFormat: true
+      "contact[local_street2]":
+        inputAsciiFormat: true
+      "contact[local_street3]":
+        inputAsciiFormat: true
+      "contact[local_city]":
+        required: true,
+        inputAsciiFormat: true
+      "contact[local_country_code]":
+        required: true,
+        inputAsciiFormat: true
+      "contact[local_state]":
+        inputAsciiFormat: true
+      "contact[local_postal_code]":
+        inputAsciiFormat: true
+      "contact[voice]":
+        required: true,
+        inputAsciiFormat: true
+      "contact[voice_ext]":
+        inputAsciiFormat: true
+      "contact[fax_ext]":
+        inputAsciiFormat: true
+      "contact[email]":
+        required: true,
+        inputAsciiFormat: true
+
   return
+# contact

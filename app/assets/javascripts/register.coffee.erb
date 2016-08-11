@@ -69,6 +69,11 @@ $(document).ready ->
         domainFormatValidation: true,
         uniqueDomainName: true
 
+  $.validator.addMethod 'inputAsciiFormat', ((value, element) ->
+    printable_ascii_char = /^[ -~]*$/
+    printable_ascii_char.test value
+  ), 'It should be a printable ASCII Char.'
+
   $(".new_registration_form").validate
     errorPlacement: (label, element) ->
       label.addClass('error-validator-label-simple')
@@ -78,19 +83,38 @@ $(document).ready ->
       "registration_form[period]":
         required: true
       "registration_form[local_name]":
-        required: true
+        required: true,
+        inputAsciiFormat: true
       "registration_form[local_organization]":
-        required: true
+        required: true,
+        inputAsciiFormat: true
       "registration_form[local_street]":
-        required: true
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[local_street2]":
+        inputAsciiFormat: true
+      "registration_form[local_street3]":
+        inputAsciiFormat: true
       "registration_form[local_city]":
-        required: true
+        required: true,
+        inputAsciiFormat: true
       "registration_form[local_country_code]":
-        required: true
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[local_state]":
+        inputAsciiFormat: true
+      "registration_form[local_postal_code]":
+        inputAsciiFormat: true
       "registration_form[voice]":
-        required: true
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[voice_ext]":
+        inputAsciiFormat: true
+      "registration_form[fax_ext]":
+        inputAsciiFormat: true
       "registration_form[email]":
-        required: true
+        required: true,
+        inputAsciiFormat: true
 
   $(".new_registration_form").submit (e) ->
     period = $("#registration_form_period").val()
