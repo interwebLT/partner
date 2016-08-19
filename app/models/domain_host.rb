@@ -35,7 +35,16 @@ class DomainHost
 
     !response.nil?
   rescue Api::Model::UnprocessableEntity
-    self.errors.add :name, 'already in use'
+    hosts = []
+    domain = Domain.search(term: self.domain, token: token)
+    domain = Domain.find(domain.first.id, token: token)
+    domain.hosts.map{|host| hosts << host.name}
+
+    if hosts.include?(self.name)
+      self.errors.add :name, 'already in use'
+    else
+      self.errors.add :name, 'You are not authorized to register this Nameserver.'
+    end
 
     false
   end
