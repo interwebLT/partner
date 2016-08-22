@@ -12,12 +12,10 @@ $(document).ready ->
   validateIPFields = () ->
     $('input.domain-host-ipv4-field').each ->
       $(this).rules 'add', {
-        required: true,
         validIPv4: true
       }
     $('input.domain-host-ipv6-field').each ->
       $(this).rules 'add', {
-        required: true,
         validIPv6: true
       }
 
