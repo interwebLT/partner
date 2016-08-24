@@ -56,4 +56,13 @@ class DomainsController < SecureController
       redirect_to domains_url, notice: "Domain(s) successfully renewed!"
     end
   end
+
+  def check_ns_authorization
+    domain  = params[:domain]
+    partner = current_user.username
+    host    = params[:host]
+    response = Domain.check_ns_authorization domain, partner, host, current_user.token
+
+    render json: response.to_json
+  end
 end

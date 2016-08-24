@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get 'domains/:id/default_nameservers', to: 'domain_hosts#add_default_nameservers', as: 'add_default_nameserver'
 
+  get 'domains/check_ns_authorization', to: 'domains#check_ns_authorization', as: 'check_ns_authorization'
+
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/

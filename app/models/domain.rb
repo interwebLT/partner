@@ -169,4 +169,12 @@ class Domain
 
     domain.update token: auth_token
   end
+
+  def self.check_ns_authorization domain, partner, host, token
+    site = Rails.configuration.api_url
+    url = "#{site}/check_ns_authorization"
+    params = {domain: domain, partner: partner, host: host}.to_query
+    response =  HTTParty.get(url, query: params, headers: default_headers(token: token)).parsed_response
+    return response
+  end
 end
