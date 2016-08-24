@@ -1,8 +1,8 @@
 class DomainHostsController < SecureController
   def index
-    @domain_id = params[:domain_id]
-    domain = Domain.find @domain_id, token: auth_token
-    @domain_name = domain.name
+    @hosts = []
+    @domain = Domain.find params[:domain_id], token: auth_token
+    @domain.hosts.map{|host| @hosts << host.name}
     @domain_host = DomainHost.new
   end
 
@@ -57,14 +57,16 @@ class DomainHostsController < SecureController
     if @domain_host.save token: auth_token
       redirect_to domain_url(domain.id), notice: 'Nameserver added!'
     else
-      @domain_id = domain.id
+      @domain = domain
 
       render :index
     end
   end
 
   def edit
+    @hosts = []
     @domain = Domain.find params[:domain_id], token: auth_token
+    @domain.hosts.map{|host| @hosts << host.name}
     @domain_host = DomainHost.find params[:domain_id], params[:id], token: auth_token
     if @domain_host.ip_list
       ip_list = @domain_host.ip_list

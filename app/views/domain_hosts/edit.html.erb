@@ -17,7 +17,8 @@
     <div>
       <label>Name</label>
       <div>
-        <%= f.input :name, label: false, class: "form-control", input_html: {"data-domain": @domain.name} %>
+        <%= f.input :name, label: false, class: "form-control", input_html: {"data-domain": @domain.name,
+          "data-hosts": @hosts, "data-newnameserver": "false"} %>
       </div>
     </div>
     <% if @ip_list %>

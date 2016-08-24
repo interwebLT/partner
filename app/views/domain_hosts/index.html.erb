@@ -4,19 +4,20 @@
       <span><%= @domain_count %></span>
     <% end %>
 <% end %>
-<h3 class="text-primary"><%= @domain_name %></h3>
+<h3 class="text-primary"><%= @domain.name %></h3>
 <%= simple_form_for @domain_host, html: {class: "domain_host_form"} do |f| %>
   <% if @domain_host.errors.any? %>
     <div id="warning" class="alert alert-warning">
       Some information is missing or incorrect.  Please check your entries and try again.
     </div>
   <% end %>
-  <%= f.hidden_field :domain_id, value: @domain_id %>
+  <%= f.hidden_field :domain_id, value: @domain.id %>
   <div id="nameserver-info">
     <div>
       <label>Name</label>
       <div>
-        <%= f.input :name, label: false, class: "form-control", input_html: {"data-domain": @domain_name} %>
+        <%= f.input :name, label: false, class: "form-control", input_html: {"data-domain": @domain.name,
+          "data-hosts": @hosts, "data-newnameserver": "true"} %>
       </div>
     </div>
     <div class="nameserver-ipv4">
@@ -51,6 +52,6 @@
   <br>
   <div class="edit-update">
     <%= f.submit 'Add Domain Host', id: :submit %>
-    <%= link_to 'Cancel', domain_path(@domain_id), class: 'btn btn-sm btn-danger' %>
+    <%= link_to 'Cancel', domain_path(@domain.id), class: 'btn btn-sm btn-danger' %>
   </div>
 <% end %>

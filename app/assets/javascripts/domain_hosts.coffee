@@ -1,4 +1,32 @@
 $(document).ready ->
+  validateIPFields = () ->
+    $('input.domain-host-ipv4-field').each ->
+      $(this).rules 'add', {
+        required: true,
+        validIPv4: true
+      }
+    $('input.domain-host-ipv6-field').each ->
+      $(this).rules 'add', {
+        required: true,
+        validIPv6: true
+      }
+
+  getDomain = (domain_host) ->
+    domainHostArray = domain_host.split('.')
+    valid_2nd_extensions = ["com", "net", "org"]
+
+    if $.inArray("ph", domainHostArray) > -1
+      phNS = true
+
+    for extension in valid_2nd_extensions
+      if $.inArray(extension, domainHostArray) > -1
+        valid_2nd_extension = true
+    if valid_2nd_extension and phNS
+      domain_name = domainHostArray[domainHostArray.length - 3] + "." + domainHostArray[domainHostArray.length - 2] + "." + domainHostArray[domainHostArray.length - 1]
+    else
+      domain_name = domainHostArray[domainHostArray.length - 2] + "." + domainHostArray[domainHostArray.length - 1]
+    return domain_name
+
   $.validator.addMethod 'validIPv4', ((value, element) ->
     valid_ipv4 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
     valid_ipv4.test value
@@ -9,15 +37,20 @@ $(document).ready ->
     valid_ipv6.test value
   ), 'It should be a valid IPv6 Format.'
 
-  validateIPFields = () ->
-    $('input.domain-host-ipv4-field').each ->
-      $(this).rules 'add', {
-        validIPv4: true
-      }
-    $('input.domain-host-ipv6-field').each ->
-      $(this).rules 'add', {
-        validIPv6: true
-      }
+  $.validator.addMethod 'validNameserver', ((value, element) ->
+    valid_nameserver = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
+    valid_nameserver.test value
+  ), 'It should be a valid Nameserver.'
+
+  $.validator.addMethod 'notAlreadyUsedNS', ((value, element) ->
+    new_ns = $("#domain_host_name").data("newnameserver")
+    hosts = $("#domain_host_name").data("hosts").split(' ')
+    if !new_ns
+      hosts.splice(hosts.indexOf(value),1)
+    if $.inArray(value, hosts) > -1
+      existed = true
+    existed != true
+  ), 'Nameserver already in used!'
 
   $(".btn-add-domain-host-ipv4").click ->
     array = $('.domain-host-ipv4-field').length
@@ -61,7 +94,7 @@ $(document).ready ->
     $('.' + thisParentClass).remove()
     return
 
-  $("#domain_host_name").keyup ->
+  $("#domain_host_name").blur ->
     domainName = $(this).data("domain")
     glue_record_requirement = "." + domainName
     if $(this).val().indexOf(glue_record_requirement) >= 0
@@ -70,15 +103,27 @@ $(document).ready ->
     else
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").find('input:text').val('');
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").hide()
+
+    $(".domain_host_form").validate
+      errorPlacement: (label, element) ->
+        label.addClass('error-validator-label-simple')
+        element.addClass('has-input-error')
+        label.insertAfter(element)
+      rules:
+        "domain_host[name]":
+          required: true,
+          validNameserver: true,
+          notAlreadyUsedNS: true,
+          remote:
+            url: "/domains/check_ns_authorization",
+            data:
+              domain: ->
+                return getDomain($("#domain_host_name").val())
+              host: ->
+                return $("#domain_host_name").val()
+      messages:
+        "domain_host[name]":
+          remote: "You are not authorized to register this Nameserver."
     return
 
-  $("#domain_host_name").trigger("keyup")
-
-  $(".domain_host_form").validate
-    errorPlacement: (label, element) ->
-      label.addClass('error-validator-label-simple')
-      element.addClass('has-input-error')
-      label.insertAfter(element)
-    rules:
-      "domain_host[address]":
-        require: true
+  $("#domain_host_name").trigger("blur")
