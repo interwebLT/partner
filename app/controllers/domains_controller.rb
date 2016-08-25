@@ -65,4 +65,17 @@ class DomainsController < SecureController
 
     render json: response.to_json
   end
+
+  def check_if_exists
+    domains = params[:domain].split(',')
+    valid = true
+    domains.each do |domain|
+      response = Domain.exists? domain.strip, token: current_user.token
+      if response == true
+        valid = false
+        break
+      end
+    end
+    render json: valid.to_json
+  end
 end
