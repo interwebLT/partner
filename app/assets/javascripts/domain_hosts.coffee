@@ -2,13 +2,21 @@ $(document).ready ->
   validateIPFields = () ->
     $('input.domain-host-ipv4-field').each ->
       $(this).rules 'add', {
-        required: true,
-        validIPv4: true
+        required:
+          depends: (element) ->
+            $(".domain-host-ipv6-field").eq(0).val() == ""
+        validIPv4:
+          depends: (element) ->
+            $(".domain-host-ipv6-field").eq(0).val() == ""
       }
     $('input.domain-host-ipv6-field').each ->
       $(this).rules 'add', {
-        required: true,
-        validIPv6: true
+        required:
+          depends: (element) ->
+            $(".domain-host-ipv4-field").eq(0).val() == ""
+        validIPv6:
+          depends: (element) ->
+            $(".domain-host-ipv4-field").eq(0).val() == ""
       }
 
   getDomain = (domain_host) ->
