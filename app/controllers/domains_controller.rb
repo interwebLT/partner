@@ -10,6 +10,7 @@ class DomainsController < SecureController
   end
 
   def show
+    @partner_nameserver = current_user.partner.default_nameservers
     @nameservers = Nameserver.all token: current_user.token
     @domain = Domain.find params[:id], token: current_user.token
   end
