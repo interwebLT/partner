@@ -47,12 +47,22 @@ class DomainHostsController < SecureController
   end
 
   def create
-    list = {"ipv4": params[:ipv4], "ipv6": params[:ipv6]}.to_json
-
+    nameserver_datas = Nameserver.all token: auth_token
+    nameservers = nameserver_datas.map{|ns| ns.name}
     domain = Domain.find params[:domain_id], token: auth_token
+    domain_hosts = domain.hosts.map{|host| host.name}
+    list = {"ipv4": params[:ipv4], "ipv6": params[:ipv6]}.to_json
 
     @domain_host = DomainHost.new create_params.merge(domain: domain.name)
     @domain_host.ip_list = list
+
+    if domain_hosts.sort == nameservers.sort
+      unless nameservers.include?(@domain_host.name)
+        domain.hosts.each do |host|
+          DomainHost.destroy domain.name, host.name, token: auth_token
+        end
+      end
+    end
 
     if @domain_host.save token: auth_token
       redirect_to domain_url(domain.id), notice: 'Nameserver added!'
