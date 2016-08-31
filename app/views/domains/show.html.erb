@@ -140,10 +140,16 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <li><%= link_to 'Add Own Nameservers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %></li>
             <% unless @partner_nameserver.empty? %>
-              <li><%= link_to 'Add Partner Nameservers', add_default_nameserver_path(id: @domain.id), class: '' %></li>
+              <li>
+                <%= link_to 'Add Partner Nameservers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
+                  'data-confirm': 'Are you sure you want to add default Partner Nameservers?' %>
+              </li>
             <% end %>
             <% unless @nameservers.empty? %>
-              <li><%= link_to 'Add DotPH Nameservers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '' %></li>
+              <li>
+                <%= link_to 'Add DotPH Nameservers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '',
+                method: :get, 'data-confirm': 'Are you sure you want to add dotPH Nameservers?' %>
+              </li>
             <% end %>
           </ul>
         </div>
