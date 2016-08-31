@@ -108,14 +108,18 @@
               <% @domain.hosts.each do |domain_host| %>
                   <tr>
                     <td>
-                      <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do %><i class="fa fa-close"></i>
+                      <% unless @nameservers.map{|ns| ns.name}.include? domain_host.name %>
+                        <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do %><i class="fa fa-close"></i>
+                        <% end %>
                       <% end %>
                     </td>
                     <td><%= domain_host.name %></td>
                     <td><%= nameserver_ip_list domain_host.ip_list %></td>
                     <td>
-                      <%= link_to edit_domain_host_path(id: domain_host.id, domain_id: @domain.id) do %>
-                        <i class="fa fa-pencil"></i>
+                      <% unless @nameservers.map{|ns| ns.name}.include? domain_host.name %>
+                        <%= link_to edit_domain_host_path(id: domain_host.id, domain_id: @domain.id) do %>
+                          <i class="fa fa-pencil"></i>
+                        <% end %>
                       <% end %>
                     </td>
                   </tr>
