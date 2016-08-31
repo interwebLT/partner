@@ -2,6 +2,7 @@ $(document).ready ->
   record_type = ""
 
   $(".srv-fields").hide()
+  $(".priority-div").hide()
 
   change_fields = (type) ->
     if type == "SRV"
@@ -10,6 +11,11 @@ $(document).ready ->
     else
       $(".srv-fields").hide()
       $(".non-srv-fields").show()
+
+    if type == "MX" || type == "SRV"
+      $(".priority-div").show()
+    else
+      $(".priority-div").hide()
     return
 
   change_validators = (type) ->
@@ -69,10 +75,11 @@ $(document).ready ->
         label.insertAfter(element)
       rules:
         "powerdns_record[name]":
-          required: true,
+          required: depends: (element) ->
+              record_type == 'NS' || record_type == 'CNAME'
           domainNameValidation:
             depends: (element) ->
-              record_type == 'AAAA' || record_type == 'NS' || record_type == 'TXT' || record_type == 'CNAME' || record_type == 'TXT'
+              record_type == 'NS' || record_type == 'CNAME'
           subdomainValidation:
             depends: (element) ->
               record_type == 'NS'
@@ -80,9 +87,10 @@ $(document).ready ->
           required: true
         "powerdns_record[prio]":
           required: depends: (element) ->
-            record_type == 'MX'
+            record_type == 'MX' || record_type == 'SRV'
         "powerdns_record[content]":
-          required: true,
+          required: depends: (element) ->
+              record_type != ''
           powerdnsContentValidation:
             depends: (element) ->
               record_type == 'AAAA' || record_type == 'A' || record_type == 'NS' || record_type == 'TXT' || record_type == 'CNAME'
