@@ -17,17 +17,17 @@ module DomainHostsHelper
           end
         end
         if ipv4_list.empty? && ipv6_list.empty?
-          output = "No IP Address"
+          output = ""
         else
-          ipv4_list = "<b>IPV4:</b><br/>#{ipv4_list.join('')}"
-          ipv6_list = "<b>IPV6:</b><br/>#{ipv6_list.join('')}"
+          ipv4_list = "#{ipv4_list.join('')}"
+          ipv6_list = "#{ipv6_list.join('')}"
           output = "#{ipv4_list}#{ipv6_list}"
         end
       else
-        output = "No IP Address"
+        output = ""
       end
     else
-      output = "No IP Address"
+      output = ""
     end
     return output.html_safe
   end
