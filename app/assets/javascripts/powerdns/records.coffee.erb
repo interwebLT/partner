@@ -79,7 +79,8 @@ $(document).ready ->
         "powerdns_record[type]":
           required: true
         "powerdns_record[prio]":
-          required: true
+          required: depends: (element) ->
+            record_type == 'MX'
         "powerdns_record[content]":
           required: true,
           powerdnsContentValidation:
