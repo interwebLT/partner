@@ -64,7 +64,18 @@ class DomainsController < SecureController
     host    = params[:host]
     response = Domain.check_ns_authorization domain, partner, host, current_user.token
 
-    render json: response.to_json
+    unless response
+      result = "Host cannot be created because domain is owned by a different registrar."
+      render json: result.to_json
+    else
+      exist = Domain.exists? domain.strip, token: current_user.token
+      unless exist
+        result = "Host cannot be created because domain does not exist."
+        render json: result.to_json
+      else
+        render json: exist.to_json
+      end
+    end
   end
 
   def check_if_exists
