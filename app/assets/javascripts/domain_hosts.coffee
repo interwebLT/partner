@@ -130,9 +130,10 @@ $(document).ready ->
                 return getDomain($("#domain_host_name").val())
               host: ->
                 return $("#domain_host_name").val()
-      messages:
-        "domain_host[name]":
-          remote: "You are not authorized to register this Nameserver."
+    return
+
+  $(".ns-form-submit").mouseenter ->
+    $("#domain_host_name").trigger("blur")
     return
 
   $("#domain_host_name").trigger("blur")
