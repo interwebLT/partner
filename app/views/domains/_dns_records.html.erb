@@ -16,28 +16,26 @@
       <tbody>
         <% unless @domain.powerdns_records.empty? %>
           <% @domain.powerdns_records.each do |record| %>
-            <% unless record.type == "SOA" %>
-              <tr>
-                <td>
-                  <% unless record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content) %>
-                    <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?' do %>
-                      <i class="fa fa-close"></i>
-                    <% end %>
+            <tr>
+              <td>
+                <% unless record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content) %>
+                  <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?' do %>
+                    <i class="fa fa-close"></i>
                   <% end %>
-                </td>
-                <td><%= record.name %></td>
-                <td><%= record.type %></td>
-                <td><%= record.prio %></td>
-                <td><%= record.content %></td>
-                <td>
-                  <% unless record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content) %>
-                    <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id) do %>
-                      <i class="fa fa-pencil"></i>
-                    <% end %>
+                <% end %>
+              </td>
+              <td><%= record.name %></td>
+              <td><%= record.type %></td>
+              <td><%= record.prio %></td>
+              <td><%= record.content %></td>
+              <td>
+                <% unless record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content) %>
+                  <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id) do %>
+                    <i class="fa fa-pencil"></i>
                   <% end %>
-                </td>
-              </tr>
-            <% end %>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
         <% else %>
           <p>No DNS Records</p>
