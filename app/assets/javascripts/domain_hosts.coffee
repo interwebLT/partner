@@ -51,11 +51,12 @@ $(document).ready ->
   ), 'It should be a valid Nameserver.'
 
   $.validator.addMethod 'notAlreadyUsedNS', ((value, element) ->
+    host_name = value.toLowerCase()
     new_ns = $("#domain_host_name").data("newnameserver")
-    hosts = $("#domain_host_name").data("hosts").split(' ')
+    hosts = $("#domain_host_name").data("hosts").toLowerCase().split(' ')
     if !new_ns
-      hosts.splice(hosts.indexOf(value),1)
-    if $.inArray(value, hosts) > -1
+      hosts.splice(hosts.indexOf(host_name),1)
+    if $.inArray(host_name, hosts) > -1
       existed = true
     existed != true
   ), 'Nameserver already in used!'
