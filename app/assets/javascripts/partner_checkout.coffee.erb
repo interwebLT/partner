@@ -113,6 +113,8 @@ clearErrors = ->
 count = 0
 
 $(document).ready ->
+  $('#pay_via_paypal').on 'click', () ->
+    $('#replenish_form').attr('action', '/paypal/setup_payment')
   if $('#replenish_total')[0]
     $("#transaction-page").faLoading()
     getPaymentTokenFor $('#replenish_total'), $('#replenish_total').attr("data-value")
