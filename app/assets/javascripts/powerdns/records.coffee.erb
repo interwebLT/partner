@@ -26,7 +26,11 @@ $(document).ready ->
     printable_ascii_char = /^[ -~]*$/
 
     $.validator.addMethod 'domainNameValidation', ((value, element) ->
-      valid_domain.test value
+      if value == ""
+        valid = true
+      else
+        valid = valid_domain.test value
+      valid == true
     ), 'It should be a valid Domain Name.'
 
     switch type
@@ -77,9 +81,7 @@ $(document).ready ->
         "powerdns_record[name]":
           required: depends: (element) ->
               record_type == 'NS' || record_type == 'CNAME'
-          domainNameValidation:
-            depends: (element) ->
-              record_type == 'NS' || record_type == 'CNAME'
+          domainNameValidation: true
           subdomainValidation:
             depends: (element) ->
               record_type == 'NS'
