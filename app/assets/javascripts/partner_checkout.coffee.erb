@@ -114,7 +114,9 @@ count = 0
 
 $(document).ready ->
   $('#pay_via_paypal').on 'click', () ->
-    $('#replenish_form').attr('action', '/paypal/setup_payment')
+    $('#replenish_form').attr('action', '<%= Rails.application.routes.url_helpers.paypal_setup_payment_path %>')
+  $('#pay_via_dragon_pay').on 'click', () ->
+    $('#replenish_form').attr('action', '<%= Rails.application.routes.url_helpers.dragon_pay_setup_payment_path %>')
   if $('#replenish_total')[0]
     $("#transaction-page").faLoading()
     getPaymentTokenFor $('#replenish_total'), $('#replenish_total').attr("data-value")
