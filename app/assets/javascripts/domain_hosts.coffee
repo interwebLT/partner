@@ -5,18 +5,14 @@ $(document).ready ->
         required:
           depends: (element) ->
             $(".domain-host-ipv6-field").eq(0).val() == ""
-        validIPv4:
-          depends: (element) ->
-            $(".domain-host-ipv6-field").eq(0).val() == ""
+        validIPv4: true
       }
     $('input.domain-host-ipv6-field').each ->
       $(this).rules 'add', {
         required:
           depends: (element) ->
             $(".domain-host-ipv4-field").eq(0).val() == ""
-        validIPv6:
-          depends: (element) ->
-            $(".domain-host-ipv4-field").eq(0).val() == ""
+        validIPv6: true
       }
 
   getDomain = (domain_host) ->
@@ -37,12 +33,20 @@ $(document).ready ->
 
   $.validator.addMethod 'validIPv4', ((value, element) ->
     valid_ipv4 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-    valid_ipv4.test value
+    if value == ""
+      valid = true
+    else
+      valid = valid_ipv4.test value
+    valid == true
   ), 'It should be a valid IPv4 Format.'
 
   $.validator.addMethod 'validIPv6', ((value, element) ->
     valid_ipv6 = /(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$)/
-    valid_ipv6.test value
+    if value == ""
+      valid = true
+    else
+      valid = valid_ipv6.test value
+    valid == true
   ), 'It should be a valid IPv6 Format.'
 
   $.validator.addMethod 'validNameserver', ((value, element) ->
