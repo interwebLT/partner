@@ -5,6 +5,18 @@
 <div id="table">
   <% total_credits = 0 %>
   <% total_orders = 0 %>
+  <% all_credits = 0 %>
+  <% all_orders = 0 %>
+
+  <div>
+    <p>
+      <%= select_month(@date_display, {}, class: "c-select report-filter-options") %>
+      <%= select_year(@date_display, {start_year: Date.today.year, end_year: Date.today.year - 15},
+        class: "c-select report-filter-options") %>
+      <%= link_to "GO", "", class: "btn btn-primary report-filter-button" %>
+    </p>
+  </div>
+
 
   <% unless @credits.empty? %>
   <h3>Credit History</h3>
@@ -20,17 +32,20 @@
     </thead>
     <tbody>
       <% @credits.each do |credit| %>
-      <tr>
-        <td><%= formatted_timestamp credit.credited_at %></td>
-        <td>
-          <a href="/receipt?id=<%= credit.credit_number %>" target="_blank">
-            <%= credit.credit_number %>
-          </a>
-        </td>
-        <td>Replenish Credits</td>
-        <td><%= number_to_currency(credit.amount.to_f, unit: '') %></td>
-      </tr>
-      <% total_credits = total_credits + credit.amount.to_f %>
+        <% if credit.filter_included? @month, @year %>
+          <tr>
+            <td><%= formatted_timestamp credit.credited_at %></td>
+            <td>
+              <a href="/receipt?id=<%= credit.credit_number %>" target="_blank">
+                <%= credit.credit_number %>
+              </a>
+            </td>
+            <td>Replenish Credits</td>
+            <td><%= number_to_currency(credit.amount.to_f, unit: '') %></td>
+          </tr>
+          <% total_credits = total_credits + credit.amount.to_f %>
+        <% end %>
+        <% all_credits = all_credits + credit.amount.to_f %>
       <% end %>
     </tbody>
     <tfoot>
@@ -60,15 +75,18 @@
     </thead>
     <tbody>
       <% @orders.each do |order| %>
-      <tr>
-        <td><%= formatted_timestamp order.ordered_at %></td>
-        <td><a href="invoice/month" target="_blank"><%= order.order_number %></a></td>
-        <td><%= order_detail_type order.type %></td>
-        <td><%= order.period %></td>
-        <td><%= order.domain %></td>
-        <td><%= number_to_currency(order.price) %></td>
-      </tr>
-      <% total_orders = total_orders + order.total_price %>
+        <% if order.filter_included? @month, @year %>
+          <tr>
+            <td><%= formatted_timestamp order.ordered_at %></td>
+            <td><a href="invoice/month" target="_blank"><%= order.order_number %></a></td>
+            <td><%= order_detail_type order.type %></td>
+            <td><%= order.period %></td>
+            <td><%= order.domain %></td>
+            <td><%= number_to_currency(order.price) %></td>
+          </tr>
+          <% total_orders = total_orders + order.total_price %>
+        <% end %>
+        <% all_orders = all_orders + order.total_price %>
       <% end %>
     </tbody>
     <tfoot>
@@ -88,7 +106,7 @@
     <tbody>
       <tr>
         <th>Remaining Balance</th>
-        <th><%= number_to_currency(total_credits - total_orders) %></th>
+        <th><%= number_to_currency(all_credits - all_orders) %></th>
       </tr>
     </tbody>
   </table>

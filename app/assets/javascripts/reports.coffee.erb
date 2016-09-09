@@ -1,0 +1,6 @@
+$ ->
+  $(".report-filter-button").click ->
+    filter_month =$("#date_month option:selected").val()
+    filter_year  = $("#date_year option:selected").val()
+    location.href = "/reports?month=" + filter_month + "&year=" + filter_year
+    return
