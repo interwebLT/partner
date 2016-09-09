@@ -78,7 +78,6 @@ $(document).ready ->
               </a>
             </div>"
     $(".moreIPV4").append(row)
-    $('input.domain-host-ipv4-field').each ->
     validateIPFields()
 
   $(".btn-add-domain-host-ipv6").click ->
@@ -94,7 +93,6 @@ $(document).ready ->
               </a>
             </div>"
     $(".moreIPV6").append(row)
-    $('input.domain-host-ipv6-field').each ->
     validateIPFields()
 
   $(".moreIPV6").on "click", ".btn-remove-domain-host-ipv6", ->
@@ -112,11 +110,10 @@ $(document).ready ->
     glue_record_requirement = "." + domainName
     if $(this).val().indexOf(glue_record_requirement) >= 0
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").show()
-      validateIPFields()
+      withIP = true
     else
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").find('input:text').val('');
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").hide()
-
     $(".domain_host_form").validate
       errorPlacement: (label, element) ->
         label.addClass('error-validator-label-simple')
@@ -134,6 +131,8 @@ $(document).ready ->
                 return getDomain($("#domain_host_name").val())
               host: ->
                 return $("#domain_host_name").val()
+    if withIP
+      validateIPFields()
     return
 
   $(".ns-form-submit").mouseenter ->
