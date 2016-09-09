@@ -2,6 +2,15 @@
   <%= fa_icon 'paste lg' %>&nbsp;Invoice
 <% end %>
 <div id="table">
+  <% if @credit.status == 'pending' %>
+  <div class="alert alert-info" role="alert">
+  <h4>Note: Your transaction is pending.</h4>
+        <p>You're almost finished! All you have to do now is to check the email our payment provider has sent you and follow the instructions. Once we receive the payment, we'll send you an email confirming your payment and process your transaction.<br>If you have any questions, feel free to contact our support team at (+632) 6372104 to 05 or send an email to <a href="#" type="button" data-toggle="modal" data-target="#contactus-modal">helpdesk@dot.ph</a></p>
+        <br>
+        <p><strong><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp; Cash/Check payments will only be accepted via Dragonpay.  Please note that we do not accept walk-in payment.</strong></p>
+        <p><a class="btn btn-sm btn-info hidden-print" href="javascript:window.print()"><i class="fa fa-print"></i>&nbsp;&nbsp;We recommend printing this page as reference. Click here to print.</a></p>
+  </div>
+  <% end %>
   <h4>Invoice No: <span class="text-success"><%= @credit.credit_number %></span></h4>
   <table id="credits">
     <thead>
@@ -28,6 +37,8 @@
     </tfoot>
   </table>
 
+  <% if @credit.status == 'complete' %>
   <button onclick="window.open('<%= "#{receipt_path}?id=#{@credit.credit_number}" %>','_blank'); " type="button" class=" btn btn-primary"><i class="fa fa-print"></i>&nbsp;&nbsp;Print Invoice</button>
+  <% end %>
 
 </div>

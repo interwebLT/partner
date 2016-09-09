@@ -89,5 +89,6 @@ Rails.application.routes.draw do
   
   scope path: :dragon_pay, as: :dragon_pay do
     post :setup_payment, to: 'dragon_pay#setup_payment'
+    get :pending, to: 'dragon_pay#pending'
   end
 end
