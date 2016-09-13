@@ -82,5 +82,6 @@ class Powerdns::RecordsController < SecureController
     @domain_id = domain.id
     @domain_name = domain.name
     @domain_expires_at = domain.expires_at
+    @powerdns_records = domain.powerdns_records.map{|record| record.name}
   end
 end

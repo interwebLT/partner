@@ -16,7 +16,8 @@
     <div>
       <label>Name</label>
       <div>
-        <%= f.input :name, label: false, class: "form-control" %>
+        <%= f.input :name, label: false, class: "form-control",
+          input_html: {"data-records": @powerdns_records, "data-domain": @domain_name} %>
         <h4><b><%= @domain_name %></b></h4>
       </div>
     </div>
