@@ -4,6 +4,14 @@ $(document).ready ->
   $(".srv-fields").hide()
   $(".priority-div").hide()
 
+  clearForm = () ->
+    $("#powerdns_record_name").val('')
+    $("#powerdns_record_content").val('')
+    $("#powerdns_record_prio").val('')
+    $("#powerdns_record_preferences_port").val('')
+    $("#powerdns_record_preferences_weight").val('')
+    $("#powerdns_record_preferences_srv_content").val('')
+
   change_fields = (type) ->
     if type == "SRV"
       $(".srv-fields").show()
@@ -71,10 +79,12 @@ $(document).ready ->
       record_type = $(this).val()
       change_fields(record_type)
       change_validators(record_type)
+      clearForm()
     ).keyup((e) ->
       record_type = $(this).val()
       change_fields(record_type)
       change_validators(record_type)
+      clearForm()
     )
 
     $(".new_powerdns_record").validate
