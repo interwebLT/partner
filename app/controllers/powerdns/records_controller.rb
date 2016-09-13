@@ -8,7 +8,15 @@ class Powerdns::RecordsController < SecureController
   def create
     pdns_record = Powerdns::Record.new pdns_params
 
-    domain_id = params[:powerdns_record][:powerdns_domain_id]
+    domain_id   = params[:powerdns_record][:powerdns_domain_id]
+    domain      = Domain.find domain_id, token: auth_token
+    domain_name = domain.name
+
+    if pdns_record.name.empty?
+      pdns_record.name = domain_name
+    else
+      pdns_record.name = pdns_record.name + ".#{domain_name}"
+    end
 
     if pdns_record.save token: auth_token
       redirect_to domain_url(domain_id), notice: 'DNS Record added!'
@@ -19,12 +27,17 @@ class Powerdns::RecordsController < SecureController
 
   def edit
     @pdns_record = Powerdns::Record.find params[:id], token: auth_token
+    @subdomain = @pdns_record.name
+    if @subdomain == @domain_name
+      @subdomain.slice!(@domain_name)
+    else
+      @subdomain.slice!(".#{@domain_name}")
+    end
   end
 
   def update
     pdns_record = Powerdns::Record.find params[:id], token: auth_token
     domain_id = params[:domain_id]
-
     update_record pdns_record, domain_id
   end
 
@@ -41,7 +54,15 @@ class Powerdns::RecordsController < SecureController
   end
 
   def update_record pdns_record, domain_id
-    pdns_record.name    = params[:powerdns_record][:name]
+    domain      = Domain.find domain_id, token: auth_token
+    domain_name = domain.name
+
+    if params[:powerdns_record][:name].empty?
+      pdns_record.name = domain_name
+    else
+      pdns_record.name = params[:powerdns_record][:name] + ".#{domain_name}"
+    end
+
     pdns_record.type    = params[:powerdns_record][:type]
     pdns_record.prio    = params[:powerdns_record][:prio]
     pdns_record.content = params[:powerdns_record][:content]

@@ -81,7 +81,7 @@ $(document).ready ->
         "powerdns_record[name]":
           required: depends: (element) ->
               record_type == 'NS' || record_type == 'CNAME'
-          domainNameValidation: true
+          # domainNameValidation: true
           # subdomainValidation:
           #   depends: (element) ->
           #     record_type == 'NS'

@@ -16,7 +16,9 @@
     <div>
       <label>Name</label>
       <div>
-        <%= f.input :name, label: false, class: "form-control" %>
+        <%= f.input :name, label: false, class: "form-control",
+          input_html: {value: @subdomain} %>
+        <h4><b><%= @domain_name %></b></h4>
       </div>
     </div>
     <div>
