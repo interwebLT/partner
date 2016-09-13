@@ -18,15 +18,19 @@
   </div>
   <hr>
   <div class="row">
-    <div class="col-md-6 col-md-offset-6 pull-right">
+    <div class="col-md-8 col-md-offset-4 pull-right">
       <%= button_tag(type: 'submit', id: 'pay_via_paypal', class: "btn btn-primary") do %>
       <i class='fa fa-cc-paypal'></i>&nbsp;Pay via PayPal &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
       <% end %>
       <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
       <i class='fa fa-credit-card'></i>&nbsp;Pay via Checkout.com &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
       <% end %>
+      <%= button_tag(type: 'submit', id: 'pay_via_dragon_pay', class: "btn btn-primary") do %>
+      <i class='fa fa-money'></i>&nbsp;Pay by Cash or Check &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
+      <% end %>
     </div>
   </div>
+  <br>
   <div class="text-danger" >* Credit Card payments are subject to 5% transaction fee.</div>
 
   <% end %>
