@@ -27,38 +27,7 @@ h3 {
 table.well tr th:last-child,table.well tr td:last-child {text-align: right}
 table.well th {background-color: #eee;color: #333;}
 table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font-weight: bold}
-@media print {
-  table.well{
-    background-color: #f5f5f5!important;
-    border: 1px solid #e3e3e3!important;
-    border-radius: 4px!important;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)!important;
-  }
-  .table td,    .table th {
-            background-color: inherit !important;
-    }
-  *, *:before, *:after {
-    color:inherit !important;
-    background-color:inherit !important;
-    -webkit-print-color-adjust: exact!important;
-  }
-  html, body { overflow: hidden; }
-  .container {
-    width: auto!important;
-  }
-  html {
-    margin: 0;
-    padding: 0;
-  }
-  body{margin-bottom: 0!important;}
-  header, footer {
-    display: none;
-    visibility: hidden;
-  }
-  section:last-child{
-    page-break-after: avoid!important;
-  }
-}
+
 </style>
 <div class="container">
   <div class="row">
@@ -93,8 +62,8 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font
   <div class="spacer"> </div>
   <div class="row">
     <div class=" col-xs-12">
-      <div><b>Invoice #</b> 123456789</div>
-      <div><b>Partner ID</b> <%= current_user.partner_name.downcase %></div>
+      <div><b>Invoice No:</b> 123456789</div>
+      <div><b>Username:</b> <%= current_user.partner_name.downcase %></div>
     </div>
   </div>
   <div class="spacer"> </div>
@@ -102,7 +71,7 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font
   <div class="spacer"></div>
   <div class="row">
   <div class="col-xs-12 ">
-    <p><strong>Invoice Period:</strong> 2016-07-01 to 2016-07-31<br>For domains in the above mentioned period we charge as follows:</p>
+    <p><strong>Invoice Period:</strong> 2016-07-01 to 2016-07-31</p>
     <div class="table-responsive">
       <table class="table table-hover well table-condensed">
         <thead>
@@ -161,6 +130,8 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font
           </tr>
         </tfoot>
       </table>
+      <p>To settle payment, please replenish your account by paying online using credit card. Just login to your <a href="https://partner.dot.ph" target="_blank">Partner Console</a>, then click on <strong>Replenish Account</strong> and follow the steps online.</p>
+      <p>For details on how to pay via wire transfer, please e-mail us at <a href="mailto:helpdesk@dot.ph">helpdesk@dot.ph</a>.</p>
     </div>
   </div>
   <div class="spacer"></div>
@@ -171,7 +142,7 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font
   <div class="spacer"></div>
   <div class="col-xs-12 hidden-print text-center "><hr>
      <a class="btn btn-primary btn-sm" href="javascript:window.print()">Print Monthly Summary</a>&nbsp;
-     <a class="btn btn-default btn-sm" href="javascript:window.close()">Close</a>
+     <a class="btn btn-default btn-sm" href="javascript:;" onclick="window.close();">Close</a>
   </div>
 </div>
 </div>
