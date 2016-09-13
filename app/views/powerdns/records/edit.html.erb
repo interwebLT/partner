@@ -25,19 +25,19 @@
       <label>Type</label>
       <div>
         <%= f.input :type, label: false, class: "form-control",
-          collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV] %>
+          collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select Type" %>
       </div>
     </div>
     <div class="priority-div">
       <label>Priority</label>
       <div>
-        <%= f.input :prio, label: false, as: :numeric, class: "form-control" %>
+        <%= f.input :prio, label: false, as: :numeric, class: "form-control", placeholder: "Enter Priority" %>
       </div>
     </div>
     <div class="non-srv-fields">
       <label>Content</label>
       <div>
-        <%= f.input :content, label: false, class: "form-control" %>
+        <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content" %>
       </div>
     </div>
     <div class="srv-fields">
@@ -45,17 +45,17 @@
         <label>Port</label>
         <div>
           <%= preference.input :port, label: false, as: :numeric, class: "form-control",
-            input_html: {value: @pdns_record.preferences[:port]} %>
+            input_html: {value: @pdns_record.preferences[:port]}, placeholder: "Enter Port" %>
         </div>
         <label>Weight</label>
         <div>
           <%= preference.input :weight, label: false, as: :numeric, class: "form-control",
-            input_html: {value: @pdns_record.preferences[:weight]} %>
+            input_html: {value: @pdns_record.preferences[:weight]}, placeholder: "Enter Weight" %>
         </div>
         <label>Content</label>
         <div>
           <%= preference.input :srv_content, label: false, class: "form-control",
-            input_html: {value: @pdns_record.preferences[:srv_content]} %>
+            input_html: {value: @pdns_record.preferences[:srv_content]}, placeholder: "Enter Content" %>
         </div>
       <% end %>
     </div>
