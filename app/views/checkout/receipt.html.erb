@@ -1,7 +1,12 @@
 <style type="text/css">
+  header, footer {
+    display: none;
+    visibility: hidden;
+  }
 .container{
-  margin: 0 auto;
+  margin: 25px auto;
   font-size: small;
+
 }
 h3 {
   margin-top: 0px;
@@ -133,7 +138,7 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font
         <tbody>
           <tr>
             <td><%= @credit.credited_at.to_date.strftime('%Y-%m-%d') %></td>
-            <td>Credit Card</td>
+            <td><%= @credit.gateway %></td>
             <td><%= @total.format %></td>
           </tr>
         </tbody>
@@ -152,9 +157,3 @@ table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font
 </div>
 </div>
 </div>
-<script type="text/javascript">
-$( document ).ready(function() {
-    $('header').hide();
-    $('footer').hide();
-});
-</script>

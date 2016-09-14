@@ -1,11 +1,41 @@
 <% content_for :banner_title do %>
-<%= fa_icon 'gears lg' %>&nbsp;Domains <% unless current_user.admin %><span><%= @domains.count %></span><% end %>
+  <%= fa_icon 'gears lg' %>&nbsp;Domains
+    <% unless current_user.admin %>
+      <span><%= @domain_count %></span>
+    <% end %>
 <% end %>
+<!--buttons for bulk options-->
+<p class="btn-container">
+  <button type="button" class="btn btn-primary btn-bulk-modal" data-toggle="modal" data-target="#modal-editc">
+    <i class="fa fa-pencil-square-o"></i>
+    <span>Edit Contact Information</span>
+  </button>
+  <button type="button" class="btn btn-success btn-bulk-modal" data-toggle="modal" data-target="#modal-brenew">
+    <i class="fa fa-refresh "></i>
+    <span>Bulk Renew</span>
+  </button>
+  <!--
+  <a class="btn btn-default">
+    <i class="fa fa-file-o "></i>
+    <span>Export to File</span>
+  </a>
+  -->
+</p>
+<!--buttons for bulk options-->
+
+<!--modal-->
+<%= render "bulk_edit_modal" %>
+<%= render "bulk_renew_term_modal" %>
+<%= render "renew_term_modal" %>
 
 <div id="table">
   <table id="domains">
     <thead>
       <tr>
+        <th>
+          <input id="checkall" type="checkbox" />
+          <label for="checkall"></label>
+        </th>
         <th></th>
         <th>Domain</th>
         <% if current_user.admin %>
@@ -18,54 +48,9 @@
     </thead>
     <tbody>
       <% @domains.each do |domain| %>
-      <% if domain.expired? %>
-      <tr class="expire">
-        <td><%= fa_icon 'flag', class: 'red', data: { placement: :left, toggle: :tooltip, original_title: 'Expired Domain' } %></td>
-        <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain has expired. You should renew it now.' } %></td>
-        <% if current_user.admin %>
-        <td><%= domain.partner %></td>
-        <% end %>
-        <td><%= formatted_date domain.registered_at %></td>
-        <td><%= formatted_date domain.expires_at %></td>
-        <td>
-          <% if domain.renew_allowed? %>
-            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %>
-          <% end %>
-        </td>
-      </tr>
-      <% elsif domain.expiring? %>
-      <tr class="expire">
-        <td><%= fa_icon 'flag', class: 'yellow', data: { placement: :left, toggle: :tooltip, original_title: 'Expiring Domain' } %></td>
-        <td class="expire"><%= link_to domain.name, domain_path(domain), data: { placement: :right, toggle: :tooltip, original_title: 'This domain is about to expire. You should renew it now.' } %></td>
-        <% if current_user.admin %>
-        <td><%= domain.partner %></td>
-        <% end %>
-        <td><%= formatted_date domain.registered_at %></td>
-        <td><%= formatted_date domain.expires_at %></td>
-        <td>
-          <% if domain.renew_allowed? %>
-            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %>
-          <% end %>
-        </td>
-      </tr>
-      <% else %>
-      <tr>
-        <td></td>
-        <td><%= link_to domain.name, domain_path(domain) %></td>
-        <% if current_user.admin %>
-        <td><%= domain.partner %></td>
-        <% end %>
-        <td><%= formatted_date domain.registered_at %></td>
-        <td><%= formatted_date domain.expires_at %></td>
-        <td>
-          <% if domain.renew_allowed? %>
-            <%= link_to "Renew", domain_renew_path(domain.id), "data-confirm": "Are you sure you want to renew for 1 year?", class: 'renew' %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-
+        <%= render "domain", domain: domain %>
       <% end %>
     </tbody>
   </table>
 </div>
+<%= will_paginate @domains %>

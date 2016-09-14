@@ -1,0 +1,149 @@
+<style type="text/css">
+.pull-right{ margin-top: 0px;}
+header, footer {
+    display: none;
+    visibility: hidden;
+}
+.container{
+  margin: 25px auto;
+  font-size: small;
+}
+h3 {
+  margin-top: 0px;
+}
+#invoice-header {
+  display: inline;
+  text-align: right;
+}
+#invoice-header img {
+  display: block;
+  margin-left: 1px;
+  margin-bottom: -100px;
+  width: 140px;
+}
+.spacer {
+    height: 8px;
+}
+table.well tr th:last-child,table.well tr td:last-child {text-align: right}
+table.well th {background-color: #eee;color: #333;}
+table.well tfoot td{background-color: #F5F5F5;color: #333; font-size: 16px; font-weight: bold}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <div id="invoice-header">
+        <div>
+          <%= image_tag Rails.configuration.invoice_logo, alt: "Brand" %>
+        </div>
+        <div>
+      <address>
+        <strong><%= Rails.configuration.invoice_organization_name %></strong><br>
+        <%= Rails.configuration.invoice_address1 %><br>
+        <%= Rails.configuration.invoice_address2 %><br>
+        <%= Rails.configuration.invoice_address3 %><br>
+        <i class="fa fa-phone"></i> <%= Rails.configuration.invoice_phone %>
+      </address>
+      </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class=" col-xs-12">
+      <div class="pull-right"><%= Time.now.strftime("%B %d, %Y") %></div>
+      <div>Juan Dela Cruz</div>
+      <div>JDC Corporation</div>
+      <div>Jollibee Plaza, F.Ortigas Jr. Road</div>
+      <div>Pasig City, NCR</div>
+      <div>1600, Philipppines</div>
+    </div>
+  </div>
+  <div class="spacer"> </div>
+  <div class="spacer"> </div>
+  <div class="spacer"> </div>
+  <div class="row">
+    <div class=" col-xs-12">
+      <div><b>Invoice No:</b> 123456789</div>
+      <div><b>Username:</b> <%= current_user.partner_name.downcase %></div>
+    </div>
+  </div>
+  <div class="spacer"> </div>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+  <div class="row">
+  <div class="col-xs-12 ">
+    <p><strong>Invoice Period:</strong> 2016-07-01 to 2016-07-31</p>
+    <div class="table-responsive">
+      <table class="table table-hover well table-condensed">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Domain</th>
+            <th>Type</th>
+            <th>Term</th>
+            <th>Amount ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2016-07-28 06:10:58 UTC</td>
+            <td>domain.com.ph</td>
+            <td>Registration</td>
+            <td>2 years</td>
+            <td>$70.00</td>
+          </tr>
+          <tr>
+            <td>2016-07-28 06:10:58 UTC</td>
+            <td>domain.ph</td>
+            <td>Registration</td>
+            <td>2 years</td>
+            <td>$70.00</td>
+          </tr>
+          <tr>
+            <td>2016-07-28 06:10:58 UTC</td>
+            <td>domain.net.ph</td>
+            <td>Registration</td>
+            <td>2 years</td>
+            <td>$70.00</td>
+          </tr>
+          <tr>
+            <td>2016-07-28 06:10:58 UTC</td>
+            <td>domain.org.ph</td>
+            <td>Registration</td>
+            <td>2 years</td>
+            <td>$70.00</td>
+          </tr>
+          <tr>
+            <td>2016-07-28 06:10:58 UTC</td>
+            <td>domains.com.ph</td>
+            <td>Registration</td>
+            <td>2 years</td>
+            <td>$70.00</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>TOTAL</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>$3,500.00</td>
+          </tr>
+        </tfoot>
+      </table>
+      <p>To settle payment, please replenish your account by paying online using credit card. Just login to your <a href="https://partner.dot.ph" target="_blank">Partner Console</a>, then click on <strong>Replenish Account</strong> and follow the steps online.</p>
+      <p>For details on how to pay via wire transfer, please e-mail us at <a href="mailto:helpdesk@dot.ph">helpdesk@dot.ph</a>.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+  <div class="col-xs-12">
+
+  </div>
+  <div class="spacer"></div>
+  <div class="col-xs-12 hidden-print text-center "><hr>
+     <a class="btn btn-primary btn-sm" href="javascript:window.print()">Print Monthly Summary</a>&nbsp;
+     <a class="btn btn-default btn-sm" href="javascript:;" onclick="window.close();">Close</a>
+  </div>
+</div>
+</div>
+</div>

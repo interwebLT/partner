@@ -42,6 +42,7 @@ label {
   -moz-transition: 0.05s;
   -webkit-transition: 0.05s;
   -o-transition: 0.05;
+  border-radius: 3px!important;
 }
 
 .btn-link {
@@ -146,6 +147,26 @@ label {
     background-color: #47A2D6;
     color: #fff;
     border-radius: 4px 4px 0 0;
+}
+
+.has-input-error {
+    border-color: red;
+}
+
+label.error.error-validator-label {
+  @extend .alert;
+  @extend .alert-danger;
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+label.error.error-validator-label-simple {
+  width: 100% !important;
+  text-align: center;
+  margin-bottom: 0;
+  color: red;
+  font-style: italic;
 }
 
 @media (min-width: 1200px) {
@@ -258,3 +279,40 @@ nav ul li.nolink{
     border-top: 5px solid transparent;
     cursor: default;
 }
+ul li a i.fa-close, table tr td i.fa-close{color:#999!important}
+.c-select {
+    display: inline-block;
+    max-width: 100%;
+    -webkit-appearance: none;
+    padding: .375rem 1.75rem .375rem .75rem;
+    padding-right: .75rem\9;
+    color: #55595c;
+    vertical-align: middle;
+    background: #fff asset-url('updown.png') no-repeat right .75rem center;
+    background-image: none\9;
+    -webkit-background-size: 8px 10px;
+    background-size: 8px 10px;
+    border: 1px solid #ccc;
+    -moz-appearance: none;
+}
+select#renew-domain-single-select{ width: 100%;}
+textarea {resize: none;outline: none;margin-bottom: 10px;}
+
+/*custom checkbox*/
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: 15px;
+
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; @extend .text-primary;} /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 10px; } /* allow space for check mark */
+
+
+/*custom checkbox*/
+

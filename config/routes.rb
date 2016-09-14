@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post 'transaction', to: 'checkout#transaction'
   get 'invoice', to: 'checkout#invoice'
   get 'receipt', to: 'checkout#receipt'
+  get 'dns' => 'domain_hosts#dns'
+  get 'invoice/month' => 'checkout#invoicemonthly'
 
   root 'welcome#index'
 
@@ -12,9 +14,17 @@ Rails.application.routes.draw do
   get 'registration/create_contact', to: 'registration#create_contact'
   post 'registration/confirm', to: 'registration#confirm'
 
+  post 'contacts/:id/multiple', to: 'contacts#edit_multiple', as: 'edit_multiple_contacts'
+  post 'domains/:id/multiple', to: 'domains#renew_multiple', as: 'renew_multiple_domains'
+
+  get 'domains/:id/default_nameservers', to: 'domain_hosts#add_default_nameservers', as: 'add_default_nameserver'
+
+  get 'domains/check_ns_authorization', to: 'domains#check_ns_authorization'
+  get 'domains/check_if_exists',        to: 'domains#check_if_exists'
+
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
-    resources :hosts, controller: :domain_hosts, only: [:create, :destroy], id: /.*/
+    resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/
   end
 
   resources :hosts, only: [:index, :show]
@@ -43,6 +53,11 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:index]
 
+  namespace :powerdns do
+    resources :records
+    resources :domains
+  end
+
   get   :register, to: 'register#new'
   post  :register, to: 'register#search'
 
@@ -62,13 +77,18 @@ Rails.application.routes.draw do
   end
 
   scope path: :paypal, as: :paypal do
-    get :setup_payment, to: 'paypal#setup_payment'
+    post :setup_payment, to: 'paypal#setup_payment'
     match :return, to: 'paypal#returns', via: [:get, :post]
     match :cancel, to: 'paypal#cancel', via: [:get, :post]
   end
 
-  resources :credits, only: [:create]
-#  scope path: :credits do
-#    match :create, to: 'credits#create', via: [:get, :post], as: :credits
-#  end
+#  resources :credits, only: [:create]
+  scope path: :credits do
+    match '/', to: 'credits#create', via: [:get, :post], as: :credits
+  end
+  
+  scope path: :dragon_pay, as: :dragon_pay do
+    post :setup_payment, to: 'dragon_pay#setup_payment'
+    get :pending, to: 'dragon_pay#pending'
+  end
 end

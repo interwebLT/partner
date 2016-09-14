@@ -4,21 +4,27 @@
 
 <div id="domain_info">
   <h3 id="head">Domain details for <span class="text-primary"><%= @registration.domain_name %></span></h3>
-
-  <% if @registration.errors.any? %>
-  <div id="warning" class="alert alert-warning">
-    Some information is missing or incorrect.  Please check your entries and try again.
+  <div class="alert alert-warning credit-balance-alert">
+    You don't have enough credit balance to continue this registration.
   </div>
+  <% if @registration.errors.any? %>
+    <div id="warning" class="alert alert-warning">
+      Some information is missing or incorrect.  Please check your entries and try again.
+    </div>
   <% end %>
-
-  <%= simple_form_for @registration, url: register_details_path do |f| %>
-
+  <%= simple_form_for @registration, url: register_details_path,
+    html: {"data-totalcredit": @total_credit, "data-pricinglist": @pricing, "data-domaincount": @domain_count} do |f| %>
+    <%= hidden_field_tag(:bulk_registration, @bulk_registration) %>
     <div id="new-info">
       <%= f.hidden_field :domain_name, value: @registration.domain_name %>
       <div><!-- form-group -->
         <label><%= fa_icon 'calendar-o' %> Registration Period </label>
         <div class="inputfield">
-          <div><%= f.input :period, collection: [1, 2, 5, 10], label: false %>
+          <div>
+            <%= f.input :period, label: false do %>
+              <%= f.select :period, options_for_select({"1 year" => "1", "2 years" => "2",
+                "5 years" => "5","10 years" => "10"}), {include_blank: true},{class: "form-control"} %>
+            <% end %>
           </div>
         </div>
       </div>

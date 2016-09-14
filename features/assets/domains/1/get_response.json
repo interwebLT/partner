@@ -27,11 +27,13 @@
   "hosts":  [
     {
       "id": 1,
-      "name": "ns5.domains.ph"
+      "name": "ns5.domains.ph",
+      "ip_list": "{\"ipv4\":{\"0\":\"\",\"1\":\"\"},\"ipv6\":{\"0\":\"\",\"1\":\"\"}}"
     },
     {
       "id": 2,
-      "name": "ns6.domains.ph"
+      "name": "ns6.domains.ph",
+      "ip_list": "{\"ipv4\":{\"0\":\"\",\"1\":\"\"},\"ipv6\":{\"0\":\"\",\"1\":\"\"}}"
     }
   ]
 }

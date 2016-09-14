@@ -5,7 +5,7 @@ class Partner
                 :nature, :representative, :position,
                 :street, :city, :state, :postal_code, :country_code, :phone, :fax, :email,
                 :local, :admin,
-                :default_nameservers, :pricing
+                :default_nameservers, :pricing, :credit_limit
 
   def persisted?
     id.present?
@@ -19,6 +19,10 @@ class Partner
 
   def pricing= pricing
     @pricing = pricing.collect { |price| PartnerPricing.new price }
+  end
+
+  def credit_limit= credit_limit
+    @credit_limit = credit_limit
   end
 
   def replenish_credits amount, remarks, token, type='bank_credit', verification_code=nil, fee=0

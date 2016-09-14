@@ -1,12 +1,21 @@
 class DomainHost
   include Api::Model
 
-  attr_accessor :id, :domain, :name, :created_at, :updated_at
+  attr_accessor :id, :domain, :name, :ip_list, :created_at, :updated_at
+
+  validates :domain,  presence: true
+  validates :name,    presence: true
 
   def as_json options = nil
     {
-      name: name
+      name: name,
+      ip_list: ip_list
     }
+  end
+
+  def self.find domain_id, id, token:
+    url = "#{Rails.configuration.api_url}/domains/#{domain_id}/hosts/#{id}"
+    new get url, token: token
   end
 
   def self.url domain_id, id: nil
@@ -20,10 +29,33 @@ class DomainHost
   end
 
   def save token:
+    return false unless valid?
+
     response = self.class.post self.class.url(self.domain), self.as_json, token: token
 
     !response.nil?
   rescue Api::Model::UnprocessableEntity
+    hosts = []
+    domain = Domain.search(term: self.domain, token: token)
+    domain = Domain.find(domain.first.id, token: token)
+    domain.hosts.map{|host| hosts << host.name}
+
+    if hosts.include?(self.name)
+      self.errors.add :name, 'already in use'
+    else
+      self.errors.add :name, 'You are not authorized to register this Nameserver.'
+    end
+
     false
+  end
+
+  def update domain_id, token:
+    if self.errors.empty?
+      update_params = self.as_json
+      url = "#{Rails.configuration.api_url}/domains/#{domain_id}/hosts/#{id}"
+      DomainHost.patch url, update_params, token: token
+      return true
+    end
+    return false
   end
 end

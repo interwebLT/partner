@@ -1,0 +1,122 @@
+<% content_for :banner_title do %>
+  <%= fa_icon 'pencil lg' %>&nbsp;Edit Contact Info
+<% end %>
+
+
+<h3>Edit Contact <span class="text-primary"><%= @list_for_edit %></span></h3>
+<%= simple_form_for @contact, url: contact_path, html: { method: :patch } do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="warning" class="alert alert-warning">
+      Some information is missing or incorrect.  Please check your entries and try again.
+    </div>
+  <% end %>
+  <%= hidden_field_tag(:ids, params[:ids]) %>
+  <%= f.hidden_field :handle %>
+  <div id="domain-info">
+    <div class="info-l10n">
+      <label class=""></label>
+      <div class=""><strong>Local</strong></div>
+      <div class=""><strong>International</strong></div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'user' %> Name</label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_name, label: false%></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'users' %> Organization </label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_organization, label: false %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><%= fa_icon 'home' %> Street </label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_street, placeholder: 'Street 1', label: false %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label class="hidden-xs">&nbsp;</label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_street2, placeholder: 'Street 2', label: false %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label class="hidden-xs">&nbsp;</label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_street3, placeholder: 'Street 3', label: false %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>City</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_city, label: false %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>State/Province</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_state, label: false %></div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>Postal Code</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_postal_code, label: false %></div>
+        <div class="contact-cat">Int'l</div>
+      </div>
+    </div>
+    <div><!-- form-group -->
+      <label><span>Country</span></label>
+      <div class="inputfield">
+        <div class="contact-cat">Local</div>
+        <div><%= f.input :local_country_code, :tabindex => 9, priority: ['PH', 'US'], include_blank: true, label: false %></div>
+      </div>
+    </div>
+    <div class="domain-info-num"><!-- form-group -->
+      <label><%= fa_icon 'phone-square' %> Telephone </label>
+      <div class="inputfield">
+        <%= f.input :voice, :tabindex => 10, label: false %>
+        <span class="text-muted">ext.</span>
+        <%= f.input :voice_ext, :tabindex => 11, label: false %>
+        <span class="help-block" style="display:none;">
+          <small>e.g. +12.34567890</small>
+        </span>
+      </div>
+      <div></div>
+    </div>
+    <div class="domain-info-num"><!-- form-group -->
+      <label><%= fa_icon 'fax' %> Fax </label>
+      <div class="inputfield">
+        <%= f.input :fax, :tabindex => 12, label: false %>
+        <span class="text-muted">ext.</span>
+        <%=f.input :fax_ext, :tabindex => 13, label: false%>
+        <span class="help-block" style="display:none;">
+          <small>e.g. +12.34567890</small>
+        </span>
+      </div>
+      <div></div>
+    </div>
+    <div class="domain-info-num">
+      <label><%= fa_icon 'envelope' %> Email </label>
+      <div class="inputfield">
+        <%= f.input :email, :tabindex => 14, label: false %>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <br>
+  <div class="edit-update">
+    <%= f.submit 'Update', id: :submit %>
+    <%= link_to 'Cancel', domains_path %>
+  </div>
+<% end %>

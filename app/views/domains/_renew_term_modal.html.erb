@@ -1,0 +1,27 @@
+<div class="modal fade" id="modal-renew" tabindex="-1" role="dialog" aria-labelledby="modal-renew" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Renew Domain</h4>
+      </div>
+      <div class="modal-body">
+        <h4><div id="renew-modal-domain-name"></div></h4>
+        <br>
+        <p>
+          <label>Select renewal term.</label><Br>
+          <select class="c-select" id="renew-domain-single-select">
+            <option value="1" selected>1 year</option>
+            <option value="2">2 years</option>
+            <option value="5">5 years</option>
+            <option value="10">10 years</option>
+          </select>
+        </p>
+        <br>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= link_to "Submit", "#", "data-dismiss": "modal", class: 'renew btn btn-success btn-renew-domain-single' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,7 +17,8 @@ class CreditsController < SecureController
     credit = if params[:verification_code].blank?
       partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token
     else
-      partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token, 'card_credit', params[:verification_code]
+      type = Credit.credit_type params[:verification_code]
+      partner.replenish_credits params[:credit][:amount], params[:credit][:remarks], current_user.token, type, params[:verification_code]
     end
     flash[:notice] = "Replenish credit successful."
 

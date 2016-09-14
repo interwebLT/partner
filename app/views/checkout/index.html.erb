@@ -4,20 +4,33 @@
 <div>
   <p>With the new dotPH top-up system, you can buy domains and mix it with the many add-on services that we offer.</p>
   <p class="lead"> Select amount below. Top-up your balance with :</p>
-  <%= form_tag transaction_path do %>
+  <%= form_tag transaction_path, :id => 'replenish_form' do %>
+  <div class="row">
   <% if current_user.staff %>
     <div class="btn btn-success"><%= radio_button_tag 'amount', '2' %> <label for="amount_2">$2.00</label></div>
   <% end %>
-  <div class="btn btn-success"><%= radio_button_tag 'amount', '150' %> <label for="amount_150">$150.00</label></div>
-  <div class="btn btn-success"><%= radio_button_tag 'amount', '250' %> <label for="amount_250">$250.00</label></div>
-  <div class="btn btn-success"><%= radio_button_tag 'amount', '500' %> <label for="amount_500">$500.00</label></div>
-  <div class="btn btn-success"><%= radio_button_tag 'amount', '1000' %> <label for="amount_1000">$1,000.00</label></div>
-  <div class="btn btn-success"><%= radio_button_tag 'amount', '2500' %> <label for="amount_2500">$2,500.00</label></div>
-  <div class="btn btn-success"><%= radio_button_tag 'amount', '5000' %> <label for="amount_5000">$5,000.00</label></div>
+    <div class="btn btn-success"><%= radio_button_tag 'amount', '150' %> <label for="amount_150">$150.00</label></div>
+    <div class="btn btn-success"><%= radio_button_tag 'amount', '250' %> <label for="amount_250">$250.00</label></div>
+    <div class="btn btn-success"><%= radio_button_tag 'amount', '500' %> <label for="amount_500">$500.00</label></div>
+    <div class="btn btn-success"><%= radio_button_tag 'amount', '1000' %> <label for="amount_1000">$1,000.00</label></div>
+    <div class="btn btn-success"><%= radio_button_tag 'amount', '2500' %> <label for="amount_2500">$2,500.00</label></div>
+    <div class="btn btn-success"><%= radio_button_tag 'amount', '5000' %> <label for="amount_5000">$5,000.00</label></div>
+  </div>
   <hr>
-  <%= button_tag(type: 'submit', class: "btn btn-primary pull-right") do %>
-  &nbsp;&nbsp;Next &nbsp;&nbsp;<i class='fa fa-caret-right'></i>&nbsp;&nbsp;
-  <% end %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-4 pull-right">
+      <%= button_tag(type: 'submit', id: 'pay_via_paypal', class: "btn btn-primary") do %>
+      <i class='fa fa-cc-paypal'></i>&nbsp;Pay via PayPal &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
+      <% end %>
+      <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+      <i class='fa fa-credit-card'></i>&nbsp;Pay via Checkout.com &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
+      <% end %>
+      <%= button_tag(type: 'submit', id: 'pay_via_dragon_pay', class: "btn btn-primary") do %>
+      <i class='fa fa-money'></i>&nbsp;Pay by Cash or Check &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
+      <% end %>
+    </div>
+  </div>
+  <br>
   <div class="text-danger" >* Credit Card payments are subject to 5% transaction fee.</div>
 
   <% end %>

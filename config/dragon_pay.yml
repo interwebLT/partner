@@ -1,0 +1,6 @@
+development:
+  merchant_id: <%= ENV['DRAGONPAY_MERCHANT_ID'] %>
+  password: <%= ENV['DRAGONPAY_PASSWORD'] %>
+  wsdl: <%= ENV['DRAGONPAY_WSDL'] %>
+  payment_url: <%= ENV['DRAGONPAY_PAYMENT_URL'] %>
+  registration_url: <%= ENV['DRAGONPAY_REGISTRATION_URL'] %>

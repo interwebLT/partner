@@ -9,7 +9,7 @@
     <%= f.hidden_field :domain_name,  value: @registration.domain_name %>
     <%= f.hidden_field :period,       value: @registration.period %>
     <%= f.hidden_field :handle,       value: @registration.handle %>
-
+    <%= hidden_field_tag(:bulk_registration, @bulk_registration) %>
     <div id="new-info" class="new-info-summary">
       <div>
         <label><%= fa_icon 'calendar-o' %> Registration Period</label>

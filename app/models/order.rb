@@ -47,4 +47,19 @@ class Order
       ]
     }
   end
+
+  def filter_included? month, year
+    if month.empty? and year.empty?
+      return true
+    else
+      included_month = self.ordered_at.to_time.strftime("%m").to_i == month.to_i
+      included_year  = self.ordered_at.to_time.strftime("%Y").to_i == year.to_i
+
+      if included_month and included_year
+        return true
+      else
+        return false
+      end
+    end
+  end
 end

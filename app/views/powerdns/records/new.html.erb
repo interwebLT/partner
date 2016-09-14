@@ -1,0 +1,66 @@
+<% content_for :banner_title do %>
+  <%= fa_icon 'server lg' %>&nbsp;Add DNS Record
+<% end %>
+
+<h3 class="text-primary"><%= @domain_name %></h3>
+
+<%= simple_form_for @pdns_record do |f| %>
+  <% if @pdns_record.errors.any? %>
+    <div id="warning" class="alert alert-warning">
+      Some information is missing or incorrect.  Please check your entries and try again.
+    </div>
+  <% end %>
+  <%= f.hidden_field :powerdns_domain_id, value: @domain_id %>
+  <%= f.hidden_field :end_date, value: @domain_expires_at %>
+  <div id="nameserver-info">
+    <div>
+      <label>Name</label>
+      <div>
+        <%= f.input :name, label: false, class: "form-control",
+          input_html: {"data-records": @powerdns_records, "data-domain": @domain_name} %>
+        <h4><b><%= @domain_name %></b></h4>
+      </div>
+    </div>
+    <div>
+      <label>Type</label>
+      <div>
+        <%= f.input :type, label: false, class: "form-control",
+          collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select Type" %>
+      </div>
+    </div>
+    <div class="priority-div">
+      <label>Priority</label>
+      <div>
+        <%= f.input :prio, label: false, as: :numeric, class: "form-control",
+          input_html: { min: '0', max: '9999'}, placeholder: "Enter Priority" %>
+      </div>
+    </div>
+    <div class="non-srv-fields">
+      <label>Content</label>
+      <div>
+        <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content" %>
+      </div>
+    </div>
+    <div class="srv-fields">
+      <%= f.simple_fields_for :preferences do |preference| %>
+        <label>Port</label>
+        <div>
+          <%= preference.input :port, label: false, as: :numeric, class: "form-control", placeholder: "Enter Port" %>
+        </div>
+        <label>Weight</label>
+        <div>
+          <%= preference.input :weight, label: false, as: :numeric, class: "form-control", placeholder: "Enter Weight" %>
+        </div>
+        <label>Content</label>
+        <div>
+          <%= preference.input :srv_content, label: false, class: "form-control", placeholder: "Enter Content" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div class="edit-update">
+    <%= f.submit 'Add DNS Record' %>
+    <%= link_to 'Cancel', domain_url(@domain_id)%>
+  </div>
+<% end %>

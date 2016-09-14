@@ -22,7 +22,7 @@ class Contact
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
 
   validates :local_postal_code, length: { minimum: 3, maximum: 10, allow_blank: true },
-                                format: { with: /^[a-zA-Z0-9-]*$/, multiline: true, allow_blank: true }
+                                format: { with: /^[a-zA-Z0-9\-\s]*$/, multiline: true, allow_blank: true }
 
   validates :fax, length: { minimum: 9, maximum: 32, allow_blank: true },
                   format: { with: /^\+[0-9]{1,3}\.[0-9]{4,32}(?:x.+)?$/, multiline: true, allow_blank: true }
@@ -32,6 +32,12 @@ class Contact
     handle = timestamp.sub('.', '')
 
     Rails.env.test? ? '123456789ABCDEF' : handle
+  end
+
+  def self.destroy id, token:
+    response = delete url(id: id), {}, token: token
+
+    new response
   end
 
   def local_country_name

@@ -25,6 +25,9 @@
 //= require inputmask.phone.extensions
 //= require inputmask.numeric.extensions
 //= require inputmask.regex.extensions
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require bootbox
 //= require_tree .
 
 $(document).ready(function() {
@@ -44,5 +47,9 @@ $(document).ready(function() {
     })
 });
 
-
+$(document).on('page:change', function(){
+  $(".alert-success, .alert-danger").delay(5000).fadeOut(500, function(){
+        $(".alert-success").alert('close');
+    });
+});
 

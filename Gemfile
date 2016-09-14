@@ -20,6 +20,7 @@ group :test do
   gem 'site_prism'
   gem 'webmock'
   gem 'timecop'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -43,5 +44,9 @@ gem 'country_select'
 gem 'countries', require: 'countries/global'
 gem 'exception_notification'
 gem 'jquery-inputmask-rails', github: 'knapo/jquery-inputmask-rails'
+gem 'jquery-validation-rails'
 gem 'money-rails', '>= 1.0.0'
 gem 'paypal-sdk-rest'
+gem 'bootbox-rails', '~> 0.5.0'
+gem 'will_paginate', '~> 3.1.0'
+gem 'savon', '~> 2.0'

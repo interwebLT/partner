@@ -148,6 +148,7 @@
   @extend .form-group;
   @extend .clearfix;
   @extend .row;
+  margin-bottom: 0px!important;
 
   label {
     @extend .control-label;
@@ -204,6 +205,7 @@
       @extend .col-md-6;
       @extend .col-sm-6;
       @extend .col-xs-12;
+      padding: 10px 15px;
 
       select {
         @extend .form-control;
@@ -290,7 +292,7 @@ border: none;
 
 .dm.nav-tabs > li.active > a, .dm.nav-tabs > li.active > a:hover, .dm.nav-tabs > li.active > a:focus {
   background: none repeat scroll 0px 0px #EB9000;
-  color: #fff;
+  color: #fff !important;
   border: 0px none;
 }
 
@@ -350,7 +352,7 @@ border: none;
 }
 
 
-#domain-info {
+#domain-info{
   @extend .form-horizontal;
   background-color: #E3EBEF;
   padding: 20px;
@@ -560,7 +562,6 @@ input#contact_handle {@extend .text-primary;}
 .contact-info-wrapper {
   @extend .clearfix;
   padding: 20px;
-  border: 1px solid #eee;
   min-height: 100px;
 }
 .contact-info-wrapper .title{
@@ -570,33 +571,43 @@ input#contact_handle {@extend .text-primary;}
   font-size: larger;
   color: #111;
   padding-right:100px;
+
+  a {
+    @extend .text-muted;
+    @extend .small;
+    margin-left: -20px;}
 }
 .contact-info {
   @extend .col-lg-8;
   line-height: 24px;
+  p{margin:17px  0 0 0;}
+}
+.contact-info2 {
+  @extend .col-lg-9;
 }
 
 .contact-info-wrapper .button {
   @extend .col-lg-1;
-  z-index: 99999999;
-  margin-top: 3%;
 }
 .contact-info ul li {line-height: 30px;}
 .contact-info ul {margin-bottom: 0!important;}
-.contact-info table thead{
-  background-color: #fff !important;
+.contact-info table thead,.contact-info2 table thead{
+  background-color: #eee !important;
   font-weight: normal;
   color: inherit;
   }
- .contact-info table > tbody > tr:nth-of-type(2n+1) {
-    background-color: #fff !important;
+ .contact-info table > tbody > tr:nth-of-type(2n+1), .contact-info2 table > tbody > tr:nth-of-type(2n+1) {
+    background-color: #f9f9f9 !important;
     padding-left: 0;
 }
 .contact-info table tr td:first-child,
 .contact-info table tr th:first-child,
 .contact-info table tr td,
-.contact-info table tr th {padding-left: 0!important; font-weight: 100!important}
-.contact-info a.btn-link {font-size:15px;}
+.contact-info table tr th,
+.contact-info2 table tr td:first-child,
+.contact-info2 table tr th:first-child,
+.contact-info2 table tr td,
+.contact-info2 table tr th {padding-left: 5!important; font-weight: 100!important}
 .pull-right {margin-top: 10px;}
 
 @media (max-width: 768px) {
@@ -617,12 +628,75 @@ input#contact_handle {@extend .text-primary;}
   i {
     cursor: pointer;
   }
-  
+
   .glyphicon {
     font-size: 12px;
     font-weight: bold;
   }
 }
 
+#MyDomains{
+hr.line{
+    border-top: 3px solid #e5e5e5;
+  }
+}
+ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !important;}
 
+#nameserver-info {
+  @extend .clearfix;
+  background-color: #E3EBEF;
+  padding: 40px 20px 20px 20px;
 
+  div {
+    @extend .form-group;
+
+    label {
+      @extend .col-sm-3;
+      @extend .control-label;
+      margin: 10px 0px;
+    }
+    div {
+      @extend .col-sm-9;
+    }
+  }
+}
+.btn-container {
+  @extend .container;
+  margin-left: 10px;
+  .btn {border-radius: 3px!important;}
+}
+
+#modal-editc, #modal-brenew {
+  .alert {margin-bottom: 0px;}
+}
+
+table#domains {
+  label {margin-bottom: 0px;}
+  th:first-child {width: 10px;}
+}
+
+.btn-add-contact {
+  @extend .button;
+  margin-right: 30px;
+}
+
+.btn-add-ns {
+  @extend .button;
+}
+
+.edit-update, .register-btn {
+  @extend .text-center;
+  input{
+    @extend .btn;
+    @extend .btn-success;
+    font-weight: inherit !important;
+    font-size: 14px !important;
+  }
+  a{
+    @extend .btn;
+    @extend .btn-default;
+  }
+
+}
+.alert {text-align: center;}
+#registration_form_period, #registration_form_local_country_code {width: 50%}

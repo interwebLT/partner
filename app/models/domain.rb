@@ -11,7 +11,7 @@ class Domain
                 :client_transfer_prohibited, :client_update_prohibited,
                 :server_hold, :server_delete_prohibited, :server_renew_prohibited,
                 :server_transfer_prohibited, :server_update_prohibited,
-                :expiring, :expired,
+                :expiring, :expired, :powerdns_domain, :powerdns_records,
                 :activities, :hosts
 
   def expired?
@@ -48,6 +48,19 @@ class Domain
 
   def hosts= hosts
     @hosts = hosts.collect { |host| DomainHost.new host }
+  end
+
+  def powerdns_domain= powerdns_domain
+    @powerdns_domain = Powerdns::Domain.new powerdns_domain
+  end
+
+  def powerdns_records= powerdns_records
+    unless powerdns_records.nil?
+      powerdns_records = powerdns_records.collect { |record| Powerdns::Record.new record }
+      @powerdns_records = powerdns_records.sort_by{|p| p.type}
+    else
+      @powerdns_records = ""
+    end
   end
 
   def self.exists?(name, token:)
@@ -88,7 +101,7 @@ class Domain
       or numbers_only or starts_with_dash or double_dash)
   end
 
-  def renew token:
+  def renew term, token:
     order = Order.new( {
       partner: nil,
       currency_code: 'USD'
@@ -99,7 +112,7 @@ class Domain
       type: 'domain_renew',
       domain: name,
       authcode: nil,
-      period: 1,
+      period: term,
       registrant_handle: registrant_handle,
       registered_at: registered_at
       }
@@ -117,5 +130,52 @@ class Domain
     max_expires_at    = Time.current + 10.years
 
     target_expires_at <= max_expires_at
+  end
+
+  def matched_nameserver? nameservers
+    if @hosts.count != nameservers.count
+      false
+    else
+      @hosts.each do |host|
+        output = nameservers.map{|nameserver| nameserver.name}.include?(host.name.strip)
+        break if !output
+      end
+    end
+  end
+
+  def update token:
+    if valid?
+      self_params = self.as_json
+
+      update_params = ["registrant_handle", "admin_handle", "billing_handle", "tech_handle"]
+
+      params = self_params.select{|k,v| update_params.include?(k) }
+
+      Domain.patch Domain.url(id: self.name), params, token: token
+      return true
+    end
+    return false
+  end
+
+  def self.update_new_contacts id, handle, type, auth_token
+    domain = Domain.find id, token: auth_token
+    if type == "admin"
+      domain.admin_handle = handle
+    elsif type == "billing"
+      domain.billing_handle = handle
+    elsif type == "tech"
+      domain.tech_handle = handle
+    else
+    end
+
+    domain.update token: auth_token
+  end
+
+  def self.check_ns_authorization domain, partner, host, token
+    site = Rails.configuration.api_url
+    url = "#{site}/check_ns_authorization"
+    params = {domain: domain, partner: partner, host: host}.to_query
+    response =  HTTParty.get(url, query: params, headers: default_headers(token: token)).parsed_response
+    return response
   end
 end

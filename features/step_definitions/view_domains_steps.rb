@@ -7,6 +7,10 @@ end
 When /^I try to view the info of one of my domains$/ do
   stub_get to: Domain.url(id: 1), returns: 'domains/1/get_response'.json
 
+  stub_get  to: "http://test.host/user/partner", returns: 'partners/1/get_response'.json
+
+  stub_get  to: Nameserver.url, returns: 'nameservers/get_response'.json
+
   site.domain_info.load id: 1
 end
 

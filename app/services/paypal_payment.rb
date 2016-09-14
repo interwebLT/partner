@@ -6,7 +6,7 @@ class PaypalPayment
   CANCEL_URL = Rails.configuration.paypal_cancel_url
 
   def initialize amount:
-    @amount = amount
+    @amount = amount * (1 + ::Credit::TRANSACTION_FEE)
   end
 
   def setup
@@ -33,7 +33,7 @@ class PaypalPayment
       :items =>  {
         name: "Top up",
         quantity: "1",
-        price: @amount.format({:symbol => ''}),
+        price: @amount.format({:symbol => ''}) ,
         currency: 'USD'
       }
     })

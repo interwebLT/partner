@@ -1,0 +1,130 @@
+$(document).ready ->
+  $(".credit-balance-alert").hide()
+
+  getDomains = (domains) ->
+    domains_array = []
+    line_values = domains.split('\n')
+    for value in line_values
+      single_value = value.split(' ')
+      for value in single_value
+        if value
+          domains_array.push(value)
+    return domains_array
+
+  $.validator.addMethod 'domainFormatValidation', ((value, element) ->
+    valid_domain = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
+    text_area_values = $("#reg-new-domain-text-area").val()
+
+    valid = true
+    line_values = text_area_values.split('\n')
+
+    for value in line_values
+      single_value = value.split(' ')
+      for value in single_value
+        if value
+          if not valid_domain.test value
+            valid = false
+
+    valid == true
+  ), "You entered an invalid Domain name format!"
+
+  $.validator.addMethod 'uniqueDomainName',((value,element) ->
+    text_area_values = $("#reg-new-domain-text-area").val()
+    valid = true
+    tempArray = []
+    line_values = text_area_values.split('\n')
+
+    for value in line_values
+      single_value = value.split(' ')
+      for value in single_value
+        if value
+          if $.inArray(value, tempArray) > -1
+            valid = false
+          else
+            tempArray.push value
+
+    valid == true
+  ), "You entered duplicate Domain Name"
+
+  $(".reg-new-domain-form").validate
+    errorPlacement: (label, element) ->
+      label.addClass('error-validator-label')
+      label.insertAfter(element)
+    rules:
+      domain_name:
+        required: true,
+        domainFormatValidation: true,
+        uniqueDomainName: true,
+        remote:
+          url: "/domains/check_if_exists",
+          data:
+            domain: ->
+              return getDomains($("#reg-new-domain-text-area").val())
+    messages:
+      domain_name:
+        remote: "You entered existing Domain."
+
+  $.validator.addMethod 'inputAsciiFormat', ((value, element) ->
+    printable_ascii_char = /^[ -~]*$/
+    printable_ascii_char.test value
+  ), 'It should be a printable ASCII Char.'
+
+  $(".new_registration_form").validate
+    errorPlacement: (label, element) ->
+      label.addClass('error-validator-label-simple')
+      element.addClass('has-input-error')
+      label.insertAfter(element)
+    rules:
+      "registration_form[period]":
+        required: true
+      "registration_form[local_name]":
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[local_organization]":
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[local_street]":
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[local_street2]":
+        inputAsciiFormat: true
+      "registration_form[local_street3]":
+        inputAsciiFormat: true
+      "registration_form[local_city]":
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[local_country_code]":
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[local_state]":
+        inputAsciiFormat: true
+      "registration_form[local_postal_code]":
+        inputAsciiFormat: true
+      "registration_form[voice]":
+        required: true,
+        inputAsciiFormat: true
+      "registration_form[voice_ext]":
+        inputAsciiFormat: true
+      "registration_form[fax_ext]":
+        inputAsciiFormat: true
+      "registration_form[email]":
+        required: true,
+        inputAsciiFormat: true
+
+  $(".new_registration_form").submit (e) ->
+    period = $("#registration_form_period").val()
+    if period
+      totalCredit = $(this).data("totalcredit")
+      pricingList = $(this).data("pricinglist")
+      domainCount = $(this).data("domaincount")
+      totalPrice  = pricingList[period] * domainCount
+      sufficientCredit = totalCredit >= totalPrice
+
+      if !sufficientCredit
+        $(".credit-balance-alert").fadeIn()
+        e.preventDefault()
+      else
+        $(".credit-balance-alert").fadeOut()
+    else
+      $(".credit-balance-alert").fadeOut()
+  return

@@ -73,9 +73,10 @@ before_fork do |server, worker|
   # # will then kill off the old master process with a SIGQUIT.
   old_pid = APP_PATH + "/tmp/pids/unicorn.pid.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
-  begin
-    Process.kill("QUIT", File.read(old_pid).to_i)
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
     end
   end
   #
@@ -100,4 +101,8 @@ after_fork do |server, worker|
   # and Redis.  TokyoCabinet file handles are safe to reuse
   # between any number of forked children (assuming your kernel
   # correctly implements pread()/pwrite() system calls)
+end
+
+before_exec do |server|
+  ENV["BUNDLE_GEMFILE"] = "#{APP_PATH}/Gemfile"
 end

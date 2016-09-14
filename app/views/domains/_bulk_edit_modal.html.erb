@@ -1,0 +1,25 @@
+<div class="modal fade" id="modal-editc" tabindex="-1" role="dialog" aria-labelledby="modal-editc" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_tag edit_multiple_contacts_path(id: 0), method: :post do |f| %>
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Contact Information</h4>
+        </div>
+        <div class="modal-body">
+          <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
+              <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
+                id: "bulk-edit-contact-text-area", "data-domains": @domains.map{|d| d.name} %>
+          <!--error msg-->
+          <div class="alert alert-danger" role="alert" id="bulk-contact-edit-error" style="display:none;">
+            You have entered an invalid Domain. Please check.
+          </div>
+          <!--error msg-->
+        </div>
+        <div class="modal-footer text-center">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <%= submit_tag nil, class: "btn btn-success", id: "bulk-contact-edit-button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
