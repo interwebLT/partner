@@ -13,6 +13,7 @@ class DomainsController < SecureController
     @partner_nameserver = current_user.partner.default_nameservers
     @nameservers = Nameserver.all token: current_user.token
     @domain = Domain.find params[:id], token: current_user.token
+    @status = @domain.get_status.join(", ")
   end
 
   def renew_multiple

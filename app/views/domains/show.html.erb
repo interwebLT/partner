@@ -36,7 +36,11 @@
     <div class="info-header">
       <h3><%= @domain.name %></h3>
     </div>
-    <div></div>
+    <div>
+      <% unless @status.empty? %>
+        Status: <%= @status %>
+      <% end %>
+    </div>
     <div>Registered: <%= formatted_date @domain.registered_at %> | Expires: <%= formatted_date @domain.expires_at %></div>
     <hr class="line">
     <div class="contact-info-wrapper">
