@@ -6,7 +6,7 @@ class Domain
 
   attr_accessor :id, :zone, :name, :partner, :registered_at, :expires_at,
                 :registrant_handle, :admin_handle, :billing_handle, :tech_handle,
-                :registrant, :admin_contact, :billing_contact, :tech_contact,
+                :registrant, :admin_contact, :billing_contact, :tech_contact, :inactive,
                 :client_hold, :client_delete_prohibited, :client_renew_prohibited,
                 :client_transfer_prohibited, :client_update_prohibited,
                 :server_hold, :server_delete_prohibited, :server_renew_prohibited,
@@ -177,5 +177,45 @@ class Domain
     params = {domain: domain, partner: partner, host: host}.to_query
     response =  HTTParty.get(url, query: params, headers: default_headers(token: token)).parsed_response
     return response
+  end
+
+  def get_status
+    status = []
+
+    if self.inactive
+      status << "Inactive"
+    end
+    if self.client_hold
+      status << "Client Hold"
+    end
+    if self.client_update_prohibited
+      status << "Client Update Prohibited"
+    end
+    if self.client_delete_prohibited
+      status << "Client Delete Prohibited"
+    end
+    if self.client_renew_prohibited
+      status << "Client Renew Prohibited"
+    end
+    if self.client_transfer_prohibited
+      status << "Client Transfer Prohibited"
+    end
+    if self.server_hold
+      status << "Server Hold"
+    end
+    if self.server_update_prohibited
+      status << "Server Update Prohibited"
+    end
+    if self.server_delete_prohibited
+      status << "Server Delete Prohibited"
+    end
+    if self.server_renew_prohibited
+      status << "Server Renew Prohibited"
+    end
+    if self.server_transfer_prohibited
+      status << "Server Transfer Prohibited"
+    end
+
+    status
   end
 end
