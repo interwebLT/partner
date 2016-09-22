@@ -36,4 +36,12 @@ class Partner
 
     return Credit.post Credit.url, credit.to_json, token: token
   end
+
+  def self.update_default_nameservers partner_ns_for_remove, partner_ns_for_add, partner, token
+    site   = Rails.configuration.api_url
+    url    = "#{site}/partner_configurations"
+    params = {ns_for_remove: partner_ns_for_remove, ns_for_add: partner_ns_for_add, partner: partner}
+    response =  HTTParty.post(url, body: params.to_json, headers: default_headers(token: token)).parsed_response
+    return response
+  end
 end

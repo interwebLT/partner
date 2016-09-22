@@ -1,0 +1,31 @@
+<table id="partnerNsTableForm">
+  <tbody id="partnerNsTableBodyForm">
+    <% @current_partner_nameservers.each_with_index do |nameserver, index| %>
+      <tr class=<%= "partner_ns_#{index}_tr" %>>
+        <td>
+          <%= text_field_tag "partner_ns_#{index}", nameserver, id: "partner_ns_#{index}",
+            placeholder: "Enter Nameserver", class: "form-control partner-config-ns" %>
+        </td>
+        <td style="width: 5%;">
+          <a class='btn btn-default btn-sm btn-remove-partner-nameserver'>
+            <i class='fa fa-close' style="margin-top: 0px;"></i>
+            <span class='sr-only'>Delete</span>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div>
+  <div class="pull-left" >
+    &nbsp;
+    <a class="btn btn-primary btn-sm" id="plusNSLink">
+      <i class="fa fa-plus"></i>
+      <span class=""> Add More</span>
+    </a>
+  </div>
+  <div class="pull-right" style="margin-top: 0px;">
+    <%= link_to "Submit", profile_partner_name_server_path, method: :post,
+      class: "btn btn-success btn-sm", id: "submitNsBtn", remote: true %>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div id="pricing_tab">
+  <br>
+  <table id="pricing">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Period</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @partner.pricing.each do |partner_price| %>
+      <tr>
+        <td><%= order_detail_type partner_price.action %></td>
+        <td><%= partner_price.period %></td>
+        <td><%= number_to_currency partner_price.price %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

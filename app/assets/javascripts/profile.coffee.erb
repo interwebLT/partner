@@ -1,0 +1,39 @@
+$ ->
+  $('#editNsBtn').click ->
+    $(this).hide()
+
+  $("#pnsTableBody").on 'click', '#plusNSLink', ->
+    array = $(".partner-config-ns").length
+    row   =  "<tr class='partner_ns_" + array + "_tr'>
+                <td>
+                  <input type='text' name='partner_ns_" + array + "' id='partner_ns_" + array + "' placeholder='Enter Nameserver' class='form-control partner-config-ns'>
+                </td>
+                <td style='width: 5%;'>
+                  <a class='btn btn-default btn-sm btn-remove-partner-nameserver'>
+                    <i class='fa fa-close' style='margin-top: 0px;'></i>
+                    <span class='sr-only'>Delete</span>
+                  </a>
+                </td>
+              </tr>"
+    if array != 0
+      $("#partnerNsTableForm tr:last").after(row)
+    else
+      $("#partnerNsTableForm").append(row)
+
+  $("#pnsTableBody").on "click", ".btn-remove-partner-nameserver", ->
+    thisParentClass = $(this).parent().parent().prop('className')
+    $('.' + thisParentClass).remove()
+    return
+
+  $("#pnsTableBody").on 'click', '#submitNsBtn', ->
+    nameservers = []
+    $(".partner-config-ns").each ->
+      nameservers.push $(this).eq(0).val()
+
+    $.ajax(
+      method: "POST"
+      url: "/profile/partner_name_server"
+      data:
+        nameservers: nameservers
+      )
+    $('#editNsBtn').show()

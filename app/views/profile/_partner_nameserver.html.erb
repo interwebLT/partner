@@ -1,0 +1,20 @@
+<div id="pns">
+  <br>
+  <table id="default_nameservers">
+    <thead>
+      <tr>
+        <th>
+          Nameservers
+          <div class="text-right" style="float: right;">
+            <%= link_to "Edit", new_profile_partner_name_server_path , id: "editNsBtn",
+              class: "btn btn-success btn-xs", remote: true %>
+          </div>
+        </th>
+      </tr>
+    </thead>
+  </table>
+  <div id="pnsTableBody">
+    <%= render "profile/current_partner_nameserver" %>
+  </div>
+  <br>
+</div>
