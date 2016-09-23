@@ -1,6 +1,12 @@
 $ ->
+  $("#cancelNsBtn").hide()
   $('#editNsBtn').click ->
     $(this).hide()
+    $("#cancelNsBtn").show()
+
+  $('#cancelNsBtn').click ->
+    $(this).hide()
+    $("#editNsBtn").show()
 
   $("#pnsTableBody").on 'click', '#plusNSLink', ->
     array = $(".partner-config-ns").length
@@ -36,4 +42,5 @@ $ ->
       data:
         nameservers: nameservers
       )
+    $("#cancelNsBtn").hide()
     $('#editNsBtn').show()
