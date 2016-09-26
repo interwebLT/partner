@@ -3,7 +3,7 @@ class ProfileController < SecureController
     @partner = current_user.partner
   end
 
-  def new_partner_nameserver
+  def new
     nameservers = []
     partner = current_user.partner
     partner.default_nameservers.each do |default_nameserver|
@@ -28,11 +28,7 @@ class ProfileController < SecureController
       response = Partner.update_default_nameservers partner_ns_for_remove, partner_ns_for_add, current_user.username, current_user.token
 
       if response == true
-        render json: "true".to_json
-      else
-        raise "asdfkljhasklfhasklfhahskjdf"
-        result = "Something went wrong. Please check."
-        render json: result.to_json
+
       end
     end
   end

@@ -1,8 +1,4 @@
 $ ->
-  showErrorNotice = (text) ->
-    $(".pns-error-notice").fadeIn()
-    $("#pns-error-text").text(text)
-
   getDomain = (domain_host) ->
     domainHostArray = domain_host.split('.')
     valid_2nd_extensions = ["com", "net", "org"]
@@ -19,44 +15,33 @@ $ ->
       domain_name = domainHostArray[domainHostArray.length - 2] + "." + domainHostArray[domainHostArray.length - 1]
     return domain_name
 
-  checkNsFormat = (nameserver) ->
-    has_error  = false
-    valid_nameserver = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
-    if nameserver != ""
-      if nameserver.match valid_nameserver
-        $("#submitNsBtn").removeClass('disabled')
-        $(".pns-error-notice").fadeOut()
-      else
-        has_error  = true
-        failing_nameserver = nameserver
-        $("#submitNsBtn").addClass('disabled')
-    else
-      $("#submitNsBtn").removeClass('disabled')
-      $(".pns-error-notice").fadeOut()
-
-    if has_error
-      text = "Nameserver " + failing_nameserver + " has invalid format."
-      showErrorNotice(text)
-
-  checkNsAuthorization = () ->
-    $(".partner-config-ns").each ->
-      if $(this).eq(0).val() != ""
-        nameserver = $(this).eq(0).val()
-        $.ajax(
-          method: "GET"
-          url: "/domains/check_ns_authorization"
+  validate_form = () ->
+    $(".new_profile_partner_name_server_form").validate
+      errorPlacement: (label, element) ->
+        label.addClass('error-validator-label-simple')
+        element.addClass('has-input-error')
+        label.insertAfter(element)
+    $('input.partner-config-ns').each ->
+      $(this).rules 'add', {
+        validNameserver: true
+      }
+    $('input.partner-config-ns').each ->
+      nameserver = $(this).val()
+      console.log nameserver
+      $(this).rules 'add', {
+        remote:
+          url: "/domains/check_ns_authorization",
           data:
             domain: ->
               return getDomain(nameserver)
             host: ->
               return nameserver
-          success: (data) ->
-            $("#submitNsBtn").removeClass('disabled')
-            if data != true
-              $("#submitNsBtn").addClass('disabled')
-              text = "Some nameservers cannot be created because domain is owned by different registrar or is not yet created."
-              showErrorNotice(text)
-          )
+      }
+
+  $.validator.addMethod 'validNameserver', ((value, element) ->
+    valid_nameserver = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
+    valid_nameserver.test value
+  ), 'It should be a valid Nameserver.'
 
   $("#cancelNsBtn").hide()
   $(".pns-error-notice").hide()
@@ -70,40 +55,42 @@ $ ->
 
   $("#pnsTableBody").on 'click', '#plusNSLink', ->
     array = $(".partner-config-ns").length
-    row   =  "<tr class='partner_ns_" + array + "_tr'>
-                <td>
-                  <input type='text' name='partner_ns_" + array + "' id='partner_ns_" + array + "' placeholder='Enter Nameserver' class='form-control partner-config-ns'>
-                </td>
-                <td style='width: 5%;'>
-                  <a class='btn btn-default btn-sm btn-remove-partner-nameserver'>
-                    <i class='fa fa-close' style='margin-top: 0px;'></i>
-                    <span class='sr-only'>Delete</span>
-                  </a>
-                </td>
-              </tr>"
-    if array != 0
-      $("#partnerNsTableForm tr:last").after(row)
-    else
-      $("#partnerNsTableForm").append(row)
+    row   =  "<div class='partner_ns_" + array + "_tr'>
+                <div class='form-group'>
+                  <div class='col-md-11'>
+                    <input type='text' name='partner_ns[" + array + "]' id='partner_ns_" + array + "' placeholder='Enter Nameserver' class='form-control partner-config-ns'>
+                  </div>
+                  <div class='col-md-1'>
+                    <a class='btn btn-default btn-sm btn-remove-partner-nameserver'>
+                      <i class='fa fa-close' style='margin-top: 0px;'></i>
+                      <span class='sr-only'>Delete</span>
+                    </a>
+                  </div>
+                  <br><br>
+                </div>
+              </div>"
+
+    $(".add-partner-default-ns").before(row)
 
   $("#pnsTableBody").on "click", ".btn-remove-partner-nameserver", ->
-    thisParentClass = $(this).parent().parent().prop('className')
+    thisParentClass = $(this).parent().parent().parent().prop('className')
     $('.' + thisParentClass).remove()
     return
 
   $("#pnsTableBody").on 'blur', '.partner-config-ns', ->
-    nameserver = $(this).val()
-    checkNsFormat(nameserver)
-    checkNsAuthorization()
-
-  $("#pnsTableBody").on 'mouseenter', '#submitNsBtn', ->
-    $(".partner-config-ns").trigger("blur")
+    validate_form()
 
   $("#pnsTableBody").on 'click', ".btn-remove-partner-nameserver", ->
-    $(".partner-config-ns").trigger("blur")
+    validate_form()
 
-  $("#pnsTableBody").on 'click', '#submitNsBtn', ->
-    if not $("#submitNsBtn").hasClass('disabled')
+  $("#pnsTableBody").on 'mouseenter', '#submitNsBtn', ->
+    validate_form()
+
+  $("#pnsTableBody").on 'click', '#submitNsBtn', (e) ->
+    e.preventDefault()
+    validate_form()
+
+    if $(".new_profile_partner_name_server_form").valid()
       nameservers = []
       $(".partner-config-ns").each ->
         if $(this).eq(0).val() != ""
@@ -114,7 +101,30 @@ $ ->
         url: "/profile/partner_name_server"
         data:
           nameservers: nameservers
+        success: ->
         )
 
       $("#cancelNsBtn").hide()
       $('#editNsBtn').show()
+
+  $("#pnsTableBody").on 'keypress', '#submitNsBtn', (e) ->
+    e.preventDefault()
+    validate_form()
+
+    if e.which == 13
+      if $(".new_profile_partner_name_server_form").valid()
+        nameservers = []
+        $(".partner-config-ns").each ->
+          if $(this).eq(0).val() != ""
+            nameservers.push $(this).eq(0).val()
+
+        $.ajax(
+          method: "POST"
+          url: "/profile/partner_name_server"
+          data:
+            nameservers: nameservers
+          success: ->
+          )
+
+        $("#cancelNsBtn").hide()
+        $('#editNsBtn').show()

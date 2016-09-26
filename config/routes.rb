@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   get 'domains/check_ns_authorization', to: 'domains#check_ns_authorization'
   get 'domains/check_if_exists',        to: 'domains#check_if_exists'
 
-  get    'profile/partner_name_server/new(.:format)', to: 'profile#new_partner_nameserver'    , as: 'new_profile_partner_name_server'
-  post   'profile/partner_name_server'              , to: 'profile#update_partner_nameserver'
+  get    'profile/partner_name_server', to: 'profile#new'    , as: 'new_profile_partner_name_server'
+  post   'profile/partner_name_server', to: 'profile#update_partner_nameserver'
 
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
