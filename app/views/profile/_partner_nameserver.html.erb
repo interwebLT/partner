@@ -3,16 +3,14 @@
   <table id="default_nameservers">
     <thead>
       <tr>
-        <th>
+       <th>
           Nameservers
-          <div class="text-right partner-ns-actions">
+        </th>
+        <th class="text-right">
             <%= link_to "Edit", new_profile_partner_name_server_path, id: "editNsBtn",
               class: "btn btn-success btn-xs", remote: true %>
-          </div>
-          <div class="text-right partner-ns-actions">
             <%= link_to "Cancel", profile_index_path, id: "cancelNsBtn",
-              class: "btn btn-success btn-xs", remote: true %>
-          </div>
+              class: "btn btn-default btn-xs", remote: true %>
         </th>
       </tr>
     </thead>

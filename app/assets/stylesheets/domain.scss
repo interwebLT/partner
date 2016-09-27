@@ -648,7 +648,7 @@ ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !im
   padding: 40px 20px 20px 20px;
 
   div {
-
+    margin-bottom: 10px;
     @extend .clearfix;
     @extend .form-group;
 
@@ -662,11 +662,11 @@ ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !im
       div {
         @extend .col-sm-7;
       }
-      span {
+      /*span {
         @extend .col-sm-5;
         margin: 10px 0 10px -23px;
         font-weight: 500;
-      }
+      }**/
     }
   }
 }
@@ -710,3 +710,4 @@ table#domains {
 }
 .alert {text-align: center;}
 #registration_form_period, #registration_form_local_country_code {width: 50%}
+.moreIPV4{min-height:0px;}
