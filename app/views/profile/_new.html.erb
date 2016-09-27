@@ -28,6 +28,7 @@
       </div>
       <div class="pull-right" style="margin-top: 0px;">
         <%= submit_tag "Update", class: 'btn btn-success btn-sm', id: "submitNsBtn" %>
+        <%= link_to "Cancel", profile_index_path, id: "cancelNsBtn", class: "btn btn-danger btn-sm", remote: true %>
       </div>
     <% end %>
   </div>

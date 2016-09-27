@@ -49,11 +49,6 @@ $ ->
   $('#editNsBtn').click ->
     add_form_validation()
     $(this).hide()
-    $("#cancelNsBtn").show()
-
-  $('#cancelNsBtn').click ->
-    $(this).hide()
-    $("#editNsBtn").show()
 
   $("#pnsTableBody").on 'click', '#plusNSLink', ->
     array = $(".partner-config-ns").length
@@ -75,6 +70,9 @@ $ ->
     $(".add-partner-default-ns").before(row)
     validate_form()
     add_form_validation()
+
+  $("#pnsTableBody").on "click", "#cancelNsBtn", ->
+    $("#editNsBtn").show()
 
   $("#pnsTableBody").on "click", ".btn-remove-partner-nameserver", ->
     thisParentClass = $(this).parent().parent().parent().prop('className')
@@ -100,8 +98,6 @@ $ ->
           nameservers: nameservers
         success: ->
         )
-
-      $("#cancelNsBtn").hide()
       $('#editNsBtn').show()
 
   $("#pnsTableBody").on 'keypress', '#submitNsBtn', (e) ->
@@ -121,6 +117,4 @@ $ ->
             nameservers: nameservers
           success: ->
           )
-
-        $("#cancelNsBtn").hide()
         $('#editNsBtn').show()
