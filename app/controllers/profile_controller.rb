@@ -28,7 +28,11 @@ class ProfileController < SecureController
       response = Partner.update_default_nameservers partner_ns_for_remove, partner_ns_for_add, current_user.username, current_user.token
 
       if response == true
-
+        @current_nameservers = []
+        @partner = current_user.partner
+        @partner.default_nameservers.each do |default_nameserver|
+          @current_nameservers << default_nameserver.name
+        end
       end
     end
   end
