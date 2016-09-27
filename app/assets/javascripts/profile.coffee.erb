@@ -15,28 +15,29 @@ $ ->
       domain_name = domainHostArray[domainHostArray.length - 2] + "." + domainHostArray[domainHostArray.length - 1]
     return domain_name
 
+  add_form_validation = () ->
+    $('input.partner-config-ns').each ->
+      $(this).rules 'add', {
+        validNameserver: true
+      }
+    $('input.partner-config-ns').each ->
+      current_id = $(this).attr("id")
+      $(this).rules 'add', {
+        remote:
+          url: "/domains/check_ns_authorization",
+          data:
+            domain: ->
+              return getDomain($("#" + current_id).val())
+            host: ->
+              return $("#" + current_id).val()
+      }
+
   validate_form = () ->
     $(".new_profile_partner_name_server_form").validate
       errorPlacement: (label, element) ->
         label.addClass('error-validator-label-simple')
         element.addClass('has-input-error')
         label.insertAfter(element)
-    $('input.partner-config-ns').each ->
-      $(this).rules 'add', {
-        validNameserver: true
-      }
-    $('input.partner-config-ns').each ->
-      nameserver = $(this).val()
-      console.log nameserver
-      $(this).rules 'add', {
-        remote:
-          url: "/domains/check_ns_authorization",
-          data:
-            domain: ->
-              return getDomain(nameserver)
-            host: ->
-              return nameserver
-      }
 
   $.validator.addMethod 'validNameserver', ((value, element) ->
     valid_nameserver = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
@@ -46,12 +47,8 @@ $ ->
   $("#cancelNsBtn").hide()
   $(".pns-error-notice").hide()
   $('#editNsBtn').click ->
+    add_form_validation()
     $(this).hide()
-    $("#cancelNsBtn").show()
-
-  $('#cancelNsBtn').click ->
-    $(this).hide()
-    $("#editNsBtn").show()
 
   $("#pnsTableBody").on 'click', '#plusNSLink', ->
     array = $(".partner-config-ns").length
@@ -71,24 +68,22 @@ $ ->
               </div>"
 
     $(".add-partner-default-ns").before(row)
+    validate_form()
+    add_form_validation()
+
+  $("#pnsTableBody").on "click", "#cancelNsBtn", ->
+    $("#editNsBtn").show()
 
   $("#pnsTableBody").on "click", ".btn-remove-partner-nameserver", ->
     thisParentClass = $(this).parent().parent().parent().prop('className')
     $('.' + thisParentClass).remove()
     return
 
-  $("#pnsTableBody").on 'blur', '.partner-config-ns', ->
-    validate_form()
-
-  $("#pnsTableBody").on 'click', ".btn-remove-partner-nameserver", ->
-    validate_form()
-
   $("#pnsTableBody").on 'mouseenter', '#submitNsBtn', ->
     validate_form()
 
   $("#pnsTableBody").on 'click', '#submitNsBtn', (e) ->
     e.preventDefault()
-    validate_form()
 
     if $(".new_profile_partner_name_server_form").valid()
       nameservers = []
@@ -103,13 +98,10 @@ $ ->
           nameservers: nameservers
         success: ->
         )
-
-      $("#cancelNsBtn").hide()
       $('#editNsBtn').show()
 
   $("#pnsTableBody").on 'keypress', '#submitNsBtn', (e) ->
     e.preventDefault()
-    validate_form()
 
     if e.which == 13
       if $(".new_profile_partner_name_server_form").valid()
@@ -125,6 +117,4 @@ $ ->
             nameservers: nameservers
           success: ->
           )
-
-        $("#cancelNsBtn").hide()
         $('#editNsBtn').show()
