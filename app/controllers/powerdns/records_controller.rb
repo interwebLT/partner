@@ -1,5 +1,6 @@
 class Powerdns::RecordsController < SecureController
   before_action :load_domain, only: [:new, :edit]
+  before_action :set_type, only: [:create, :update]
 
   def new
     @pdns_record = Powerdns::Record.new
@@ -83,5 +84,11 @@ class Powerdns::RecordsController < SecureController
     @domain_name = domain.name
     @domain_expires_at = domain.expires_at
     @powerdns_records = domain.powerdns_records.map{|record| record.name}
+  end
+
+  def set_type
+    unless params[:powerdns_record][:type] == "SRV"
+      params[:powerdns_record][:preferences] = nil
+    end
   end
 end
