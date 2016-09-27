@@ -1,0 +1,27 @@
+<div id="pns">
+  <br>
+  <table id="default_nameservers">
+    <thead>
+      <tr>
+        <th>
+          Nameservers
+          <div class="text-right partner-ns-actions">
+            <%= link_to "Edit", new_profile_partner_name_server_path, id: "editNsBtn",
+              class: "btn btn-success btn-xs", remote: true %>
+          </div>
+          <div class="text-right partner-ns-actions">
+            <%= link_to "Cancel", profile_index_path, id: "cancelNsBtn",
+              class: "btn btn-success btn-xs", remote: true %>
+          </div>
+        </th>
+      </tr>
+    </thead>
+  </table>
+  <div id="warning" class="alert alert-warning pns-error-notice">
+    <p id="pns-error-text"></p>
+  </div>
+  <div id="pnsTableBody">
+    <%= render "profile/current_partner_nameserver" %>
+  </div>
+  <br>
+</div>

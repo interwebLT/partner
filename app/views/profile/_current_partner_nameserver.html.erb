@@ -1,0 +1,9 @@
+<table>
+  <tbody>
+    <% @partner.default_nameservers.each do |default_nameserver| %>
+      <tr>
+        <td><%= default_nameserver.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -648,6 +648,8 @@ ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !im
   padding: 40px 20px 20px 20px;
 
   div {
+
+    @extend .clearfix;
     @extend .form-group;
 
     label {
@@ -657,6 +659,14 @@ ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !im
     }
     div {
       @extend .col-sm-9;
+      div {
+        @extend .col-sm-7;
+      }
+      span {
+        @extend .col-sm-5;
+        margin: 10px 0 10px -23px;
+        font-weight: 500;
+      }
     }
   }
 }

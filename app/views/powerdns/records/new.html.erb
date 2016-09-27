@@ -18,7 +18,7 @@
       <div>
         <%= f.input :name, label: false, class: "form-control",
           input_html: {"data-records": @powerdns_records, "data-domain": @domain_name} %>
-        <h4><b><%= @domain_name %></b></h4>
+        <span>.<%= @domain_name %></span>
       </div>
     </div>
     <div>
