@@ -1,6 +1,7 @@
 <div id="partnerNsTableForm">
   <div id="partnerNsTableBodyForm">
-    <%= form_tag new_profile_partner_name_server_path, class: "new_profile_partner_name_server_form", remote: true do %>
+    <%= form_tag new_profile_partner_name_server_path, class: "new_profile_partner_name_server_form",
+      id: "new_profile_partner_name_server_form", remote: true do %>
       <% @current_partner_nameservers.each_with_index do |nameserver, index| %>
         <div class=<%= "partner_ns_#{index}_tr" %>>
           <div class="form-group">
@@ -27,7 +28,7 @@
         </a>
       </div>
       <div class="pull-right" style="margin-top: 0px;">
-        <%= submit_tag "Update", class: 'btn btn-success btn-sm', id: "submitNsBtn" %>
+        <%= button_tag "Update", class: 'btn btn-success btn-sm', id: "submitNsBtn" %>
         <%= link_to "Cancel", profile_index_path, id: "cancelNsBtn", class: "btn btn-danger btn-sm", remote: true %>
       </div>
     <% end %>
