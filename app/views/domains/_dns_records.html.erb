@@ -1,125 +1,13 @@
 <hr class="line">
 <div class="contact-info-wrapper">
   <div class="title">DNS Records</div>
-  <div class="contact-info">
-    <table class="table table-striped table-condensed">
-      <thead>
-        <tr>
-          <th width="10"></th>
-          <th width="200">Name</th>
-          <th width="70">Type</th>
-          <th>Priority</th>
-          <th>Content</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% unless @domain.powerdns_records.empty? %>
-          <% @domain.powerdns_records.each do |record| %>
-            <tr>
-              <td>
-                <% unless (record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content)) || record.type == "SOA" %>
-                  <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?' do %>
-                    <i class="fa fa-close"></i>
-                  <% end %>
-                <% end %>
-              </td>
-              <td><%= record.name %></td>
-              <td><%= record.type %></td>
-              <td><%= record.prio %></td>
-              <td><%= record.content %></td>
-              <td>
-                <% unless (record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content)) || record.type == "SOA" %>
-                  <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id) do %>
-                    <i class="fa fa-pencil"></i>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        <% else %>
-          <p>No DNS Records</p>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="button">
-    <%= link_to "Add", new_powerdns_record_path(domain_id: @domain.id), class: 'btn btn-success btn-small' %>
-  </div>
-
-  <% if false %>
-    <div class="col-lg-12">
-      <p class="pull-right"><a href="">Add DNS</a></p>
-      <p class="text-danger">New layout</p>
-      <table class="table table-striped table-condensed" id="dnsTable">
-        <thead  style="background-color: #eee !important; color: inherit;">
-          <tr>
-            <th width="40%">Name</th>
-            <th width="70">Type</th>
-            <th width="100">Priority</th>
-            <th>Content</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>survey.<%= @domain.name %></td>
-            <td>A</td>
-            <td> </td>
-            <td>203.119.6.168</td>
-            <td class="text-right">
-              <a href=""><i class="fa fa-pencil"></i> </a>
-              <a  href="#">
-                <i class="fa fa-close" style="color: #337ab7 !important;"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>www.<%= @domain.name %></td>
-            <td>CNAME</td>
-            <td> </td>
-            <td>phlnx.domains.ph</td>
-            <td class="text-right">
-              <a href=""><i class="fa fa-pencil"></i> </a>
-              <a  href="#">
-                <i class="fa fa-close" style="color: #337ab7 !important;"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>mx.<%= @domain.name %></td>
-            <td>MX</td>
-            <td>10</td>
-            <td>mx2.domains.ph</td>
-            <td class="text-right">
-              <a href=""><i class="fa fa-pencil"></i> </a>
-              <a  href="#">
-                <i class="fa fa-close" style="color: #337ab7 !important;"></i></a>
-            </td>
-          </tr>
-          <!--new/edit dns-->
-          <tr>
-            <td><input type="text">.<%= @domain.name %></td>
-            <td>
-              <select class="form-control" style="height: 29px!important;border-radius: 0;">
-                <option>NS</option>
-                <option>A</option>
-                <option>AAAA</option>
-                <option>MX</option>
-                <option>CNAME</option>
-                <option>TXT</option>
-                <option>SRV</option>
-              </select> </td>
-            <td><input type="text" style="width: 50px"></td>
-            <td><input type="text" class="col-lg-12"></td>
-            <td class="text-right">
-              <a class="btn btn-default btn-sm saveDnsBtn" href="#">
-                <i class="fa fa-check"></i> Save</a>
-              <a class="btn btn-default btn-sm cancelDnsBtn" href="#">
-                <i class="fa fa-close"></i></a>
-            </td>
-          </tr>
-          <!--new/edit dns-->
-        </tbody>
-      </table>
+  <div class="col-lg-12" id="pdnsNewDynamicTableForm">
+    <p class="pull-right">
+      <%= link_to "Add DNS", new_powerdns_record_path(domain_id: @domain.id), id: "addPowerDnsBtn", remote: true %>
+    </p>
+    <div id="pdnsListTableBody">
+      <%= render "powerdns/records/index" %>
     </div>
-  <% end %>
+    <div id="dnsDynamicForm"></div>
+  </div>
 </div>

@@ -1,0 +1,37 @@
+<table class="table table-striped table-condensed" id="dnsTable">
+  <thead  style="background-color: #eee !important; color: inherit;">
+    <tr>
+      <th width="40%">Name</th>
+      <th width="70">Type</th>
+      <th width="90">Priority</th>
+      <th>Content</th>
+      <th width="70"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% unless @domain.powerdns_records.empty? %>
+      <% @domain.powerdns_records.each do |record| %>
+        <tr id="pdnsTableRow<%= record.id %>">
+          <td><%= record.name %></td>
+          <td><%= record.type %></td>
+          <td><%= record.prio %></td>
+          <td><%= record.content %></td>
+          <td class="text-right pdnsActionButtons">
+            <% unless (record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content)) || record.type == "SOA" %>
+              <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id), class: "pdnsEditButton", remote: true do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
+            <% end %>
+            <% unless (record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content)) || record.type == "SOA" %>
+              <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?', class: "deletePdnsButton", remote: true do %>
+                <i class="fa fa-close"></i>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

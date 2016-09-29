@@ -12,8 +12,9 @@ class DomainsController < SecureController
   def show
     @partner_nameserver = current_user.partner.default_nameservers
     @nameservers = Nameserver.all token: current_user.token
-    @domain = Domain.find params[:id], token: current_user.token
-    @status = @domain.get_status.join(", ")
+    @domain      = Domain.find params[:id], token: current_user.token
+    @status      = @domain.get_status.join(", ")
+    @pdns_record = Powerdns::Record.new
   end
 
   def renew_multiple

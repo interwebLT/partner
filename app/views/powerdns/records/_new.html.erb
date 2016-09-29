@@ -1,0 +1,41 @@
+<%= simple_form_for @pdns_record, remote: true do |f| %>
+  <%= f.hidden_field :powerdns_domain_id, value: @domain_id %>
+  <%= f.hidden_field :end_date, value: @domain_expires_at %>
+  <div class="col-md-3">
+    <%= f.input :name, label: false, class: "form-control",
+      input_html: {"data-records": @powerdns_records, "data-domain": @domain_name} %>
+    <span>.<%= @domain_name %></span>
+  </div>
+  <div class="col-md-2">
+    <%= f.input :type, label: false, class: "form-control",
+      collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select" %>
+  </div>
+  <div class="col-md-2">
+    <div class="priority-div">
+        <%= f.input :prio, label: false, as: :numeric, class: "form-control",
+          input_html: { min: '0', max: '9999'}, placeholder: "Enter Priority" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="non-srv-fields">
+      <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content" %>
+    </div>
+    <div class="srv-fields" style="display: none;">
+      <%= f.simple_fields_for :preferences do |preference| %>
+        <div>
+          <%= preference.input :port, label: false, as: :numeric, class: "form-control", placeholder: "Enter Port" %>
+        </div>
+        <div>
+          <%= preference.input :weight, label: false, as: :numeric, class: "form-control", placeholder: "Enter Weight" %>
+        </div>
+        <div>
+          <%= preference.input :srv_content, label: false, class: "form-control", placeholder: "Enter Content" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <%= f.submit 'Save', class: "btn btn-success btn-xs", id: "submitDnsDynamicForm" %>
+    <%= link_to 'Cancel', domain_url(@domain_id), class: "btn btn-danger btn-xs", id: "cancelDnsDynamicForm" %>
+  </div>
+<% end %>

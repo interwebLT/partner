@@ -1,0 +1,48 @@
+<td colspan="5">
+  <%= simple_form_for @pdns_record,
+    url: powerdns_record_path(id: @pdns_record.id, domain_id: @domain_id),
+    html: {method: :patch}, remote: true do |f| %>
+    <div class="col-md-3">
+      <%= f.input :name, label: false, class: "form-control",
+        input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name} %>.<%= @domain_name %>
+    </div>
+    <div class="col-md-2">
+      <%= f.input :type, label: false, class: "form-control",
+        collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select" %>
+    </div>
+    <div class="col-md-2">
+      <div class="priority-div">
+          <%= f.input :prio, label: false, as: :numeric, class: "form-control",
+            input_html: { min: '0', max: '9999'}, placeholder: "Enter Priority" %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="non-srv-fields">
+        <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content" %>
+      </div>
+      <div class="srv-fields" style="display: none;">
+        <%= f.simple_fields_for :preferences do |preference| %>
+          <div>
+            <%= preference.input :port, label: false, as: :numeric, class: "form-control",
+              input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:port]},
+              placeholder: "Enter Port" %>
+          </div>
+          <div>
+            <%= preference.input :weight, label: false, as: :numeric, class: "form-control",
+              input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:weight]},
+              placeholder: "Enter Weight" %>
+          </div>
+          <div>
+            <%= preference.input :srv_content, label: false, class: "form-control",
+              input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:srv_content]},
+              placeholder: "Enter Content" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <%= f.submit 'Update', class: "btn btn-success btn-xs", id: "submitEditDnsDynamicForm" %>
+      <%= link_to 'Cancel', domain_url(@domain_id), class: "btn btn-danger btn-xs", id: "cancelEditDnsDynamicForm", remote: true %>
+    </div>
+  <% end %>
+</td>

@@ -20,7 +20,8 @@ class Powerdns::RecordsController < SecureController
     end
 
     if pdns_record.save token: auth_token
-      redirect_to domain_url(domain_id), notice: 'DNS Record added!'
+      @domain      = Domain.find domain_id, token: auth_token
+      @nameservers = Nameserver.all token: current_user.token
     else
       redirect_to domain_url(domain_id), notice: 'Not Saved!'
     end
@@ -45,7 +46,8 @@ class Powerdns::RecordsController < SecureController
   def destroy
     domain = params[:domain_id]
     Powerdns::Record.destroy params[:id], token: auth_token
-    redirect_to domain_url(domain)
+    @domain      = Domain.find domain, token: auth_token
+    @nameservers = Nameserver.all token: current_user.token
   end
 
   private
@@ -67,12 +69,16 @@ class Powerdns::RecordsController < SecureController
     pdns_record.type    = params[:powerdns_record][:type]
     pdns_record.prio    = params[:powerdns_record][:prio]
     pdns_record.content = params[:powerdns_record][:content]
-    pdns_record.preferences[:weight]       = params[:powerdns_record][:preferences][:weight]
-    pdns_record.preferences[:port]         = params[:powerdns_record][:preferences][:port]
-    pdns_record.preferences[:srv_content]  = params[:powerdns_record][:preferences][:srv_content]
+    unless pdns_record.preferences.nil?
+      pdns_record.preferences[:weight]       = params[:powerdns_record][:preferences][:weight]
+      pdns_record.preferences[:port]         = params[:powerdns_record][:preferences][:port]
+      pdns_record.preferences[:srv_content]  = params[:powerdns_record][:preferences][:srv_content]
+    end
 
     if pdns_record.update token: auth_token
-      redirect_to domain_url(domain_id), notice: 'DNS Record updated!'
+      @domain      = Domain.find domain_id, token: auth_token
+      @nameservers = Nameserver.all token: current_user.token
+      # redirect_to domain_url(domain_id), notice: 'DNS Record updated!'
     else
       redirect_to domain_url(domain_id), notice: 'Not Updated!'
     end
