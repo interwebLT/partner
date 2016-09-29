@@ -33,7 +33,7 @@ $ ->
       }
 
   validate_form = () ->
-    $(".new_profile_partner_name_server_form").validate
+    $("#new_profile_partner_name_server_form").validate
       errorPlacement: (label, element) ->
         label.addClass('error-validator-label-simple')
         element.addClass('has-input-error')
@@ -79,13 +79,19 @@ $ ->
     $('.' + thisParentClass).remove()
     return
 
-  $("#pnsTableBody").on 'mouseenter', '#submitNsBtn', ->
+  $("#pnsTableBody").on 'mouseenter', '#submitNsBtn', (e) ->
     validate_form()
+    $("#new_profile_partner_name_server_form").valid()
+
+  $("#pnsTableBody").on 'mouseout', '.partner-config-ns', (e) ->
+    validate_form()
+    $("#new_profile_partner_name_server_form").valid()
 
   $("#pnsTableBody").on 'click', '#submitNsBtn', (e) ->
     e.preventDefault()
+    validate_form()
 
-    if $(".new_profile_partner_name_server_form").valid()
+    if $("#new_profile_partner_name_server_form").valid()
       nameservers = []
       $(".partner-config-ns").each ->
         if $(this).eq(0).val() != ""
@@ -104,7 +110,7 @@ $ ->
     e.preventDefault()
 
     if e.which == 13
-      if $(".new_profile_partner_name_server_form").valid()
+      if $("#new_profile_partner_name_server_form").valid()
         nameservers = []
         $(".partner-config-ns").each ->
           if $(this).eq(0).val() != ""
