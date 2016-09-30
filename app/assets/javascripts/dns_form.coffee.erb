@@ -115,10 +115,11 @@ $ ->
     $("#dnsDynamicForm").html(pdnsFormTemplate)
     $(".submitDnsDynamicForm").removeClass("disabled")
     $(".cancelDnsDynamicForm").removeClass("disabled")
-    change_fields
 
   $("#pdnsNewDynamicTableForm").on "click", ".pdnsEditButton", (e) ->
     $(document.body).css 'cursor': 'wait'
+
+  $("#pdnsNewDynamicTableForm").on "click", ".pdnsDeleteButton", (e) ->
 
   $("#pdnsNewDynamicTableForm").on "click", ".submitDnsDynamicForm", (e) ->
     if $("#new_powerdns_record_dynamic_form").valid()
@@ -141,13 +142,13 @@ $ ->
     e.preventDefault()
     $(this).parent().parent().remove()
 
-  $("#pdnsNewDynamicTableForm").on "click", ".powerdns_record_type", (e) ->
+  $("#pdnsNewDynamicTableForm").on "click", "#powerdns_record_type", (e) ->
     record_type = $(this).val()
     change_fields(record_type)
     change_validators(record_type)
     clearForm()
 
-  $("#pdnsNewDynamicTableForm").on "keyup", ".powerdns_record_type", (e) ->
+  $("#pdnsNewDynamicTableForm").on "keyup", "#powerdns_record_type", (e) ->
     record_type = $(this).val()
     change_fields(record_type)
     change_validators(record_type)

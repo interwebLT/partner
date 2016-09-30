@@ -23,7 +23,7 @@
               <% end %>
             <% end %>
             <% unless (record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content)) || record.type == "SOA" %>
-              <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?', class: "deletePdnsButton", remote: true do %>
+              <%= link_to powerdns_record_path(id: record.id, domain_id: @domain.id), method: :delete, 'data-confirm': 'Are you sure you want to remove this record?', class: "pdnsDeleteButton", remote: true do %>
                 <i class="fa fa-close"></i>
               <% end %>
             <% end %>
