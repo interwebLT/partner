@@ -1,4 +1,4 @@
 $("#pdnsTableRow<%= @pdns_record.id %>").html("<%= escape_javascript(render('powerdns/records/edit')) %>");
-$(".pdnsActionButtons").hide();
+$(".pdnsActionButtons").html("");
 // $("#powerdns_record_type").trigger("click");
 $(document.body).css({'cursor' : 'default'});
