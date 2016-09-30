@@ -1,16 +1,16 @@
-$(document).ready ->
-  record_type = ""
-
-  $(".srv-fields").hide()
-  $(".priority-div").hide()
+$ ->
+  goToByScroll = (id) ->
+    id = id.replace('link', '')
+    $('html,body').animate {scrollTop: $('#' + id).offset().top - 200}, 'slow'
+    return
 
   clearForm = () ->
-    $("#powerdns_record_name").val('')
-    $("#powerdns_record_content").val('')
-    $("#powerdns_record_prio").val('')
-    $("#powerdns_record_preferences_port").val('')
-    $("#powerdns_record_preferences_weight").val('')
-    $("#powerdns_record_preferences_srv_content").val('')
+    $(".powerdns_record_name").val('')
+    $(".powerdns_record_content").val('')
+    $(".powerdns_record_prio").val('')
+    $(".powerdns_record_preferences_port").val('')
+    $(".powerdns_record_preferences_weight").val('')
+    $(".powerdns_record_preferences_srv_content").val('')
 
   change_fields = (type) ->
     if type == "SRV"
@@ -21,9 +21,9 @@ $(document).ready ->
       $(".non-srv-fields").show()
 
     if type == "MX" || type == "SRV"
-      $(".priority-div").show()
+      $(".priority-div :input").attr("disabled", false)
     else
-      $(".priority-div").hide()
+      $(".priority-div :input").attr("disabled", true)
     return
 
   change_validators = (type) ->
@@ -70,44 +70,32 @@ $(document).ready ->
       when "SRV" then
     return
 
-  $ ->
-    record_type = $('#powerdns_record_type').val()
-    change_fields(record_type)
-    change_validators(record_type)
-
-    $('#powerdns_record_type').click((e) ->
-      record_type = $(this).val()
-      change_fields(record_type)
-      change_validators(record_type)
-      clearForm()
-    ).keyup((e) ->
-      record_type = $(this).val()
-      change_fields(record_type)
-      change_validators(record_type)
-      clearForm()
-    )
-
-    $(".new_powerdns_record").validate
+  validatePowerdnsForm = () ->
+    record_type = undefined
+    $("#new_powerdns_record_dynamic_form").validate
       errorPlacement: (label, element) ->
         label.addClass('error-validator-label')
         label.insertAfter(element)
       rules:
         "powerdns_record[name]":
           required: depends: (element) ->
-              record_type == 'NS' || record_type == 'CNAME'
+            record_type = $("#new_powerdns_record_dynamic_form").find(".powerdns_record_type :input").val()
+            record_type == 'NS' || record_type == 'CNAME'
           uniqueness: depends: (element) ->
-              record_type == 'CNAME'
+            record_type == 'CNAME'
           # domainNameValidation: true
         "powerdns_record[type]":
           required: true
         "powerdns_record[prio]":
           required: depends: (element) ->
+            record_type = $("#new_powerdns_record_dynamic_form").find(".powerdns_record_type :input").val()
             record_type == 'MX' || record_type == 'SRV'
         "powerdns_record[content]":
           required: depends: (element) ->
-              record_type != ''
+            record_type != ''
           powerdnsContentValidation:
             depends: (element) ->
+              record_type = $("#new_powerdns_record_dynamic_form").find(".powerdns_record_type :input").val()
               record_type == 'AAAA' || record_type == 'A' || record_type == 'NS' || record_type == 'TXT' || record_type == 'CNAME'
         "powerdns_record[preferences][srv_content]":
           required: true,
@@ -117,3 +105,57 @@ $(document).ready ->
       unhighlight: (element) ->
         $(element).removeClass('has-input-error');
     return
+
+  $("#pdnsNewDynamicTableForm").on "mouseenter", ".submitDnsDynamicForm", (e) ->
+    validatePowerdnsForm()
+
+  $("#pdnsNewDynamicTableForm").on "mouseenter", "#submitEditDnsDynamicForm", (e) ->
+    validatePowerdnsForm()
+
+  $("#addPowerDnsBtn").click (e) ->
+    e.preventDefault()
+    pdnsFormTemplate = $("#new_powerdns_record").clone()
+    pdnsFormTemplate.removeAttr("id")
+    pdnsFormTemplate.attr("id", "new_powerdns_record_dynamic_form")
+    $("#dnsDynamicForm").html(pdnsFormTemplate)
+    $(".submitDnsDynamicForm").removeClass("disabled")
+    $(".cancelDnsDynamicForm").removeClass("disabled")
+    goToByScroll($("#dnsDynamicForm").attr("id"))
+
+  $("#pdnsNewDynamicTableForm").on "click", ".pdnsEditButton", (e) ->
+    $(document.body).css 'cursor': 'wait'
+
+  $("#pdnsNewDynamicTableForm").on "click", ".pdnsDeleteButton", (e) ->
+
+  $("#pdnsNewDynamicTableForm").on "click", ".submitDnsDynamicForm", (e) ->
+    if $("#new_powerdns_record_dynamic_form").valid()
+      $(".submitDnsDynamicForm").addClass("disabled")
+      $(".cancelDnsDynamicForm").addClass("disabled")
+      $(document.body).css 'cursor': 'wait'
+
+  $("#pdnsNewDynamicTableForm").on "click", "#submitEditDnsDynamicForm", (e) ->
+    if $(".new_powerdns_record").valid()
+      $("#submitEditDnsDynamicForm").addClass("disabled")
+      $("#cancelEditDnsDynamicForm").addClass("disabled")
+      $(document.body).css 'cursor': 'wait'
+
+  $("#pdnsNewDynamicTableForm").on "click", "#cancelEditDnsDynamicForm", (e) ->
+    $("#submitEditDnsDynamicForm").addClass("disabled")
+    $("#cancelEditDnsDynamicForm").addClass("disabled")
+    $(document.body).css 'cursor': 'wait'
+
+  $("#pdnsNewDynamicTableForm").on "click", ".cancelDnsDynamicForm", (e) ->
+    e.preventDefault()
+    $(this).parent().parent().remove()
+
+  $("#pdnsNewDynamicTableForm").on "click", "#powerdns_record_type", (e) ->
+    record_type = $(this).val()
+    change_fields(record_type)
+    change_validators(record_type)
+    clearForm()
+
+  $("#pdnsNewDynamicTableForm").on "keyup", "#powerdns_record_type", (e) ->
+    record_type = $(this).val()
+    change_fields(record_type)
+    change_validators(record_type)
+    clearForm()

@@ -4,11 +4,11 @@
 <div id="table">
   <% if @credit.status == 'pending' %>
   <div class="alert alert-info" role="alert">
-  <h4>Note: Your transaction is pending.</h4>
-        <p>You're almost finished! All you have to do now is to check the email our payment provider has sent you and follow the instructions. Once we receive the payment, we'll send you an email confirming your payment and process your transaction.<br>If you have any questions, feel free to contact our support team at (+632) 6372104 to 05 or send an email to <a href="#" type="button" data-toggle="modal" data-target="#contactus-modal">helpdesk@dot.ph</a></p>
-        <br>
-        <p><strong><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp; Cash/Check payments will only be accepted via Dragonpay.  Please note that we do not accept walk-in payment.</strong></p>
-        <p><a class="btn btn-sm btn-info hidden-print" href="javascript:window.print()"><i class="fa fa-print"></i>&nbsp;&nbsp;We recommend printing this page as reference. Click here to print.</a></p>
+    <h4>Note: Your transaction is pending.</h4>
+    <p>You're almost finished! All you have to do now is to check the email our payment provider has sent you and follow the instructions. Once we receive the payment, we'll send you an email confirming your payment and process your transaction.<br>If you have any questions, feel free to contact our support team at (+632) 6372104 to 05 or send an email to <a href="#" type="button" data-toggle="modal" data-target="#contactus-modal">helpdesk@dot.ph</a></p>
+    <br>
+    <p><strong><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp; Cash/Check payments will only be accepted via Dragonpay.  Please note that we do not accept walk-in payment.</strong></p>
+    <p><a class="btn btn-sm btn-info hidden-print" href="javascript:window.print()"><i class="fa fa-print"></i>&nbsp;&nbsp;We recommend printing this page as reference. Click here to print.</a></p>
   </div>
   <% end %>
   <h4>Invoice No: <span class="text-success"><%= @credit.credit_number %></span></h4>
@@ -24,10 +24,12 @@
         <td>Top-up Amount</td>
         <td><%= @amount.format %></td>
       </tr>
+      <% unless @transaction_fee == 0.money %>
       <tr>
         <td>Transaction Fee</td>
         <td><%= @transaction_fee.format %> </td>
       </tr>
+      <% end %>
     </tbody>
     <tfoot>
       <tr>
