@@ -6,6 +6,12 @@ class Partner
                 :street, :city, :state, :postal_code, :country_code, :phone, :fax, :email,
                 :local, :admin,
                 :default_nameservers, :pricing, :credit_limit
+  
+  DRAGON_PAY_COUNTRY_CODE = 'PH'
+  
+  def dragon_pay_allowed?
+    self.country_code == DRAGON_PAY_COUNTRY_CODE
+  end
 
   def persisted?
     id.present?

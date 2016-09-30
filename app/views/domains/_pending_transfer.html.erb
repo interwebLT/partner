@@ -1,0 +1,12 @@
+<% if @domain.pending_transfer? %>
+  <div id="alert" class="alert alert-warning" role="alert">
+    <div class="title">
+      <%= @domain.status_pending_transfer %>
+    </div>
+    <br>
+    <div class="title">
+      <button id="reject_transfer" class="btn btn-default btn-small">Reject</button>
+      <button id="accept_transfer" class="btn btn-primary btn-small">Accept</button>
+    </div>
+  </div>
+<% end %>
