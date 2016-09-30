@@ -3,7 +3,9 @@
   <div class="title">DNS Records</div>
   <div class="col-lg-12" id="pdnsNewDynamicTableForm">
     <p class="pull-right">
-      <%= link_to "Add DNS", "#", id: "addPowerDnsBtn" %>
+      <% unless @domain.pending_transfer? %>
+        <%= link_to "Add DNS", "#", id: "addPowerDnsBtn" %>
+      <% end %>
     </p>
     <div id="pdnsListTableBody">
       <%= render "powerdns/records/index" %>

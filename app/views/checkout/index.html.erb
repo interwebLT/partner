@@ -18,15 +18,17 @@
 
   <hr>
   <div class="text-left">
-      <%= button_tag(type: 'submit', id: 'pay_via_paypal', class: "btn btn-primary") do %>
+    <%= button_tag(type: 'submit', id: 'pay_via_paypal', class: "btn btn-primary") do %>
       <i class='fa fa-cc-paypal'></i>&nbsp;Pay via PayPal &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
       <% end %>
       <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
       <i class='fa fa-credit-card'></i>&nbsp;Pay via Checkout.com &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
       <% end %>
+      <% if current_user.partner.dragon_pay_allowed? %>
       <%= button_tag(type: 'submit', id: 'pay_via_dragon_pay', class: "btn btn-primary") do %>
       <i class='fa fa-money'></i>&nbsp;Pay by Cash or Check &nbsp;&nbsp;<i class='fa fa-caret-right'></i>
       <% end %>
+    <% end %>
   </div>
   <br>
   <div class="text-danger" >* Credit Card payments are subject to 5% transaction fee.</div>

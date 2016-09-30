@@ -11,6 +11,7 @@ class Domain
                 :client_transfer_prohibited, :client_update_prohibited,
                 :server_hold, :server_delete_prohibited, :server_renew_prohibited,
                 :server_transfer_prohibited, :server_update_prohibited,
+                :status_pending_transfer,
                 :expiring, :expired, :powerdns_domain, :powerdns_records,
                 :activities, :hosts
 
@@ -24,6 +25,10 @@ class Domain
 
   def persisted?
     id.present?
+  end
+  
+  def pending_transfer?
+    !self.status_pending_transfer.blank?
   end
 
   def registrant= registrant
