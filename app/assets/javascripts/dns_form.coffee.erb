@@ -159,3 +159,8 @@ $ ->
     change_fields(record_type)
     change_validators(record_type)
     clearForm()
+
+  $("#pdnsNewDynamicTableForm").on "keypress cut copy paste", ".numbersOnly", (e) ->
+    if isNaN(@value + '' + String.fromCharCode(e.charCode))
+      return false
+    return
