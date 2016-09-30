@@ -3,11 +3,12 @@
   <div class="title">DNS Records</div>
   <div class="col-lg-12" id="pdnsNewDynamicTableForm">
     <p class="pull-right">
-      <%= link_to "Add DNS", new_powerdns_record_path(domain_id: @domain.id), id: "addPowerDnsBtn", remote: true %>
+      <%= link_to "Add DNS", "#", id: "addPowerDnsBtn" %>
     </p>
     <div id="pdnsListTableBody">
       <%= render "powerdns/records/index" %>
     </div>
+    <%= render "powerdns/records/new" %>
     <div id="dnsDynamicForm"></div>
   </div>
 </div>
