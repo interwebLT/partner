@@ -4,38 +4,38 @@
     html: {method: :patch}, remote: true do |f| %>
     <div class="col-md-3">
       <%= f.input :name, label: false, class: "form-control",
-        input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name} %>.<%= @domain_name %>
+        input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name, class: "powerdns_record_name"} %>.<%= @domain_name %>
     </div>
     <div class="col-md-2">
       <%= f.input :type, label: false, class: "form-control",
-        collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select" %>
+        collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select", input_html: {class: "powerdns_record_type"} %>
     </div>
     <div class="col-md-2">
       <div class="priority-div">
-          <%= f.input :prio, label: false, as: :numeric, class: "form-control",
-            input_html: { min: '0', max: '9999'}, placeholder: "Enter Priority" %>
+          <%= f.input :prio, label: false, class: "form-control",
+            input_html: { min: '0', max: '9999', class: "powerdns_record_prio numbersOnly"}, placeholder: "Enter Priority" %>
       </div>
     </div>
     <div class="col-md-3">
       <div class="non-srv-fields">
-        <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content" %>
+        <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content", input_html: {class: "powerdns_record_content"} %>
       </div>
       <div class="srv-fields" style="display: none;">
         <%= f.simple_fields_for :preferences do |preference| %>
           <div>
-            <%= preference.input :port, label: false, as: :numeric, class: "form-control",
+            <%= preference.input :port, label: false, class: "form-control",
               input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:port]},
-              placeholder: "Enter Port" %>
+              placeholder: "Enter Port", input_html: {class: "powerdns_record_preferences_port numbersOnly"} %>
           </div>
           <div>
-            <%= preference.input :weight, label: false, as: :numeric, class: "form-control",
+            <%= preference.input :weight, label: false, class: "form-control",
               input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:weight]},
-              placeholder: "Enter Weight" %>
+              placeholder: "Enter Weight", input_html: {class: "powerdns_record_preferences_weight numbersOnly"} %>
           </div>
           <div>
             <%= preference.input :srv_content, label: false, class: "form-control",
               input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:srv_content]},
-              placeholder: "Enter Content" %>
+              placeholder: "Enter Content", input_html: {class: "powerdns_record_preferences_srv_content"} %>
           </div>
         <% end %>
       </div>
