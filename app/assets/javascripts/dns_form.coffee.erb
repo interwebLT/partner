@@ -1,4 +1,9 @@
 $ ->
+  goToByScroll = (id) ->
+    id = id.replace('link', '')
+    $('html,body').animate {scrollTop: $('#' + id).offset().top - 200}, 'slow'
+    return
+
   clearForm = () ->
     $(".powerdns_record_name").val('')
     $(".powerdns_record_content").val('')
@@ -115,6 +120,7 @@ $ ->
     $("#dnsDynamicForm").html(pdnsFormTemplate)
     $(".submitDnsDynamicForm").removeClass("disabled")
     $(".cancelDnsDynamicForm").removeClass("disabled")
+    goToByScroll($("#dnsDynamicForm").attr("id"))
 
   $("#pdnsNewDynamicTableForm").on "click", ".pdnsEditButton", (e) ->
     $(document.body).css 'cursor': 'wait'
