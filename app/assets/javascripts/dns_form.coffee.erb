@@ -107,11 +107,11 @@ $ ->
     return
 
   $("#pdnsNewDynamicTableForm").on "mouseenter", ".submitDnsDynamicForm", (e) ->
-    thisFormID = $(this).parent().parent().attr('id')
+    thisFormID = $(this).parent().parent().parent().attr('id')
     validatePowerdnsForm(thisFormID)
 
   $("#pdnsNewDynamicTableForm").on "mouseenter", "#submitEditDnsDynamicForm", (e) ->
-    thisFormID = $(this).parent().parent().attr('id')
+    thisFormID = $(this).parent().parent().parent().attr('id')
     validatePowerdnsForm(thisFormID)
 
   $("#addPowerDnsBtn").click (e) ->
@@ -148,7 +148,7 @@ $ ->
 
   $("#pdnsNewDynamicTableForm").on "click", ".cancelDnsDynamicForm", (e) ->
     e.preventDefault()
-    $(this).parent().parent().remove()
+    $(this).parent().parent().parent().remove()
 
   $("#pdnsNewDynamicTableForm").on "click", "#powerdns_record_type", (e) ->
     record_type = $(this).val()

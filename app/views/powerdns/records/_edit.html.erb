@@ -8,7 +8,7 @@
         <%= f.input :name, label: false, class: "form-control",
         input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name, class: "powerdns_record_name"} %>
       </div>
-      <div id="dnsd" class="col-md-3 col-sm-6 col-xs-3">.<%= @domain.name %></div>
+      <div id="dnsd" class="col-md-3 col-sm-6 col-xs-3">.<%= @domain_name %></div>
       <label class="col-xs-12 visible-xs visible-sm">Type</label>
       <div class="col-md-1">
         <%= f.input :type, label: false, class: "form-control",
@@ -45,10 +45,11 @@
             </div>
           <% end %>
         </div>
+      </div>
       <div class="col-md-2 text-right" style="margin: 5px;">
         <%= f.submit 'Update', class: "btn btn-success btn-xs", id: "submitEditDnsDynamicForm" %>
         <%= link_to 'Cancel', domain_url(@domain_id), class: "btn btn-danger btn-xs", id: "cancelEditDnsDynamicForm", remote: true %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </td>
