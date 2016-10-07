@@ -7,8 +7,10 @@
           Nameservers
         </th>
         <th class="text-right">
+          <% unless current_user.epp_partner %>
             <%= link_to "Edit", new_profile_partner_name_server_path, id: "editNsBtn",
               class: "btn btn-success btn-xs", remote: true %>
+          <% end %>
         </th>
       </tr>
     </thead>
