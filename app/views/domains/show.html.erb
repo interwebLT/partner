@@ -8,36 +8,38 @@
     <% unless @domain.admin_handle && @domain.billing_handle && @domain.tech_handle %>
       <div class="pull-right">
         <div class="btn-add-contact">
-          <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Add Contact
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>
-                <% unless @domain.admin_handle %>
-                  <%= link_to "Admin Contact", new_contact_path(domain_id: @domain.id, type: "admin") %>
-                <% end %>
-              </li>
-              <li>
-                <% unless @domain.billing_handle %>
-                  <%= link_to "Billing Contact", new_contact_path(domain_id: @domain.id, type: "billing") %>
-                <% end %>
-              </li>
-              <li>
-                <% unless @domain.tech_handle %>
-                  <%= link_to "Technical Contact", new_contact_path(domain_id: @domain.id, type: "tech") %>
-                <% end %>
-              </li>
-            </ul>
-          </div>
+          <% if current_user.epp_partner %>
+            <%= create_display_only_button("button", "Add Contact", "domain_show") %>
+          <% else %>
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Add Contact
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li>
+                  <% unless @domain.admin_handle %>
+                    <%= link_to "Admin Contact", new_contact_path(domain_id: @domain.id, type: "admin") %>
+                  <% end %>
+                </li>
+                <li>
+                  <% unless @domain.billing_handle %>
+                    <%= link_to "Billing Contact", new_contact_path(domain_id: @domain.id, type: "billing") %>
+                  <% end %>
+                </li>
+                <li>
+                  <% unless @domain.tech_handle %>
+                    <%= link_to "Technical Contact", new_contact_path(domain_id: @domain.id, type: "tech") %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
     <% end %>
-    
     <%= render 'pending_transfer' %>
-    
     <div class="info-header">
       <h3><%= @domain.name %></h3>
     </div>
@@ -53,7 +55,11 @@
       <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.registrant } %></div>
       <div class="button">
         <% unless @domain.pending_transfer? %>
-          <%= link_to 'Edit', contact_path(@domain.registrant.handle, d: @domain.id), id: 'edit_registrant', :class => 'btn btn-primary btn-small' %>
+          <% if current_user.epp_partner %>
+            <%= create_display_only_button("button", "Edit", "domain_show") %>
+          <% else %>
+            <%= link_to 'Edit', contact_path(@domain.registrant.handle, d: @domain.id), id: 'edit_registrant', :class => 'btn btn-primary btn-small' %>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -67,7 +73,11 @@
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.admin_contact } %></div>
         <div class="button">
           <% unless @domain.pending_transfer? %>
-            <%= link_to 'Edit', contact_path(@domain.admin_contact.handle, d: @domain.id), id: 'edit_admin', :class => 'btn btn-primary btn-small' %>
+            <% if current_user.epp_partner %>
+              <%= create_display_only_button("button", "Edit", "domain_show") %>
+            <% else %>
+              <%= link_to 'Edit', contact_path(@domain.admin_contact.handle, d: @domain.id), id: 'edit_admin', :class => 'btn btn-primary btn-small' %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -82,7 +92,11 @@
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.billing_contact } %></div>
         <div class="button">
           <% unless @domain.pending_transfer? %>
-            <%= link_to 'Edit', contact_path(@domain.billing_contact.handle, d: @domain.id), id: 'edit_billing', :class => 'btn btn-primary btn-small' %>
+            <% if current_user.epp_partner %>
+              <%= create_display_only_button("button", "Edit", "domain_show") %>
+            <% else %>
+              <%= link_to 'Edit', contact_path(@domain.billing_contact.handle, d: @domain.id), id: 'edit_billing', :class => 'btn btn-primary btn-small' %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -97,8 +111,11 @@
         <div class="contact-info"><%= render partial: 'domains/domain_contact', locals: { contact: @domain.tech_contact } %></div>
         <div class="button">
           <% unless @domain.pending_transfer? %>
-            <%= link_to 'Edit', contact_path(@domain.tech_contact.handle, d: @domain.id), id: 'edit_tech',
-            :class => 'btn btn-primary btn-small' %>
+            <% if current_user.epp_partner %>
+              <%= create_display_only_button("button", "Edit", "domain_show") %>
+            <% else %>
+              <%= link_to 'Edit', contact_path(@domain.tech_contact.handle, d: @domain.id), id: 'edit_tech', :class => 'btn btn-primary btn-small' %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -126,8 +143,10 @@
                     <td>
                       <% unless @domain.pending_transfer? %>
                       <% unless @nameservers.map{|ns| ns.name}.include? domain_host.name %>
+                      <% unless current_user.epp_partner %>
                         <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do %><i class="fa fa-close"></i>
                         <% end %>
+                      <% end %>
                       <% end %>
                       <% end %>
                     </td>
@@ -136,9 +155,11 @@
                     <td>
                       <% unless @domain.pending_transfer? %>
                       <% unless @nameservers.map{|ns| ns.name}.include? domain_host.name %>
+                      <% unless current_user.epp_partner %>
                         <%= link_to edit_domain_host_path(id: domain_host.id, domain_id: @domain.id) do %>
                           <i class="fa fa-pencil"></i>
                         <% end %>
+                      <% end %>
                       <% end %>
                       <% end %>
                     </td>
@@ -153,27 +174,31 @@
       </div>
       <% unless @domain.pending_transfer? %>
       <div class="btn-add-ns">
-        <div class="dropdown">
-          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Add
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><%= link_to 'Add Own Nameservers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %></li>
-            <% unless @partner_nameserver.empty? %>
-              <li>
-                <%= link_to 'Add Partner Nameservers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
-                  'data-confirm': 'Are you sure you want to add default Partner Nameservers?' %>
-              </li>
-            <% end %>
-            <% unless @nameservers.empty? %>
-              <li>
-                <%= link_to 'Add DotPH Nameservers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '',
-                method: :get, 'data-confirm': 'Are you sure you want to add dotPH Nameservers?' %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        <% if current_user.epp_partner %>
+          <%= create_display_only_button("button", "Add", "domain_show") %>
+        <% else %>
+          <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Add
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><%= link_to 'Add Own Nameservers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %></li>
+              <% unless @partner_nameserver.empty? %>
+                <li>
+                  <%= link_to 'Add Partner Nameservers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
+                    'data-confirm': 'Are you sure you want to add default Partner Nameservers?' %>
+                </li>
+              <% end %>
+              <% unless @nameservers.empty? %>
+                <li>
+                  <%= link_to 'Add DotPH Nameservers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '',
+                  method: :get, 'data-confirm': 'Are you sure you want to add dotPH Nameservers?' %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
       <% end %>
     </div>

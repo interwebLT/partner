@@ -70,16 +70,16 @@ $ ->
       when "SRV" then
     return
 
-  validatePowerdnsForm = () ->
+  validatePowerdnsForm = (thisFormID) ->
     record_type = undefined
-    $("#new_powerdns_record_dynamic_form").validate
+    $("#" + thisFormID).validate
       errorPlacement: (label, element) ->
         label.addClass('error-validator-label')
         label.insertAfter(element)
       rules:
         "powerdns_record[name]":
           required: depends: (element) ->
-            record_type = $("#new_powerdns_record_dynamic_form").find(".powerdns_record_type :input").val()
+            record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
             record_type == 'NS' || record_type == 'CNAME'
           uniqueness: depends: (element) ->
             record_type == 'CNAME'
@@ -88,14 +88,14 @@ $ ->
           required: true
         "powerdns_record[prio]":
           required: depends: (element) ->
-            record_type = $("#new_powerdns_record_dynamic_form").find(".powerdns_record_type :input").val()
+            record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
             record_type == 'MX' || record_type == 'SRV'
         "powerdns_record[content]":
           required: depends: (element) ->
             record_type != ''
           powerdnsContentValidation:
             depends: (element) ->
-              record_type = $("#new_powerdns_record_dynamic_form").find(".powerdns_record_type :input").val()
+              record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
               record_type == 'AAAA' || record_type == 'A' || record_type == 'NS' || record_type == 'TXT' || record_type == 'CNAME'
         "powerdns_record[preferences][srv_content]":
           required: true,
@@ -107,10 +107,12 @@ $ ->
     return
 
   $("#pdnsNewDynamicTableForm").on "mouseenter", ".submitDnsDynamicForm", (e) ->
-    validatePowerdnsForm()
+    thisFormID = $(this).parent().parent().parent().attr('id')
+    validatePowerdnsForm(thisFormID)
 
   $("#pdnsNewDynamicTableForm").on "mouseenter", "#submitEditDnsDynamicForm", (e) ->
-    validatePowerdnsForm()
+    thisFormID = $(this).parent().parent().parent().attr('id')
+    validatePowerdnsForm(thisFormID)
 
   $("#addPowerDnsBtn").click (e) ->
     e.preventDefault()
@@ -146,7 +148,7 @@ $ ->
 
   $("#pdnsNewDynamicTableForm").on "click", ".cancelDnsDynamicForm", (e) ->
     e.preventDefault()
-    $(this).parent().parent().remove()
+    $(this).parent().parent().parent().remove()
 
   $("#pdnsNewDynamicTableForm").on "click", "#powerdns_record_type", (e) ->
     record_type = $(this).val()
@@ -159,3 +161,8 @@ $ ->
     change_fields(record_type)
     change_validators(record_type)
     clearForm()
+
+  $("#pdnsNewDynamicTableForm").on "keypress cut copy paste", ".numbersOnly", (e) ->
+    if isNaN(@value + '' + String.fromCharCode(e.charCode))
+      return false
+    return

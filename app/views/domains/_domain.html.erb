@@ -32,10 +32,14 @@
     <td><%= formatted_date domain.expires_at %></td>
     <td>
       <% if domain.renew_allowed? %>
-        <a href="#" class="btn-renew-link" data-toggle="modal" data-name=<%= domain.name %>
-          data-target="#modal-renew" data-domain=<%= domain.id %>>
-          Renew
-        </a>
+        <% if current_user.epp_partner %>
+          <%= create_display_only_button("link", "Renew") %>
+        <% else %>
+          <a href="#" class="btn-renew-link" data-toggle="modal" data-name=<%= domain.name %>
+            data-target="#modal-renew" data-domain=<%= domain.id %>>
+            Renew
+          </a>
+        <% end %>
       <% end %>
     </td>
   </tr>

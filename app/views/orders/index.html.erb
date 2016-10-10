@@ -24,6 +24,8 @@
         <td><%= link_to order.partner, partner_url(order.partner) %></td>
         <td><%= order_detail_type order.type %></td>
         <td><%= order.period %></td>
+        <td><%= order.domain %></td>
+        <td><%= order.status %></td>
         <td><%= number_to_currency(order.price) %></td>
       </tr>
       <% end %>

@@ -5,22 +5,23 @@
     <% end %>
 <% end %>
 <!--buttons for bulk options-->
-<p class="btn-container">
-  <button type="button" class="btn btn-primary btn-bulk-modal" data-toggle="modal" data-target="#modal-editc">
-    <i class="fa fa-pencil-square-o"></i>
-    <span>Edit Contact Information</span>
-  </button>
-  <button type="button" class="btn btn-success btn-bulk-modal" data-toggle="modal" data-target="#modal-brenew">
-    <i class="fa fa-refresh "></i>
-    <span>Bulk Renew</span>
-  </button>
-  <!--
-  <a class="btn btn-default">
-    <i class="fa fa-file-o "></i>
-    <span>Export to File</span>
-  </a>
-  -->
-</p>
+<% if current_user.epp_partner %>
+  <div class="btn-container">
+    <%= create_display_only_button("button", "Edit Contact Information") %>
+    <%= create_display_only_button("button", "Bulk Renew") %>
+  </div>
+<% else %>
+  <p class="btn-container">
+    <button type="button" class="btn btn-primary btn-bulk-modal" data-toggle="modal" data-target="#modal-editc">
+      <i class="fa fa-pencil-square-o"></i>
+      <span>Edit Contact Information</span>
+    </button>
+    <button type="button" class="btn btn-success btn-bulk-modal" data-toggle="modal" data-target="#modal-brenew">
+      <i class="fa fa-refresh "></i>
+      <span>Bulk Renew</span>
+    </button>
+  </p>
+<% end %>
 <!--buttons for bulk options-->
 
 <!--modal-->
