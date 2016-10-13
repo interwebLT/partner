@@ -3,7 +3,7 @@ class TransferRequest
   
   RESOURCE_NAME = 'transfer_requests'
   
-  attr_accessor :domain, :period, :auth_code
+  attr_accessor :id, :domain, :period, :auth_code
   
   def as_json options = nil
     {
@@ -44,7 +44,7 @@ class TransferRequest
   private
   
   def url
-    TransferRequest.url id: URI.encode(self.domain, /\W/), resource: RESOURCE_NAME
+    TransferRequest.url id: self.id, resource: RESOURCE_NAME
   end
 
 end

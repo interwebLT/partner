@@ -10,21 +10,21 @@ class TransfersController < SecureController
     transfer = TransferRequest.new transfer_request_params
     transfer.save token: current_user.token
 #    @domain = Domain.find transfer_request_params[:domain], token: current_user.token
+    flash[:notice] = "Transfer request successful."
     redirect_to :controller => :domains, :action => :index
   end
   
   def update
-    @domain = Domain.find params[:id], token: current_user.token
-    transfer = TransferRequest.new domain: @domain.name
+    transfer = TransferRequest.new id: params[:domain_id], domain: params[:id]
     transfer.update token: current_user.token
-    redirect_to :controller => :domains, :action => :show, :id => @domain.id
+    flash[:notice] = "Transfer approval successful."
+    redirect_to :controller => :domains, :action => :index
   end
   
   def destroy
-    @domain = Domain.find params[:id], token: current_user.token
-    transfer = TransferRequest.new domain: @domain.name
+    transfer = TransferRequest.new id: params[:domain_id], domain: params[:id]
     transfer.delete token: current_user.token
-    
+    flash[:notice] = "Transfer rejection successful."
     redirect_to :controller => :domains, :action => :show, :id => @domain.id
   end
   
@@ -33,6 +33,5 @@ class TransfersController < SecureController
   def transfer_request_params
     params[:transfer_request].permit :domain, :period, :auth_code
   end
-
 
 end
