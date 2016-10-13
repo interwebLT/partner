@@ -28,7 +28,10 @@ Rails.application.routes.draw do
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/
+    resources :transfers, only: [:update, :destroy]
   end
+  
+  resources :transfers, only: [:new, :create]
 
   resources :hosts, only: [:index, :show]
 

@@ -1,0 +1,30 @@
+<% content_for :banner_title do %>
+<%= fa_icon 'gears lg' %>&nbsp; Request for Transfer
+<% end %>
+<%= simple_form_for @transfer, url: transfers_path, class: "'register-form-search navbar-form' reg-new-domain-form"  do |f| %>
+  <div id="nameserver-info">
+    <div>
+      <label>Domain</label>
+      <div>
+        <%= f.input :domain, :tabindex => 1, label: false %>
+      </div>
+    </div>
+    <div>
+      <label>Period (optional)</label>
+      <div>
+        <%= f.input :period, :tabindex => 2, label: false %>
+      </div>
+    </div>
+    <div>
+      <label>Auth Code (optional)</label>
+      <div>
+        <%= f.input :auth_code, :tabindex => 3, label: false %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="edit-update ns-form-submit">
+    <%= f.submit 'Transfer', id: :submit %>
+    <%= link_to 'Cancel', domains_path, class: 'btn btn-sm btn-danger' %>
+  </div>
+<% end %>

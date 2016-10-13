@@ -5,8 +5,8 @@
     </div>
     <br>
     <div class="title">
-      <button id="reject_transfer" class="btn btn-default btn-small">Reject</button>
-      <button id="accept_transfer" class="btn btn-primary btn-small">Accept</button>
+      <%= link_to "Reject", domain_transfer_url(@domain.id, @domain.name), :method => :delete, :class => "btn btn-default btn-small" %>
+      <%= link_to "Accept", domain_transfer_url(@domain.id, @domain.name), :method => :put, :class => "btn btn-primary btn-small" %>
     </div>
   </div>
 <% end %>
