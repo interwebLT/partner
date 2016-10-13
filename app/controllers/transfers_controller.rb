@@ -8,24 +8,33 @@ class TransfersController < SecureController
   
   def create
     transfer = TransferRequest.new transfer_request_params
-    transfer.save token: current_user.token
+    if transfer.save token: current_user.token
 #    @domain = Domain.find transfer_request_params[:domain], token: current_user.token
-    flash[:notice] = "Transfer request successful."
+      flash[:notice] = "Transfer request successful."
+    else
+      flash[:alert] = "Transfer request failed."
+    end
     redirect_to :controller => :domains, :action => :index
   end
   
   def update
     transfer = TransferRequest.new id: params[:domain_id], domain: params[:id]
-    transfer.update token: current_user.token
-    flash[:notice] = "Transfer approval successful."
+    if transfer.update token: current_user.token
+      flash[:notice] = "Transfer approval successful."
+    else
+      flash[:alert] = "Transfer approval failed."
+    end
     redirect_to :controller => :domains, :action => :index
   end
   
   def destroy
     transfer = TransferRequest.new id: params[:domain_id], domain: params[:id]
-    transfer.delete token: current_user.token
-    flash[:notice] = "Transfer rejection successful."
-    redirect_to :controller => :domains, :action => :show, :id => @domain.id
+    if transfer.delete token: current_user.token
+      flash[:notice] = "Transfer rejection successful."
+    else
+      flash[:alert] = "Transfer rejection failed."
+    end
+    redirect_to :controller => :domains, :action => :show, :id => params[:domain_id]
   end
   
   private
