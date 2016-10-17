@@ -3,7 +3,20 @@ class TransferRequest
   
   RESOURCE_NAME = 'transfer_requests'
   
-  attr_accessor :id, :domain, :period, :auth_code
+  REQUEST_PERIOD = {
+    '01'  => '1 year',
+    '02'  => '2 years',
+    '03'  => '3 years',
+    '04'  => '4 years',
+    '05'  => '5 years',
+    '06'  => '6 years',
+    '07'  => '7 years',
+    '08'  => '8 years',
+    '09'  => '9 years',
+    '10' => '10 years'
+  }
+  
+  attr_accessor :id, :domain, :period, :auth_code, :response_message
   
   def as_json options = nil
     {
@@ -15,29 +28,29 @@ class TransferRequest
   
   def save token:
     save_url = TransferRequest.url resource: RESOURCE_NAME
-    puts "save_url #{save_url}"
     response = self.class.post save_url, self.as_json, token: token
-
+    
     !response.nil?
-  rescue Api::Model::UnprocessableEntity
+  rescue Api::Model::UnprocessableEntity => e
+    @response_message = e.message
     false
   end
   
   def update token:
-    puts "update_url #{url}"
     response = TransferRequest.patch url, "", token: token
     
     !response.nil?
-  rescue Api::Model::UnprocessableEntity
+  rescue Api::Model::UnprocessableEntity =>e
+    @response_message = e.message
     false
   end
   
   def delete token:
-    puts "delete_url #{url}"
     response = TransferRequest.delete url, "", token: token
     
     !response.nil?
-  rescue Api::Model::UnprocessableEntity
+  rescue Api::Model::UnprocessableEntity => e
+    @response_message = e.message
     false
   end
 

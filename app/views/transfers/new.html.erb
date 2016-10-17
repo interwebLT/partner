@@ -1,7 +1,7 @@
 <% content_for :banner_title do %>
 <%= fa_icon 'gears lg' %>&nbsp; Request for Transfer
 <% end %>
-<%= simple_form_for @transfer, url: transfers_path, class: "'register-form-search navbar-form' reg-new-domain-form"  do |f| %>
+<%= simple_form_for @transfer, url: transfers_path, html: { novalidate: false } do |f| %>
   <div id="nameserver-info">
     <div>
       <label>Domain</label>
@@ -12,7 +12,7 @@
     <div>
       <label>Period (optional)</label>
       <div>
-        <%= f.input :period, :tabindex => 2, label: false %>
+        <%= f.input :period, :collection => TransferRequest::REQUEST_PERIOD.sort.map {|k,v| [v,k]}, :tabindex => 2, label: false %>
       </div>
     </div>
     <div>

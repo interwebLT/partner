@@ -9,10 +9,9 @@ class TransfersController < SecureController
   def create
     transfer = TransferRequest.new transfer_request_params
     if transfer.save token: current_user.token
-#    @domain = Domain.find transfer_request_params[:domain], token: current_user.token
       flash[:notice] = "Transfer request successful."
     else
-      flash[:alert] = "Transfer request failed."
+      flash[:alert] = transfer.response_message
     end
     redirect_to :controller => :domains, :action => :index
   end
@@ -22,7 +21,7 @@ class TransfersController < SecureController
     if transfer.update token: current_user.token
       flash[:notice] = "Transfer approval successful."
     else
-      flash[:alert] = "Transfer approval failed."
+      flash[:alert] = transfer.response_message
     end
     redirect_to :controller => :domains, :action => :index
   end
@@ -32,7 +31,7 @@ class TransfersController < SecureController
     if transfer.delete token: current_user.token
       flash[:notice] = "Transfer rejection successful."
     else
-      flash[:alert] = "Transfer rejection failed."
+      flash[:alert] = transfer.response_message
     end
     redirect_to :controller => :domains, :action => :show, :id => params[:domain_id]
   end
@@ -40,7 +39,11 @@ class TransfersController < SecureController
   private
   
   def transfer_request_params
-    params[:transfer_request].permit :domain, :period, :auth_code
+    p = params[:transfer_request].permit :domain, :period, :auth_code
+    unless p[:period].blank?
+      p[:period] = "#{p[:period].to_i}y"
+    end
+    p
   end
 
 end
