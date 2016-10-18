@@ -10,7 +10,7 @@
       </div>
     </div>
     <div>
-      <label>Period (optional)</label>
+      <label>Renew for (optional)</label>
       <div>
         <%= f.input :period, :collection => TransferRequest::REQUEST_PERIOD.sort.map {|k,v| [v,k]}, :tabindex => 2, label: false %>
       </div>
