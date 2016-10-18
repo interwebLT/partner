@@ -31,6 +31,38 @@ $(document).ready ->
       domain_name = domainHostArray[domainHostArray.length - 2] + "." + domainHostArray[domainHostArray.length - 1]
     return domain_name
 
+  check_host_address = (domain_host) ->
+    $.ajax(
+      method: "GET"
+      url: "/hosts/get_host_address"
+      data:
+        domain_host: domain_host
+      success: (data) ->
+        if data.length > 0
+          $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").find('input:text').val('');
+          $(".moreIPV4, .moreIPV6").children().remove()
+          index_ipv4 = 0
+          index_ipv6 = 0
+          for host_address in data
+            if host_address.type == "v4"
+              if index_ipv4 == 0
+                $("#ipv4_0").val(host_address.address)
+                index_ipv4++
+              else
+                $(".btn-add-domain-host-ipv4").trigger("click")
+                $("#ipv4_" + index_ipv4).val(host_address.address)
+                index_ipv4++
+
+            if host_address.type == "v6"
+              if index_ipv6 == 0
+                $("#ipv6_0").val(host_address.address)
+                index_ipv6++
+              else
+                $(".btn-add-domain-host-ipv6").trigger("click")
+                $("#ipv6_" + index_ipv6).val(host_address.address)
+                index_ipv6++
+      )
+
   $.validator.addMethod 'validIPv4', ((value, element) ->
     valid_ipv4 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
     if value == ""
@@ -109,10 +141,12 @@ $(document).ready ->
     domainName = $(this).data("domain")
     glue_record_requirement = "." + domainName
     if $(this).val().indexOf(glue_record_requirement) >= 0
+      check_host_address($(this).val())
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").show()
       withIP = true
     else
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").find('input:text').val('');
+      $(".moreIPV4, .moreIPV6").children().remove()
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").hide()
     $(".domain_host_form").validate
       errorPlacement: (label, element) ->
@@ -135,8 +169,8 @@ $(document).ready ->
       validateIPFields()
     return
 
-  $(".ns-form-submit").mouseenter ->
-    $("#domain_host_name").trigger("blur")
-    return
+  # $(".ns-form-submit").mouseenter ->
+  #   $("#domain_host_name").trigger("blur")
+  #   return
 
   $("#domain_host_name").trigger("blur")
