@@ -33,7 +33,7 @@ class TransfersController < SecureController
     else
       flash[:alert] = transfer.response_message
     end
-    redirect_to :controller => :domains, :action => :show, :id => params[:domain_id]
+    redirect_to :controller => :domains, :action => :index
   end
   
   private
