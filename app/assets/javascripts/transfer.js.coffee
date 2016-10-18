@@ -1,6 +1,6 @@
 $(document).ready ->
   $.validator.addMethod 'domainFormatValidation', (value, element, params) ->
-    valid_domain = /^[A-Za-z0-9][A-Za-z0-9\-_]{2,62}.ph$/
+    valid_domain = /^[A-Za-z0-9][A-Za-z0-9\-_]{2,62}.(ph|com.ph|net.ph|org.ph)$/
     has_consecutive_dash = /--/
     all_numeric = /^[0-9]+$/
     starts_with_dash = /^-/
