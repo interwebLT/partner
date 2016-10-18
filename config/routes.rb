@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'invoice/month' => 'checkout#invoicemonthly'
 
   root 'welcome#index'
+  
+  get 'zendesk' => 'welcome#zendesk'
 
   get 'registration/search', to: 'registration#search'
   get 'registration/create_contact', to: 'registration#create_contact'
