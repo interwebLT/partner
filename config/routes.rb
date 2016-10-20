@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'invoice/month' => 'checkout#invoicemonthly'
 
   root 'welcome#index'
+  
+  get 'zendesk' => 'welcome#zendesk'
 
   get 'registration/search', to: 'registration#search'
   get 'registration/create_contact', to: 'registration#create_contact'
@@ -22,13 +24,18 @@ Rails.application.routes.draw do
   get 'domains/check_ns_authorization', to: 'domains#check_ns_authorization'
   get 'domains/check_if_exists',        to: 'domains#check_if_exists'
 
-  get    'profile/partner_name_server', to: 'profile#new'    , as: 'new_profile_partner_name_server'
-  post   'profile/partner_name_server', to: 'profile#update_partner_nameserver'
+  get  'profile/partner_name_server',   to: 'profile#new'    , as: 'new_profile_partner_name_server'
+  post 'profile/partner_name_server',   to: 'profile#update_partner_nameserver'
+
+  get  'hosts/get_host_address', to: 'hosts#get_host_address'
 
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/
+    resources :transfers, only: [:update, :destroy]
   end
+  
+  resources :transfers, only: [:new, :create]
 
   resources :hosts, only: [:index, :show]
 

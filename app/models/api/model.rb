@@ -47,7 +47,7 @@ module Api
         when 400, 404
           raise Api::Model::NotFound
         when 422
-          raise Api::Model::UnprocessableEntity
+          raise Api::Model::UnprocessableEntity, response.body
         end
       end
 
