@@ -4,16 +4,7 @@ class TransferRequest
   RESOURCE_NAME = 'transfer_requests'
   
   REQUEST_PERIOD = {
-    '01'  => '1 year',
-    '02'  => '2 years',
-    '03'  => '3 years',
-    '04'  => '4 years',
-    '05'  => '5 years',
-    '06'  => '6 years',
-    '07'  => '7 years',
-    '08'  => '8 years',
-    '09'  => '9 years',
-    '10' => '10 years'
+    '01'  => '1 year'
   }
   
   attr_accessor :id, :domain, :period, :auth_code, :response_message
