@@ -18,7 +18,6 @@
           <td><%= record.content %></td>
           <td class="text-right pdnsActionButtons">
             <% unless @domain.pending_transfer? %>
-            <% unless current_user.epp_partner %>
               <% unless (record.type == "NS" && @nameservers.map{|ns| ns.name}.include?(record.content)) || record.type == "SOA" %>
                 <%= link_to edit_powerdns_record_path(id: record.id, domain_id: @domain.id), class: "pdnsEditButton", remote: true do %>
                   <i class="fa fa-pencil"></i>
@@ -29,7 +28,6 @@
                   <i class="fa fa-close"></i>
                 <% end %>
               <% end %>
-            <% end %>
             <% end %>
           </td>
         </tr>

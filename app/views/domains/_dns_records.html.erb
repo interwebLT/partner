@@ -4,11 +4,7 @@
   <div class="col-lg-12" id="pdnsNewDynamicTableForm">
     <p class="pull-right">
       <% unless @domain.pending_transfer? %>
-        <% if current_user.epp_partner %>
-          <%= create_display_only_button("link", "Add DNS") %>
-        <% else %>
-          <%= link_to "Add DNS", "#", id: "addPowerDnsBtn" %>
-        <% end %>
+        <%= link_to "Add DNS", "#", id: "addPowerDnsBtn" %>
       <% end %>
     </p>
     <div id="pdnsListTableBody">
