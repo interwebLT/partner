@@ -1,7 +1,8 @@
 $ ->
-  domain_id = undefined
-  selected_option = undefined
-  term_checking = undefined
+  domain_id          = undefined
+  selected_option    = undefined
+  term_checking      = undefined
+  has_exceeding_term = undefined
 
   $("#bulk-contact-edit-button").attr('disabled','disabled')
   $("#bulk-renew-term-button").attr('disabled','disabled')
@@ -69,25 +70,28 @@ $ ->
   $("#renewal-term-table-body").on 'change', '.bulk_term_renewal', (e) ->
     $(document.body).css 'cursor': 'wait'
     term_checking = true
-    selected_option = $(this).val()
-    domain_name = $(this).parent().prev().prev().text()
-    $.ajax(
-      method: "GET"
-      url: "/domains/renewal_validation"
-      data:
-        domain_name: domain_name,
-        term: selected_option
-      success: (valid_term) ->
-        console.log valid_term
-        if !valid_term
-          $("#bulk-renew-term-button2").addClass("disabled")
-          $("#bulk_renewal_warning").fadeIn()
-        else
-          $("#bulk-renew-term-button2").removeClass("disabled")
-          $("#bulk_renewal_warning").fadeOut()
-        $(document.body).css 'cursor': 'default'
-        term_checking = undefined
-      )
+    has_exceeding_term = false
+    $(".bulk_term_renewal").each (i) ->
+      selected_option = $(this).val()
+      domain_name = $(this).parent().prev().prev().text()
+      $.ajax(
+        method: "GET"
+        url: "/domains/renewal_validation"
+        data:
+          domain_name: domain_name,
+          term: selected_option
+        success: (valid_term) ->
+          if !valid_term
+            has_exceeding_term = true
+          if has_exceeding_term
+            $("#bulk-renew-term-button2").addClass("disabled")
+            $("#bulk_renewal_warning").fadeIn()
+          else
+            $("#bulk-renew-term-button2").removeClass("disabled")
+            $("#bulk_renewal_warning").fadeOut()
+          $(document.body).css 'cursor': 'default'
+          term_checking = undefined
+        )
 
   $("#renew-domain-single-select").change ->
     $(document.body).css 'cursor': 'wait'
