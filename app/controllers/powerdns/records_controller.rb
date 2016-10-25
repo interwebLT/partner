@@ -50,6 +50,24 @@ class Powerdns::RecordsController < SecureController
     @nameservers = Nameserver.all token: current_user.token
   end
 
+  def check_if_exists
+    name        = params[:name]
+    content     = params[:content]
+    type        = params[:type]
+    srv_port    = params[:srv_port]
+    srv_weight  = params[:srv_weight]
+    srv_content = params[:srv_content]
+
+    valid = Powerdns::Record.check_if_exists name, content, type, srv_port, srv_weight, srv_content, auth_token
+    # render json: valid
+    if !valid
+      result = "Record Already Exists."
+      render json: result.to_json
+    else
+      render json: "true".to_json
+    end
+  end
+
   private
   def pdns_params
     params.require(:powerdns_record).permit :name, :type, :prio, :content, :powerdns_domain_id, :end_date,

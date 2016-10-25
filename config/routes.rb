@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   get 'domains/renewal_validation', to: 'domains#renewal_validation'
 
+  get 'powerdns/records/check_if_exists', to: 'powerdns/records#check_if_exists'
+
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/
