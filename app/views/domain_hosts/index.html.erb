@@ -1,5 +1,5 @@
 <% content_for :banner_title do %>
-  <%= fa_icon 'server lg' %>&nbsp;Add Nameserver
+  <%= fa_icon 'server lg' %>&nbsp;Add Name Server
     <% unless current_user.admin %>
       <span><%= @domain_count %></span>
     <% end %>
@@ -7,13 +7,13 @@
 <h3 class="text-primary"><%= @domain.name %></h3>
 <br>
 <% if false %>
-  <h3>Current Nameservers</h3>
+  <h3>Current Name Servers</h3>
       <!--table ns-->
       <table id="domain_hosts" class="table table-striped table-condensed">
         <thead>
           <tr>
             <th width="10">#</th>
-            <th width="200">Nameserver</th>
+            <th width="200">Name Server</th>
             <th>IP Address</th>
           </tr>
         </thead>
@@ -31,7 +31,7 @@
         </tbody>
       </table>
   <br>
-  <h3 class="">New Nameservers</h3>
+  <h3 class="">New Name Servers</h3>
    You can add up to 13 domain hosts.
 <% end %>
 

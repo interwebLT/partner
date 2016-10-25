@@ -3,7 +3,8 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Domain details for <span class="text-primary"><%= @registration.domain_name %></span></h3>
+  <h3 id="head">Domain details for
+    <span class="text-primary"><%= @registration.domain_name %></span></h3>
   <div class="alert alert-warning credit-balance-alert">
     You don't have enough credit balance to continue this registration.
   </div>
@@ -107,7 +108,7 @@
       </div>
       <hr>
       <div class="domain-info-ns"><!-- form-group -->
-        <label><%= fa_icon 'server' %> Nameservers </label>
+        <label><%= fa_icon 'server' %> Name Servers </label>
         <div class="inputfield">
           <div>
             <% unless @partner.default_nameservers.empty? %>

@@ -44,7 +44,7 @@ end
 
 Then /^domain must now have domain host$/  do
   expect(site.domain_info).to be_displayed
-  expect(site.domain_info.notice).to have_attributes text: 'Nameserver added!'
+  expect(site.domain_info.notice).to have_attributes text: 'Name server added!'
 end
 
 Then /^I must be notified that domain host is not valid$/ do
