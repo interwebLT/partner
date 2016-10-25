@@ -86,6 +86,12 @@ module Api
 
         response.map { |entry| new entry }
       end
+
+      def fetch(term:,token:)
+        response = get url, {name: term}, token: token
+
+        response.map { |entry| new entry }
+      end
     end
 
     def save token:

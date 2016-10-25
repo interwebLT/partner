@@ -97,4 +97,20 @@ class DomainsController < SecureController
     end
     render json: valid.to_json
   end
+
+  def renewal_validation
+    unless params[:domain_name].nil?
+      domains = Domain.fetch term: params[:domain_name], token: current_user.token
+      domain = domains.first
+    end
+
+    term   = params[:term].to_i
+    exdate = domain.expires_at.to_date
+
+    if (exdate + term.year - 1.day) > (Date.today + 10.year)
+      render json: false
+    else
+      render json: true
+    end
+  end
 end
