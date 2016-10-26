@@ -124,7 +124,7 @@
     <hr class="line">
 
     <div class="contact-info-wrapper">
-      <div class="title">Nameservers</div>
+      <div class="title">Name Servers</div>
       <div class="contact-info">
         <% unless @domain.hosts.empty? %>
           <!--table ns-->
@@ -132,7 +132,7 @@
             <thead>
               <tr>
                 <th width="10"></th>
-                <th width="200">Nameserver</th>
+                <th width="200">Name Server</th>
                 <th>IP Address</th>
                 <th></th>
               </tr>
@@ -144,7 +144,7 @@
                       <% unless @domain.pending_transfer? %>
                       <% unless @nameservers.map{|ns| ns.name}.include? domain_host.name %>
                       <% unless current_user.epp_partner %>
-                        <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this nameserver?' do %><i class="fa fa-close"></i>
+                        <%= link_to domain_host_path(@domain.name, domain_host.name), method: :delete, 'data-confirm': 'Are you sure you want to remove this name server?' do %><i class="fa fa-close"></i>
                         <% end %>
                       <% end %>
                       <% end %>
@@ -169,7 +169,7 @@
           </table>
 
         <% else %>
-          <p>No Nameservers</p>
+          <p>No Name Servers</p>
         <% end %>
       </div>
       <% unless @domain.pending_transfer? %>
@@ -183,17 +183,17 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><%= link_to 'Add Own Nameservers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %></li>
+              <li><%= link_to 'Add Own Name Servers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %></li>
               <% unless @partner_nameserver.empty? %>
                 <li>
-                  <%= link_to 'Add Partner Nameservers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
-                    'data-confirm': 'Are you sure you want to add default Partner Nameservers?' %>
+                  <%= link_to 'Add Partner Name Servers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
+                    'data-confirm': 'Are you sure you want to add default Partner Name Servers?' %>
                 </li>
               <% end %>
               <% unless @nameservers.empty? %>
                 <li>
-                  <%= link_to 'Add DotPH Nameservers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '',
-                  method: :get, 'data-confirm': 'Are you sure you want to add dotPH Nameservers?' %>
+                  <%= link_to 'Add DotPH Name Servers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '',
+                  method: :get, 'data-confirm': 'Are you sure you want to add dotPH Name Servers?' %>
                 </li>
               <% end %>
             </ul>

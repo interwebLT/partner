@@ -6,10 +6,8 @@ Rails.application.routes.draw do
   get 'invoice', to: 'checkout#invoice'
   get 'receipt', to: 'checkout#receipt'
   get 'dns' => 'domain_hosts#dns'
-  get 'invoice/month' => 'checkout#invoicemonthly'
-
   root 'welcome#index'
-  
+
   get 'zendesk' => 'welcome#zendesk'
 
   get 'registration/search', to: 'registration#search'
@@ -29,12 +27,16 @@ Rails.application.routes.draw do
 
   get  'hosts/get_host_address', to: 'hosts#get_host_address'
 
+  get 'domains/renewal_validation', to: 'domains#renewal_validation'
+
+  get 'powerdns/records/check_if_exists', to: 'powerdns/records#check_if_exists'
+
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/
     resources :transfers, only: [:update, :destroy]
   end
-  
+
   resources :transfers, only: [:new, :create]
 
   resources :hosts, only: [:index, :show]
@@ -96,7 +98,7 @@ Rails.application.routes.draw do
   scope path: :credits do
     match '/', to: 'credits#create', via: [:get, :post], as: :credits
   end
-  
+
   scope path: :dragon_pay, as: :dragon_pay do
     post :setup_payment, to: 'dragon_pay#setup_payment'
     get :pending, to: 'dragon_pay#pending'

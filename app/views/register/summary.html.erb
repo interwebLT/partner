@@ -108,7 +108,7 @@
       </div>
       <hr>
       <div class="domain-info-ns">
-        <label><%= fa_icon 'server' %> Nameservers </label>
+        <label><%= fa_icon 'server' %> Name Servers </label>
         <div class="inputfield">
           <div>
             <% unless @partner.default_nameservers.empty? %>
@@ -116,7 +116,7 @@
                 <%= default_nameserver.name %>
               <% end %>
             <% else %>
-              No default nameservers.  Domain will be registered but inactive.
+              No default name servers.  Domain will be registered but inactive.
             <% end %>
           </div>
         </div>

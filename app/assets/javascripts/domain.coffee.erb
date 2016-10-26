@@ -1,10 +1,13 @@
 $ ->
-  domain_id = undefined
-  selected_option = undefined
+  domain_id          = undefined
+  selected_option    = undefined
+  term_checking      = undefined
+  has_exceeding_term = undefined
 
   $("#bulk-contact-edit-button").attr('disabled','disabled')
   $("#bulk-renew-term-button").attr('disabled','disabled')
-
+  $("#renewal_warning").hide()
+  $("#bulk_renewal_warning").hide()
 
   validateDomainNames = (text_area_values, domain_list) ->
     output = true
@@ -35,7 +38,7 @@ $ ->
       single_value = value.split(' ')
       for value in single_value
         if value
-          terms =  '<select name="renewal_term[' + renewal_index + ']" id="renewal_term" class="c-select">
+          terms =  '<select name="renewal_term[' + renewal_index + ']" id="renewal_term" class="c-select bulk_term_renewal">
                       <option selected="selected" value="1">1</option>
                       <option value="2">2</option>
                       <option value="5">5</option>
@@ -64,48 +67,93 @@ $ ->
     $("#renewal-term-table-body").empty()
     return
 
+  $("#renewal-term-table-body").on 'change', '.bulk_term_renewal', (e) ->
+    $(document.body).css 'cursor': 'wait'
+    term_checking = true
+    has_exceeding_term = false
+    $(".bulk_term_renewal").each (i) ->
+      selected_option = $(this).val()
+      domain_name = $(this).parent().prev().prev().text()
+      $.ajax(
+        method: "GET"
+        url: "/domains/renewal_validation"
+        data:
+          domain_name: domain_name,
+          term: selected_option
+        success: (valid_term) ->
+          if !valid_term
+            has_exceeding_term = true
+          if has_exceeding_term
+            $("#bulk-renew-term-button2").addClass("disabled")
+            $("#bulk_renewal_warning").fadeIn()
+          else
+            $("#bulk-renew-term-button2").removeClass("disabled")
+            $("#bulk_renewal_warning").fadeOut()
+          $(document.body).css 'cursor': 'default'
+          term_checking = undefined
+        )
+
   $("#renew-domain-single-select").change ->
+    $(document.body).css 'cursor': 'wait'
     selected_option = $("#renew-domain-single-select option:selected").val()
+    domain_name     = $(this).parent().prev().prev().text()
+    $.ajax(
+      method: "GET"
+      url: "/domains/renewal_validation"
+      data:
+        domain_name: domain_name,
+        term: selected_option
+      success: (valid_term) ->
+        if !valid_term
+          $(".btn-renew-domain-single").addClass("disabled")
+          $("#renewal_warning").fadeIn()
+        else
+          $(".btn-renew-domain-single").removeClass("disabled")
+          $("#renewal_warning").fadeOut()
+        $(document.body).css 'cursor': 'default'
+      )
     return
 
   $(".btn-renew-domain-single").click ->
-    id = domain_id
-    bootbox.dialog {
-      size: 'small'
-      message: 'Are you sure you want to renew for ' + selected_option + 'year(s)?',
-      title: 'Confirm Renewal',
-      buttons: {
-        No: {
-          className: 'btn-default',
-          label: 'Cancel'
-        },
-        Yes: {
-          className: 'btn-success',
-          label: "Yes, I want to renew",
-          callback: ->
-            location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+    if !term_checking
+      id = domain_id
+      bootbox.dialog {
+        size: 'small'
+        message: 'Are you sure you want to renew for ' + selected_option + 'year(s)?',
+        title: 'Confirm Renewal',
+        buttons: {
+          No: {
+            className: 'btn-default',
+            label: 'Cancel'
+          },
+          Yes: {
+            className: 'btn-success',
+            label: "Yes, I want to renew",
+            callback: ->
+              location.href = "/domains/"+id+"/renew?renewal_term=" + selected_option
+          }
         }
       }
-    }
     return false
 
   $("#bulk-renew-term-button2").click ->
-    bootbox.dialog {
-      message: 'Are you sure you want to renew these domains?',
-      title: 'Confirm Renewal',
-      buttons: {
-        No: {
-          className: 'btn-default',
-          label: 'Cancel'
-        },
-        Yes: {
-          className: 'btn-success',
-          label: "Yes, I want to renew",
-          callback: ->
-            $("#renew-multiple-form").submit()
+    if !$(this).hasClass("disabled")
+      bootbox.dialog {
+        message: 'Are you sure you want to renew these domains?',
+        title: 'Confirm Renewal',
+        buttons: {
+          No: {
+            className: 'btn-default',
+            label: 'Cancel'
+          },
+          Yes: {
+            className: 'btn-success',
+            label: "Yes, I want to renew",
+            callback: ->
+              $("#renew-multiple-form").submit()
+          }
         }
       }
-    }
     return false
 
 

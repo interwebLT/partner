@@ -5,8 +5,8 @@ $ ->
     return
 
   clearForm = () ->
-    $(".powerdns_record_name").val('')
-    $(".powerdns_record_content").val('')
+    # $(".powerdns_record_name").val('')
+    # $(".powerdns_record_content").val('')
     $(".powerdns_record_prio").val('')
     $(".powerdns_record_preferences_port").val('')
     $(".powerdns_record_preferences_weight").val('')
@@ -82,10 +82,31 @@ $ ->
             record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
             record_type == 'NS' || record_type == 'CNAME'
           uniqueness: depends: (element) ->
+            record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
             record_type == 'CNAME'
-          # domainNameValidation: true
         "powerdns_record[type]":
           required: true
+          remote:
+            url: "/powerdns/records/check_if_exists",
+            method: "GET",
+            data:
+              name: ->
+                return $("#" + thisFormID).find(".powerdns_record_name :input").val() + "." +$("#powerdns_record_name").data("domain")
+              content: ->
+                return $("#" + thisFormID).find(".powerdns_record_content :input").val()
+              type: ->
+                return $("#" + thisFormID).find(".powerdns_record_type :input").val()
+              srv_port: ->
+                return $("#" + thisFormID).find(".powerdns_record_preferences_port :input").val()
+              srv_weight: ->
+                return $("#" + thisFormID).find(".powerdns_record_preferences_weight :input").val()
+              srv_content: ->
+                return $("#" + thisFormID).find(".powerdns_record_preferences_srv_content :input").val()
+            complete: (data) ->
+              if data.responseText != "true"
+                $(".submitDnsDynamicForm").removeClass("disabled")
+                $(".cancelDnsDynamicForm").removeClass("disabled")
+                $(document.body).css 'cursor': 'default'
         "powerdns_record[prio]":
           required: depends: (element) ->
             record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
@@ -101,18 +122,24 @@ $ ->
           required: true,
           domainNameValidation: true
       highlight: (element) ->
-        $(element).addClass('has-input-error');
+        $(element).addClass('has-input-error')
       unhighlight: (element) ->
-        $(element).removeClass('has-input-error');
+        $(element).removeClass('has-input-error')
     return
 
   $("#pdnsNewDynamicTableForm").on "mouseenter", ".submitDnsDynamicForm", (e) ->
     thisFormID = $(this).parent().parent().parent().attr('id')
     validatePowerdnsForm(thisFormID)
+    $("#" + thisFormID).find(".powerdns_record_type").removeData('previousValue')
+    $("#" + thisFormID).validate().element(".powerdns_record_type")
+    $("#" + thisFormID).valid()
 
   $("#pdnsNewDynamicTableForm").on "mouseenter", "#submitEditDnsDynamicForm", (e) ->
     thisFormID = $(this).parent().parent().parent().attr('id')
     validatePowerdnsForm(thisFormID)
+    # $("#" + thisFormID).find(".powerdns_record_type").removeData('previousValue')
+    # $("#" + thisFormID).validate().element(".powerdns_record_type")
+    # $("#" + thisFormID).valid()
 
   $("#addPowerDnsBtn").click (e) ->
     e.preventDefault()

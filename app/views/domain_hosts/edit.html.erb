@@ -1,5 +1,5 @@
 <% content_for :banner_title do %>
-  <%= fa_icon 'pencil lg' %>&nbsp;Edit Nameserver
+  <%= fa_icon 'pencil lg' %>&nbsp;Edit Name Sever
     <% unless current_user.admin %>
       <span><%= @domain_count %></span>
     <% end %>
@@ -21,13 +21,13 @@
           "data-hosts": @hosts, "data-newnameserver": "false"} %>
       </div>
     </div>
-    <% if @ip_list %>
+    <% if !@ip_list.nil? %>
       <div class="nameserver-ipv4">
         <label>IPv4</label>
         <div>
           <div class="form-group">
             <%= text_field_tag "ipv4[0]", nil, class: "form-control domain-host-ipv4-field",
-              placeholder: "Enter IP Address", value: @ip_list["ipv4"]["0"] %>
+              placeholder: "Enter IP Address", value: @ip_list["ipv4"].nil? ? "" : @ip_list["ipv4"]["0"] %>
           </div>
           <a class="btn btn-primary btn-sm btn-add-domain-host-ipv4">
             <i class="fa fa-plus"></i>
@@ -57,7 +57,7 @@
         <div>
           <div class="form-group">
             <%= text_field_tag "ipv6[0]", nil, class: "form-control domain-host-ipv6-field",
-              placeholder: "Enter IP Address", value: @ip_list["ipv6"]["0"]  %>
+              placeholder: "Enter IP Address", value: @ip_list["ipv6"].nil? ? "" : @ip_list["ipv6"]["0"]  %>
           </div>
           <a class="btn btn-primary btn-sm btn-add-domain-host-ipv6">
             <i class="fa fa-plus"></i>
