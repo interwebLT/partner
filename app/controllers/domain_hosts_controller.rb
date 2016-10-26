@@ -39,7 +39,7 @@ class DomainHostsController < SecureController
     end
 
     if output
-      redirect_to domain_url(domain.id), notice: 'Nameserver list updated!'
+      redirect_to domain_url(domain.id), notice: 'Name server list updated!'
     else
       @domain_id = domain.id
       render :index

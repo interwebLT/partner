@@ -75,10 +75,12 @@
           <% unless @domain.pending_transfer? %>
             <% if current_user.epp_partner %>
               <%= create_display_only_button("button", "Edit", "domain_show") %>
+
             <% else %>
               <%= link_to 'Edit', contact_path(@domain.admin_contact.handle, d: @domain.id), id: 'edit_admin', :class => 'btn btn-primary btn-small' %>
             <% end %>
           <% end %>
+
         </div>
       </div>
     <% end %>
@@ -178,26 +180,26 @@
           <%= create_display_only_button("button", "Add", "domain_show") %>
         <% else %>
           <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Add
-              <span class="caret"></span>
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Edit
+              <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <% if @domain.hosts.count < 13 %>
                 <li>
-                  <%= link_to 'Add Own Name Servers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %>
+                  <%= link_to 'Own Name Servers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %>
                 </li>
               <% end %>
               <% unless @partner_nameserver.empty? %>
                 <li>
-                  <%= link_to 'Add Partner Name Servers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
-                    'data-confirm': 'Are you sure you want to add default Partner Name Servers?' %>
+                  <%= link_to 'Partner Name Servers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
+                    'data-confirm': 'Are you sure you want to use Partner Name Servers?' %>
                 </li>
               <% end %>
               <% unless @nameservers.empty? %>
                 <li>
-                  <%= link_to 'Add DotPH Name Servers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '',
-                  method: :get, 'data-confirm': 'Are you sure you want to add dotPH Name Servers?' %>
+                  <%= link_to 'dotPH Name Servers', add_default_nameserver_path(id: @domain.id, dotph_default: true), class: '',
+                  method: :get, 'data-confirm': 'Are you sure you want to use dotPH Name Servers?' %>
                 </li>
               <% end %>
             </ul>

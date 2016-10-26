@@ -3,7 +3,7 @@
     url: powerdns_record_path(id: @pdns_record.id, domain_id: @domain_id),
     html: {method: :patch}, remote: true do |f| %>
     <div class="row">
-      <label class="col-xs-12 visible-xs visible-sm">Name</label>
+      <label class="col-xs-12 visible-xs visible-sm">Hostname</label>
       <div class="col-md-2 col-sm-6 col-xs-5">
         <%= f.input :name, label: false, class: "form-control",
         input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name, class: "powerdns_record_name"} %>
