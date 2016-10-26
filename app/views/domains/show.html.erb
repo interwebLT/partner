@@ -183,7 +183,11 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><%= link_to 'Add Own Name Servers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %></li>
+              <% if @domain.hosts.count < 13 %>
+                <li>
+                  <%= link_to 'Add Own Name Servers', domain_hosts_path(@domain.id), id: :add_domain_host, class: '' %>
+                </li>
+              <% end %>
               <% unless @partner_nameserver.empty? %>
                 <li>
                   <%= link_to 'Add Partner Name Servers', add_default_nameserver_path(id: @domain.id), class: '', method: :get,
