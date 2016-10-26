@@ -3,7 +3,7 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Summary: <span class="text-primary"><%= @registration.domain_name %></span> <%= fa_icon 'check-circle', :class=>"green" %></h3>
+  <h3 id="head">Domain<small>(</small>s<small>)</small>: <span class="btn btn-default"><%= @registration.domain_name %></span></h3>
 
   <%= simple_form_for @registration, url: register_summary_path do |f| %>
     <%= f.hidden_field :domain_name,  value: @registration.domain_name %>
@@ -12,9 +12,9 @@
     <%= hidden_field_tag(:bulk_registration, @bulk_registration) %>
     <div id="new-info" class="new-info-summary">
       <div>
-        <label><%= fa_icon 'calendar-o' %> Registration Period</label>
+        <label><%= fa_icon 'calendar-o' %> Registration Term</label>
         <div class="inputfield">
-          <div><span class="string"><%= @registration.period %> years</span></div>
+          <div><span class="string"><%= @registration.period %> year<small>(</small>s<small>)</small></span></div>
         </div>
       </div>
       <hr>
@@ -40,7 +40,7 @@
         <div>
           <label class="hidden-xs">&nbsp;</label>
           <div class="inputfield">
-            <div><span class="string"><%= @registration.local_street2 %></span></div>
+            <div><span class="string"><%= @registration.local_street2 %></span> </div>
           </div>
         </div>
       <% end %>
@@ -113,7 +113,7 @@
           <div>
             <% unless @partner.default_nameservers.empty? %>
               <% @partner.default_nameservers.each do |default_nameserver| %>
-                <%= default_nameserver.name %>
+                 <%= default_nameserver.name %><br>
               <% end %>
             <% else %>
               No default name servers.  Domain will be registered but inactive.

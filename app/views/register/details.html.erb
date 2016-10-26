@@ -3,8 +3,8 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Domain details for
-    <span class="text-primary"><%= @registration.domain_name %></span></h3>
+  <h3 id="head">Domain Information for <span class="btn btn-default"><%= @registration.domain_name %></span></h3>
+
   <div class="alert alert-warning credit-balance-alert">
     You don't have enough credit balance to continue this registration.
   </div>
@@ -19,7 +19,7 @@
     <div id="new-info">
       <%= f.hidden_field :domain_name, value: @registration.domain_name %>
       <div><!-- form-group -->
-        <label><%= fa_icon 'calendar-o' %> Registration Period </label>
+        <label><%= fa_icon 'calendar-o' %> Registration Term </label>
         <div class="inputfield">
           <div>
             <%= f.input :period, label: false do %>
@@ -110,15 +110,13 @@
       <div class="domain-info-ns"><!-- form-group -->
         <label><%= fa_icon 'server' %> Name Servers </label>
         <div class="inputfield">
-          <div>
             <% unless @partner.default_nameservers.empty? %>
               <% @partner.default_nameservers.each do |default_nameserver| %>
-                <%= default_nameserver.name %>
+                <span class="btn btn-default"><%= default_nameserver.name %></span>
               <% end %>
             <% else %>
-              No default nameservers.  Domain will be registered but inactive.
+              No default name servers.  Domain will be registered but inactive.
             <% end %>
-          </div>
         </div>
         <div></div>
       </div>
