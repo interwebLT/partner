@@ -111,6 +111,7 @@ $ ->
           required: depends: (element) ->
             record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
             record_type == 'MX' || record_type == 'SRV'
+          number: true
         "powerdns_record[content]":
           required: depends: (element) ->
             record_type != ''
@@ -118,6 +119,12 @@ $ ->
             depends: (element) ->
               record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
               record_type == 'AAAA' || record_type == 'A' || record_type == 'NS' || record_type == 'TXT' || record_type == 'CNAME'
+        "powerdns_record[preferences][weight]":
+          required: true,
+          number: true
+        "powerdns_record[preferences][port]":
+          required: true,
+          number: true
         "powerdns_record[preferences][srv_content]":
           required: true,
           domainNameValidation: true
@@ -189,7 +196,7 @@ $ ->
     change_validators(record_type)
     clearForm()
 
-  $("#pdnsNewDynamicTableForm").on "keypress cut copy paste", ".numbersOnly", (e) ->
-    if isNaN(@value + '' + String.fromCharCode(e.charCode))
-      return false
-    return
+  # $("#pdnsNewDynamicTableForm").on "keypress cut copy paste", ".numbersOnly", (e) ->
+  #   if isNaN(@value + '' + String.fromCharCode(e.charCode))
+  #     return false
+  #   return

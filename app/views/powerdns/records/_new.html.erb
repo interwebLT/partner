@@ -26,10 +26,10 @@
         <div class="srv-fields" style="display: none;">
           <%= f.simple_fields_for :preferences do |preference| %>
             <div>
-              <%= preference.input :port, label: false, class: "form-control", placeholder: "Enter Port", input_html: {class: "powerdns_record_preferences_port numbersOnly"} %>
+              <%= preference.input :weight, label: false, class: "form-control", placeholder: "Enter Weight", input_html: {class: "powerdns_record_preferences_weight numbersOnly"} %>
             </div>
             <div>
-              <%= preference.input :weight, label: false, class: "form-control", placeholder: "Enter Weight", input_html: {class: "powerdns_record_preferences_weight numbersOnly"} %>
+              <%= preference.input :port, label: false, class: "form-control", placeholder: "Enter Port", input_html: {class: "powerdns_record_preferences_port numbersOnly"} %>
             </div>
             <div>
               <%= preference.input :srv_content, label: false, class: "form-control", placeholder: "Enter Content", input_html: {class: "powerdns_record_preferences_srv_content"} %>

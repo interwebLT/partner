@@ -29,14 +29,14 @@
         <div class="srv-fields" style="display: <%= @pdns_record.preferences.nil? ? "none" : "" %>;">
           <%= f.simple_fields_for :preferences do |preference| %>
             <div>
-              <%= preference.input :port, label: false, class: "form-control",
-                input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:port],
-                class: "powerdns_record_preferences_port numbersOnly"}, placeholder: "Enter Port" %>
-            </div>
-            <div>
               <%= preference.input :weight, label: false, class: "form-control",
                 input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:weight],
                 class: "powerdns_record_preferences_weight numbersOnly"}, placeholder: "Enter Weight" %>
+            </div>
+            <div>
+              <%= preference.input :port, label: false, class: "form-control",
+                input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:port],
+                class: "powerdns_record_preferences_port numbersOnly"}, placeholder: "Enter Port" %>
             </div>
             <div>
               <%= preference.input :srv_content, label: false, class: "form-control",
