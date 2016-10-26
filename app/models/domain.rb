@@ -62,7 +62,7 @@ class Domain
   def powerdns_records= powerdns_records
     unless powerdns_records.nil?
       powerdns_records = powerdns_records.collect { |record| Powerdns::Record.new record }
-      @powerdns_records = powerdns_records.sort_by{|p| p.type}
+      @powerdns_records = powerdns_records.sort_by{|p| p.updated_at}
     else
       @powerdns_records = ""
     end
