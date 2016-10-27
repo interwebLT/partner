@@ -1,6 +1,22 @@
 class ProfileController < SecureController
   def index
     @partner = current_user.partner
+    @pricing = []
+    @partner.pricing.map{|pricing|
+      if pricing.action == "transfer_domain"
+        @pricing << pricing
+      end
+    }
+    @partner.pricing.map{|pricing|
+      if pricing.action == "domain_create"
+        @pricing << pricing
+      end
+    }
+    @partner.pricing.map{|pricing|
+      if pricing.action == "domain_renew"
+        @pricing << pricing
+      end
+    }
   end
 
   def new
