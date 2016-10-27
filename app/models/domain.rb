@@ -13,7 +13,7 @@ class Domain
                 :server_transfer_prohibited, :server_update_prohibited,
                 :status_pending_transfer,
                 :expiring, :expired, :powerdns_domain, :powerdns_records,
-                :activities, :hosts
+                :hosts
 
   def expired?
     expired
@@ -26,7 +26,7 @@ class Domain
   def persisted?
     id.present?
   end
-  
+
   def pending_transfer?
     !self.status_pending_transfer.blank?
   end
@@ -45,10 +45,6 @@ class Domain
 
   def tech_contact= admin_contact
     @tech_contact = Contact.new admin_contact
-  end
-
-  def activities= activities
-    @activities = activities.collect { |activity| ObjectActivity.new activity }
   end
 
   def hosts= hosts
@@ -125,7 +121,7 @@ class Domain
 
     return order.save token: token
   end
-  
+
   def domain_owner
     registrant.name.present? ? registrant.name : registrant.local_name
   end
@@ -180,8 +176,17 @@ class Domain
     site = Rails.configuration.api_url
     url = "#{site}/check_ns_authorization"
     params = {domain: domain, partner: partner, host: host}.to_query
-    response =  HTTParty.get(url, query: params, headers: default_headers(token: token)).parsed_response
+    response = HTTParty.get(url, query: params, headers: default_headers(token: token)).parsed_response
     return response
+  end
+
+  def self.get_activities domain_id, token
+    site = Rails.configuration.api_url
+    url = "#{site}/activities"
+    params = {domain_id: domain_id}.to_query
+    response = HTTParty.get(url, query: params, headers: default_headers(token: token)).parsed_response
+    activities = response.collect { |activity| ObjectActivity.new activity }
+    return activities
   end
 
   def get_status
