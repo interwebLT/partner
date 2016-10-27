@@ -1,8 +1,8 @@
 <% content_for :banner_title do %>
-<%= fa_icon 'gears lg' %>&nbsp; Request for Transfer
+<%= fa_icon 'gears lg' %>&nbsp; Domain Transfer Request
 <% end %>
 <%= simple_form_for @transfer, url: transfers_path, html: { novalidate: false } do |f| %>
-  <div id="nameserver-info">
+  <div id="transfer-info">
     <div>
       <label>Domain</label>
       <div>
@@ -10,13 +10,13 @@
       </div>
     </div>
     <div>
-      <label>Renew for (optional)</label>
+      <label>Renew Domain <br><small>(</small>optional<small>)</small></label>
       <div>
         <%= f.input :period, :collection => TransferRequest::REQUEST_PERIOD.sort.map {|k,v| [v,k]}, :tabindex => 2, label: false %>
       </div>
     </div>
     <div>
-      <label>Auth Code (optional)</label>
+      <label>Authorisation Code <br><small>(</small>optional<small>)</small></label>
       <div>
         <%= f.input :auth_code, :tabindex => 3, label: false %>
       </div>
@@ -24,7 +24,7 @@
   </div>
   <br>
   <div class="edit-update ns-form-submit">
-    <%= f.submit 'Transfer', id: :submit %>
+    <%= f.submit 'Submit Transfer Request', id: :submit %>
     <%= link_to 'Cancel', domains_path, class: 'btn btn-sm btn-danger' %>
   </div>
 <% end %>

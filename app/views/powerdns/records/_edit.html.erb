@@ -3,7 +3,7 @@
     url: powerdns_record_path(id: @pdns_record.id, domain_id: @domain_id),
     html: {method: :patch}, remote: true do |f| %>
     <div class="row">
-      <label class="col-xs-12 visible-xs visible-sm">Name</label>
+      <label class="col-xs-12 visible-xs visible-sm">Hostname</label>
       <div class="col-md-2 col-sm-6 col-xs-5">
         <%= f.input :name, label: false, class: "form-control",
         input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name, class: "powerdns_record_name"} %>
@@ -29,14 +29,14 @@
         <div class="srv-fields" style="display: <%= @pdns_record.preferences.nil? ? "none" : "" %>;">
           <%= f.simple_fields_for :preferences do |preference| %>
             <div>
-              <%= preference.input :port, label: false, class: "form-control",
-                input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:port],
-                class: "powerdns_record_preferences_port numbersOnly"}, placeholder: "Enter Port" %>
-            </div>
-            <div>
               <%= preference.input :weight, label: false, class: "form-control",
                 input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:weight],
                 class: "powerdns_record_preferences_weight numbersOnly"}, placeholder: "Enter Weight" %>
+            </div>
+            <div>
+              <%= preference.input :port, label: false, class: "form-control",
+                input_html: {value: @pdns_record.preferences.nil? ? "" : @pdns_record.preferences[:port],
+                class: "powerdns_record_preferences_port numbersOnly"}, placeholder: "Enter Port" %>
             </div>
             <div>
               <%= preference.input :srv_content, label: false, class: "form-control",

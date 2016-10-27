@@ -3,7 +3,7 @@
     <%= f.hidden_field :powerdns_domain_id, value: @domain.id %>
     <%= f.hidden_field :end_date, value: @domain_expires_at %>
     <div class="row">
-      <label class="col-xs-12 visible-xs visible-sm">Name</label>
+      <label class="col-xs-12 visible-xs visible-sm">Hostname</label>
       <div class="col-md-2 col-sm-6 col-xs-5">
         <%= f.input :name, label: false, class: "form-control", input_html: {"data-records": @powerdns_records, "data-domain": @domain.name, class: "powerdns_record_name"} %>
       </div>
@@ -26,10 +26,10 @@
         <div class="srv-fields" style="display: none;">
           <%= f.simple_fields_for :preferences do |preference| %>
             <div>
-              <%= preference.input :port, label: false, class: "form-control", placeholder: "Enter Port", input_html: {class: "powerdns_record_preferences_port numbersOnly"} %>
+              <%= preference.input :weight, label: false, class: "form-control", placeholder: "Enter Weight", input_html: {class: "powerdns_record_preferences_weight numbersOnly"} %>
             </div>
             <div>
-              <%= preference.input :weight, label: false, class: "form-control", placeholder: "Enter Weight", input_html: {class: "powerdns_record_preferences_weight numbersOnly"} %>
+              <%= preference.input :port, label: false, class: "form-control", placeholder: "Enter Port", input_html: {class: "powerdns_record_preferences_port numbersOnly"} %>
             </div>
             <div>
               <%= preference.input :srv_content, label: false, class: "form-control", placeholder: "Enter Content", input_html: {class: "powerdns_record_preferences_srv_content"} %>

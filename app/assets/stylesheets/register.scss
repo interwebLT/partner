@@ -13,7 +13,7 @@
 
 .register-page {
 width: 70%;
-margin: 0 auto;	
+margin: 0 auto;
 }
 
 .register-page > form.register-form-search{
@@ -22,7 +22,7 @@ margin: 0 auto;
 }
 
 .register-page > form.register-form-search 	> input[type="text"] {
-	
+
 	width: 100%;
 	line-height: 31px;
 }
@@ -138,7 +138,7 @@ form.register-form-search input.btn:active, form.register-form-search .btn:focus
 }
 
 .has-feedback-left .form-control-feedback {
-    left: 0; 
+    left: 0;
 }
 .form-horizontal .has-feedback-left .form-control-feedback {
     left: 12px; /* @grid-gutter-width / 2 */
@@ -173,7 +173,7 @@ table#domain_info_summary {
 	tbody {
 		background-color: #E3EBEF;
 		border-radius: 4px;
-		
+
 		tr:nth-of-type(odd) {
     	background-color: transparent !important;
 		}
@@ -209,8 +209,8 @@ table#domain_info_summary {
 	 				float: left;
 	 			}
 	 			.string {
-	 				
-	 				
+
+
 	 			}
 	 		}
 	 	}
@@ -225,6 +225,18 @@ table#domain_info_summary {
 	 }
 }
 
+#head {
+  span.btn {
+    border-color: #E3EBEF;
+    border-width: 1px;
+    font-size: 18px;
+    font-weight: 300!important;
+    margin-right: 10px;}
+}
+
+.inputfield {
+  span.btn-default{background-color: #fff !important;}
+  }
 
 @media (max-width: 768px) {
 	#new-info.new-info-summary div label {
@@ -241,8 +253,6 @@ table#domain_info_summary {
 	}
 }
 
-
-
 @media (max-width: 480px) {
 
 	#new-info.new-info-summary > div {
@@ -258,5 +268,7 @@ table#domain_info_summary {
 
 }
 
-
-
+.domain-names-for-register{
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}

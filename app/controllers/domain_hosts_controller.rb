@@ -39,7 +39,7 @@ class DomainHostsController < SecureController
     end
 
     if output
-      redirect_to domain_url(domain.id), notice: 'Nameserver list updated!'
+      redirect_to domain_url(domain.id), notice: 'Name server list updated!'
     else
       @domain_id = domain.id
       render :index
@@ -54,6 +54,7 @@ class DomainHostsController < SecureController
     list = {"ipv4": params[:ipv4], "ipv6": params[:ipv6]}.to_json
 
     @domain_host = DomainHost.new create_params.merge(domain: domain.name)
+    @domain_host.name.strip!
     @domain_host.ip_list = list
 
     if domain_hosts.sort == nameservers.sort
@@ -88,7 +89,7 @@ class DomainHostsController < SecureController
     list = {"ipv4": params[:ipv4], "ipv6": params[:ipv6]}.to_json
     domain_id = params[:domain_id]
     domain_host = DomainHost.find domain_id, params[:id], token: auth_token
-    domain_host.name = create_params[:name]
+    domain_host.name = create_params[:name].try(:strip)
     domain_host.ip_list = list
 
     if domain_host.update domain_id, token: auth_token

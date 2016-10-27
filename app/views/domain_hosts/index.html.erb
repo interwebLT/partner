@@ -1,5 +1,5 @@
 <% content_for :banner_title do %>
-  <%= fa_icon 'server lg' %>&nbsp;Add Name Server
+  <%= fa_icon 'server lg' %>&nbsp;Edit Name Server
     <% unless current_user.admin %>
       <span><%= @domain_count %></span>
     <% end %>
@@ -45,14 +45,14 @@
   <%= f.hidden_field :domain_id, value: @domain.id %>
   <div id="nameserver-info">
     <div>
-      <label>Name</label>
+      <label>Hostname</label>
       <div>
         <%= f.input :name, label: false, class: "form-control", input_html: {"data-domain": @domain.name,
           "data-hosts": @hosts, "data-newnameserver": "true"} %>
       </div>
     </div>
     <div class="nameserver-ipv4">
-      <label>IPv4</label>
+      <label>IPv4 Address</label>
       <div>
         <div class="form-group">
           <%= text_field_tag "ipv4[0]", nil, class: "form-control domain-host-ipv4-field", placeholder: "Enter IP Address" %>
@@ -66,7 +66,7 @@
     <div class="moreIPV4">
     </div>
     <div class="nameserver-ipv6">
-      <label>IPv6</label>
+      <label>IPv6 Address</label>
       <div>
         <div class="form-group">
           <%= text_field_tag "ipv6[0]", nil, class: "form-control domain-host-ipv6-field", placeholder: "Enter IP Address" %>
@@ -82,7 +82,7 @@
   </div>
   <br>
   <div class="edit-update ns-form-submit">
-    <%= f.submit 'Add Domain Host', id: :submit %>
+    <%= f.submit 'Add Hostname', id: :submit %>
     <%= link_to 'Cancel', domain_path(@domain.id), class: 'btn btn-sm btn-danger' %>
   </div>
 <% end %>

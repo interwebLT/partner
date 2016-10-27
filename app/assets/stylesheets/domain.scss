@@ -642,7 +642,7 @@ hr.line{
 }
 ul li a, .contact-info table td a, .contact-info2 table td a {color: #636363 !important;}
 
-#nameserver-info {
+#nameserver-info, #transfer-info {
   @extend .clearfix;
   background-color: #E3EBEF;
   padding: 40px 20px 20px 20px;
