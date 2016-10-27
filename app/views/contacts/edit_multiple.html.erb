@@ -1,9 +1,17 @@
 <% content_for :banner_title do %>
   <%= fa_icon 'pencil lg' %>&nbsp;Edit Contact Info
 <% end %>
+<% domain_names = @list_for_edit.split(",") %>
 
+<h3 id="head">
+  Edit Contact for
+  <% domain_names.each do |domain_name| %>
+    <span class="btn btn-default domain-names-for-register">
+      <%= domain_name %>
+    </span>
+  <% end %>
+</h3>
 
-<h3>Edit Contact <span class="text-primary"><%= @list_for_edit %></span></h3>
 <%= simple_form_for @contact, url: contact_path, html: { method: :patch } do |f| %>
   <% if @contact.errors.any? %>
     <div id="warning" class="alert alert-warning">

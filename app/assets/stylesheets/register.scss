@@ -233,9 +233,11 @@ table#domain_info_summary {
     font-weight: 300!important;
     margin-right: 10px;}
 }
+
 .inputfield {
   span.btn-default{background-color: #fff !important;}
   }
+
 @media (max-width: 768px) {
 	#new-info.new-info-summary div label {
 		width: 50% !important;
@@ -250,8 +252,6 @@ table#domain_info_summary {
 		width: 100%;
 	}
 }
-
-
 
 @media (max-width: 480px) {
 
@@ -268,5 +268,7 @@ table#domain_info_summary {
 
 }
 
-
-
+.domain-names-for-register{
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}
