@@ -1,26 +1,28 @@
-<% content_for :banner_title do %>
-<%= fa_icon 'list lg' %>&nbsp;Activities
-<% end %>
+<% if current_user.admin %>
+  <% content_for :banner_title do %>
+  <%= fa_icon 'list lg' %>&nbsp;Activities
+  <% end %>
 
-<div id="table">
-  <table id="activities">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Partner</th>
-        <th>Domain</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @activities.each do |activity| %>
-      <tr>
-        <td><%= formatted_timestamp activity.activity_at %></td>
-        <td><%= link_to activity.partner.name, partner_path(activity.partner.id) %></td>
-        <td><%= link_to activity.object.name, domain_path(activity.object.id) %></td>
-        <td><%= activity_description(activity).html_safe %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <div id="table">
+    <table id="activities">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Partner</th>
+          <th>Domain</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @activities.each do |activity| %>
+        <tr>
+          <td><%= formatted_timestamp activity.activity_at %></td>
+          <td><%= link_to activity.partner.name, partner_path(activity.partner.id) %></td>
+          <td><%= link_to activity.object.name, domain_path(activity.object.id) %></td>
+          <td><%= activity_description(activity).html_safe %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
