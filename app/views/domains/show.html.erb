@@ -142,7 +142,6 @@
             <tbody>
               <% @domain.hosts.each do |domain_host| %>
                   <tr>
-                    
                     <td><%= domain_host.name %></td>
                     <td><%= nameserver_ip_list domain_host.ip_list %></td>
                     <td class="nslist-edit">
@@ -209,16 +208,14 @@
       </div>
       <% end %>
     </div>
-
     <% if @domain.matched_nameserver? @nameservers %>
       <%= render "dns_records" %>
     <% end %>
-
     <hr class="line">
     <div style="display: none;">
       <%= link_to "dynamic-history-link", activities_path(domain_id: @domain.id),
         id: "dynamic-history-link-id",remote: true %>
     </div>
-    <div id="domain-dynamic-history"></div>
+    <div id="domain-dynamic-history">Loading Domain History . . .</div>
   </div>
 </section>
