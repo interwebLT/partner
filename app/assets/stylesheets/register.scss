@@ -229,13 +229,17 @@ table#domain_info_summary {
   span.btn {
     border-color: #E3EBEF;
     border-width: 1px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 300!important;
-    margin-right: 10px;}
+    margin-right: 5px;}
 }
 
 .inputfield {
-  span.btn-default{background-color: #fff !important;}
+  span.btn-default{
+  	background-color: #fff !important;
+  	margin-bottom: 5px;
+    margin-right: 5px;
+  	}
   }
 
 @media (max-width: 768px) {
@@ -269,6 +273,6 @@ table#domain_info_summary {
 }
 
 .domain-names-for-register{
-  padding-top: 1px !important;
+  padding-top: 2px !important;
   padding-bottom: 1px !important;
 }
