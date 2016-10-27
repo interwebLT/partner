@@ -711,3 +711,11 @@ table#domains {
 .alert {text-align: center;}
 #registration_form_period, #registration_form_local_country_code {width: 50%}
 .moreIPV4{min-height:0px;}
+
+td.nslist-edit a i:hover {
+    color: #47a2d6;
+}
+
+td.nslist-delete a i:hover {
+    color: #cd0000 !important;
+}

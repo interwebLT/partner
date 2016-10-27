@@ -78,7 +78,7 @@
 <div role="banner" id="banner-title">
   <div>
     <div>
-      <h2><%= yield :banner_title %></h2>
+      <h3><%= yield :banner_title %></h3>
     </div>
     <% if user_signed_in? %>
         <div class="col-sm-7 <%= 'hidden' if params[:controller] == 'register'  %>, <%= 'hidden' if params[:controller] == 'checkout'  %>">
