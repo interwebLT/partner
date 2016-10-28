@@ -89,14 +89,21 @@ class DomainsController < SecureController
   def check_if_exists
     domains = params[:domain].split(',')
     valid = true
+    existing_domain = ""
     domains.each do |domain|
       response = Domain.exists? domain.strip, token: current_user.token
       if response == true
         valid = false
+        existing_domain = domain
         break
       end
     end
-    render json: valid.to_json
+    if valid
+      render json: valid.to_json
+    else
+      result = "Domain " + existing_domain + " already exists."
+      render json: result.to_json
+    end
   end
 
   def renewal_validation

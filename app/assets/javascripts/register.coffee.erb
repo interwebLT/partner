@@ -60,9 +60,6 @@ $(document).ready ->
           data:
             domain: ->
               return getDomains($("#reg-new-domain-text-area").val())
-    messages:
-      domain_name:
-        remote: "You entered existing Domain."
 
   $.validator.addMethod 'inputAsciiFormat', ((value, element) ->
     printable_ascii_char = /^[ -~]*$/
