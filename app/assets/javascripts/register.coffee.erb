@@ -28,7 +28,7 @@ $(document).ready ->
     valid == true
   ), "You entered an invalid Domain name format!"
 
-  $.validator.addMethod 'uniqueDomainName',((value,element) ->
+  $.validator.addMethod 'uniqueDomainName',((value, element) ->
     text_area_values = $("#reg-new-domain-text-area").val()
     valid = true
     tempArray = []
@@ -46,6 +46,23 @@ $(document).ready ->
     valid == true
   ), "You entered duplicate Domain Name"
 
+  $.validator.addMethod 'limitRegistration',((value, element) ->
+    text_area_values = $("#reg-new-domain-text-area").val()
+    valid = true
+    count = 0
+    line_values = text_area_values.split('\n')
+
+    for value in line_values
+      single_value = value.split(' ')
+      for value in single_value
+        if value
+          count++
+          if count > 20
+            valid = false
+
+    valid == true
+  ), "You can only register up to 20 Domains."
+
   $(".reg-new-domain-form").validate
     errorPlacement: (label, element) ->
       label.addClass('error-validator-label')
@@ -55,6 +72,7 @@ $(document).ready ->
         required: true,
         domainRegistrationFormatValidation: true,
         uniqueDomainName: true,
+        limitRegistration: true,
         remote:
           url: "/domains/check_if_exists",
           data:
