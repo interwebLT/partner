@@ -228,15 +228,17 @@ $ ->
       if $(window).scrollTop() + $(window).height() == $(document).height()
         domain_id = $("#dynamic-history-link-id").data("id")
         params = "/activities?domain_id=" + domain_id + "&activity_page=" + activity_page
-        $("#history_loading_more_message").html("Loading More Histories . . .")
-        $("#dynamic-history-link-id").attr("href", () ->
-          return this.href = params
-        )
-        $("#dynamic-history-link-id").click()
-        activity_page++
-        # $('#DomainActivities').tablesorter
-        #   sortList: [ 0 ]
-        #   headers: 1: sorter: false
+
+        if $("#history_loading_more_message").html() == ""
+          $("#dynamic-history-link-id").attr("href", () ->
+            return this.href = params
+          )
+          $("#dynamic-history-link-id").click()
+          $("#history_loading_more_message").html("Loading More Histories . . .")
+          activity_page++
+          # $('#DomainActivities').tablesorter
+          #   sortList: [ 0 ]
+          #   headers: 1: sorter: false
         # return
       return
   return
