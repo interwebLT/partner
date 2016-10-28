@@ -216,6 +216,7 @@
       <%= link_to "dynamic-history-link", activities_path(domain_id: @domain.id),
         id: "dynamic-history-link-id", "data-id": @domain.id, remote: true %>
     </div>
+
     <div id="history_loading_message">Loading Domain History . . .</div>
     <div class="contact-info-wrapper">
       <div class="title">Domain Activities</div>
@@ -232,5 +233,6 @@
         </table>
       </div>
     </div>
+    <div id="history_loading_more_message"></div>
   </div>
 </section>

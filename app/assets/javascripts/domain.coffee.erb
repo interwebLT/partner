@@ -228,7 +228,7 @@ $ ->
       if $(window).scrollTop() + $(window).height() == $(document).height()
         domain_id = $("#dynamic-history-link-id").data("id")
         params = "/activities?domain_id=" + domain_id + "&activity_page=" + activity_page
-
+        $("#history_loading_more_message").html("Loading More Histories . . .")
         $("#dynamic-history-link-id").attr("href", () ->
           return this.href = params
         )
