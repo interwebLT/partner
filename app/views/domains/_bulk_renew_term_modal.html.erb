@@ -9,7 +9,7 @@
           <div id="step1-brenew">
             <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
             <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
-              id: "bulk-renew-term-text-area", "data-domains": @domains.map{|d| d.name} %>
+              id: "bulk-renew-term-text-area", "data-domains": @domain_names %>
             <!--error msg-->
             <div class="alert alert-danger" role="alert" id="bulk-renew-term-error" style="display:none">
               You have entered an invalid Domain. Please check.
