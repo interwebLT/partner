@@ -80,6 +80,18 @@ ul.nav li a i {
   font-size: 25px;
 }
 
+li#current_balance {
+  line-height: 18px;
+  padding: 8px 20px;
+  font-weight: 500;
+  text-align: right;
+  
+  span {
+    font-size: 12px;
+    font-weight: 300;
+  }
+}
+
 a.navbar-brand span {
   margin: 10px;
   line-height: 35px;

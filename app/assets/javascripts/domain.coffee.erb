@@ -221,6 +221,9 @@ $ ->
 
   if $("#domain-dynamic-history").length > 0
     $("#dynamic-history-link-id").click()
+    # $('#DomainActivities').tablesorter
+    #   sortList: [ 0 ]
+    #   headers: 1: sorter: false
     $(window).scroll ->
       if $(window).scrollTop() + $(window).height() == $(document).height()
         domain_id = $("#dynamic-history-link-id").data("id")
@@ -231,5 +234,9 @@ $ ->
         )
         $("#dynamic-history-link-id").click()
         activity_page++
+        # $('#DomainActivities').tablesorter
+        #   sortList: [ 0 ]
+        #   headers: 1: sorter: false
+        # return
       return
   return

@@ -20,7 +20,7 @@ class RegisterController < SecureController
         if not Domain.valid? domain
           valid_domain = false
           redirect_to register_path(list: params[:domain_name]),
-            alert: "Domain #{domain} is not valid."
+            alert: "Domain names must have at least 3 characters (not including the extension) and a maximum of 63 (excluding the extension). Characters allowed are [a-z], [0-9] and [-]. Domains must not start or end with a dash [-] or have simultaneous dashes, and must not contain embedded spaces. Names with only numeric characters will not be accepted. Valid extensions are ph, com.ph, net.ph, and org.ph."
           break
         elsif not Domain.exists? domain, token: auth_token
         else

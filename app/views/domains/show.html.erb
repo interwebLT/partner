@@ -48,7 +48,7 @@
         Status: <%= @status %>
       <% end %>
     </div>
-    <div>Registered: <%= formatted_date @domain.registered_at %> <br> Expires: <%= formatted_date @domain.expires_at %></div>
+    <div class="domain-dates"><span>Registered:</span> <%= formatted_date @domain.registered_at %> <br> <span>Expires:</span> <%= formatted_date @domain.expires_at %></div>
     <hr class="line">
     <div class="contact-info-wrapper">
       <div class="title">Registrant</div>
@@ -220,7 +220,7 @@
     <div class="contact-info-wrapper">
       <div class="title">Domain Activities</div>
       <div class="contact-info">
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped table-condensed tablesorter" id="DomainActivities">
           <thead>
             <tr>
               <th class="col-lg-5">Date</th>

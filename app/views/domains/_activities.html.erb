@@ -1,6 +1,21 @@
 <% @activities.each do |activity| %>
-<tr>
-  <td><%= formatted_timestamp activity.activity_at %></td>
-  <td><%= activity_description(activity).html_safe %></td>
-</tr>
+  <tr>
+    <td><%= formatted_timestamp activity.activity_at %></td>
+    <td><%= activity_description(activity).html_safe %></td>
+  </tr>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function()
+    {
+      $("#DomainActivities").tablesorter(
+        {
+          sortList: [0],
+          headers: {
+            1: { sorter: false }
+          }
+        }
+      );
+    }
+  );
+</script>

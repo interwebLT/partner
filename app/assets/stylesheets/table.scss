@@ -15,6 +15,7 @@ caption {
 
 th {
   text-align: left;
+  cursor: pointer;
 }
 
 th, td {
@@ -425,3 +426,19 @@ table tr td i.fa-close { margin-top: 0px;}
 
 table tr td a {text-decoration: none; color: #999!important;}
 table tr td a.btn-danger { color: #fff!important;}
+
+th.tablesorter-headerAsc { 
+    background-image: asset-url('asc.gif') !important;   
+} 
+th.tablesorter-headerDesc { 
+    background-image: asset-url('desc.gif') !important;
+} 
+th.tablesorter-header{ 
+    background-image: asset-url('bg.gif'); 
+    cursor: pointer; 
+    font-weight: bold; 
+    background-repeat: no-repeat; 
+    background-position: center left !important; 
+    padding-left: 20px !important; 
+    margin-left: -1px; 
+} 

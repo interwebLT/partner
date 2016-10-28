@@ -63,6 +63,7 @@
             </li>
             <% unless current_user.admin %>
             <li id="current_balance" class="nolink">
+              <span>Current Balance:</span><br>
                 <%= number_to_currency current_user.credits %>
             </li>
             <% end %>
