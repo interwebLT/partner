@@ -1,7 +1,7 @@
 <% content_for :banner_title do %>
   <%= fa_icon 'gears lg' %>&nbsp;Domains
     <% unless current_user.admin %>
-      <span><%= @domain_count %></span>
+      <span id="domains-total" data-toggle="tooltip" data-placement="right" title="Total Number of Domains"><%= @domain_count %></span>
     <% end %>
 <% end %>
 <!--buttons for bulk options-->

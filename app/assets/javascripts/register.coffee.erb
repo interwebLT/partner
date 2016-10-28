@@ -26,7 +26,7 @@ $(document).ready ->
             valid = false
 
     valid == true
-  ), "You entered an invalid Domain name format!"
+  ), "Domain names must have at least 3 characters (not including the extension) and a maximum of 63 (excluding the extension). Characters allowed are [a-z], [0-9] and [-]. Domains must not start or end with a dash [-] or have simultaneous dashes, and must not contain embedded spaces. Names with only numeric characters will not be accepted. Valid extensions are ph, com.ph, net.ph, and org.ph."
 
   $.validator.addMethod 'uniqueDomainName',((value, element) ->
     text_area_values = $("#reg-new-domain-text-area").val()

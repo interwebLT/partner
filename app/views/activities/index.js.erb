@@ -1,1 +1,4 @@
-$("#domain-dynamic-history").html("<%= escape_javascript(render('domains/activities')) %>");
+$("#history_loading_message").html("");
+$("#domain-dynamic-history").append("<%= escape_javascript(render('domains/activities')) %>");
+$("table").trigger("update");
+$("#history_loading_more_message").html("");

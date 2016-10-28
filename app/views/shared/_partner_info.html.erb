@@ -4,8 +4,7 @@
       <span>Username:</span> <%= @partner.name %>
     </h3>
   </div>
-
-  <p><strong>Current Balance:</strong> $ <%= @partner.credits %></p>
+  <p><strong>Current Balance:</strong> <%= number_to_currency current_user.credits %></p>
   <ul class="dm nav nav-tabs responsive" role="tablist">
     <li class="active"><a href="#pinfo" role="tab" data-toggle="tab">Profile Info</a></li>
     <li><a href="#pns" role="tab" data-toggle="tab">Name Server Info</a></li>
