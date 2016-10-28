@@ -12,7 +12,9 @@
       <% @partner.pricing.each do |partner_price| %>
       <tr>
         <td><%= order_detail_type partner_price.action %></td>
-        <td><%= partner_price.period %></td>
+        <td>
+          <%= if partner_price.action == "transfer_domain" then "" else partner_price.period end %>
+        </td>
         <td><%= number_to_currency partner_price.price %></td>
       </tr>
       <% end %>
