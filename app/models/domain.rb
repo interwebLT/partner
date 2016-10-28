@@ -11,7 +11,7 @@ class Domain
                 :client_transfer_prohibited, :client_update_prohibited,
                 :server_hold, :server_delete_prohibited, :server_renew_prohibited,
                 :server_transfer_prohibited, :server_update_prohibited,
-                :status_pending_transfer,
+                :status_pending_transfer, :ok,
                 :expiring, :expired, :powerdns_domain, :powerdns_records,
                 :hosts
 
@@ -224,6 +224,9 @@ class Domain
     end
     if self.server_transfer_prohibited
       status << "Server Transfer Prohibited"
+    end
+    if self.ok
+      status << "OK"
     end
 
     status
