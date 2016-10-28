@@ -221,9 +221,7 @@ $ ->
 
   if $("#domain-dynamic-history").length > 0
     $("#dynamic-history-link-id").click()
-    # $('#DomainActivities').tablesorter
-    #   sortList: [ 0 ]
-    #   headers: 1: sorter: false
+
     $(window).scroll ->
       if $(window).scrollTop() + $(window).height() == $(document).height()
         domain_id = $("#dynamic-history-link-id").data("id")
@@ -234,11 +232,10 @@ $ ->
             return this.href = params
           )
           $("#dynamic-history-link-id").click()
+          $("table").trigger("update")
+          sorting = [[2,1],[0,0]]
+          $("table").trigger("sorton",[sorting])
           $("#history_loading_more_message").html("Loading More Histories . . .")
           activity_page++
-          # $('#DomainActivities').tablesorter
-          #   sortList: [ 0 ]
-          #   headers: 1: sorter: false
-        # return
       return
   return
