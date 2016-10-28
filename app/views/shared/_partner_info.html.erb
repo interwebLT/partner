@@ -1,10 +1,8 @@
 <section id="partner_info">
   <div class="info-header">
     <h3>
-    <%= link_to partners_path, :class => 'btn btn-default btn-xs back-btn' do %>
-      <i class="fa fa-chevron-left"></i>
-    <% end %>
-    <%= @partner.name %></h3>
+      <span>Username:</span> <%= @partner.name %>
+    </h3>
   </div>
 
   <p><strong>Current Balance:</strong> $ <%= @partner.credits %></p>
