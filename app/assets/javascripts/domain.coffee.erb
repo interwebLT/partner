@@ -3,6 +3,7 @@ $ ->
   selected_option    = undefined
   term_checking      = undefined
   has_exceeding_term = undefined
+  activity_page      = 2
 
   $("#bulk-contact-edit-button").attr('disabled','disabled')
   $("#bulk-renew-term-button").attr('disabled','disabled')
@@ -220,5 +221,15 @@ $ ->
 
   if $("#domain-dynamic-history").length > 0
     $("#dynamic-history-link-id").click()
+    $(window).scroll ->
+      if $(window).scrollTop() + $(window).height() == $(document).height()
+        domain_id = $("#dynamic-history-link-id").data("id")
+        params = "/activities?domain_id=" + domain_id + "&activity_page=" + activity_page
 
+        $("#dynamic-history-link-id").attr("href", () ->
+          return this.href = params
+        )
+        $("#dynamic-history-link-id").click()
+        activity_page++
+      return
   return

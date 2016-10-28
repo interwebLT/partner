@@ -180,10 +180,10 @@ class Domain
     return response
   end
 
-  def self.get_activities domain_id, token
+  def self.get_activities domain_id, page, token
     site = Rails.configuration.api_url
     url = "#{site}/activities"
-    params = {domain_id: domain_id}.to_query
+    params = {domain_id: domain_id, page: page}.to_query
     response = HTTParty.get(url, query: params, headers: default_headers(token: token)).parsed_response
     activities = response.collect { |activity| ObjectActivity.new activity }
     return activities
