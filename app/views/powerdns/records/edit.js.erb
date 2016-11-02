@@ -2,3 +2,13 @@ $("#pdnsTableRow<%= @pdns_record.id %>").html("<%= escape_javascript(render('pow
 $(".pdnsActionButtons").html("");
 // $("#powerdns_record_type").trigger("click");
 $(document.body).css({'cursor' : 'default'});
+
+if ($(".pdns-edit").length > 0) {
+  pdnsType = $(".type-edit").val();
+
+  if (pdnsType == "MX" || pdnsType == "SRV"){
+    $(".priority-div :input").attr("disabled", false)
+  } else {
+    $(".priority-div :input").attr("disabled", true)
+  }
+}
