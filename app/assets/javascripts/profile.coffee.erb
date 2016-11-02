@@ -20,6 +20,10 @@ $ ->
       $(this).rules 'add', {
         validNameserver: true
       }
+    # $('input.partner-config-ns').each ->
+    #   $(this).rules 'add', {
+    #     duplicateValidate: true
+    #   }
     $('input.partner-config-ns').each ->
       current_id = $(this).attr("id")
       $(this).rules 'add', {
@@ -44,6 +48,10 @@ $ ->
     valid_nameserver.test value.trim()
   ), 'It should be a valid Nameserver.'
 
+  # $.validator.addMethod 'duplicateValidate', ((value,element) ->
+  #   console.log value
+  # ), "test"
+
   $("#cancelNsBtn").hide()
   $(".pns-error-notice").hide()
   $('#editNsBtn').click ->
@@ -52,29 +60,36 @@ $ ->
 
   $("#pnsTableBody").on 'click', '#plusNSLink', ->
     array = $(".partner-config-ns").length
-    row   =  "<div class='partner_ns_" + array + "_tr'>
-                <div class='form-group'>
-                  <div class='col-md-11'>
-                    <input type='text' name='partner_ns[" + array + "]' id='partner_ns_" + array + "' placeholder='Enter Nameserver' class='form-control partner-config-ns'>
-                  </div>
-                  <div class='col-md-1'>
-                    <a class='btn btn-default btn-sm btn-remove-partner-nameserver'>
-                      <i class='fa fa-close' style='margin-top: 0px;'></i>
-                      <span class='sr-only'>Delete</span>
-                    </a>
-                  </div>
-                  <br><br>
-                </div>
-              </div>"
 
-    $(".add-partner-default-ns").before(row)
-    validate_form()
-    add_form_validation()
+    if array < 13
+      row   =  "<div class='partner_ns_" + array + "_tr'>
+                  <div class='form-group'>
+                    <div class='col-md-11'>
+                      <input type='text' name='partner_ns[" + array + "]' id='partner_ns_" + array + "' placeholder='Enter Nameserver' class='form-control partner-config-ns'>
+                    </div>
+                    <div class='col-md-1'>
+                      <a class='btn btn-default btn-sm btn-remove-partner-nameserver'>
+                        <i class='fa fa-close' style='margin-top: 0px;'></i>
+                        <span class='sr-only'>Delete</span>
+                      </a>
+                    </div>
+                    <br><br>
+                  </div>
+                </div>"
+
+      $(".add-partner-default-ns").before(row)
+      validate_form()
+      add_form_validation()
+      $("#max-partner-ns").html("")
+    else
+      $("#max-partner-ns").html("Max Nameserver up to 13 only.")
 
   $("#pnsTableBody").on "click", "#cancelNsBtn", ->
+    $("#max-partner-ns").html("")
     $("#editNsBtn").show()
 
   $("#pnsTableBody").on "click", ".btn-remove-partner-nameserver", ->
+    $("#max-partner-ns").html("")
     thisParentClass = $(this).parent().parent().parent().prop('className')
     $('.' + thisParentClass).remove()
     return
@@ -83,9 +98,9 @@ $ ->
     validate_form()
     $("#new_profile_partner_name_server_form").valid()
 
-  $("#pnsTableBody").on 'mouseout', '.partner-config-ns', (e) ->
-    validate_form()
-    $("#new_profile_partner_name_server_form").valid()
+  # $("#pnsTableBody").on 'mouseout', '.partner-config-ns', (e) ->
+  #   validate_form()
+  #   $("#new_profile_partner_name_server_form").valid()
 
   $("#pnsTableBody").on 'click', '#submitNsBtn', (e) ->
     e.preventDefault()
