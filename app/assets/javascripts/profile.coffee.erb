@@ -20,10 +20,10 @@ $ ->
       $(this).rules 'add', {
         validNameserver: true
       }
-    # $('input.partner-config-ns').each ->
-    #   $(this).rules 'add', {
-    #     duplicateValidate: true
-    #   }
+    $('input.partner-config-ns').each ->
+      $(this).rules 'add', {
+        duplicateValidate: true
+      }
     $('input.partner-config-ns').each ->
       current_id = $(this).attr("id")
       $(this).rules 'add', {
@@ -48,9 +48,14 @@ $ ->
     valid_nameserver.test value.trim()
   ), 'It should be a valid Nameserver.'
 
-  # $.validator.addMethod 'duplicateValidate', ((value,element) ->
-  #   console.log value
-  # ), "test"
+  $.validator.addMethod 'duplicateValidate', ((value,element) ->
+    valid = true
+    $('input.partner-config-ns').each ->
+      if $(this).val() == value
+        if $(this).attr("id") != element.id
+          valid = false
+    valid == true
+  ), "You entered duplicate Name Server(s)."
 
   $("#cancelNsBtn").hide()
   $(".pns-error-notice").hide()
