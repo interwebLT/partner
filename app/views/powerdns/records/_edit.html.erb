@@ -1,7 +1,7 @@
 <td colspan="5">
   <%= simple_form_for @pdns_record,
     url: powerdns_record_path(id: @pdns_record.id, domain_id: @domain_id),
-    html: {method: :patch, class: "pdns-edit"}, remote: true do |f| %>
+    html: {method: :patch, class: "pdns-edit-form"}, remote: true do |f| %>
     <div class="row">
       <label class="col-xs-12 visible-xs visible-sm">Hostname</label>
       <div class="col-md-2 col-sm-6 col-xs-5">
@@ -53,4 +53,5 @@
       </div>
     </div>
   <% end %>
+  <div class="editPdnsErrors"></div>
 </td>

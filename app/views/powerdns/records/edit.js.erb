@@ -3,12 +3,20 @@ $(".pdnsActionButtons").html("");
 // $("#powerdns_record_type").trigger("click");
 $(document.body).css({'cursor' : 'default'});
 
-if ($(".pdns-edit").length > 0) {
+if ($(".pdns-edit-form").length > 0) {
   pdnsType = $(".type-edit").val();
-
   if (pdnsType == "MX" || pdnsType == "SRV"){
     $(".priority-div :input").attr("disabled", false)
   } else {
     $(".priority-div :input").attr("disabled", true)
   }
 }
+
+$(document).ready(function(){
+  $("#powerdns_record_type").change(function(){
+    validatePowerdnsForm(thisFormID)
+    formID = $(this).parent().parent().parent().parent().attr("id")
+    DnsRecordValidator.validatePowerdnsForm(formID)
+  });
+  $("#powerdns_record_type").trigger("change");
+});

@@ -1,0 +1,90 @@
+class DnsRecordValidator
+  @validatePowerdnsForm: (thisFormID) ->
+    record_type = undefined
+    $("#" + thisFormID).validate
+      errorPlacement: (label, element) ->
+        label.addClass('error-validator-label')
+        if thisFormID == "new_powerdns_record_dynamic_form"
+          if $("#pdnsErrors").find($("#" + $(label).attr("id"))).length == 0
+            $("#pdnsErrors").append(label)
+        else
+          if $(".editPdnsErrors").find($("#" + $(label).attr("id"))).length == 0
+            $(".editPdnsErrors").append(label)
+      rules:
+        "powerdns_record[type]":
+          required: true
+          remote:
+            url: "/powerdns/records/check_if_exists",
+            method: "GET",
+            data:
+              name: ->
+                return $("#" + thisFormID).find(".powerdns_record_name :input").val() + "." +$("#powerdns_record_name").data("domain")
+              content: ->
+                return $("#" + thisFormID).find(".powerdns_record_content :input").val()
+              type: ->
+                return $("#" + thisFormID).find(".powerdns_record_type :input").val()
+              srv_port: ->
+                return $("#" + thisFormID).find(".powerdns_record_preferences_port :input").val()
+              srv_weight: ->
+                return $("#" + thisFormID).find(".powerdns_record_preferences_weight :input").val()
+              srv_content: ->
+                return $("#" + thisFormID).find(".powerdns_record_preferences_srv_content :input").val()
+            complete: (data) ->
+              if data.responseText != "true"
+                $(".submitDnsDynamicForm").removeClass("disabled")
+                $(".cancelDnsDynamicForm").removeClass("disabled")
+                $(document.body).css 'cursor': 'default'
+        "powerdns_record[name]":
+          validPdnsName: depends: (element) ->
+            record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
+            record_type != ""
+          required: depends: (element) ->
+            record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
+            record_type == 'NS' || record_type == 'CNAME'
+          uniqueness: depends: (element) ->
+            record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
+            record_type == 'CNAME'
+        "powerdns_record[prio]":
+          required: depends: (element) ->
+            record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
+            record_type == 'MX' || record_type == 'SRV'
+          number: true
+        "powerdns_record[content]":
+          required: depends: (element) ->
+            record_type != ''
+          powerdnsContentValidation:
+            depends: (element) ->
+              record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
+              record_type == 'AAAA' || record_type == 'A' || record_type == 'NS' || record_type == 'TXT' || record_type == 'CNAME'
+        "powerdns_record[preferences][weight]":
+          required: true,
+          number: true
+        "powerdns_record[preferences][port]":
+          required: true,
+          number: true
+        "powerdns_record[preferences][srv_content]":
+          required: true,
+          domainNameValidation: true
+      messages:
+        "powerdns_record[name]":
+          required: "Name is required"
+        "powerdns_record[type]":
+          required: "Please select type"
+        "powerdns_record[prio]":
+          required: "Priority is required"
+        "powerdns_record[content]":
+          required: "Content is required"
+        "powerdns_record[preferences][weight]":
+          required: "Weight is required"
+        "powerdns_record[preferences][port]":
+          required: "Port is required"
+        "powerdns_record[preferences][srv_content]":
+          required: "Content is required"
+      highlight: (element) ->
+        $(element).addClass('has-input-error')
+      unhighlight: (element) ->
+        $(element).removeClass('has-input-error')
+    $("#" + thisFormID).valid()
+
+root = exports ? this
+root.DnsRecordValidator = DnsRecordValidator
