@@ -82,7 +82,7 @@
       <h3><%= yield :banner_title %></h3>
     </div>
     <% if user_signed_in? %>
-        <div class="col-sm-7 <%= 'hidden' if params[:controller] == 'register'  %>, <%= 'hidden' if params[:controller] == 'checkout'  %>">
+        <div class="col-sm-7 <%= 'hidden' if params[:controller] == 'register'  %>, <%= 'hidden' if params[:controller] == 'checkout'  %>, <%= 'hidden' if params[:controller] == 'transfers'  %>">
           <% if current_user.epp_partner %>
             <%= create_display_only_button("button", "Register Domain +", "register") %>
           <% else %>
