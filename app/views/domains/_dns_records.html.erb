@@ -1,6 +1,7 @@
 <hr class="line">
 <div class="contact-info-wrapper">
   <div class="title">DNS Records</div>
+  <%= render "powerdns/records/new" %>
   <div class="col-lg-12" id="pdnsNewDynamicTableForm">
     <p class="pull-right">
       <% unless @domain.pending_transfer? %>
@@ -10,7 +11,7 @@
     <div id="pdnsListTableBody">
       <%= render "powerdns/records/index" %>
     </div>
-    <%= render "powerdns/records/new" %>
     <div id="dnsDynamicForm"></div>
+    <div id="pdnsErrors"></div>
   </div>
 </div>

@@ -224,6 +224,14 @@ button.add-credits {
     }
   }
 
+  h3 {
+    cursor: default !important;
+  }
+
+  #domains-total {
+    cursor: pointer !important;
+  }
+
   span {
     @extend .badge;
     font-weight: 500 !important;

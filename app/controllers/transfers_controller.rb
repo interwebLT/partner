@@ -4,16 +4,20 @@ class TransfersController < SecureController
   
   def new
     @transfer = TransferRequest.new
+		@transfer.domain = params[:domain_name] unless params[:domain_name].blank?
+		@transfer.period = '01' unless params[:period].blank?
+		@transfer.auth_code = params[:auth_code] unless params[:auth_code].blank?
   end
   
   def create
     transfer = TransferRequest.new transfer_request_params
     if transfer.save token: current_user.token
       flash[:notice] = "Transfer request successful."
+			redirect_to :controller => :domains, :action => :index
     else
       flash[:alert] = transfer.response_message
+			redirect_to :controller => :transfers, :action => :new, :domain_name => transfer.domain, :period => transfer.period, :auth_code => transfer.auth_code
     end
-    redirect_to :controller => :domains, :action => :index
   end
   
   def update
@@ -23,7 +27,7 @@ class TransfersController < SecureController
     else
       flash[:alert] = transfer.response_message
     end
-    redirect_to :controller => :domains, :action => :index
+		redirect_to :controller => :domains, :action => :index
   end
   
   def destroy
