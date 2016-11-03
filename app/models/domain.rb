@@ -94,12 +94,12 @@ class Domain
     too_long = (root_name.length > 63)
     special_chars = (root_name =~ /^[a-zA-Z0-9-]*$/).nil?
     invalid_extension = (not VALID_EXTENSIONS.include? extension)
-    # numbers_only = !(root_name =~ /^[0-9]*$/).nil?
+    numbers_only = !(root_name =~ /^[0-9]*$/).nil?
     starts_with_dash = !(root_name =~ /^-/).nil?
     double_dash = root_name.include? '--'
 
     not (too_short or too_long or special_chars or invalid_extension \
-      or starts_with_dash or double_dash)
+      or numbers_only or starts_with_dash or double_dash)
   end
 
   def renew term, token:
