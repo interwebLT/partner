@@ -207,22 +207,21 @@ class RegisterController < SecureController
     if params[:bulk_registration]
       domain_names = registration_params[:domain_name].split(',')
       handles      = registration_params[:handle].split(',')
+      registration.domain_name = domain_names
+      registration.handle      = handles
 
-      domain_names.each_with_index do |domain_name, key|
-        domain = domain_name.strip.downcase
-        registration.domain_name = domain
-        registration.handle      = handles[key]
 
-        if registration.order.save token: auth_token
+      if registration.order.save token: auth_token
+        domain_names.each_with_index do |domain_name, key|
+          domain = domain_name.strip.downcase
           current_user.partner.default_nameservers.each do |nameserver|
-            domain_host = DomainHost.new  domain: registration.domain_name,
+            domain_host = DomainHost.new  domain: domain_name.strip,
                                           name:   nameserver.name
             domain_host.save token: auth_token
           end
-        else
-          domain_saved = false
-          break
         end
+      else
+        domain_saved = false
       end
     else
       if registration.order.save token: auth_token

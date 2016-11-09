@@ -36,15 +36,16 @@ class Order
   def as_json options = nil
     {
       currency_code: 'USD',
-      order_details: [
-        {
-          type:     self.type,
-          domain:   self.domain,
-          authcode: 'ABC123',
-          period:   self.period,
-          registrant_handle:  self.registrant_handle
+      order_details:
+        self.domain.to_enum.with_index.map{|domain, i|
+          {
+            type:     self.type,
+            domain:   domain,
+            authcode: 'ABC123',
+            period:   self.period,
+            registrant_handle:  self.registrant_handle[i]
+          }
         }
-      ]
     }
   end
 
