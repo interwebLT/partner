@@ -85,14 +85,20 @@ $ ->
   $("#pdnsNewDynamicTableForm").on "mouseenter", ".submitDnsDynamicForm", (e) ->
     $("#pdnsErrors").empty()
     thisFormID = $(this).parent().parent().parent().attr('id')
-    DnsRecordValidator.validatePowerdnsForm(thisFormID)
     change_validators($("#" + thisFormID).find(".powerdns_record_type :input").val())
+    DnsRecordValidator.validatePowerdnsForm(thisFormID)
+    $("#pdnsErrors").empty()
+    $("#" + thisFormID).find("#powerdns_record_type").removeData('previousValue')
+    $("#" + thisFormID).validate().element("#powerdns_record_type")
 
   $("#pdnsNewDynamicTableForm").on "mouseenter", "#submitEditDnsDynamicForm", (e) ->
     $(".editPdnsErrors").empty()
+    $("#powerdns_record_type").removeData('previousValue')
     thisFormID = $(this).parent().parent().parent().attr('id')
     change_validators($("#" + thisFormID).find(".powerdns_record_type :input").val())
     DnsRecordValidator.validatePowerdnsForm(thisFormID)
+    $("#" + thisFormID).find(".powerdns_record_type").removeData('previousValue')
+    $("#" + thisFormID).validate().element(".powerdns_record_type")
 
   $("#addPowerDnsBtn").click (e) ->
     e.preventDefault()

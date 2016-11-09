@@ -54,11 +54,12 @@ class Powerdns::RecordsController < SecureController
     name        = params[:name]
     content     = params[:content]
     type        = params[:type]
+    ttl         = params[:ttl]
     srv_port    = params[:srv_port]
     srv_weight  = params[:srv_weight]
     srv_content = params[:srv_content]
 
-    valid = Powerdns::Record.check_if_exists name, content, type, srv_port, srv_weight, srv_content, auth_token
+    valid = Powerdns::Record.check_if_exists name, content, type, ttl, srv_port, srv_weight, srv_content, auth_token
     # render json: valid
     if !valid
       result = "Record Already Exists."
@@ -86,6 +87,7 @@ class Powerdns::RecordsController < SecureController
 
     pdns_record.type    = params[:powerdns_record][:type]
     pdns_record.prio    = params[:powerdns_record][:prio]
+    pdns_record.ttl     = params[:powerdns_record][:ttl]
     pdns_record.content = params[:powerdns_record][:content]
     unless pdns_record.preferences.nil?
       pdns_record.preferences[:weight]       = params[:powerdns_record][:preferences][:weight]

@@ -23,6 +23,8 @@ class DnsRecordValidator
                 return $("#" + thisFormID).find(".powerdns_record_content :input").val()
               type: ->
                 return $("#" + thisFormID).find(".powerdns_record_type :input").val()
+              ttl: ->
+                return $("#" + thisFormID).find(".powerdns_record_ttl :input").val()
               srv_port: ->
                 return $("#" + thisFormID).find(".powerdns_record_preferences_port :input").val()
               srv_weight: ->
@@ -49,6 +51,8 @@ class DnsRecordValidator
             record_type = $("#" + thisFormID).find(".powerdns_record_type :input").val()
             record_type == 'MX' || record_type == 'SRV'
           number: true
+        "powerdns_record[ttl]":
+          number: true
         "powerdns_record[content]":
           required: depends: (element) ->
             record_type != ''
@@ -72,8 +76,13 @@ class DnsRecordValidator
           required: "Please select type"
         "powerdns_record[prio]":
           required: "Priority is required"
+          min: "Priority min value atleast 0."
+          max: "Priority max value upto 9999."
         "powerdns_record[content]":
           required: "Content is required"
+        "powerdns_record[ttl]":
+          min: "TTL min value atleast 240."
+          max: "TTL max value upto 172800."
         "powerdns_record[preferences][weight]":
           required: "Weight is required"
         "powerdns_record[preferences][port]":

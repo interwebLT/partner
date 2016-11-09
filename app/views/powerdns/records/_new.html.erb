@@ -9,7 +9,7 @@
       </div>
       <div id="dnsd" class="col-md-2 col-sm-6 col-xs-3">.<%= @domain.name %></div>
       <label class="col-xs-12 visible-xs visible-sm">Type</label>
-      <div class="col-md-2">
+      <div class="col-md-1">
         <%= f.input :type, label: false, class: "form-control", collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select", input_html: {class: "powerdns_record_type"} %>
       </div>
       <label class="col-xs-12 visible-xs visible-sm">Priority</label>
@@ -18,8 +18,14 @@
             <%= f.input :prio, label: false, class: "form-control powerdns_record_prio", input_html: { min: '0', max: '9999', class: "powerdns_record_prio numbersOnly"}, placeholder: "Enter Priority" %>
         </div>
       </div>
+      <label class="col-xs-12 visible-xs visible-sm">TTL</label>
+      <div class="col-md-2">
+        <div class="ttl-div">
+            <%= f.input :ttl, label: false, class: "form-control powerdns_record_ttl", input_html: { min: '240', max: '172800', class: "powerdns_record_ttl numbersOnly", value: 14400}, placeholder: "Enter TTL" %>
+        </div>
+      </div>
       <label class="col-xs-12 visible-xs visible-sm">Content</label>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="non-srv-fields">
           <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content", input_html: {class: "powerdns_record_content"} %>
         </div>
