@@ -38,7 +38,7 @@ td a {
 }
 
 th div {
-  padding: 6px 0px;
+  *padding: 6px 0px;
 }
 
 tbody a {
@@ -115,7 +115,7 @@ table thead {
 }
 
 .table > tbody + tbody {
-  border-top: 2px solid #ddd;
+  border-top: 0px solid #ddd;
 }
 
 .table .table {
@@ -428,26 +428,31 @@ table tr td a {text-decoration: none; color: #999!important;}
 table tr td a.btn-danger { color: #fff!important;}
 
 th.tablesorter-headerAsc .tablesorter-header-inner{ 
-    background-image: asset-url('asc.gif') !important;   
+  background-image: asset-url('asc.gif') !important;   
 } 
 th.tablesorter-headerDesc .tablesorter-header-inner{ 
-    background-image: asset-url('desc.gif') !important;
+  background-image: asset-url('desc.gif') !important;
 } 
 th.tablesorter-header .tablesorter-header-inner{ 
-    background-image: asset-url('bg.gif'); 
-    cursor: pointer; 
-    font-weight: bold; 
-    background-repeat: no-repeat; 
-    background-position: center left !important; 
-    padding-left: 20px !important; 
-    margin-left: -1px; 
+  background-image: asset-url('bg.gif'); 
+  cursor: pointer; 
+  font-weight: bold; 
+  background-repeat: no-repeat; 
+  background-position: center left !important; 
+  padding-left: 20px !important; 
+  margin-left: -1px; 
 } 
 
 th.tablesorter-header.sorter-disable .tablesorter-header-inner {
   background-image: none; 
-    cursor: pointer; 
-    font-weight: bold; 
-    background-repeat: no-repeat; 
-    background-position: center left !important; 
-    padding-left: 0px !important;  
+  cursor: pointer; 
+  font-weight: bold; 
+  background-repeat: no-repeat; 
+  background-position: center left !important; 
+  padding-left: 0px !important;  
+}
+
+th.sorter-false .tablesorter-header-inner {
+  background-image: none !important;
+  padding-left: 0 !important;
 }
