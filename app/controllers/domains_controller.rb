@@ -65,20 +65,26 @@ class DomainsController < SecureController
     domain  = params[:domain]
     partner = current_user.username
     host    = params[:host]
+    valid_second_level_domain = [] #pending "edu", "gov"
+    domain_array = domain.strip.split(".")
 
-    if domain.strip.split(".").include?("ph")
-      response = Domain.check_ns_authorization domain, partner, host, current_user.token
-
-      unless response
-        result = "Host cannot be created because domain is owned by a different registrar."
-        render json: result.to_json
+    if domain_array.last == "ph"
+      if valid_second_level_domain.include?  domain_array[domain_array.length - 2]
+        render json: "true".to_json
       else
-        exist = Domain.exists? domain.strip, token: current_user.token
-        unless exist
-          result = "Host cannot be created because domain does not exist."
+        response = Domain.check_ns_authorization domain, partner, host, current_user.token
+
+        unless response
+          result = "Host cannot be created because domain is owned by a different registrar."
           render json: result.to_json
         else
-          render json: exist.to_json
+          exist = Domain.exists? domain.strip, token: current_user.token
+          unless exist
+            result = "Host cannot be created because domain does not exist."
+            render json: result.to_json
+          else
+            render json: exist.to_json
+          end
         end
       end
     else

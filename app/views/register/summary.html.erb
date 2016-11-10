@@ -3,7 +3,14 @@
 <% end %>
 
 <div id="domain_info">
-  <h3 id="head">Domain<small>(</small>s<small>)</small>: <span class="btn btn-default"><%= @registration.domain_name %></span></h3>
+  <h3 id="head">
+    Domain<small>(</small>s<small>)</small>:
+    <% @registration.domain_name.split(",").each do |domain_name| %>
+      <span class="btn btn-default domain-names-for-register">
+        <%= domain_name %>
+      </span>
+    <% end %>
+  </h3>
 
   <%= simple_form_for @registration, url: register_summary_path do |f| %>
     <%= f.hidden_field :domain_name,  value: @registration.domain_name %>

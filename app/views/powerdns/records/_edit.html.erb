@@ -1,4 +1,4 @@
-<td colspan="5">
+<td colspan="6">
   <%= simple_form_for @pdns_record,
     url: powerdns_record_path(id: @pdns_record.id, domain_id: @domain_id),
     html: {method: :patch, class: "pdns-edit-form"}, remote: true do |f| %>
@@ -8,7 +8,7 @@
         <%= f.input :name, label: false, class: "form-control",
         input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name, class: "powerdns_record_name"} %>
       </div>
-      <div id="dnsd" class="col-md-3 col-sm-6 col-xs-3">.<%= @domain_name %></div>
+      <div id="dnsd" class="col-md-2 col-sm-6 col-xs-3">.<%= @domain_name %></div>
       <label class="col-xs-12 visible-xs visible-sm">Type</label>
       <div class="col-md-1">
         <%= f.input :type, label: false, class: "form-control",
@@ -22,8 +22,14 @@
             input_html: { min: '0', max: '9999', class: "powerdns_record_prio numbersOnly"}, placeholder: "Enter Priority" %>
         </div>
       </div>
+      <label class="col-xs-12 visible-xs visible-sm">TTL</label>
+      <div class="col-md-2">
+        <div class="ttl-div">
+            <%= f.input :ttl, label: false, class: "form-control powerdns_record_ttl", input_html: { min: '240', max: '172800', class: "powerdns_record_ttl numbersOnly"}, placeholder: "Enter TTL" %>
+        </div>
+      </div>
       <label class="col-xs-12 visible-xs visible-sm">Content</label>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="non-srv-fields" style="display: <%= @pdns_record.preferences.nil? ? "" : "none"%>;">
           <%= f.input :content, label: false, class: "form-control", placeholder: "Enter Content", input_html: {class: "powerdns_record_content"} %>
         </div>
