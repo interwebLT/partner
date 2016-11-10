@@ -44,7 +44,7 @@ class DomainsController < SecureController
         term      = params[:renewal_term]
         domain_id = params[:domain_id]
         @domain   = Domain.find domain_id, token: current_user.token
-        @domain.renew(term, token: current_user.token) if @domain.renew_allowed?
+        @domain.renew(current_user, term, token: current_user.token) if @domain.renew_allowed?
       end
     rescue Exception => ex
       renew_saved = false

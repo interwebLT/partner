@@ -76,14 +76,16 @@
       <tbody>
         <% @orders.each do |order| %>
           <% if order.filter_included? @month, @year %>
-            <tr>
-              <td><%= formatted_timestamp order.ordered_at %></td>
-              <td><%= order.order_number %></td>
-              <td><%= order_detail_type order.type %></td>
-              <td><%= order.period %></td>
-              <td><%= order.domain %></td>
-              <td><%= number_to_currency(order.price) %></td>
-            </tr>
+            <% order.order_details.each do |order_detail| %>
+              <tr>
+                <td><%= formatted_timestamp order.ordered_at %></td>
+                <td><%= order.order_number %></td>
+                <td><%= order_detail_type order_detail.type %></td>
+                <td><%= order_detail.period %></td>
+                <td><%= order_detail.domain %></td>
+                <td><%= number_to_currency(order_detail.price) %></td>
+              </tr>
+            <% end %>
             <% total_orders = total_orders + order.total_price %>
           <% end %>
           <% all_orders = all_orders + order.total_price %>

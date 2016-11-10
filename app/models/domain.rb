@@ -115,6 +115,7 @@ class Domain
 
     order = Order.new(
       partner:            current_user,
+      currency_code:      'USD',
       ordered_at:         DateTime.now,
       type:               'domain_renew',
       domain:             domain_names,
@@ -124,22 +125,16 @@ class Domain
     return order.save token: token
   end
 
-  def renew term, token:
-    order = Order.new( {
-      partner: nil,
-      currency_code: 'USD'
-    } )
-    order.partner = partner
-
-    detail = {
-      type: 'domain_renew',
-      domain: name,
-      authcode: nil,
-      period: term,
-      registrant_handle: registrant_handle,
-      registered_at: registered_at
-      }
-    order.order_details = [detail]
+  def renew current_user, term, token:
+    order = Order.new(
+      partner:            current_user,
+      currency_code:      'USD',
+      ordered_at:         DateTime.now,
+      type:               'domain_renew',
+      domain:             name,
+      period:             term,
+      registrant_handle:  registrant_handle
+    )
 
     return order.save token: token
   end

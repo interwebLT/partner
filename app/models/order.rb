@@ -12,13 +12,14 @@ class Order
   ERROR     = 'error'
 
   def order_details= order_details
-    order_detail = order_details.last
+    @order_details = order_details.collect { |order_detail| OrderDetail.new order_detail }
+    # order_detail = order_details.last
 
-    self.type               = order_detail[:type]
-    self.price              = order_detail[:price]
-    self.domain             = order_detail[:domain]
-    self.period             = order_detail[:period]
-    self.registrant_handle  = order_detail[:registrant_handle]
+    # self.type               = order_detail[:type]
+    # self.price              = order_detail[:price]
+    # self.domain             = order_detail[:domain]
+    # self.period             = order_detail[:period]
+    # self.registrant_handle  = order_detail[:registrant_handle]
   end
 
   def complete?
@@ -53,7 +54,7 @@ class Order
               type:     self.type,
               domain:   self.domain,
               authcode: 'ABC123',
-              period:   self.period,
+              period:   self.period.length == 1 ? self.period[0].strip.to_i : self.period[i].strip.to_i,
               registrant_handle:  self.registrant_handle
             }
           ]
