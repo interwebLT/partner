@@ -102,6 +102,28 @@ class Domain
       or numbers_only or starts_with_dash or double_dash)
   end
 
+  def self.bulk_renew current_user, domain_ids, terms, token:
+    domain_names        = []
+    registrants         = []
+    term_array          = terms.values
+
+    domain_ids.each do |domain_id|
+      domain = Domain.find domain_id, token: token
+      domain_names << domain.name
+      registrants  << domain.registrant_handle
+    end
+
+    order = Order.new(
+      partner:            current_user,
+      ordered_at:         DateTime.now,
+      type:               'domain_renew',
+      domain:             domain_names,
+      period:             term_array,
+      registrant_handle:  registrants
+    )
+    return order.save token: token
+  end
+
   def renew term, token:
     order = Order.new( {
       partner: nil,

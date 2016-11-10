@@ -35,7 +35,7 @@ class RegistrationForm
     Order.new ordered_at:         DateTime.now,
               type:               'domain_create',
               domain:             self.domain_name,
-              period:             self.period.to_i,
+              period:             self.period.split,
               registrant_handle:  self.registrant.handle
   end
 

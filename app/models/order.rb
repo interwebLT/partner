@@ -37,15 +37,27 @@ class Order
     {
       currency_code: 'USD',
       order_details:
-        self.domain.to_enum.with_index.map{|domain, i|
-          {
-            type:     self.type,
-            domain:   domain,
-            authcode: 'ABC123',
-            period:   self.period,
-            registrant_handle:  self.registrant_handle[i]
+        if self.domain.class == Array
+          self.domain.to_enum.with_index.map{|domain, i|
+            {
+              type:     self.type,
+              domain:   domain.strip,
+              authcode: 'ABC123',
+              period:   self.period.length == 1 ? self.period[0].strip.to_i : self.period[i].strip.to_i,
+              registrant_handle:  self.registrant_handle[i].strip
+            }
           }
-        }
+        else
+          [
+            {
+              type:     self.type,
+              domain:   self.domain,
+              authcode: 'ABC123',
+              period:   self.period,
+              registrant_handle:  self.registrant_handle
+            }
+          ]
+        end
     }
   end
 

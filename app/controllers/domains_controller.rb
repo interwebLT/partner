@@ -34,26 +34,22 @@ class DomainsController < SecureController
   end
 
   def renew
-    domain_ids = params[:domain_id].split(',')
-    renew_saved = true
-    renewal_index = 0
+    domain_ids        = params[:domain_id].split(',')
+    renew_saved       = true
 
-    domain_ids.each do |domain_id|
-      @domain = Domain.find domain_id, token: current_user.token
+    begin
       if params[:bulk]
-        term = params[:renewal_term][renewal_index.to_s]
+        Domain.bulk_renew(current_user, domain_ids, params[:renewal_term], token: current_user.token)
       else
-        term = params[:renewal_term]
-      end
-
-      begin
+        term      = params[:renewal_term]
+        domain_id = params[:domain_id]
+        @domain   = Domain.find domain_id, token: current_user.token
         @domain.renew(term, token: current_user.token) if @domain.renew_allowed?
-        renewal_index += 1
-      rescue Exception => ex
-        renew_saved = false
-        break
-        flash[:alert] = ex.message
       end
+    rescue Exception => ex
+      renew_saved = false
+      flash[:alert] = "Something went wrong."
+      redirect_to domains_url
     end
 
     if renew_saved
