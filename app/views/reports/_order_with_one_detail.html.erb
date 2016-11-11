@@ -1,0 +1,12 @@
+<tr>
+  <td><%= formatted_timestamp order.ordered_at %></td>
+  <td><%= order.order_number %></td>
+  <td><%= order_detail_type order.order_details.first.type %></td>
+  <td><%= order.order_details.first.period %></td>
+  <td><%= order.order_details.first.domain %></td>
+  <td><%= number_to_currency(order.order_details.map{|od| od.price}.sum) %></td>
+</tr>
+<tr>
+  <td colspan="6">
+  </td>
+</tr>
