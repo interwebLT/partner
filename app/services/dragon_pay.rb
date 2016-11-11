@@ -12,7 +12,7 @@ class DragonPay
     current_rate = ExchangeRate.get_current_rate Date.today, token
 
     if !current_rate.nil?
-      current_rate_amount = current_rate.usd_rate.to_i
+      current_rate_amount = current_rate.last.usd_rate.to_i
     else
       current_rate_amount = 47
     end
