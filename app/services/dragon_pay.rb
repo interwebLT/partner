@@ -1,6 +1,4 @@
 class DragonPay
-  USD_TO_PESO = 47
-  
   def initialize dragonpay_config
     @merchant_id = dragonpay_config['merchant_id']
     @password = dragonpay_config['password']
@@ -10,9 +8,17 @@ class DragonPay
     @payment_url = dragonpay_config['payment_url']
   end
 
-  def setup_transaction callback_token, amount
+  def setup_transaction callback_token, amount, token
+    current_rate = ExchangeRate.get_current_rate Date.today, token
+
+    if !current_rate.nil?
+      current_rate_amount = current_rate.last.usd_rate.to_i
+    else
+      current_rate_amount = 47
+    end
+
     txn_id = callback_token
-    amount = (amount * USD_TO_PESO).format({:symbol => '', :delimiter => ''})
+    amount = (amount * current_rate_amount).format({:symbol => '', :delimiter => ''})
     ccy = 'PHP'
     description = 'Replenish Credits'
 
