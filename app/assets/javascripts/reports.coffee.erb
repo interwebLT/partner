@@ -7,3 +7,9 @@ $ ->
 
   $(".report_order_rows").hover ->
     $(".report_order_rows").css("cursor", "pointer")
+
+  $(".report_order_rows").mouseenter ->
+    $(this).css("color", "blue")
+
+  $(".report_order_rows").mouseleave ->
+    $(this).css("color", "#636363")
