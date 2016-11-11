@@ -62,30 +62,48 @@
   <% unless @orders.empty? %>
   <h3>Transactions</h3>
   <div class="table-responsive">
-    <table id="orders"  class="well">
+    <table id="orders" class="well table table-hover">
       <thead>
         <tr>
           <th>Date</th>
           <th>Order No.</th>
-          <th>Type</th>
-          <th width="50">Term</th>
-          <th>Domain</th>
           <th>Amount ($)</th>
         </tr>
       </thead>
       <tbody>
         <% @orders.each do |order| %>
           <% if order.filter_included? @month, @year %>
-            <% order.order_details.each do |order_detail| %>
-              <tr>
-                <td><%= formatted_timestamp order.ordered_at %></td>
-                <td><%= order.order_number %></td>
-                <td><%= order_detail_type order_detail.type %></td>
-                <td><%= order_detail.period %></td>
-                <td><%= order_detail.domain %></td>
-                <td><%= number_to_currency(order_detail.price) %></td>
-              </tr>
-            <% end %>
+            <tr data-toggle="collapse" data-target="#order_details_<%= order.id%>" class="clickable report_order_rows">
+              <td><%= formatted_timestamp order.ordered_at %></td>
+              <td><%= order.order_number %></td>
+              <td><%= number_to_currency(order.order_details.map{|od| od.price}.sum) %></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div id="order_details_<%= order.id%>" class="collapse">
+                  <table id="orders" class="well">
+                    <thead>
+                      <tr>
+                        <th>Domain</th>
+                        <th>Type</th>
+                        <th width="50">Term</th>
+                        <th>Amount ($)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% order.order_details.each do |order_detail| %>
+                        <tr>
+                          <td style="text-align: left"><%= order_detail.domain %></td>
+                          <td style="text-align: left"><%= order_detail_type order_detail.type %></td>
+                          <td><%= order_detail.period %></td>
+                          <td><%= number_to_currency(order_detail.price) %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
             <% total_orders = total_orders + order.total_price %>
           <% end %>
           <% all_orders = all_orders + order.total_price %>
@@ -94,9 +112,6 @@
       <tfoot>
         <tr>
           <td>TOTAL</td>
-          <td></td>
-          <td></td>
-          <td></td>
           <td></td>
           <td><%= number_to_currency total_orders %></td>
         </tr>

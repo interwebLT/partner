@@ -4,3 +4,6 @@ $ ->
     filter_year  = $("#date_year option:selected").val()
     location.href = "/reports?month=" + filter_month + "&year=" + filter_year
     return
+
+  $(".report_order_rows").hover ->
+    $(".report_order_rows").css("cursor", "pointer")
