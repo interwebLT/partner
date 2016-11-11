@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   get 'powerdns/records/check_if_exists', to: 'powerdns/records#check_if_exists'
 
+  get 'exchange_rates/get_current_rate', to: 'exchange_rates#get_current_rate'
+
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/

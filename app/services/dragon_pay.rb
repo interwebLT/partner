@@ -1,6 +1,8 @@
 class DragonPay
-  if ExchangeRate.table_exists?
-    USD_TO_PESO = ExchangeRate.where("? > from_date and ? < to_date", Date.today, Date.today).first.usd_rate.to_i
+  current_rate = ExchangeRate.get_current_rate
+
+  if !current_rate.nil?
+    USD_TO_PESO = current_rate.usd_rate.to_i
   else
     USD_TO_PESO = 47
   end
