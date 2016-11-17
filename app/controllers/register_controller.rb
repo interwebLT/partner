@@ -230,6 +230,7 @@ class RegisterController < SecureController
           domain_host = DomainHost.new  domain: registration.domain_name,
                                         name:   nameserver.name
           domain_host.save token: auth_token
+          sleep 3
         end
       else
         domain_saved = false
