@@ -90,14 +90,15 @@
              Register Domain <i class="fa fa-plus-circle"></i>
             <% end %>
           <% end %>
-          <% if current_user.epp_partner %>
-            
-            <%= create_display_only_button("button", "Transfer Domain", "transfer") %>
-          <% else %>
-            <%= link_to new_transfer_path do %>
-              Transfer Domain <i class="fa fa-arrow-circle-right"></i>
+          <% if false %> <!--%= hide the transfer button %-->
+            <% if current_user.epp_partner %>
+              <%= create_display_only_button("button", "Transfer Domain", "transfer") %>
+            <% else %>
+              <%= link_to new_transfer_path do %>
+                Transfer Domain <i class="fa fa-arrow-circle-right"></i>
+              <% end %>
+              <!--%= link_to 'Transfer Domain', new_transfer_path %-->
             <% end %>
-            <!--%= link_to 'Transfer Domain', new_transfer_path %-->
           <% end %>
           <!--%= link_to 'Replenish Account', checkout_index_path %-->
           <%= link_to checkout_index_path do %>
