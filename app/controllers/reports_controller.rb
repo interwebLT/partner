@@ -6,8 +6,8 @@ class ReportsController < SecureController
       @credits = Credit.all token: current_user.token
       @orders  = Order.all token: current_user.token
       @date_display = Date.today
-      @month = ""
-      @year  = ""
+      @month = Date.today.month.to_s
+      @year  = Date.today.year.to_s
     else
       @credits  = Credit.all token: current_user.token
       @orders   = Order.all token: current_user.token
