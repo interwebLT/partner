@@ -3,11 +3,22 @@ class DomainsController < SecureController
     if params[:search]
       @domains = Domain.search term: params[:search].try(:strip), token: current_user.token
     else
-      @domains = Domain.all token: current_user.token
+      page = params[:activity_page].nil? ? 1 : params[:activity_page]
+      @domains = Domain.get_paginated_domains_list page, token: current_user.token
     end
     @domain_count = @domains.count
     @domain_names = @domains.map{|d| d.name}
-    @domains      = @domains.paginate page: params[:page], per_page: 20
+  end
+
+  def paginated
+    if params[:search]
+      @domains = Domain.search term: params[:search].try(:strip), token: current_user.token
+    else
+      page = params[:domain_page].nil? ? 1 : params[:domain_page]
+      @domains = Domain.get_paginated_domains_list page, token: current_user.token
+    end
+    @domain_count = @domains.count
+    @domain_names = @domains.map{|d| d.name}
   end
 
   def show

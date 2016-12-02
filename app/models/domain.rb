@@ -189,6 +189,15 @@ class Domain
     return activities
   end
 
+  def self.get_paginated_domains_list page, token:
+    site = Rails.configuration.api_url
+    url = "#{site}/domains"
+    params = {page: page}.to_query
+    response = process_response HTTParty.get(url, query: params, headers: default_headers(token: token))
+
+    response.map { |entry| new entry }
+  end
+
   def get_status
     status = []
 

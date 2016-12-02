@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   get 'powerdns/records/check_if_exists', to: 'powerdns/records#check_if_exists'
 
+  get 'domains/paginated', to: 'domains#paginated'
+
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew
     resources :hosts, controller: :domain_hosts, only: [:index, :create, :edit, :update, :destroy], id: /.*/

@@ -8,7 +8,7 @@
         <div class="modal-body">
           <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
               <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
-                id: "bulk-edit-contact-text-area", "data-domains": @domain_names %>
+                id: "bulk-edit-contact-text-area" %>
           <!--error msg-->
           <div class="alert alert-danger" role="alert" id="bulk-contact-edit-error" style="display:none;">
             You have entered an invalid Domain. Please check.

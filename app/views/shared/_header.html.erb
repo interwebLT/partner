@@ -33,7 +33,7 @@
           <ul class="navbar-right">
             <% if user_signed_in? %>
             <li class="nb">
-            <%= form_tag '/domains', method: 'get', class: 'search-bar navbar-form navbar-left' do %>
+            <%= form_tag '/domains/paginated', method: 'get', remote: true, class: 'search-bar navbar-form navbar-left' do %>
               <div class="form-group">
                 <% if current_user.admin %>
                   <%= text_field_tag :search, nil, class: 'form-control sm', placeholder: "Search" %>

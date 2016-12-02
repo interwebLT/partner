@@ -1,19 +1,27 @@
 $ ->
-  domain_id          = undefined
-  selected_option    = undefined
-  term_checking      = undefined
-  has_exceeding_term = undefined
-  activity_page      = 2
+  domain_id           = undefined
+  selected_option     = undefined
+  term_checking       = undefined
+  has_exceeding_term  = undefined
+  activity_page       = 2
+  domain_page         = 2
+  current_domain_list = []
+  domain_expire_pairs = {}
 
   $("#bulk-contact-edit-button").attr('disabled','disabled')
   $("#bulk-renew-term-button").attr('disabled','disabled')
   $("#renewal_warning").hide()
   $("#bulk_renewal_warning").hide()
 
+  extend = (obj, src) ->
+    for key of src
+      if src.hasOwnProperty(key)
+        obj[key] = src[key]
+    obj
+
   validateDomainNames = (text_area_values, domain_list) ->
     output = true
     line_values = text_area_values.split('\n')
-    domain_list = domain_list.split(' ')
 
     for value in line_values
       single_value = value.split(' ')
@@ -158,7 +166,7 @@ $ ->
     return false
 
 
-  $(".btn-renew-link").click ->
+  $("#domains").on "click", ".btn-renew-link", (e) ->
     domain_id = $(this).data("domain")
     domain_name = $(this).data("name")
     $("#renew-modal-domain-name").text(domain_name)
@@ -167,12 +175,12 @@ $ ->
 
   $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").keyup ->
     text_area_values = $(this).val()
-    domain_list = $(this).data("domains")
+    domain_list = current_domain_list
     validateDomainNames(text_area_values, domain_list)
     return
 
   $("#bulk-renew-term-button").click ->
-    domain_expiration = $(this).data("domains")
+    domain_expiration = domain_expire_pairs
     list_for_renew = $("#bulk-renew-term-text-area").val()
     assignValuesToTable(list_for_renew, domain_expiration)
     selectTerm()
@@ -192,6 +200,10 @@ $ ->
       if $(this).is(":checked")
         domainList += $(".domain-list-checkbox").eq(i).data("name") + " "
 
+    $(".index_domain_list").each (i) ->
+      current_domain_list.push $(this).html()
+      domain_expire_pairs = extend(domain_expire_pairs, $(this).data("domain_expires"))
+
     $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val(domainList)
     $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").trigger("keyup")
     return
@@ -204,20 +216,37 @@ $ ->
       $(".domain-list-checkbox").each (i) ->
         $(this).prop('checked', false)
 
-  if $('.pagination').length
-    $(window).scroll ->
-      url = $('.pagination .next_page').attr('href')
-      if url and $(window).scrollTop() > $(document).height() - $(window).height() - 100
-        $('.pagination').text 'Please Wait...'
-        return $.getScript(url)
-      return
-    return $(window).scroll()
-
   $("#reject_transfer").click ->
     alert("reject transfer")
 
   $("#accept_transfer").click ->
     alert("accept transfer")
+
+  $(".search-bar").submit ->
+    $("#domain-dynamic-index-list").html("")
+
+  if $("#domain-dynamic-index-list").length > 0
+    $("#dynamic-domain-load-id").click()
+
+    $(window).scroll ->
+      count = 0
+      if $(window).scrollTop() + $(window).height() == $(document).height()
+        domain_id = $("#dynamic-history-link-id").data("id")
+        params = "/domains/paginated?domain_page=" + domain_page
+
+        if $("#domain_loading_more_message").html() == ""
+          $("#dynamic-domain-load-id").attr("href", () ->
+            return this.href = params
+          )
+          $("#dynamic-domain-load-id").click()
+          $("#domain_loading_more_message").html("Loading More Domains . . .")
+          domain_page++
+
+        $(".index_domain_list").each (i) ->
+          count++
+        $("#domains-total").html(count)
+      return
+  return
 
   if $("#domain-dynamic-history").length > 0
     $("#dynamic-history-link-id").click()
