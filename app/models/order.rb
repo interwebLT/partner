@@ -62,18 +62,12 @@ class Order
     }
   end
 
-  def filter_included? month, year
-    if month.empty? and year.empty?
-      return true
-    else
-      included_month = self.ordered_at.to_time.strftime("%m").to_i == month.to_i
-      included_year  = self.ordered_at.to_time.strftime("%Y").to_i == year.to_i
+  def self.get_for_current_month month, year, token:
+    site = Rails.configuration.api_url
+    url = "#{site}/orders"
+    params = {month: month, year: year}.to_query
+    response = process_response HTTParty.get(url, query: params, headers: default_headers(token: token))
 
-      if included_month and included_year
-        return true
-      else
-        return false
-      end
-    end
+    response.map { |entry| new entry }
   end
 end
