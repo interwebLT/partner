@@ -8,36 +8,15 @@ $ ->
   current_domain_list = []
   domain_expire_pairs = {}
 
-  $("#bulk-contact-edit-button").attr('disabled','disabled')
-  $("#bulk-renew-term-button").attr('disabled','disabled')
   $("#renewal_warning").hide()
   $("#bulk_renewal_warning").hide()
+  $("#bulk-contact-edit-button-submit").hide()
 
   extend = (obj, src) ->
     for key of src
       if src.hasOwnProperty(key)
         obj[key] = src[key]
     obj
-
-  validateDomainNames = (text_area_values, domain_list) ->
-    output = true
-    line_values = text_area_values.split('\n')
-
-    for value in line_values
-      single_value = value.split(' ')
-      for value in single_value
-        if value
-          if $.inArray(value, domain_list) == -1
-            output = false
-
-    if (text_area_values.trim().length != 0) and output
-      $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeOut()
-      $("#bulk-contact-edit-button, #bulk-renew-term-button").removeAttr('disabled')
-    else
-      if (text_area_values.trim().length != 0)
-        $("#bulk-contact-edit-error, #bulk-renew-term-error").fadeIn()
-      $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
-    return
 
   assignValuesToTable = (list_for_renew, domain_expiration) ->
     line_values = list_for_renew.split('\n')
@@ -74,6 +53,7 @@ $ ->
     $('#step1-brenew').show()
     $('#step2-brenew').hide()
     $("#renewal-term-table-body").empty()
+    $(document.body).css 'cursor': 'default'
     return
 
   $("#renewal-term-table-body").on 'change', '.bulk_term_renewal', (e) ->
@@ -165,7 +145,6 @@ $ ->
       }
     return false
 
-
   $("#domains").on "click", ".btn-renew-link", (e) ->
     domain_id = $(this).data("domain")
     domain_name = $(this).data("name")
@@ -173,15 +152,14 @@ $ ->
     selected_option = $("#renew-domain-single-select option:selected").val()
     return
 
-  $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").keyup ->
-    text_area_values = $(this).val()
-    domain_list = current_domain_list
-    validateDomainNames(text_area_values, domain_list)
-    return
-
   $("#bulk-renew-term-button").click ->
     domain_expiration = domain_expire_pairs
     list_for_renew = $("#bulk-renew-term-text-area").val()
+
+    $(".index_domain_list").each (i) ->
+      current_domain_list.push $(this).html()
+      domain_expire_pairs = extend(domain_expire_pairs, $(this).data("domain_expires"))
+
     assignValuesToTable(list_for_renew, domain_expiration)
     selectTerm()
     return
@@ -193,19 +171,13 @@ $ ->
     domainList = ""
     $("#bulk-contact-edit-error, #bulk-renew-term-error").hide()
     $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val("")
-    $("#bulk-contact-edit-button, #bulk-renew-term-button").attr('disabled','disabled')
-    $("#bulk-renew-term-button").attr('disabled','disabled')
+    $("#bulk-contact-edit-button, #bulk-renew-term-button").removeAttr('disabled')
 
     $(".domain-list-checkbox").each (i) ->
       if $(this).is(":checked")
         domainList += $(".domain-list-checkbox").eq(i).data("name") + " "
 
-    $(".index_domain_list").each (i) ->
-      current_domain_list.push $(this).html()
-      domain_expire_pairs = extend(domain_expire_pairs, $(this).data("domain_expires"))
-
     $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").val(domainList)
-    $("#bulk-edit-contact-text-area, #bulk-renew-term-text-area").trigger("keyup")
     return
 
   $("#checkall").click ->

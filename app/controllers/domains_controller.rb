@@ -138,4 +138,11 @@ class DomainsController < SecureController
       render json: true
     end
   end
+
+  def partner_valid_domain
+    domain_names = params[:list].split(" ")
+    result = Domain.check_if_valid_partner_domain domain_names, token: current_user.token
+    result = result == "true" ? true : result
+    render json: result.to_json
+  end
 end

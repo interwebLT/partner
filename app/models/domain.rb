@@ -198,6 +198,13 @@ class Domain
     response.map { |entry| new entry }
   end
 
+  def self.check_if_valid_partner_domain domain_names, token:
+    site = Rails.configuration.api_url
+    url = "#{site}/valid_partner_domain"
+    params = {domains: domain_names}.to_query
+    response =  HTTParty.get(url, query: params, headers: default_headers(token: token)).body
+  end
+
   def get_status
     status = []
 
