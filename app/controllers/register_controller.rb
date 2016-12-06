@@ -5,7 +5,6 @@ class RegisterController < SecureController
     else
       @entered_domains = ""
     end
-    @domains = Domain.all token: current_user.token
   end
 
   def search

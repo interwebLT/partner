@@ -9,8 +9,7 @@
   <%= form_tag register_path, class: "'register-form-search navbar-form' reg-new-domain-form" do %>
     <div class="form-group">
       <%= text_area_tag :domain_name, @entered_domains, class: 'form-control input-lg',
-        id: "reg-new-domain-text-area", "data-domains": @domains.map{|d| d.name}, rows: 5,
-        placeholder: "Enter the domain you want to register." %>
+        id: "reg-new-domain-text-area", rows: 5, placeholder: "Enter the domain you want to register." %>
     </div>
     <%= submit_tag "Register", class: 'btn btn-primary btn-lg', id: "reg-new-domain-button" %>
   <% end %>
