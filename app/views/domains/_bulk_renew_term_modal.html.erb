@@ -34,13 +34,15 @@
             <p style="color: red; text-align: center">Policy Violation: Will Exceed maximum renewal date.</p>
           </div>
         </div>
-        <div class="modal-footer text-center">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="bulk-renew-term-cancel">
-            Cancel
-          </button>
-          <%= button_tag 'Continue', type: 'button', class: "btn btn-success", id: "bulk-renew-term-button" %>
-          <%= submit_tag 'Renew Domain(s)', class: "btn btn-success", id: "bulk-renew-term-button2",
-            style: "display:none;" %>
+        <div class="modal-footer text-center" id="bulk-renewal-modal-footer">
+          <div id="bulk-renewal-buttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="bulk-renew-term-cancel">
+              Cancel
+            </button>
+            <%= button_tag 'Continue', type: 'button', class: "btn btn-success", id: "bulk-renew-term-button" %>
+            <%= submit_tag 'Renew Domain(s)', class: "btn btn-success", id: "bulk-renew-term-button2",
+              style: "display:none;" %>
+          </div>
         </div>
       <% end %>
     </div>

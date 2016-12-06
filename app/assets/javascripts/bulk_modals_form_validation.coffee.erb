@@ -13,7 +13,6 @@ $ ->
     errorPlacement: (label, element) ->
       label.addClass('error-validator-label')
       label.insertAfter(element)
-      $("#bulk-renew-term-button").attr('disabled', 'disabled')
     rules:
       list:
         bulkFormsDomainValidation: true
@@ -38,3 +37,27 @@ $ ->
 
     valid == true
   ), 'Please enter a valid domain name.'
+
+  $("#bulk-renew-term-text-area").blur ->
+    if $("#bulk-renew-term-text-area").valid()
+      $("#bulk-renew-term-button").removeAttr('disabled', 'disabled')
+    else
+      $("#bulk-renew-term-button").attr('disabled', 'disabled')
+
+  $("#bulk-renewal-buttons, #bulk-renewal-modal-footer").mouseenter ->
+    if $("#bulk-renew-term-text-area").valid()
+      $("#bulk-renew-term-button").removeAttr('disabled', 'disabled')
+    else
+      $("#bulk-renew-term-button").attr('disabled', 'disabled')
+
+  $("#bulk-edit-contact-text-area").blur ->
+    if $("#bulk-edit-contact-text-area").valid()
+      $("#bulk-contact-edit-button").removeAttr('disabled', 'disabled')
+    else
+      $("#bulk-contact-edit-button").attr('disabled', 'disabled')
+
+  $("#bulk-edit-buttons, #bulk-edit-modal-footer").mouseenter ->
+    if $("#bulk-edit-contact-text-area").valid()
+      $("#bulk-contact-edit-button").removeAttr('disabled', 'disabled')
+    else
+      $("#bulk-contact-edit-button").attr('disabled', 'disabled')

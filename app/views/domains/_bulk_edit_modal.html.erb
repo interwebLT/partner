@@ -15,9 +15,11 @@
           </div>
           <!--error msg-->
         </div>
-        <div class="modal-footer text-center">
-          <button type="button" class="btn btn-default" id="btn-cancel-bulk-edit" data-dismiss="modal">Cancel</button>
-          <%= submit_tag nil, class: "btn btn-success", id: "bulk-contact-edit-button" %>
+        <div class="modal-footer text-center" id="bulk-edit-modal-footer">
+          <div id="bulk-edit-buttons">
+            <button type="button" class="btn btn-default" id="btn-cancel-bulk-edit" data-dismiss="modal">Cancel</button>
+            <%= submit_tag nil, class: "btn btn-success", id: "bulk-contact-edit-button" %>
+          </div>
         </div>
       <% end %>
     </div>
