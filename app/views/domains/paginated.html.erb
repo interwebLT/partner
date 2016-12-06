@@ -1,0 +1,54 @@
+<% content_for :banner_title do %>
+  <%= fa_icon 'gears lg' %>&nbsp;Domains
+    <% unless current_user.admin %>
+      <span id="domains-total" data-toggle="tooltip" data-placement="right" title="Total Number of Domains"><%= @domain_count %></span>
+    <% end %>
+<% end %>
+<!--buttons for bulk options-->
+<% if current_user.epp_partner %>
+  <div class="btn-container">
+    <%= create_display_only_button("button", "Bulk Edit Registrant") %>
+    <%= create_display_only_button("button", "Bulk Renew") %>
+  </div>
+<% else %>
+  <p class="btn-container">
+    <button type="button" class="btn btn-primary btn-bulk-modal" data-toggle="modal" data-target="#modal-editc">
+      <i class="fa fa-pencil-square-o"></i>
+      <span>Bulk Edit Registrant</span>
+    </button>
+    <button type="button" class="btn btn-success btn-bulk-modal" data-toggle="modal" data-target="#modal-brenew">
+      <i class="fa fa-refresh "></i>
+      <span>Bulk Renew</span>
+    </button>
+  </p>
+<% end %>
+<!--buttons for bulk options-->
+
+<!--modal-->
+<%= render "bulk_edit_modal" %>
+<%= render "bulk_renew_term_modal" %>
+<%= render "renew_term_modal" %>
+
+<div id="table">
+  <table id="domains">
+    <thead>
+      <tr>
+        <th>
+          <input id="checkall" type="checkbox" />
+          <label for="checkall"></label>
+        </th>
+        <th></th>
+        <th>Domain</th>
+        <% if current_user.admin %>
+        <th>Partner</th>
+        <% end %>
+        <th>Registration Date</th>
+        <th>Expiry Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render "domain" %>
+    </tbody>
+  </table>
+</div>

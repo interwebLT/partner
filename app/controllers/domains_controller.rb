@@ -12,7 +12,9 @@ class DomainsController < SecureController
 
   def paginated
     if params[:search]
-      @domains = Domain.search term: params[:search].try(:strip), token: current_user.token
+      redirect_to domains_paginated_path(search_domain: params[:search].try(:strip))
+    elsif params[:search_domain]
+      @domains = Domain.search term: params[:search_domain].try(:strip), token: current_user.token
     else
       page = params[:domain_page].nil? ? 1 : params[:domain_page]
       @domains = Domain.get_paginated_domains_list page, token: current_user.token
