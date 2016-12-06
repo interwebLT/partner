@@ -205,6 +205,13 @@ class Domain
     response =  HTTParty.get(url, query: params, headers: default_headers(token: token)).body
   end
 
+  def self.get_count token:
+    site = Rails.configuration.api_url
+    url = "#{site}/domains"
+    params = {get_count: true}.to_query
+    response =  HTTParty.get(url, query: params, headers: default_headers(token: token)).body
+  end
+
   def get_status
     status = []
 

@@ -201,7 +201,6 @@ $ ->
     $("#dynamic-domain-load-id").click()
 
     $(window).scroll ->
-      count = 0
       if $(window).scrollTop() + $(window).height() == $(document).height()
         domain_id = $("#dynamic-history-link-id").data("id")
         params = "/domains/paginated?domain_page=" + domain_page
@@ -213,10 +212,6 @@ $ ->
           $("#dynamic-domain-load-id").click()
           $("#domain_loading_more_message").html("Loading More Domains . . .")
           domain_page++
-
-        $(".index_domain_list").each (i) ->
-          count++
-        $("#domains-total").html(count)
       return
   return
 

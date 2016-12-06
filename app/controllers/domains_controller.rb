@@ -1,13 +1,13 @@
 class DomainsController < SecureController
   def index
+    @domain_count = Domain.get_count token: current_user.token
+
     if params[:search]
       @domains = Domain.search term: params[:search].try(:strip), token: current_user.token
     else
       page = params[:activity_page].nil? ? 1 : params[:activity_page]
       @domains = Domain.get_paginated_domains_list page, token: current_user.token
     end
-    @domain_count = @domains.count
-    @domain_names = @domains.map{|d| d.name}
   end
 
   def paginated
@@ -17,8 +17,6 @@ class DomainsController < SecureController
       page = params[:domain_page].nil? ? 1 : params[:domain_page]
       @domains = Domain.get_paginated_domains_list page, token: current_user.token
     end
-    @domain_count = @domains.count
-    @domain_names = @domains.map{|d| d.name}
   end
 
   def show
