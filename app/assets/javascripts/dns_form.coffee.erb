@@ -35,7 +35,7 @@ $ ->
       if value == ""
         valid = true
       else
-        valid = valid_domain.test value
+        valid = valid_domain.test value.toLowerCase().trim()
       valid == true
     ), 'It should be a valid Domain Name.'
 
