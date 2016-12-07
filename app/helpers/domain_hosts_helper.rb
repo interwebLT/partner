@@ -5,17 +5,22 @@ module DomainHostsHelper
         ip_list = JSON.parse ip_list
         ipv4_list = []
         ipv6_list = []
-        ip_list["ipv4"].each do |ipv4|
-          unless ipv4[1].empty?
-            ipv4_list << "#{ipv4[1]} <br/>"
+        if !ip_list["ipv4"].nil?
+          ip_list["ipv4"].each do |ipv4|
+            unless ipv4[1].empty?
+              ipv4_list << "#{ipv4[1]} <br/>"
+            end
           end
         end
 
-        ip_list["ipv6"].each do |ipv6|
-          unless ipv6[1].empty?
-            ipv6_list << "#{ipv6[1]} <br/>"
+        if !ip_list["ipv6"].nil?
+          ip_list["ipv6"].each do |ipv6|
+            unless ipv6[1].empty?
+              ipv6_list << "#{ipv6[1]} <br/>"
+            end
           end
         end
+
         if ipv4_list.empty? && ipv6_list.empty?
           output = ""
         else
