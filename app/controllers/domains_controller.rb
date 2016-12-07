@@ -76,7 +76,7 @@ class DomainsController < SecureController
     domain  = params[:domain]
     partner = current_user.username
     host    = params[:host]
-    valid_second_level_domain = [] #pending "edu", "gov"
+    valid_second_level_domain = ["edu", "gov"]
     domain_array = domain.strip.split(".")
 
     if domain_array.last == "ph"
