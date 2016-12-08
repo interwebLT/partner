@@ -82,8 +82,9 @@ $(document).ready ->
   ), 'It should be a valid IPv6 Format.'
 
   $.validator.addMethod 'validNameserver', ((value, element) ->
+    input_value = value.toLowerCase().trim()
     valid_nameserver = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]{1,61}))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
-    valid_nameserver.test value.trim()
+    valid_nameserver.test input_value
   ), 'It should be a valid Nameserver.'
 
   $.validator.addMethod 'notAlreadyUsedNS', ((value, element) ->
@@ -140,7 +141,7 @@ $(document).ready ->
   $("#domain_host_name").blur ->
     domainName = $(this).data("domain")
     glue_record_requirement = "." + domainName
-    nameserver_value = $(this).val().trim()
+    nameserver_value = $(this).val().trim().toLowerCase()
     if nameserver_value.indexOf(glue_record_requirement) >= 0
       check_host_address(nameserver_value)
       $(".nameserver-ipv4, .nameserver-ipv6, .moreIPV4, .moreIPV6").show()
@@ -163,9 +164,9 @@ $(document).ready ->
             url: "/domains/check_ns_authorization",
             data:
               domain: ->
-                return getDomain($("#domain_host_name").val().trim())
+                return getDomain($("#domain_host_name").val().trim().toLowerCase())
               host: ->
-                return $("#domain_host_name").val().trim()
+                return $("#domain_host_name").val().trim().toLowerCase()
     if withIP
       validateIPFields()
     return

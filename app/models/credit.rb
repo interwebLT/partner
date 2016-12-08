@@ -2,17 +2,17 @@ class Credit
   include Api::Model
 
   attr_accessor :id, :partner_id, :partner, :credit_number, :amount, :fee, :credited_at, :created_at, :updated_at, :remarks, :type, :verification_code, :status
-  
+
   TRANSACTION_FEE = 0.05
   PAYPAL_CODE = 'EC'
   CHECKOUT_CODE = 'pay_tok'
-  
+
   BANK_CREDIT = 'bank_credit'
   CARD_CREDIT = 'card_credit'
   CHECKOUT_CREDIT = 'checkout_credit'
   PAYPAL_CREDIT = 'paypal_credit'
   DRAGON_PAY_CREDIT = 'dragon_pay_credit'
-  
+
   def to_json
     {
       type: type,
@@ -25,7 +25,7 @@ class Credit
       remarks: remarks
     }
   end
-  
+
   def self.credit_type verification_code
     if verification_code.blank?
       Credit::BANK_CREDIT
@@ -37,7 +37,7 @@ class Credit
       Credit::DRAGON_PAY_CREDIT
     end
   end
-  
+
   def gateway
     if self.verification_code.blank?
       'Manual'
@@ -49,7 +49,7 @@ class Credit
       'DragonPay'
     end
   end
-  
+
   def fees_by_type
     if type == DRAGON_PAY_CREDIT
       ''
@@ -58,19 +58,13 @@ class Credit
     end
   end
 
-  def filter_included? month, year
-    if month.empty? and year.empty?
-      return true
-    else
-      included_month = self.credited_at.to_time.strftime("%m").to_i == month.to_i
-      included_year  = self.credited_at.to_time.strftime("%Y").to_i == year.to_i
+  def self.get_for_current_month month, year, token:
+    site = Rails.configuration.api_url
+    url = "#{site}/credits"
+    params = {month: month, year: year}.to_query
+    response = process_response HTTParty.get(url, query: params, headers: default_headers(token: token))
 
-      if included_month and included_year
-        return true
-      else
-        return false
-      end
-    end
+    response.map { |entry| new entry }
   end
 end
 

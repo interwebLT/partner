@@ -20,12 +20,17 @@ $ ->
 
     if type == "MX" || type == "SRV"
       $(".priority-div :input").attr("disabled", false)
+      $(".dns-type-div").removeClass("col-md-2")
+      $(".dns-type-div").addClass("col-md-1")
+      $(".dns-prio-div").css("display", "block")
     else
+      $(".dns-prio-div").css("display", "none")
+      $(".dns-type-div").removeClass("col-md-1").addClass("col-md-2")
       $(".priority-div :input").attr("disabled", true)
     return
 
   change_validators = (type) ->
-    valid_domain = /^(([a-zA-Z0-9-_\.\-]{1})|([a-zA-Z0-9-_\.\-]{1}[a-zA-Z0-9-_\.\-]{1})|([a-zA-Z0-9-_\.\-]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.\-]{1})|([a-zA-Z0-90-9-_\.\-][a-zA-Z0-9-0-9-_\.\-]{1,61}[a-zA-Z0-9-\.\-]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
+    valid_domain = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]{1,61}))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
     valid_ip = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
     valid_ipv6 = /(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$)/
     has_more_than_one_dot = /.*\..*\../
@@ -35,14 +40,16 @@ $ ->
       if value == ""
         valid = true
       else
-        valid = valid_domain.test value
+        valid = valid_domain.test value.toLowerCase().trim()
       valid == true
     ), 'It should be a valid Domain Name.'
 
     $.validator.addMethod 'uniqueness', ((value, element) ->
-      records     = $("#powerdns_record_name").data("records")
-      domain_name = $("#powerdns_record_name").data("domain")
-      valid = true
+      records     = $(element).data("records")
+      domain_name = $(element).data("domain")
+      dns_name    = value + "." + domain_name
+      valid       = true
+
       if $.inArray(value + "." + domain_name, records.split(" ")) > -1
         valid = false
       valid == true
@@ -86,7 +93,7 @@ $ ->
     $("#pdnsErrors").empty()
     thisFormID = $(this).parent().parent().parent().attr('id')
     change_validators($("#" + thisFormID).find(".powerdns_record_type :input").val())
-    DnsRecordValidator.validatePowerdnsForm(thisFormID)
+    DnsRecordValidator.validatePowerdnsForm(thisFormID, "0")
     $("#pdnsErrors").empty()
     $("#" + thisFormID).find("#powerdns_record_type").removeData('previousValue')
     $("#" + thisFormID).validate().element("#powerdns_record_type")
@@ -96,7 +103,7 @@ $ ->
     $("#powerdns_record_type").removeData('previousValue')
     thisFormID = $(this).parent().parent().parent().attr('id')
     change_validators($("#" + thisFormID).find(".powerdns_record_type :input").val())
-    DnsRecordValidator.validatePowerdnsForm(thisFormID)
+    DnsRecordValidator.validatePowerdnsForm(thisFormID, $("#dns_record_id").val())
     $("#" + thisFormID).find(".powerdns_record_type").removeData('previousValue')
     $("#" + thisFormID).validate().element(".powerdns_record_type")
 

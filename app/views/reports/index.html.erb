@@ -31,19 +31,17 @@
       </thead>
       <tbody>
         <% @credits.each do |credit| %>
-          <% if credit.filter_included? @month, @year %>
-            <tr>
-              <td><%= formatted_timestamp credit.credited_at %></td>
-              <td>
-                <a href="/receipt?id=<%= credit.credit_number %>" target="_blank">
-                  <%= credit.credit_number %>
-                </a>
-              </td>
-              <td><%= credit.gateway %></td>
-              <td><%= number_to_currency(credit.amount.to_f, unit: '') %></td>
-            </tr>
-            <% total_credits = total_credits + credit.amount.to_f %>
-          <% end %>
+          <tr>
+            <td><%= formatted_timestamp credit.credited_at %></td>
+            <td>
+              <a href="/receipt?id=<%= credit.credit_number %>" target="_blank">
+                <%= credit.credit_number %>
+              </a>
+            </td>
+            <td><%= credit.gateway %></td>
+            <td><%= number_to_currency(credit.amount.to_f, unit: '') %></td>
+          </tr>
+          <% total_credits = total_credits + credit.amount.to_f %>
           <% all_credits = all_credits + credit.amount.to_f %>
         <% end %>
       </tbody>
@@ -75,17 +73,15 @@
       </thead>
       <tbody>
         <% @orders.each do |order| %>
-          <% if order.filter_included? @month, @year %>
-            <tr>
-              <td><%= formatted_timestamp order.ordered_at %></td>
-              <td><%= order.order_number %></td>
-              <td><%= order_detail_type order.type %></td>
-              <td><%= order.period %></td>
-              <td><%= order.domain %></td>
-              <td><%= number_to_currency(order.price) %></td>
-            </tr>
-            <% total_orders = total_orders + order.total_price %>
-          <% end %>
+          <tr>
+            <td><%= formatted_timestamp order.ordered_at %></td>
+            <td><%= order.order_number %></td>
+            <td><%= order_detail_type order.type %></td>
+            <td><%= order.period %></td>
+            <td><%= order.domain %></td>
+            <td><%= number_to_currency(order.price) %></td>
+          </tr>
+          <% total_orders = total_orders + order.total_price %>
           <% all_orders = all_orders + order.total_price %>
         <% end %>
       </tbody>

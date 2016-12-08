@@ -22,6 +22,7 @@ class DomainHostsController < SecureController
     domain.hosts.each do |host|
       unless nameservers.include? host.name
         DomainHost.destroy domain.name, host.name, token: auth_token
+        sleep 1 # PENDING FOR BATCH IN REGISTRY
       end
     end
 
@@ -36,6 +37,7 @@ class DomainHostsController < SecureController
           output = false
         end
       end
+      sleep 1 # PENDING FOR BATCH IN REGISTRY
     end
 
     if output
@@ -54,6 +56,7 @@ class DomainHostsController < SecureController
     list = {"ipv4": params[:ipv4], "ipv6": params[:ipv6]}.to_json
 
     @domain_host = DomainHost.new create_params.merge(domain: domain.name)
+    @domain_host.name.downcase!
     @domain_host.name.strip!
     @domain_host.ip_list = list
 
@@ -90,6 +93,7 @@ class DomainHostsController < SecureController
     domain_id = params[:domain_id]
     domain_host = DomainHost.find domain_id, params[:id], token: auth_token
     domain_host.name = create_params[:name].try(:strip)
+    domain_host.name.downcase!
     domain_host.ip_list = list
 
     if domain_host.update domain_id, token: auth_token

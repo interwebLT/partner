@@ -29,7 +29,11 @@ Rails.application.routes.draw do
 
   get 'domains/renewal_validation', to: 'domains#renewal_validation'
 
+  get 'domains/partner_valid_domain', to: 'domains#partner_valid_domain'
+
   get 'powerdns/records/check_if_exists', to: 'powerdns/records#check_if_exists'
+
+  get 'domains/paginated', to: 'domains#paginated'
 
   resources :domains, only: [:index, :show, :update], id: /.*/ do
     get :renew

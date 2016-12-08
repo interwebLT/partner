@@ -3,20 +3,21 @@
     url: powerdns_record_path(id: @pdns_record.id, domain_id: @domain_id),
     html: {method: :patch, class: "pdns-edit-form"}, remote: true do |f| %>
     <div class="row">
+      <input type="hidden" id="dns_record_id" name="dns_record_id" value=<%= @pdns_record.id %>>
       <label class="col-xs-12 visible-xs visible-sm">Hostname</label>
       <div class="col-md-2 col-sm-6 col-xs-5">
         <%= f.input :name, label: false, class: "form-control",
-        input_html: {value: @subdomain, "data-records": @powerdns_records, "data-domain": @domain_name, class: "powerdns_record_name"} %>
+        input_html: {value: @subdomain, "data-records": @powerdns_records,"data-domain": @domain_name, class: "powerdns_record_name"} %>
       </div>
       <div id="dnsd" class="col-md-2 col-sm-6 col-xs-3">.<%= @domain_name %></div>
       <label class="col-xs-12 visible-xs visible-sm">Type</label>
-      <div class="col-md-1">
+      <div class="col-md-2 dns-type-div">
         <%= f.input :type, label: false, class: "form-control",
-        collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select",
+        collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "",
           input_html: {class: "powerdns_record_type type-edit"} %>
       </div>
       <label class="col-xs-12 visible-xs visible-sm">Priority</label>
-      <div class="col-md-1">
+      <div class="col-md-1 dns-prio-div" style="display: none">
         <div class="priority-div">
             <%= f.input :prio, label: false, class: "form-control",
             input_html: { min: '0', max: '9999', class: "powerdns_record_prio numbersOnly"}, placeholder: "Enter Priority" %>

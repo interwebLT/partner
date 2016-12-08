@@ -1,0 +1,4 @@
+$("#domain_index_loading_message").html("");
+$("#domain-dynamic-index-list").append("<%= escape_javascript(render('domains/domain')) %>");
+$("table").trigger("update");
+$("#domain_loading_more_message").html("");

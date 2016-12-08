@@ -31,9 +31,9 @@ $ ->
           url: "/domains/check_ns_authorization",
           data:
             domain: ->
-              return getDomain($("#" + current_id).val())
+              return getDomain($("#" + current_id).val().toLowerCase())
             host: ->
-              return $("#" + current_id).val()
+              return $("#" + current_id).val().toLowerCase()
       }
 
   validate_form = () ->
@@ -45,7 +45,7 @@ $ ->
 
   $.validator.addMethod 'validNameserver', ((value, element) ->
     valid_nameserver = /^(([a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-9-_\.]{1}[0-9]{1})|([0-9]{1}[a-zA-Z0-9-_\.]{1})|([a-zA-Z0-90-9-_\.][a-zA-Z0-9-0-9-_\.]{1,61}[a-zA-Z0-9-\.]{1,61}))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})$/
-    valid_nameserver.test value.trim()
+    valid_nameserver.test value.toLowerCase().trim()
   ), 'It should be a valid Nameserver.'
 
   $.validator.addMethod 'duplicateValidate', ((value,element) ->
@@ -115,7 +115,7 @@ $ ->
       nameservers = []
       $(".partner-config-ns").each ->
         if $(this).eq(0).val() != ""
-          nameservers.push $(this).eq(0).val()
+          nameservers.push $(this).eq(0).val().toLowerCase()
 
       $.ajax(
         method: "POST"
@@ -134,7 +134,7 @@ $ ->
         nameservers = []
         $(".partner-config-ns").each ->
           if $(this).eq(0).val() != ""
-            nameservers.push $(this).eq(0).val()
+            nameservers.push $(this).eq(0).val().toLowerCase()
 
         $.ajax(
           method: "POST"

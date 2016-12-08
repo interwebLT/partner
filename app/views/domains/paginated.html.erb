@@ -29,11 +29,6 @@
 <%= render "bulk_renew_term_modal" %>
 <%= render "renew_term_modal" %>
 
-
-<div style="display: none;">
-  <%= link_to "dynamic-history-link", domains_paginated_path,
-    id: "dynamic-domain-load-id", remote: true %>
-</div>
 <div id="table">
   <table id="domains">
     <thead>
@@ -52,9 +47,8 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody id="domain-dynamic-index-list">
+    <tbody>
+      <%= render "domain" %>
     </tbody>
   </table>
 </div>
-<div id="domain_index_loading_message">Loading Domain List . . .</div>
-<div id="domain_loading_more_message"></div>

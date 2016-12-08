@@ -9,7 +9,7 @@
           <div id="step1-brenew">
             <label>Enter domain(s) here. Enter one domain per line or separate by space.</label>
             <%= text_area_tag :list, nil, rows: 5, class: "form-control input-lg",
-              id: "bulk-renew-term-text-area", "data-domains": @domain_names %>
+              id: "bulk-renew-term-text-area" %>
             <!--error msg-->
             <div class="alert alert-danger" role="alert" id="bulk-renew-term-error" style="display:none">
               You have entered an invalid Domain. Please check.
@@ -34,14 +34,15 @@
             <p style="color: red; text-align: center">Policy Violation: Will Exceed maximum renewal date.</p>
           </div>
         </div>
-        <div class="modal-footer text-center">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="bulk-renew-term-cancel">
-            Cancel
-          </button>
-          <%= button_tag 'Continue', type: 'button', class: "btn btn-success", id: "bulk-renew-term-button",
-            "data-domains": @domains.map{|d| [d.name, d.expires_at.to_datetime.strftime("%F")]}.to_h.to_json %>
-          <%= submit_tag 'Renew Domain(s)', class: "btn btn-success", id: "bulk-renew-term-button2",
-            style: "display:none;" %>
+        <div class="modal-footer text-center" id="bulk-renewal-modal-footer">
+          <div id="bulk-renewal-buttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="bulk-renew-term-cancel">
+              Cancel
+            </button>
+            <%= button_tag 'Continue', type: 'button', class: "btn btn-success", id: "bulk-renew-term-button" %>
+            <%= submit_tag 'Renew Domain(s)', class: "btn btn-success", id: "bulk-renew-term-button2",
+              style: "display:none;" %>
+          </div>
         </div>
       <% end %>
     </div>

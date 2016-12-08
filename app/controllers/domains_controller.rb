@@ -1,13 +1,24 @@
 class DomainsController < SecureController
   def index
+    @domain_count = Domain.get_count token: current_user.token
+
     if params[:search]
       @domains = Domain.search term: params[:search].try(:strip), token: current_user.token
     else
-      @domains = Domain.all token: current_user.token
+      page = params[:activity_page].nil? ? 1 : params[:activity_page]
+      @domains = Domain.get_paginated_domains_list page, token: current_user.token
     end
-    @domain_count = @domains.count
-    @domain_names = @domains.map{|d| d.name}
-    @domains      = @domains.paginate page: params[:page], per_page: 20
+  end
+
+  def paginated
+    if params[:search]
+      redirect_to domains_paginated_path(search_domain: params[:search].try(:strip))
+    elsif params[:search_domain]
+      @domains = Domain.search term: params[:search_domain].try(:strip), token: current_user.token
+    else
+      page = params[:domain_page].nil? ? 1 : params[:domain_page]
+      @domains = Domain.get_paginated_domains_list page, token: current_user.token
+    end
   end
 
   def show
@@ -65,7 +76,7 @@ class DomainsController < SecureController
     domain  = params[:domain]
     partner = current_user.username
     host    = params[:host]
-    valid_second_level_domain = [] #pending "edu", "gov"
+    valid_second_level_domain = ["edu", "gov"]
     domain_array = domain.strip.split(".")
 
     if domain_array.last == "ph"
@@ -126,5 +137,12 @@ class DomainsController < SecureController
     else
       render json: true
     end
+  end
+
+  def partner_valid_domain
+    domain_names = params[:list].split(" ")
+    result = Domain.check_if_valid_partner_domain domain_names, token: current_user.token
+    result = result == "true" ? true : result
+    render json: result.to_json
   end
 end
