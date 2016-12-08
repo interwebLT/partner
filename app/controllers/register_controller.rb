@@ -217,7 +217,7 @@ class RegisterController < SecureController
             domain_host = DomainHost.new  domain: registration.domain_name,
                                           name:   nameserver.name
             domain_host.save token: auth_token
-            sleep 3
+            sleep 1 # PENDING FOR BATCH IN REGISTRY
           end
         else
           domain_saved = false
@@ -230,7 +230,7 @@ class RegisterController < SecureController
           domain_host = DomainHost.new  domain: registration.domain_name,
                                         name:   nameserver.name
           domain_host.save token: auth_token
-          sleep 3
+          sleep 1 # PENDING FOR BATCH IN REGISTRY
         end
       else
         domain_saved = false

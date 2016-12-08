@@ -22,6 +22,7 @@ class DomainHostsController < SecureController
     domain.hosts.each do |host|
       unless nameservers.include? host.name
         DomainHost.destroy domain.name, host.name, token: auth_token
+        sleep 1 # PENDING FOR BATCH IN REGISTRY
       end
     end
 
@@ -36,6 +37,7 @@ class DomainHostsController < SecureController
           output = false
         end
       end
+      sleep 1 # PENDING FOR BATCH IN REGISTRY
     end
 
     if output
