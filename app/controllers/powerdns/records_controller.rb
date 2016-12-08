@@ -1,5 +1,5 @@
 class Powerdns::RecordsController < SecureController
-  before_action :load_domain, only: [:new, :edit]
+  before_action :load_domain, only: [:edit]
   before_action :set_type, only: [:create, :update]
 
   def new
@@ -110,7 +110,7 @@ class Powerdns::RecordsController < SecureController
     @domain_id = domain.id
     @domain_name = domain.name
     @domain_expires_at = domain.expires_at
-    @powerdns_records = domain.powerdns_records.map{|record| record.name}
+    @powerdns_records = domain.powerdns_records.map{|record| record.name} - params[:pdns_name].split()
   end
 
   def set_type

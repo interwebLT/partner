@@ -40,9 +40,11 @@ $ ->
     ), 'It should be a valid Domain Name.'
 
     $.validator.addMethod 'uniqueness', ((value, element) ->
-      records     = $("#powerdns_record_name").data("records")
-      domain_name = $("#powerdns_record_name").data("domain")
-      valid = true
+      records     = $(element).data("records")
+      domain_name = $(element).data("domain")
+      dns_name    = value + "." + domain_name
+      valid       = true
+
       if $.inArray(value + "." + domain_name, records.split(" ")) > -1
         valid = false
       valid == true
