@@ -103,7 +103,7 @@
     <tbody>
       <tr>
         <th>Remaining Balance</th>
-        <th><%= number_to_currency(all_credits - all_orders) %></th>
+        <th><%= number_to_currency current_user.credits %></th>
       </tr>
     </tbody>
   </table>
