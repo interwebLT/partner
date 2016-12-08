@@ -60,6 +60,11 @@ class Powerdns::RecordsController < SecureController
     srv_content   = params[:srv_content]
     dns_record_id = params[:dns_record_id]
 
+    # remove possible '.' in name as first string
+    if name.first == "."
+      name.slice!(0)
+    end
+
     valid = Powerdns::Record.check_if_exists name, content, type, ttl, srv_port, srv_weight, srv_content, dns_record_id, auth_token
     # render json: valid
     if !valid

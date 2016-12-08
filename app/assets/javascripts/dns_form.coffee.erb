@@ -20,7 +20,12 @@ $ ->
 
     if type == "MX" || type == "SRV"
       $(".priority-div :input").attr("disabled", false)
+      $(".dns-type-div").removeClass("col-md-2")
+      $(".dns-type-div").addClass("col-md-1")
+      $(".dns-prio-div").css("display", "block")
     else
+      $(".dns-prio-div").css("display", "none")
+      $(".dns-type-div").removeClass("col-md-1").addClass("col-md-2")
       $(".priority-div :input").attr("disabled", true)
     return
 
