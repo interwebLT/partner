@@ -86,7 +86,7 @@ $ ->
     $("#pdnsErrors").empty()
     thisFormID = $(this).parent().parent().parent().attr('id')
     change_validators($("#" + thisFormID).find(".powerdns_record_type :input").val())
-    DnsRecordValidator.validatePowerdnsForm(thisFormID)
+    DnsRecordValidator.validatePowerdnsForm(thisFormID, "0")
     $("#pdnsErrors").empty()
     $("#" + thisFormID).find("#powerdns_record_type").removeData('previousValue')
     $("#" + thisFormID).validate().element("#powerdns_record_type")
@@ -96,7 +96,7 @@ $ ->
     $("#powerdns_record_type").removeData('previousValue')
     thisFormID = $(this).parent().parent().parent().attr('id')
     change_validators($("#" + thisFormID).find(".powerdns_record_type :input").val())
-    DnsRecordValidator.validatePowerdnsForm(thisFormID)
+    DnsRecordValidator.validatePowerdnsForm(thisFormID, $("#dns_record_id").val())
     $("#" + thisFormID).find(".powerdns_record_type").removeData('previousValue')
     $("#" + thisFormID).validate().element(".powerdns_record_type")
 

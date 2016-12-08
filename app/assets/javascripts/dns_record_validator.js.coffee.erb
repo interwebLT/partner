@@ -1,5 +1,5 @@
 class DnsRecordValidator
-  @validatePowerdnsForm: (thisFormID) ->
+  @validatePowerdnsForm: (thisFormID, dns_record_id) ->
     record_type = undefined
     $("#" + thisFormID).validate
       errorPlacement: (label, element) ->
@@ -31,6 +31,8 @@ class DnsRecordValidator
                 return $("#" + thisFormID).find(".powerdns_record_preferences_weight :input").val()
               srv_content: ->
                 return $("#" + thisFormID).find(".powerdns_record_preferences_srv_content :input").val()
+              dns_record_id: ->
+                return dns_record_id
             complete: (data) ->
               if data.responseText != "true"
                 $(".submitDnsDynamicForm").removeClass("disabled")

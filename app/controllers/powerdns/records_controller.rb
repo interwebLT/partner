@@ -51,15 +51,16 @@ class Powerdns::RecordsController < SecureController
   end
 
   def check_if_exists
-    name        = params[:name]
-    content     = params[:content]
-    type        = params[:type]
-    ttl         = params[:ttl]
-    srv_port    = params[:srv_port]
-    srv_weight  = params[:srv_weight]
-    srv_content = params[:srv_content]
+    name          = params[:name]
+    content       = params[:content]
+    type          = params[:type]
+    ttl           = params[:ttl]
+    srv_port      = params[:srv_port]
+    srv_weight    = params[:srv_weight]
+    srv_content   = params[:srv_content]
+    dns_record_id = params[:dns_record_id]
 
-    valid = Powerdns::Record.check_if_exists name, content, type, ttl, srv_port, srv_weight, srv_content, auth_token
+    valid = Powerdns::Record.check_if_exists name, content, type, ttl, srv_port, srv_weight, srv_content, dns_record_id, auth_token
     # render json: valid
     if !valid
       result = "Record Already Exists."
