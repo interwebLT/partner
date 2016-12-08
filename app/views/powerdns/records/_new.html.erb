@@ -10,7 +10,7 @@
       <div id="dnsd" class="col-md-2 col-sm-6 col-xs-3">.<%= @domain.name %></div>
       <label class="col-xs-12 visible-xs visible-sm">Type</label>
       <div class="col-md-1">
-        <%= f.input :type, label: false, class: "form-control", collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "Select", input_html: {class: "powerdns_record_type"} %>
+        <%= f.input :type, label: false, class: "form-control", collection: [:NS, :A, :AAAA, :MX, :CNAME, :TXT, :SRV], prompt: "", input_html: {class: "powerdns_record_type"} %>
       </div>
       <label class="col-xs-12 visible-xs visible-sm">Priority</label>
       <div class="col-md-1">
