@@ -78,16 +78,6 @@ class Contact
   def as_json options = nil
     {
       handle:             self.handle,
-
-      name:               self.local_name,
-      organization:       self.local_organization,
-      street:             self.local_street,
-      street2:            (self.local_street2.blank?  ? nil : self.local_street2),
-      street3:            (self.local_street3.blank?  ? nil : self.local_street3),
-      city:               self.local_city,
-      state:              (self.local_state.blank?  ? nil : self.local_state),
-      postal_code:        (self.local_postal_code.blank?  ? nil : self.local_postal_code),
-      country_code:       self.local_country_code,
       local_name:         self.local_name,
       local_organization: self.local_organization,
       local_street:       self.local_street,
